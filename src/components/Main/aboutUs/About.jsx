@@ -3,7 +3,6 @@ import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import styled from '@emotion/styled';
 
-
 const Title = styled.div`
     font-size: 20px;
 `;
