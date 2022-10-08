@@ -3,6 +3,7 @@ import * as React from 'react';
 import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
+<<<<<<< HEAD
 // import SideBarBtn from './SideBarBtn';
 import SideBar from './SideBar';
 
@@ -24,6 +25,22 @@ function Header() {
                 {/* <SideBarBtn /> */}
             </Toolbar>
         </AppBar>
+=======
+import Button from '@mui/material/Button';
+
+function Header() {
+    return (
+        <Box sx={{ flexGrow: 1 }}>
+            <AppBar position="static" color="primary">
+                <Toolbar>
+                    <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+                        SKKU.D
+                    </Typography>
+                    <Button variant="outlined">recruitment</Button>
+                </Toolbar>
+            </AppBar>
+        </Box>
+>>>>>>> cf06860 (add ProjectList)
     );
 }
 

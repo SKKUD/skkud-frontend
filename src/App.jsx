@@ -14,7 +14,11 @@ export const darkTheme = createTheme({
         mode: 'dark',
         primary: {
             main: '#00FFB0',
+<<<<<<< HEAD
             contrastText: '#222222',
+=======
+            contrastText: '#292929',
+>>>>>>> cf06860 (add ProjectList)
             dark: '#027d56'
         },
         neutral: {
