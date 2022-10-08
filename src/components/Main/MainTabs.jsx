@@ -2,11 +2,11 @@ import * as React from 'react';
 import PropTypes from 'prop-types';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
-import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import Intro from './aboutUs/Intro';
 import About from './aboutUs/About';
 import History from './aboutUs/History';
+import ProjectList from './project/ProjectList';
 
 function TabPanel(props) {
     const { children, value, index, ...other } = props;
@@ -19,11 +19,7 @@ function TabPanel(props) {
             aria-labelledby={`simple-tab-${index}`}
             {...other}
         >
-            {value === index && (
-                <Box sx={{ p: 3 }}>
-                    <Typography>{children}</Typography>
-                </Box>
-            )}
+            {value === index && <Box sx={{ p: 3 }}>{children}</Box>}
         </div>
     );
 }
@@ -61,12 +57,14 @@ export default function MainTabs() {
                 </Tabs>
             </Box>
             <TabPanel value={value} index={0}>
-                <Intro />
-                <About />
-                <History />
+                <div>
+                    <Intro />
+                    <About />
+                    <History />
+                </div>
             </TabPanel>
             <TabPanel value={value} index={1}>
-                project
+                <ProjectList />
             </TabPanel>
             <TabPanel value={value} index={2}>
                 member

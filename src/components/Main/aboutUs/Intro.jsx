@@ -14,7 +14,7 @@ const Detail = styled.div`
 export default function Intro() {
     return (
         <Card sx={{ minWidth: 275 }}>
-            <CardContent>
+            <CardContent component="div">
                 <Title>SKKU.D</Title>
                 <Detail>The final step before becoming a developer</Detail>
             </CardContent>

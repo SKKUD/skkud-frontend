@@ -5,16 +5,6 @@ import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 
-// const recruiteButton =
-//     styled(Button) <
-//     ButtonProps >
-//     (({ darkTheme }) => ({
-//         backgroundColor: darkTheme.palette.main,
-//         '&:hover': {
-//             backgroundColor: purple[700]
-//         }
-//     }));
-
 function Header() {
     return (
         <Box sx={{ flexGrow: 1 }}>
@@ -23,7 +13,7 @@ function Header() {
                     <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
                         SKKU.D
                     </Typography>
-                    <Button>recruitment</Button>
+                    <Button variant="outlined">recruitment</Button>
                 </Toolbar>
             </AppBar>
         </Box>
