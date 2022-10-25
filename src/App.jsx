@@ -2,8 +2,7 @@ import React from 'react';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 import Header from './components/common/Header';
-import MainTabs from './components/Main/MainTabs';
-
+import MainTab from './pages/MainTab';
 
 export const darkTheme = createTheme({
     palette: {
@@ -31,7 +30,7 @@ function App() {
             <CssBaseline />
             <div className="App" color="primary">
                 <Header position="static" />
-                <MainTabs />
+                <MainTab />
             </div>
         </ThemeProvider>
     );

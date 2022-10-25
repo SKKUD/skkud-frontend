@@ -4,8 +4,8 @@ import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import Box from '@mui/material/Box';
 import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
-import TabAboutUs from './aboutUs/TabAboutUs';
-import ProjectList from './project/ProjectList';
+import TabAboutUs from './Tabs/TabAboutUs';
+import ProjectList from './Tabs/TabProject';
 // import ProjectList from './project/ProjectList';
 
 function TabPanel(props) {
@@ -40,7 +40,7 @@ function a11yProps(index) {
     };
 }
 
-export default function MainTabs() {
+export default function MainTab() {
     const [value, setValue] = React.useState(0);
 
     const handleChange = (event, newValue) => {

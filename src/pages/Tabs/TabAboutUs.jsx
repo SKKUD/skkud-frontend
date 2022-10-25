@@ -1,7 +1,7 @@
 import React from 'react';
-import Intro from './Intro';
-import About from './About';
-import History from './History';
+import Intro from '../../components/Main/aboutUs/Intro';
+import About from '../../components/Main/aboutUs/About';
+import History from '../../components/Main/aboutUs/History';
 
 function TabAboutUs() {
     return (
