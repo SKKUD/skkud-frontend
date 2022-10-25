@@ -7,6 +7,7 @@ import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
 import TabAboutUs from './Tabs/TabAboutUs';
 import ProjectList from './Tabs/TabProject';
 // import ProjectList from './project/ProjectList';
+import TabMember from './Tabs/TabMember';
 
 function TabPanel(props) {
     const { children, value, index, ...other } = props;
@@ -61,7 +62,7 @@ export default function MainTab() {
                     <Routes>
                         <Route path="/" element={<TabAboutUs />} />
                         <Route path="/project" element={<ProjectList />} />
-                        <Route path="/member" element={<TabAboutUs />} />
+                        <Route path="/member" element={<TabMember />} />
                     </Routes>
                 </TabPanel>
             </Box>
