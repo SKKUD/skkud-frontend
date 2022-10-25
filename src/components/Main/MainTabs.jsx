@@ -3,10 +3,10 @@ import PropTypes from 'prop-types';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import Box from '@mui/material/Box';
-import Intro from './aboutUs/Intro';
-import About from './aboutUs/About';
-import History from './aboutUs/History';
+import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
+import TabAboutUs from './aboutUs/TabAboutUs';
 import ProjectList from './project/ProjectList';
+// import ProjectList from './project/ProjectList';
 
 function TabPanel(props) {
     const { children, value, index, ...other } = props;
@@ -48,27 +48,23 @@ export default function MainTabs() {
     };
 
     return (
-        <Box sx={{ width: '100%' }}>
-            <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
-                <Tabs value={value} onChange={handleChange} aria-label="mainTabs" centered>
-                    <Tab label="about us" {...a11yProps(0)} />
-                    <Tab label="project" {...a11yProps(1)} />
-                    <Tab label="member" {...a11yProps(2)} />
-                </Tabs>
+        <Router>
+            <Box sx={{ width: '100%' }}>
+                <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
+                    <Tabs value={value} onChange={handleChange} aria-label="mainTabs" centered>
+                        <Tab label="about us" {...a11yProps(0)} component={Link} to="/" />
+                        <Tab label="project" {...a11yProps(1)} component={Link} to="/project" />
+                        <Tab label="member" {...a11yProps(2)} component={Link} to="/member" />
+                    </Tabs>
+                </Box>
+                <TabPanel value={value} index={value}>
+                    <Routes>
+                        <Route path="/" element={<TabAboutUs />} />
+                        <Route path="/project" element={<ProjectList />} />
+                        <Route path="/member" element={<TabAboutUs />} />
+                    </Routes>
+                </TabPanel>
             </Box>
-            <TabPanel value={value} index={0}>
-                <div>
-                    <Intro />
-                    <About />
-                    <History />
-                </div>
-            </TabPanel>
-            <TabPanel value={value} index={1}>
-                <ProjectList />
-            </TabPanel>
-            <TabPanel value={value} index={2}>
-                member
-            </TabPanel>
-        </Box>
+        </Router>
     );
 }
