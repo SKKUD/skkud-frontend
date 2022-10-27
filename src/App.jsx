@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
+import axios from 'axios';
 import Header from './components/common/Header';
 import MainTab from './pages/MainTab';
 
@@ -25,6 +26,15 @@ export const darkTheme = createTheme({
 });
 
 function App() {
+    useEffect(() => {
+        axios
+            .post(
+                'http://localhost:8000/auth/login',
+                { userID: 'skkud', passwd: 'skkud' },
+                { withCredentials: true }
+            )
+            .then((user) => console.log(user));
+    }, []);
     return (
         <ThemeProvider theme={darkTheme}>
             <CssBaseline />
