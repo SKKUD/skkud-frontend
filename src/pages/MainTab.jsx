@@ -3,11 +3,13 @@ import PropTypes from 'prop-types';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import Box from '@mui/material/Box';
-import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import TabAboutUs from './Tabs/TabAboutUs';
-import ProjectList from './Tabs/TabProject';
-// import ProjectList from './project/ProjectList';
+import ProjectList from './Tabs/Project/TabProject';
 import TabMember from './Tabs/TabMember';
+import PostProject from './Tabs/Project/PostProject';
+import ProjectDetail from './Tabs/Project/ProjectDetail';
+import EditProject from './Tabs/Project/EditProject';
 
 function TabPanel(props) {
     const { children, value, index, ...other } = props;
@@ -62,6 +64,9 @@ export default function MainTab() {
                     <Routes>
                         <Route path="/" element={<TabAboutUs />} />
                         <Route path="/project" element={<ProjectList />} />
+                        <Route path="/postproject" element={<PostProject />} />
+                        <Route path="/editproject/:index" element={<EditProject />} />
+                        <Route path="/projectdetail/:index" element={<ProjectDetail />} />
                         <Route path="/member" element={<TabMember />} />
                     </Routes>
                 </TabPanel>
