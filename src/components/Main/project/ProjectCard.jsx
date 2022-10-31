@@ -6,28 +6,28 @@ import Typography from '@mui/material/Typography';
 import Chip from '@mui/material/Chip';
 import Stack from '@mui/material/Stack';
 import { CardActionArea } from '@mui/material';
-import Pimg1 from '../../../assets/project-img1.png';
 
 export default function ProjectCard(project) {
-    const { name, des, keywords } = { ...project };
+    const projectPosts = { ...project };
+    const { title, body, mainimage, tags } = projectPosts.project;
 
     return (
         <Card sx={{ maxWidth: 345, borderRadius: '5%', mb: 2 }}>
             <CardActionArea>
-                <CardMedia component="img" height="190" image={Pimg1} alt="project1" />
+                <CardMedia component="img" height="190" image={mainimage} alt="project1" />
                 <CardContent>
                     <Typography gutterBottom variant="h5" component="div">
-                        {name}
+                        {title}
                     </Typography>
                     <Typography variant="body2" color="text.secondary">
-                        {des}
+                        {body}
                     </Typography>
                     <Stack direction="row" spacing={0.5} mt={1.5}>
-                        {keywords &&
-                            keywords.map((keyword) => (
+                        {tags &&
+                            tags.map((tag) => (
                                 <Chip
-                                    key={keyword}
-                                    label={`# ${keyword}`}
+                                    key={tag}
+                                    label={`# ${tag}`}
                                     variant="outlined"
                                     color="neutral"
                                 />
