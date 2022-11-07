@@ -2,6 +2,7 @@ import * as React from 'react';
 import { useState } from 'react';
 import axios from 'axios';
 import { useNavigate, useLocation } from 'react-router-dom';
+// import { createBrowserHistory } from 'history';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
@@ -9,6 +10,7 @@ import PhotoCamera from '@mui/icons-material/PhotoCamera';
 import Box from '@mui/material/Box';
 
 export default function EditProject() {
+    // const history = createBrowserHistory();
     const location = useLocation();
     const navigate = useNavigate();
     const navigateToProject = () => {
@@ -16,6 +18,30 @@ export default function EditProject() {
     };
 
     const { title, body, images, tags, _id } = location.state;
+
+    // const [post, setPost] = useState({});
+
+    // // :id 파라미터
+    // const { index } = useParams();
+
+    // useEffect(() => {
+    //     const fetchEvents = async () => {
+    //         const res = await axios.get(`http://localhost:8000/posts/${index}`);
+    //         setPost(res.data.data);
+    //     };
+    //     fetchEvents();
+    // }, []);
+    // const { _id, title, body, images, tags } = post;
+
+    // useEffect(() => {
+    //     const unlistenHistoryEvent = history.listen(({ action }) => {
+    //         if (action === 'PUSH' || action === 'POP') {
+    //             navigate(`/projectdetail/${_id}`);
+    //         }
+    //     });
+
+    //     return unlistenHistoryEvent;
+    // }, [history]);
 
     const [titleinput, setTitle] = useState(title);
     const [bodyinput, setBody] = useState(body);

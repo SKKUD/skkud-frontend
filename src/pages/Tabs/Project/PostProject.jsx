@@ -17,23 +17,31 @@ export default function PostProject() {
     const [title, setTitle] = useState('');
     const [body, setBody] = useState('');
     const [tags, setTags] = useState([]);
-    const [img, setImage] = useState([]);
+    const [images, setImages] = useState([]);
 
     const postContent = {
         title,
         body,
         tags,
-        img
+        images
     };
+
     const onImageInput = (e) => {
-        if (!e.target.files) {
-            return;
-        }
+        // const selectedImageList = e.target.files;
+        // for (let i = 0; i < selectedImageList.length; i += 1) {
+        //     setImages([selectedImageList[i].name, ...images]);
+        // }
 
         const formData = new FormData();
-        formData.append('image', e.target.files[0]);
+        // for (let i = 0; i < e.target.files.length; i += 1) {
+        //     formData.append('images', e.target.files[i]);
 
-        setImage(formData);
+        // }
+        formData.append('images', e.target.files[0]);
+        setImages(formData);
+        // console.log(formData);
+        // console.log(e.target.files[0]);
+        // console.log(images)
     };
 
     const HandlPostSubmit = async () => {
@@ -57,7 +65,7 @@ export default function PostProject() {
     };
 
     return (
-        <form>
+        <form encType="multipart/form-data">
             <TextField
                 fullWidth
                 label="Project Title"
@@ -80,7 +88,6 @@ export default function PostProject() {
                 variant="filled"
                 onChange={(e) => {
                     const tagsArray = e.target.value.split(',');
-                    console.log(tagsArray);
                     setTags(tagsArray);
                 }}
             />
@@ -93,7 +100,14 @@ export default function PostProject() {
                 }}
             >
                 <IconButton color="primary" aria-label="upload picture" component="label">
-                    <input hidden accept="images/*" type="file" onChange={onImageInput} />
+                    <input
+                        hidden
+                        name="images"
+                        multiple
+                        type="file"
+                        accept="image/jpg,impge/png,image/jpeg,image/gif"
+                        onChange={onImageInput}
+                    />
                     <PhotoCamera />
                 </IconButton>
                 <Button variant="contained" onClick={HandlPostSubmit}>

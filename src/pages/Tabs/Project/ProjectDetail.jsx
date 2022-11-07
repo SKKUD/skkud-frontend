@@ -1,5 +1,6 @@
-import React from 'react';
-import { useLocation, Link } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { Link, useParams } from 'react-router-dom';
+import axios from 'axios';
 import Divider from '@mui/material/Divider';
 import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
@@ -7,8 +8,21 @@ import DeleteBtn from '../../../components/Main/project/DeleteBtn';
 import EditBtn from '../../../components/Main/project/EditBtn';
 
 export default function ProjectDetail() {
-    const location = useLocation();
-    const { title, body, images, mainimage, tags, _id } = location.state.project;
+    const [post, setPost] = useState({});
+
+    // :id 파라미터
+    const { index } = useParams();
+
+    useEffect(() => {
+        const fetchEvents = async () => {
+            const res = await axios.get(`http://localhost:8000/posts/${index}`);
+            setPost(res.data.data);
+        };
+        fetchEvents();
+    }, []);
+    console.log(post);
+    const { title, body, images, mainimage, tags, _id } = post;
+
     return (
         <>
             <img src={mainimage} alt={title} style={{ width: '100%' }} />
@@ -32,9 +46,7 @@ export default function ProjectDetail() {
             <Divider component="div" />
             <Box sx={{ mt: '10px' }}>
                 <Container> {body}</Container>
-                {images.map((img) => (
-                    <img src={img} alt={title} key={img} />
-                ))}
+                {images && images.map((img) => <img src={img} alt={title} key={img} />)}
             </Box>
         </>
     );

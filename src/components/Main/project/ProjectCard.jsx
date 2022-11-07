@@ -14,7 +14,7 @@ export default function ProjectCard(project) {
     return (
         <Card sx={{ maxWidth: 345, borderRadius: '5%', mb: 2 }}>
             <CardActionArea>
-                <CardMedia component="img" height="190" image={mainimage} alt="project1" />
+                <CardMedia component="img" height="190" image={mainimage} alt={title} />
                 <CardContent>
                     <Typography gutterBottom variant="h5" component="div">
                         {title}
