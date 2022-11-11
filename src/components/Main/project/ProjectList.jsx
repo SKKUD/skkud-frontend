@@ -33,18 +33,20 @@ export default function ProjectList() {
         );
     }
 
-    return Projects.map((project) => (
-        <Link
-            to={`/projectdetail/${project._id}`}
-            style={{
-                textDecoration: 'none',
-                display: 'contents',
-                width: '100%'
-            }}
-            key={project.index}
-            state={{ project }}
-        >
-            <ProjectCard project={project} key={project.index} />
-        </Link>
-    ));
+    return Projects.slice(0)
+        .reverse()
+        .map((project) => (
+            <Link
+                to={`/projectdetail/${project._id}`}
+                style={{
+                    textDecoration: 'none',
+                    display: 'contents',
+                    width: '100%'
+                }}
+                key={project.index}
+                state={{ project }}
+            >
+                <ProjectCard project={project} key={project.index} />
+            </Link>
+        ));
 }

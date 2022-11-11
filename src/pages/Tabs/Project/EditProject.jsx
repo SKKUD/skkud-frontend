@@ -8,6 +8,7 @@ import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
 import PhotoCamera from '@mui/icons-material/PhotoCamera';
 import Box from '@mui/material/Box';
+import PreImages from '../../../components/Main/project/PreImages';
 
 export default function EditProject() {
     // const history = createBrowserHistory();
@@ -18,8 +19,9 @@ export default function EditProject() {
 
     const [title, setTitle] = useState('');
     const [body, setBody] = useState('');
-    const [tags, setTags] = useState('');
-    const [images, setImages] = useState('');
+    const [tags, setTags] = useState([]);
+    const [images, setImages] = useState([]);
+    const [PreviewImg, setPreviewImg] = useState('');
 
     // :id 파라미터
     const { index } = useParams();
@@ -33,6 +35,7 @@ export default function EditProject() {
             setTitle(data.title);
             setBody(data.body);
             setTags(data.tags);
+            setImages(data.images);
         });
     }, []);
 
@@ -46,29 +49,43 @@ export default function EditProject() {
     //     listenHistoryEvent();
     // }, [history]);
 
-    const postContent = {
-        title,
-        body,
-        tags,
-        images
-    };
+    const uploadImgFile = (event) => {
+        const fileArr = event.target.files;
+        setImages(Array.from(fileArr)); // 업로드할 이미지 배열 저장
+        const fileURLs = [];
+        const filesLength = fileArr.length > 10 ? 10 : fileArr.length;
 
-    const onInputChange = (e) => {
-        setImages(e.target.files[0]);
-        const formData = new FormData();
-        formData.append('file', images);
+        // 미리보기
+        for (let i = 0; i < filesLength; i += 1) {
+            const file = fileArr[i];
+            const reader = new FileReader();
+            reader.onload = () => {
+                fileURLs[i] = reader.result;
+                setPreviewImg([...fileURLs]);
+            };
+            reader.readAsDataURL(file);
+        }
     };
 
     const HandlPostSubmit = async () => {
-        if (postContent.title === '') {
+        if (title === '') {
             alert('제목을 입력하세요');
-        } else if (postContent.body === '') {
+        } else if (body === '') {
             alert('내용을 입력하세요');
         } else {
+            const formData = new FormData();
+            formData.append('title', title);
+            formData.append('body', body);
+            formData.append('tags', tags);
+            images.map((image) => formData.append('images', image));
+            formData.append('_id', index);
             await axios
-                .patch(`http://localhost:8000/posts/${index}`, postContent)
+                .patch(`http://localhost:8000/posts/${index}`, formData)
                 .then((response) => {
                     console.log(response.status);
+                })
+                .then(() => {
+                    navigateToProject();
                 })
                 .catch((error) => {
                     console.log(error);
@@ -115,7 +132,14 @@ export default function EditProject() {
                 }}
             >
                 <IconButton color="primary" aria-label="upload picture" component="label">
-                    <input hidden accept="images/*" type="file" onChange={onInputChange} />
+                    <input
+                        hidden
+                        name="images"
+                        multiple
+                        type="file"
+                        accept="image/jpg,impge/png,image/jpeg,image/gif"
+                        onChange={uploadImgFile}
+                    />
                     <PhotoCamera />
                 </IconButton>
                 <Button
@@ -129,6 +153,10 @@ export default function EditProject() {
                     submit
                 </Button>
             </Box>
+            {PreviewImg
+                ? null
+                : images.map((img) => <img src={img} alt={title} key={img} width="20%" />)}
+            {PreviewImg && <PreImages imgFiles={PreviewImg} />}
         </form>
     );
 }

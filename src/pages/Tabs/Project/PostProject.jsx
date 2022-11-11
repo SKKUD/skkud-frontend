@@ -7,6 +7,7 @@ import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
 import PhotoCamera from '@mui/icons-material/PhotoCamera';
 import Box from '@mui/material/Box';
+import PreImages from '../../../components/Main/project/PreImages';
 
 export default function PostProject() {
     const navigate = useNavigate();
@@ -17,13 +18,25 @@ export default function PostProject() {
     const [title, setTitle] = useState('');
     const [body, setBody] = useState('');
     const [tags, setTags] = useState([]);
+    const [language, setLanguage] = useState('');
     const [images, setImages] = useState([]);
+    const [PreviewImg, setPreviewImg] = useState([]);
 
-    const onImageInput = (e) => {
-        e.preventDefault();
+    const uploadImgFile = (event) => {
+        const fileArr = event.target.files;
+        setImages(Array.from(fileArr)); // 업로드할 이미지 배열 저장
+        const fileURLs = [];
+        const filesLength = fileArr.length > 10 ? 10 : fileArr.length;
 
-        if (e.target.files.length > 0) {
-            setImages(e.target.files[0]);
+        // 미리보기
+        for (let i = 0; i < filesLength; i += 1) {
+            const file = fileArr[i];
+            const reader = new FileReader();
+            reader.onload = () => {
+                fileURLs[i] = reader.result;
+                setPreviewImg([...fileURLs]);
+            };
+            reader.readAsDataURL(file);
         }
     };
 
@@ -37,7 +50,9 @@ export default function PostProject() {
             formData.append('title', title);
             formData.append('body', body);
             formData.append('tags', tags);
-            formData.append('images', images);
+            formData.append('language', language);
+            images.map((image) => formData.append('images', image));
+
             await axios
                 .post('http://localhost:8000/posts', formData)
                 .then((response) => {
@@ -79,6 +94,13 @@ export default function PostProject() {
                     setTags(tagsArray);
                 }}
             />
+            <TextField
+                fullWidth
+                label="# language"
+                id="language"
+                variant="filled"
+                onChange={(e) => setLanguage(e.target.value)}
+            />
             <Box
                 sx={{
                     display: 'flex',
@@ -94,7 +116,7 @@ export default function PostProject() {
                         multiple
                         type="file"
                         accept="image/jpg,impge/png,image/jpeg,image/gif"
-                        onChange={onImageInput}
+                        onChange={uploadImgFile}
                     />
                     <PhotoCamera />
                 </IconButton>
@@ -102,6 +124,7 @@ export default function PostProject() {
                     submit
                 </Button>
             </Box>
+            <PreImages imgFiles={PreviewImg} />
         </form>
     );
 }
