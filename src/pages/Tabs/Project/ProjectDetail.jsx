@@ -20,7 +20,7 @@ export default function ProjectDetail() {
         };
         fetchEvents();
     }, []);
-    console.log(post);
+
     const { title, body, images, mainimage, tags, _id } = post;
 
     return (

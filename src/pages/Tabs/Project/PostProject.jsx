@@ -19,39 +19,27 @@ export default function PostProject() {
     const [tags, setTags] = useState([]);
     const [images, setImages] = useState([]);
 
-    const postContent = {
-        title,
-        body,
-        tags,
-        images
-    };
-
     const onImageInput = (e) => {
-        // const selectedImageList = e.target.files;
-        // for (let i = 0; i < selectedImageList.length; i += 1) {
-        //     setImages([selectedImageList[i].name, ...images]);
-        // }
+        e.preventDefault();
 
-        const formData = new FormData();
-        // for (let i = 0; i < e.target.files.length; i += 1) {
-        //     formData.append('images', e.target.files[i]);
-
-        // }
-        formData.append('images', e.target.files[0]);
-        setImages(formData);
-        // console.log(formData);
-        // console.log(e.target.files[0]);
-        // console.log(images)
+        if (e.target.files.length > 0) {
+            setImages(e.target.files[0]);
+        }
     };
 
     const HandlPostSubmit = async () => {
-        if (postContent.title === '') {
+        if (title === '') {
             alert('제목을 입력하세요');
-        } else if (postContent.body === '') {
+        } else if (body === '') {
             alert('내용을 입력하세요');
         } else {
+            const formData = new FormData();
+            formData.append('title', title);
+            formData.append('body', body);
+            formData.append('tags', tags);
+            formData.append('images', images);
             await axios
-                .post('http://localhost:8000/posts', postContent)
+                .post('http://localhost:8000/posts', formData)
                 .then((response) => {
                     console.log(response.status);
                 })

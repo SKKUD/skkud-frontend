@@ -27,7 +27,7 @@ export default function ProjectList() {
             postList[i].title,
             postList[i].body,
             postList[i].images,
-            postList[i].img,
+            postList[i].mainimage,
             postList[i].tags,
             postList[i].createdAt
         );

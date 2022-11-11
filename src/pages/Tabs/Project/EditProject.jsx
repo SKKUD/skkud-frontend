@@ -1,7 +1,7 @@
 import * as React from 'react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import axios from 'axios';
-import { useNavigate, useLocation } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 // import { createBrowserHistory } from 'history';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
@@ -11,54 +11,52 @@ import Box from '@mui/material/Box';
 
 export default function EditProject() {
     // const history = createBrowserHistory();
-    const location = useLocation();
     const navigate = useNavigate();
     const navigateToProject = () => {
         navigate('/project');
     };
 
-    const { title, body, images, tags, _id } = location.state;
+    const [title, setTitle] = useState('');
+    const [body, setBody] = useState('');
+    const [tags, setTags] = useState('');
+    const [images, setImages] = useState('');
 
-    // const [post, setPost] = useState({});
+    // :id 파라미터
+    const { index } = useParams();
 
-    // // :id 파라미터
-    // const { index } = useParams();
+    useEffect(() => {
+        const fetchEvents = async () => {
+            const res = await axios.get(`http://localhost:8000/posts/${index}`);
+            return res.data.data;
+        };
+        fetchEvents().then((data) => {
+            setTitle(data.title);
+            setBody(data.body);
+            setTags(data.tags);
+        });
+    }, []);
 
     // useEffect(() => {
-    //     const fetchEvents = async () => {
-    //         const res = await axios.get(`http://localhost:8000/posts/${index}`);
-    //         setPost(res.data.data);
-    //     };
-    //     fetchEvents();
-    // }, []);
-    // const { _id, title, body, images, tags } = post;
-
-    // useEffect(() => {
-    //     const unlistenHistoryEvent = history.listen(({ action }) => {
+    //     const listenHistoryEvent = history.listen((action) => {
     //         if (action === 'PUSH' || action === 'POP') {
-    //             navigate(`/projectdetail/${_id}`);
+    //             navigate(`/projectdetail/${index}`);
     //         }
     //     });
 
-    //     return unlistenHistoryEvent;
+    //     listenHistoryEvent();
     // }, [history]);
 
-    const [titleinput, setTitle] = useState(title);
-    const [bodyinput, setBody] = useState(body);
-    const [tagsinput, setTags] = useState(tags);
-    const [imginput, setImage] = useState(images);
-
     const postContent = {
-        title: titleinput,
-        body: bodyinput,
-        tags: tagsinput,
-        images: imginput
+        title,
+        body,
+        tags,
+        images
     };
 
     const onInputChange = (e) => {
-        setImage(e.target.files[0]);
+        setImages(e.target.files[0]);
         const formData = new FormData();
-        formData.append('file', imginput);
+        formData.append('file', images);
     };
 
     const HandlPostSubmit = async () => {
@@ -68,7 +66,7 @@ export default function EditProject() {
             alert('내용을 입력하세요');
         } else {
             await axios
-                .patch(`http://localhost:8000/posts/${_id}`, postContent)
+                .patch(`http://localhost:8000/posts/${index}`, postContent)
                 .then((response) => {
                     console.log(response.status);
                 })
@@ -84,7 +82,7 @@ export default function EditProject() {
                 fullWidth
                 label="Project Title"
                 id="ProjectTitle"
-                value={titleinput || ''}
+                value={title || ''}
                 onChange={(e) => setTitle(e.target.value)}
             />
             <TextField
@@ -94,7 +92,7 @@ export default function EditProject() {
                 sx={{ mt: '10px' }}
                 multiline
                 rows={10}
-                value={bodyinput || ''}
+                value={body || ''}
                 onChange={(e) => setBody(e.target.value)}
             />
             <TextField
@@ -102,7 +100,7 @@ export default function EditProject() {
                 label="# tags"
                 id="ProjectTags"
                 variant="filled"
-                value={tagsinput || ''}
+                value={tags || ''}
                 onChange={(e) => {
                     const tagsArray = e.target.value.split(',');
                     setTags(tagsArray);

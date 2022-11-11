@@ -1,5 +1,6 @@
 import * as React from 'react';
 import PropTypes from 'prop-types';
+import { styled } from '@mui/material/styles';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import Box from '@mui/material/Box';
@@ -27,6 +28,34 @@ function TabPanel(props) {
     );
 }
 
+const StyledTabs = styled((props) => (
+    <Tabs {...props} TabIndicatorProps={{ children: <span className="MuiTabs-indicatorSpan" /> }} />
+))({
+    '& .MuiTabs-indicator': {
+        display: 'flex',
+        justifyContent: 'center',
+        backgroundColor: 'transparent'
+    },
+    '& .MuiTabs-indicatorSpan': {
+        maxWidth: 80,
+        width: '100%',
+        backgroundColor: '#00FFB0'
+    }
+});
+
+const StyledTab = styled((props) => <Tab disableRipple {...props} />)(({ theme }) => ({
+    textTransform: 'none',
+    fontWeight: 500,
+    fontSize: theme.typography.pxToRem(15),
+    color: 'rgba(255, 255, 255, 0.7)',
+    '&.Mui-selected': {
+        color: '#fff'
+    },
+    '&.Mui-focusVisible': {
+        backgroundColor: 'rgba(100, 95, 228, 0.32)'
+    }
+}));
+
 TabPanel.propTypes = {
     children: PropTypes.node,
     index: PropTypes.number.isRequired,
@@ -53,12 +82,28 @@ export default function MainTab() {
     return (
         <Router>
             <Box sx={{ width: '100%' }}>
-                <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
-                    <Tabs value={value} onChange={handleChange} aria-label="mainTabs" centered>
-                        <Tab label="about us" {...a11yProps(0)} component={Link} to="/" />
-                        <Tab label="project" {...a11yProps(1)} component={Link} to="/project" />
-                        <Tab label="member" {...a11yProps(2)} component={Link} to="/member" />
-                    </Tabs>
+                <Box
+                    sx={{
+                        display: 'flex',
+                        justifyContent: 'center'
+                    }}
+                >
+                    <StyledTabs
+                        value={value}
+                        onChange={handleChange}
+                        aria-label="mainTabs"
+                        variant="fullWidth"
+                        sx={{ width: '80%' }}
+                    >
+                        <StyledTab label="about us" {...a11yProps(0)} component={Link} to="/" />
+                        <StyledTab
+                            label="project"
+                            {...a11yProps(1)}
+                            component={Link}
+                            to="/project"
+                        />
+                        <StyledTab label="member" {...a11yProps(2)} component={Link} to="/member" />
+                    </StyledTabs>
                 </Box>
                 <TabPanel value={value} index={value}>
                     <Routes>
