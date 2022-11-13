@@ -1,35 +1,65 @@
 import * as React from 'react';
-import { useState, useContext } from 'react';
+import { useState, useContext, useEffect } from 'react';
 import axios from 'axios';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
+import { useCookies } from 'react-cookie';
 import { UserContext } from '../../context/UserContext';
 
 export default function Login() {
     const { user, setUser } = useContext(UserContext);
     const [ID, setID] = useState('');
     const [PW, setPW] = useState('');
-    const login = { ID, PW };
+    const [cookies, setCookie, removeCookie] = useCookies(['id']);
 
     const loginBtn = async () => {
-        console.log('clicked');
-        setUser(login.ID);
-        console.log(login);
         await axios
             .post('http://localhost:8000/auth/login', { userID: ID, passwd: PW })
-            .then((userData) => console.log(userData))
-            .catch((error) => console.log(error));
+            .then((userData) => {
+                console.log(userData);
+                if (userData.data.loginSuccess === true) {
+                    setUser(ID);
+                    setCookie('id', ID);
+                } else if (userData.data.message === '비밀번호가 틀렸습니다.') {
+                    alert('비밀번호가 틀렸습니다.');
+                } else {
+                    alert('아이디에 해당하는 유저 정보가 없습니다.');
+                }
+            });
+
+        // .catch((error) => console.log(error));
     };
 
     const logoutBtn = async () => {
         setUser('');
-        axios
+        removeCookie('id');
+        await axios
             .post('http://localhost:8000/auth/logout')
             .then((userData) => console.log(userData))
             .catch((error) => console.log(error));
     };
+
+    const authCheck = () => {
+        console.log('cookies', cookies.id);
+        const token = cookies.id;
+        axios
+            .post('http://localhost:8000/auth/verify')
+            .then((res) => {
+                console.log('id', res.data.data.userID);
+                if (res.data.data.userID === token) {
+                    logoutBtn();
+                }
+            })
+            .catch((error) => console.log(error));
+    };
+    useEffect(() => {
+        if (cookies.id !== undefined) {
+            authCheck();
+        }
+        console.log('user', ID);
+    }, []);
 
     return (
         <div>
