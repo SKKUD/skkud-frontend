@@ -51,15 +51,13 @@ export default function EditUser() {
         } else if (email.match(validEmail) == null) {
             alert('이메일 형식에 맞춰 입력하세요');
         } else {
-            await axios
-                .patch(`http://localhost:8000/users/${id}`, {
-                    userID: newMember.newID,
-                    username: newMember.newname,
-                    usernameEng: newMember.newengName,
-                    email: newMember.newemail,
-                    passwd: newMember.newpw
-                })
-                .then((response) => console.log('edit 성공?', response));
+            await axios.patch(`http://localhost:8000/users/${id}`, {
+                userID: newMember.newID,
+                username: newMember.newname,
+                usernameEng: newMember.newengName,
+                email: newMember.newemail,
+                passwd: newMember.newpw
+            });
             navigateToMember();
             alert('user edit');
         }

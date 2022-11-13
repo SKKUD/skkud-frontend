@@ -1,10 +1,11 @@
 import * as React from 'react';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
 import MemberCard from './MemberCard';
 import memberImg from '../../../assets/memberImg.png';
 import MemberDeleteBtn from './MemberDeleteBtn';
 import MemberEditBtn from './MemberEditBtn';
+import { UserContext } from '../../../context/UserContext';
 
 const Members = [
     {
@@ -43,12 +44,12 @@ const Members = [
 ];
 
 export default function MemberList() {
+    const { user } = useContext(UserContext);
     const [users, setUsers] = useState([]);
     useEffect(() => {
         const fetchEvents = async () => {
             const res = await axios.get('http://localhost:8000/users');
 
-            console.log('성공?', res);
             setUsers(res.data.data.users);
         };
         fetchEvents();
@@ -70,15 +71,22 @@ export default function MemberList() {
                     link2={member.link2}
                 />
             ))}
-            {users.map((user) => (
-                <div key={user._id}>
-                    <h1>ID: {user.userID}</h1>
-                    <h2>name: {user.username}</h2>
-                    <h3>nameEng: {user.usernameEng}</h3>
-                    <p>email: {user.email}</p>
-                    <p>passwd: {user.passwd}</p>
-                    <MemberDeleteBtn _id={user.userID} />
-                    <MemberEditBtn _id={user.userID} />
+            {users.map((u) => (
+                <div key={u._id}>
+                    <h1>ID: {u.userID}</h1>
+                    <h2>name: {u.username}</h2>
+                    <h3>nameEng: {u.usernameEng}</h3>
+                    <p>email: {u.email}</p>
+                    <p>passwd: {u.passwd}</p>
+                    {user ? (
+                        <>
+                            <MemberDeleteBtn _id={u.userID} />
+                            <MemberEditBtn _id={u.userID} />
+                        </>
+                    ) : (
+                        <p>read only</p>
+                    )}
+
                     <p>===============================================</p>
                 </div>
             ))}

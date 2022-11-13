@@ -62,6 +62,7 @@ export default function MainTab() {
                         <Tab label="member" {...a11yProps(2)} component={Link} to="/member" />
                     </Tabs>
                 </Box>
+
                 <TabPanel value={value} index={value}>
                     <Routes>
                         <Route path="/" element={<TabAboutUs />} />
