@@ -34,7 +34,7 @@ export default function JoinUs() {
                     여러분들의 개발자로의 여정, 저희 스꾸디가 도와드리겠습니다!
                 </Detail>
                 <ButtonBlock>
-                    <Button class="joinusBtn">지금 지원하기</Button>
+                    <Button className="joinusBtn">지금 지원하기</Button>
                 </ButtonBlock>
             </CardContent>
         </Card>

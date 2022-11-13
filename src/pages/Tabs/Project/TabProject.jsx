@@ -1,9 +1,11 @@
 import * as React from 'react';
 // import { useEffect, useState } from 'react';
+import { useContext } from 'react';
 // import axios from 'axios';
 import { Link } from 'react-router-dom';
 import PostBtn from '../../../components/Main/project/PostBtn';
 import ProjectList from '../../../components/Main/project/ProjectList';
+import { UserContext } from '../../../context/UserContext';
 
 // const Projects = [
 //     {
@@ -19,6 +21,7 @@ import ProjectList from '../../../components/Main/project/ProjectList';
 // ];
 
 export default function TabProject() {
+    const { user } = useContext(UserContext);
     // const [postList, setPostList] = useState([]);
 
     // useEffect(() => {
@@ -33,9 +36,14 @@ export default function TabProject() {
 
     return (
         <>
-            <Link to="/postproject" style={{ textDecoration: 'inherit' }}>
-                <PostBtn />
-            </Link>
+            {user ? (
+                <Link to="/postproject" style={{ textDecoration: 'inherit' }}>
+                    <PostBtn />
+                </Link>
+            ) : (
+                <p>read only</p>
+            )}
+
             {/* {Projects.map((project) => (
                 <Link
                     to={`/projectdetail/${project.name}`}

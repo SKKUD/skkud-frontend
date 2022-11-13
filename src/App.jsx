@@ -1,10 +1,15 @@
-import React from 'react';
-import './utils/font.css';
+import React, { useState, useMemo } from 'react';
+import axios from 'axios';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 // import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import CssBaseline from '@mui/material/CssBaseline';
+import { UserContext } from './context/UserContext';
 import Header from './components/common/Header';
 import MainTab from './pages/MainTab';
+import Login from './components/common/Login';
+import './utils/font.css';
+
+axios.defaults.withCredentials = true;
 
 export const darkTheme = createTheme({
     palette: {
@@ -57,13 +62,27 @@ export const darkTheme = createTheme({
 });
 
 function App() {
+    const [user, setUser] = useState();
+    const userValue = useMemo(() => ({ user, setUser }), [user, setUser]);
+    // useEffect(() => {
+    //     axios
+    //         .post(
+    //             'http://localhost:8000/auth/login',
+    //             { userID: 'skkud', passwd: 'skkud' },
+    //             { withCredentials: true }
+    //         )
+    //         .then((user) => console.log(user));
+    // }, []);
     return (
         <ThemeProvider theme={darkTheme}>
             <CssBaseline />
-            <div className="App" color="primary">
-                <Header position="static" />
-                <MainTab />
-            </div>
+            <UserContext.Provider value={userValue}>
+                <div className="App" color="primary">
+                    <Header position="static" />
+                    <Login />
+                    <MainTab />
+                </div>
+            </UserContext.Provider>
         </ThemeProvider>
     );
 }

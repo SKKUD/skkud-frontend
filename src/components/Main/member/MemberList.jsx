@@ -1,6 +1,11 @@
 import * as React from 'react';
+import { useState, useEffect, useContext } from 'react';
+import axios from 'axios';
 import MemberCard from './MemberCard';
 import memberImg from '../../../assets/memberImg.png';
+import MemberDeleteBtn from './MemberDeleteBtn';
+import MemberEditBtn from './MemberEditBtn';
+import { UserContext } from '../../../context/UserContext';
 
 const Members = [
     {
@@ -39,6 +44,17 @@ const Members = [
 ];
 
 export default function MemberList() {
+    const { user } = useContext(UserContext);
+    const [users, setUsers] = useState([]);
+    useEffect(() => {
+        const fetchEvents = async () => {
+            const res = await axios.get('http://localhost:8000/users');
+
+            setUsers(res.data.data.users);
+        };
+        fetchEvents();
+    }, []);
+
     return (
         <>
             {Members.map((member) => (
@@ -54,6 +70,25 @@ export default function MemberList() {
                     insta={member.insta}
                     link2={member.link2}
                 />
+            ))}
+            {users.map((u) => (
+                <div key={u._id}>
+                    <h1>ID: {u.userID}</h1>
+                    <h2>name: {u.username}</h2>
+                    <h3>nameEng: {u.usernameEng}</h3>
+                    <p>email: {u.email}</p>
+                    <p>passwd: {u.passwd}</p>
+                    {user ? (
+                        <>
+                            <MemberDeleteBtn _id={u.userID} />
+                            <MemberEditBtn _id={u.userID} />
+                        </>
+                    ) : (
+                        <p>read only</p>
+                    )}
+
+                    <p>===============================================</p>
+                </div>
             ))}
         </>
     );
