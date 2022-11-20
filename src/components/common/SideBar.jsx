@@ -110,6 +110,7 @@ export default function SideBar() {
                         width: 200,
                         display: 'flex',
                         flexDirection: 'column',
+                        flex: 1,
                         alignItems: 'flex-end',
                         pr: '10px'
                     }}
@@ -149,18 +150,19 @@ export default function SideBar() {
                             </ListItemButton>
                         </ListItem>
                     </List>
-                    <Button
-                        variant="contained"
-                        sx={{
-                            justifySelf: 'flex-end',
-                            alignSelf: 'center',
-                            borderRadius: '20px',
-                            textTransform: 'none'
-                        }}
-                    >
-                        recruitment
-                    </Button>
                 </Box>
+                <Button
+                    variant="contained"
+                    sx={{
+                        alignSelf: 'center',
+                        borderRadius: '20px',
+                        textTransform: 'none',
+                        marginTop: 'auto',
+                        mb: '100%'
+                    }}
+                >
+                    recruitment
+                </Button>
             </Drawer>
         </>
     );
