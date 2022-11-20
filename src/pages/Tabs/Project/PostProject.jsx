@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { useState, useContext } from 'react';
+import { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import TextField from '@mui/material/TextField';
@@ -8,11 +8,8 @@ import IconButton from '@mui/material/IconButton';
 import PhotoCamera from '@mui/icons-material/PhotoCamera';
 import Box from '@mui/material/Box';
 import PreImages from '../../../components/Main/project/PreImages';
-import { UserContext } from '../../../context/UserContext';
 
 export default function PostProject() {
-    const { user } = useContext(UserContext);
-
     const navigate = useNavigate();
     const navigateToProject = () => {
         navigate('/project');
@@ -54,7 +51,6 @@ export default function PostProject() {
             formData.append('body', body);
             formData.append('tags', tags);
             formData.append('language', language);
-            formData.append('auth', user.ID);
             images.map((image) => formData.append('images', image));
 
             await axios
@@ -95,6 +91,7 @@ export default function PostProject() {
                 variant="filled"
                 onChange={(e) => {
                     const tagsArray = e.target.value.split(',');
+                    console.log(tagsArray);
                     setTags(tagsArray);
                 }}
             />

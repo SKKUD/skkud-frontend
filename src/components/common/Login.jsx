@@ -18,7 +18,11 @@ export default function Login() {
         setUser(login.ID);
         console.log(login);
         await axios
-            .post('http://localhost:8000/auth/login', { userID: ID, passwd: PW })
+            .post(
+                'http://localhost:8000/auth/login',
+                { userID: ID, passwd: PW }
+                // { withCredentials: true }
+            )
             .then((userData) => console.log(userData))
             .catch((error) => console.log(error));
     };

@@ -8,6 +8,7 @@ import Header from './components/common/Header';
 import MainTab from './pages/MainTab';
 import Login from './components/common/Login';
 import './utils/font.css';
+// import SideBarDrawer from './components/common/SideBarDrawer';
 
 axios.defaults.withCredentials = true;
 
@@ -77,10 +78,11 @@ function App() {
         <ThemeProvider theme={darkTheme}>
             <CssBaseline />
             <UserContext.Provider value={userValue}>
-                <div className="App" color="primary">
+                <div className="App" color="primary" style={{ paddingTop: '60px', width: '100%' }}>
                     <Header position="static" />
-                    <Login />
+                    <Login sx={{ mt: '20px' }} />
                     <MainTab />
+                    {/* <SideBarDrawer /> */}
                 </div>
             </UserContext.Provider>
         </ThemeProvider>

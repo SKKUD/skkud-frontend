@@ -75,7 +75,15 @@ function a11yProps(index) {
 }
 
 export default function MainTab() {
-    const [value, setValue] = React.useState(0);
+    let TabIndex = 0;
+    if (window.location.pathname === '/') {
+        TabIndex = 0;
+    } else if (window.location.pathname === '/member') {
+        TabIndex = 2;
+    } else {
+        TabIndex = 1;
+    }
+    const [value, setValue] = React.useState(TabIndex);
 
     const handleChange = (event, newValue) => {
         setValue(newValue);

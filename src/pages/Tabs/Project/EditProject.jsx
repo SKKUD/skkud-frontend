@@ -21,6 +21,7 @@ export default function EditProject() {
     const [body, setBody] = useState('');
     const [tags, setTags] = useState([]);
     const [images, setImages] = useState([]);
+    const [newImages, setNewImages] = useState([]);
     const [PreviewImg, setPreviewImg] = useState('');
 
     // :id 파라미터
@@ -39,6 +40,16 @@ export default function EditProject() {
         });
     }, []);
 
+    const convertURLtoFile = async (imageUrl) => {
+        const response = await fetch(imageUrl);
+        const data = await response.blob();
+        const ext = imageUrl.split('.').pop();
+        const filename = imageUrl.split('/').pop();
+        const metadata = { type: `image/${ext}` };
+
+        return new File([data], filename, metadata);
+    };
+
     // useEffect(() => {
     //     const listenHistoryEvent = history.listen((action) => {
     //         if (action === 'PUSH' || action === 'POP') {
@@ -51,7 +62,8 @@ export default function EditProject() {
 
     const uploadImgFile = (event) => {
         const fileArr = event.target.files;
-        setImages(Array.from(fileArr)); // 업로드할 이미지 배열 저장
+        // console.log(Array.from(fileArr));
+        setNewImages(Array.from(fileArr)); // 업로드할 이미지 배열 저장
         const fileURLs = [];
         const filesLength = fileArr.length > 10 ? 10 : fileArr.length;
 
@@ -77,10 +89,15 @@ export default function EditProject() {
             formData.append('title', title);
             formData.append('body', body);
             formData.append('tags', tags);
-            images.map((image) => formData.append('images', image));
-            formData.append('_id', index);
+            const appendFiletoFormdata = async (image) => {
+                const newfile = await convertURLtoFile(image);
+                formData.append('images', newfile);
+            }; // 이미지 url을 file로 변환 후 formData에 append
+            images.map((image) => appendFiletoFormdata(image));
+            newImages.map((image) => formData.append('images', image));
+
             await axios
-                .patch(`http://localhost:8000/posts/${index}`, formData)
+                .post(`http://localhost:8000/posts/revise/${index}`, formData)
                 .then((response) => {
                     console.log(response.status);
                 })
@@ -153,11 +170,9 @@ export default function EditProject() {
                     submit
                 </Button>
             </Box>
-            {PreviewImg
-                ? null
-                : images.map((img) => <img src={img} alt={title} key={img} width="20%" />)}
+            {images &&
+                images.map((img) => <img src={img} alt={title} key={img.name} width="20%" />)}
             {PreviewImg && <PreImages imgFiles={PreviewImg} />}
-
         </form>
     );
 }
