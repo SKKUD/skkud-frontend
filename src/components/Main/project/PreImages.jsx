@@ -11,7 +11,7 @@ function PreImages({ imgFiles }) {
     );
 }
 
-PreImages.propsTypes = {
+PreImages.propTypes = {
     imgFiles: PropTypes.arrayOf(PropTypes.string).isRequired
     // imgFiles: PropTypes.string.isRequired,
 };

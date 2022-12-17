@@ -1,12 +1,9 @@
 import React, { useState, useMemo } from 'react';
 import axios from 'axios';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
-// import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import CssBaseline from '@mui/material/CssBaseline';
 import { UserContext } from './context/UserContext';
-import Header from './components/common/Header';
 import MainTab from './pages/MainTab';
-import Login from './components/common/Login';
 import './utils/font.css';
 // import SideBarDrawer from './components/common/SideBarDrawer';
 
@@ -79,10 +76,7 @@ function App() {
             <CssBaseline />
             <UserContext.Provider value={userValue}>
                 <div className="App" color="primary" style={{ paddingTop: '60px', width: '100%' }}>
-                    <Header position="static" />
-                    <Login sx={{ mt: '20px' }} />
                     <MainTab />
-                    {/* <SideBarDrawer /> */}
                 </div>
             </UserContext.Provider>
         </ThemeProvider>

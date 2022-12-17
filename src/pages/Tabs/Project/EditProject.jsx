@@ -40,16 +40,6 @@ export default function EditProject() {
         });
     }, []);
 
-    const convertURLtoFile = async (imageUrl) => {
-        const response = await fetch(imageUrl);
-        const data = await response.blob();
-        const ext = imageUrl.split('.').pop();
-        const filename = imageUrl.split('/').pop();
-        const metadata = { type: `image/${ext}` };
-
-        return new File([data], filename, metadata);
-    };
-
     // useEffect(() => {
     //     const listenHistoryEvent = history.listen((action) => {
     //         if (action === 'PUSH' || action === 'POP') {
@@ -89,12 +79,37 @@ export default function EditProject() {
             formData.append('title', title);
             formData.append('body', body);
             formData.append('tags', tags);
-            const appendFiletoFormdata = async (image) => {
-                const newfile = await convertURLtoFile(image);
+
+            const convertURLtoFile = async (imageUrl) => {
+                const response = await fetch(imageUrl);
+                const data = await response.blob();
+                const ext = imageUrl.split('.').pop();
+                const filename = imageUrl.split('/').pop();
+                const metadata = { type: `image/${ext}` };
+
+                const newfile = new File([data], filename, metadata);
                 formData.append('images', newfile);
-            }; // 이미지 url을 file로 변환 후 formData에 append
-            images.map((image) => appendFiletoFormdata(image));
-            newImages.map((image) => formData.append('images', image));
+                // console.log(1);
+                // for (const value of formData.values()) {
+                //     console.log('after convert : ', value);
+                // }
+            };
+
+            images.map((image) => convertURLtoFile(image));
+
+            newImages.map(
+                (image) =>
+                    // console.log(3);
+                    formData.append('images', image)
+                // for (const value of formData.values()) {
+                //     console.log('after append newfile : ', value);
+                // }
+            );
+
+            // console.log(formData);
+            // for (const pair of formData.entries()) {
+            //     console.log(pair[0] + ', ' + pair[1]);
+            // }
 
             await axios
                 .post(`http://localhost:8000/posts/revise/${index}`, formData)
@@ -170,8 +185,7 @@ export default function EditProject() {
                     submit
                 </Button>
             </Box>
-            {images &&
-                images.map((img) => <img src={img} alt={title} key={img.name} width="20%" />)}
+            {images && images.map((img) => <img src={img} alt={title} key={img} width="20%" />)}
             {PreviewImg && <PreImages imgFiles={PreviewImg} />}
         </form>
     );

@@ -7,18 +7,6 @@ import PostBtn from '../../../components/Main/project/PostBtn';
 import ProjectList from '../../../components/Main/project/ProjectList';
 import { UserContext } from '../../../context/UserContext';
 
-// const Projects = [
-//     {
-//         name: 'SKKLUB',
-//         des: '성균관대학교 교내 동아리 안내',
-//         keywords: ['학교 서비스', '사용 프로그램']
-//     },
-//     {
-//         name: 'SKKLUB2',
-//         des: '성균관대학교 교내 동아리 안내',
-//         keywords: ['학교 서비스', '사용 프로그램']
-//     }
-// ];
 
 export default function TabProject() {
     const { user } = useContext(UserContext);

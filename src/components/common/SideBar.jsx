@@ -1,12 +1,11 @@
 import * as React from 'react';
+import { NavLink } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import { styled } from '@mui/material/styles';
 import Button from '@mui/material/Button';
 import List from '@mui/material/List';
 import IconButton from '@mui/material/IconButton';
-// import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
-// import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import Drawer from '@mui/material/Drawer';
-
 import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemText from '@mui/material/ListItemText';
@@ -22,18 +21,27 @@ const DrawerHeader = styled('div')(({ theme }) => ({
     justifyContent: 'flex-end'
 }));
 
+function SidebarItem({ path }) {
+    return (
+        <ListItem disablePadding>
+            <NavLink
+                style={{ color: 'white', textDecoration: 'none', width: '100%' }}
+                to={`/${path}`}
+            >
+                <ListItemButton>
+                    <ListItemText sx={{ textAlign: 'right' }} primary={path} />
+                </ListItemButton>
+            </NavLink>
+        </ListItem>
+    );
+}
+
+SidebarItem.propTypes = {
+    path: PropTypes.string.isRequired
+};
+
 export default function SideBar() {
-    // const drawerWidth = 200;
-    // const theme = useTheme();
     const [open, setOpen] = React.useState(false);
-
-    // const handleDrawerOpen = () => {
-    //     setOpen(true);
-    // };
-
-    // const handleDrawerClose = () => {
-    //     setOpen(false);
-    // };
 
     const toggleDrawer = (val) => (event) => {
         if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
@@ -54,57 +62,13 @@ export default function SideBar() {
             >
                 <MenuIcon />
             </IconButton>
-            {/* <Drawer
-                sx={{
-                    width: drawerWidth,
-                    // flexShrink: 0,
-                    '& .MuiDrawer-paper': {
-                        width: drawerWidth
-                    }
-                }}
-                variant="persistent"
-                anchor="right"
-                open={open}
-            >
-                <DrawerHeader>
-                    <IconButton onClick={handleDrawerClose}>
-                        {theme.direction === 'rtl' ? <ChevronLeftIcon /> : <ChevronRightIcon />}
-                    </IconButton>
-                </DrawerHeader>
-                <Divider />
-                <List>
-                    {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
-                        <ListItem key={text} disablePadding>
-                            <ListItemButton>
-                                <ListItemIcon>
-                                    {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-                                </ListItemIcon>
-                                <ListItemText primary={text} />
-                            </ListItemButton>
-                        </ListItem>
-                    ))}
-                </List>
-                <Divider />
-                <List>
-                    {['All mail', 'Trash', 'Spam'].map((text, index) => (
-                        <ListItem key={text} disablePadding>
-                            <ListItemButton>
-                                <ListItemIcon>
-                                    {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-                                </ListItemIcon>
-                                <ListItemText primary={text} />
-                            </ListItemButton>
-                        </ListItem>
-                    ))}
-                    
-                </List>
-            </Drawer> */}
             <Drawer open={open} onClose={toggleDrawer(false)} anchor="right">
                 <DrawerHeader>
                     <IconButton onClick={toggleDrawer(false)}>
                         <MenuIcon />
                     </IconButton>
                 </DrawerHeader>
+
                 <Box
                     sx={{
                         width: 200,
@@ -119,17 +83,10 @@ export default function SideBar() {
                     onKeyDown={toggleDrawer(false)}
                 >
                     <List>
-                        <ListItem disablePadding>
-                            <ListItemButton>
-                                <ListItemText sx={{ textAlign: 'right' }} primary="project" />
-                            </ListItemButton>
-                        </ListItem>
-                        <ListItem disablePadding>
-                            <ListItemButton>
-                                <ListItemText sx={{ textAlign: 'right' }} primary="member" />
-                            </ListItemButton>
-                        </ListItem>
+                        <SidebarItem path="project" sx={{ pr: '0px' }} />
+                        <SidebarItem path="member" />
                     </List>
+
                     <div
                         style={{
                             width: '80%',
@@ -139,21 +96,14 @@ export default function SideBar() {
                         }}
                     />
                     <List>
-                        <ListItem disablePadding>
-                            <ListItemButton>
-                                <ListItemText sx={{ textAlign: 'right' }} primary="schedule" />
-                            </ListItemButton>
-                        </ListItem>
-                        <ListItem disablePadding>
-                            <ListItemButton>
-                                <ListItemText sx={{ textAlign: 'right' }} primary="study" />
-                            </ListItemButton>
-                        </ListItem>
+                        <SidebarItem path="project" />
+                        <SidebarItem path="project" />
                     </List>
                 </Box>
                 <Button
                     variant="contained"
                     sx={{
+                        width: '70%',
                         alignSelf: 'center',
                         borderRadius: '20px',
                         textTransform: 'none',
