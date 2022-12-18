@@ -4,11 +4,8 @@ import { useStudiesApi, useStudyGroupsApi } from '../../hooks/study';
 
 export default function TabStudy() {
     const [studyGroups] = useStudyGroupsApi();
-    const [studies, setStudies] = useStudiesApi();
-    const filterStudies = (a) => {
-        const data = studies.filter((study) => String(study.groupId) === String(a));
-        setStudies(data);
-    };
+    const [studies, filterStudies] = useStudiesApi();
+
     return (
         <>
             <div>
