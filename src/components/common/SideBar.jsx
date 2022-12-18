@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { styled } from '@mui/material/styles';
 import Button from '@mui/material/Button';
@@ -26,7 +26,7 @@ function SidebarItem({ path }) {
         <ListItem disablePadding>
             <NavLink
                 style={{ color: 'white', textDecoration: 'none', width: '100%' }}
-                to={`/${path}`}
+                to={`/maintab/${path}`}
             >
                 <ListItemButton>
                     <ListItemText sx={{ textAlign: 'right' }} primary={path} />
@@ -100,19 +100,28 @@ export default function SideBar() {
                         <SidebarItem path="project" />
                     </List>
                 </Box>
-                <Button
-                    variant="contained"
-                    sx={{
-                        width: '70%',
-                        alignSelf: 'center',
-                        borderRadius: '20px',
-                        textTransform: 'none',
-                        marginTop: 'auto',
-                        mb: '100%'
+                <Link
+                    to="/application"
+                    style={{
+                        textDecoration: 'none',
+                        display: 'contents',
+                        width: '100%'
                     }}
                 >
-                    recruitment
-                </Button>
+                    <Button
+                        variant="contained"
+                        sx={{
+                            width: '70%',
+                            alignSelf: 'center',
+                            borderRadius: '20px',
+                            textTransform: 'none',
+                            marginTop: 'auto',
+                            mb: '100%'
+                        }}
+                    >
+                        recruitment
+                    </Button>
+                </Link>
             </Drawer>
         </>
     );

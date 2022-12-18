@@ -7,7 +7,6 @@ import PostBtn from '../../../components/Main/project/PostBtn';
 import ProjectList from '../../../components/Main/project/ProjectList';
 import { UserContext } from '../../../context/UserContext';
 
-
 export default function TabProject() {
     const { user } = useContext(UserContext);
     // const [postList, setPostList] = useState([]);
@@ -25,7 +24,7 @@ export default function TabProject() {
     return (
         <>
             {user ? (
-                <Link to="/postproject" style={{ textDecoration: 'inherit' }}>
+                <Link to="/maintab/postproject" style={{ textDecoration: 'inherit' }}>
                     <PostBtn />
                 </Link>
             ) : (

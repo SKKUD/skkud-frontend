@@ -30,7 +30,7 @@ export default function ProjectDetail() {
         <>
             <Box sx={{ display: 'flex', justifyContent: 'end', mb: '15px' }}>
                 <Link
-                    to={`/editproject/${_id}`}
+                    to={`/maintab/editproject/${_id}`}
                     style={{
                         textDecoration: 'none',
                         display: 'contents',

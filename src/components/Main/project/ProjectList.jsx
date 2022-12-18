@@ -28,7 +28,7 @@ export default function ProjectList() {
         .reverse()
         .map((project) => (
             <Link
-                to={`/projectdetail/${project._id}`}
+                to={`/maintab/projectdetail/${project._id}`}
                 style={{
                     textDecoration: 'none',
                     display: 'contents',

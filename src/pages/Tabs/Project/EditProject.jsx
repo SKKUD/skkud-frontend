@@ -15,7 +15,7 @@ export default function EditProject() {
     // const history = createBrowserHistory();
     const navigate = useNavigate();
     const navigateToProject = () => {
-        navigate('/project');
+        navigate('/maintab/project');
     };
     const PostDetail = useProjectPostDetailApi();
 

@@ -12,7 +12,7 @@ import PreImages from '../../../components/Main/project/PreImages';
 export default function PostProject() {
     const navigate = useNavigate();
     const navigateToProject = () => {
-        navigate('/project');
+        navigate('/maintab/project');
     };
 
     const [title, setTitle] = useState('');
