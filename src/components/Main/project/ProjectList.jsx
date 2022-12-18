@@ -1,19 +1,10 @@
 import * as React from 'react';
-import { useEffect, useState } from 'react';
-import axios from 'axios';
 import { Link } from 'react-router-dom';
 import ProjectCard from './ProjectCard';
+import { useProjectListApi } from '../../../hooks/Project';
 
 export default function ProjectList() {
-    const [postList, setPostList] = useState([]);
-
-    useEffect(() => {
-        const fetchEvents = async () => {
-            const res = await axios.get('http://localhost:8000/posts');
-            setPostList(res.data.data);
-        };
-        fetchEvents();
-    }, []);
+    const [postList] = useProjectListApi();
 
     function createData(index, _id, title, body, images, mainimage, tags, createdAt) {
         return { index, _id, title, body, images, mainimage, tags, createdAt };

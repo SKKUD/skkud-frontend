@@ -1,6 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import { Link, useParams } from 'react-router-dom';
-import axios from 'axios';
+import React from 'react';
+import { Link } from 'react-router-dom';
 import { styled } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
@@ -9,21 +8,11 @@ import Stack from '@mui/material/Stack';
 import DeleteBtn from '../../../components/Main/project/DeleteBtn';
 import EditBtn from '../../../components/Main/project/EditBtn';
 // import { UserContext } from '../../../context/UserContext';
+import { useProjectPostApi } from '../../../hooks/Project';
 
 export default function ProjectDetail() {
     // const { user } = useContext(UserContext);
-    const [post, setPost] = useState({});
-
-    // :id 파라미터
-    const { index } = useParams();
-
-    useEffect(() => {
-        const fetchEvents = async () => {
-            const res = await axios.get(`http://localhost:8000/posts/${index}`);
-            setPost(res.data.data);
-        };
-        fetchEvents();
-    }, []);
+    const [post] = useProjectPostApi();
 
     const { title, body, images, mainimage, tags, language, _id } = post;
 

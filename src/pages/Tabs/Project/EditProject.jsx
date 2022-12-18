@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import axios from 'axios';
 import { useNavigate, useParams } from 'react-router-dom';
 // import { createBrowserHistory } from 'history';
@@ -9,6 +9,7 @@ import IconButton from '@mui/material/IconButton';
 import PhotoCamera from '@mui/icons-material/PhotoCamera';
 import Box from '@mui/material/Box';
 import PreImages from '../../../components/Main/project/PreImages';
+import { useProjectPostDetailApi } from '../../../hooks/Project';
 
 export default function EditProject() {
     // const history = createBrowserHistory();
@@ -16,39 +17,17 @@ export default function EditProject() {
     const navigateToProject = () => {
         navigate('/project');
     };
+    const PostDetail = useProjectPostDetailApi();
 
-    const [title, setTitle] = useState('');
-    const [body, setBody] = useState('');
-    const [tags, setTags] = useState([]);
-    const [images, setImages] = useState([]);
+    const [title, setTitle] = PostDetail[0];
+    const [body, setBody] = PostDetail[1];
+    const [tags, setTags] = PostDetail[2];
+    const [images] = PostDetail[3];
     const [newImages, setNewImages] = useState([]);
     const [PreviewImg, setPreviewImg] = useState('');
 
     // :id 파라미터
     const { index } = useParams();
-
-    useEffect(() => {
-        const fetchEvents = async () => {
-            const res = await axios.get(`http://localhost:8000/posts/${index}`);
-            return res.data.data;
-        };
-        fetchEvents().then((data) => {
-            setTitle(data.title);
-            setBody(data.body);
-            setTags(data.tags);
-            setImages(data.images);
-        });
-    }, []);
-
-    // useEffect(() => {
-    //     const listenHistoryEvent = history.listen((action) => {
-    //         if (action === 'PUSH' || action === 'POP') {
-    //             navigate(`/projectdetail/${index}`);
-    //         }
-    //     });
-
-    //     listenHistoryEvent();
-    // }, [history]);
 
     const uploadImgFile = (event) => {
         const fileArr = event.target.files;

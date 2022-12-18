@@ -3,7 +3,7 @@ import axios from 'axios';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 import { UserContext } from './context/UserContext';
-import MainTab from './pages/MainTab';
+import MainPage from './pages/MainPage';
 import './utils/font.css';
 // import SideBarDrawer from './components/common/SideBarDrawer';
 
@@ -55,6 +55,13 @@ export const darkTheme = createTheme({
               unicodeRange: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF;
             }
           `
+        },
+        MuiDrawer: {
+            styleOverrides: {
+                paper: {
+                    background: '#222222'
+                }
+            }
         }
     }
 });
@@ -76,7 +83,7 @@ function App() {
             <CssBaseline />
             <UserContext.Provider value={userValue}>
                 <div className="App" color="primary" style={{ paddingTop: '60px', width: '100%' }}>
-                    <MainTab />
+                    <MainPage />
                 </div>
             </UserContext.Provider>
         </ThemeProvider>
