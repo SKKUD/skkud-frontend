@@ -14,12 +14,15 @@ export default function Login() {
     const [PW, setPW] = useState('');
     const [cookies, setCookie, removeCookie] = useCookies(['id']);
 
-    const loginBtn = async () => {
+    const loginBtn = async (e) => {
+        e.preventDefault();
         await axios
             .post('http://localhost:8000/auth/login', { userID: ID, passwd: PW })
             .then((userData) => {
                 console.log(userData);
+                console.log(user);
                 if (userData.data.loginSuccess === true) {
+                    console.log('login success');
                     setUser(ID);
                     setCookie('id', ID);
                 } else if (userData.data.message === '비밀번호가 틀렸습니다.') {
@@ -35,6 +38,7 @@ export default function Login() {
     const logoutBtn = async () => {
         setUser('');
         removeCookie('id');
+        console.log('remove cookies', cookies);
         await axios
             .post('http://localhost:8000/auth/logout')
             .then((userData) => console.log(userData))
@@ -51,7 +55,10 @@ export default function Login() {
                 console.log(res);
                 console.log('id', res.data.data.userID);
                 if (res.data.data.userID !== token) {
+                    alert('세션이 만료되었습니다.');
                     logoutBtn();
+                } else {
+                    console.log('login 유지');
                 }
             })
             .catch((error) => console.log(error));
@@ -59,13 +66,14 @@ export default function Login() {
     useEffect(() => {
         authCheck();
         console.log('user', ID);
+        console.log('cookies', cookies);
     }, []);
 
     return (
         <div>
-            {user ? (
+            {cookies ? (
                 <div>
-                    <Typography>{user}님 안녕하세요</Typography>
+                    <Typography>{cookies.id}님 안녕하세요</Typography>
                     <Button variant="contained" onClick={logoutBtn}>
                         Logout
                     </Button>

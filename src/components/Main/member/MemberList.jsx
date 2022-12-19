@@ -12,7 +12,6 @@ export default function MemberList() {
     const [backend, setBackend] = useState([]);
     const { trackTab } = useContext(TrackContext);
     const [data, setData] = useState([]);
-    console.log('tracktab', trackTab);
 
     useEffect(() => {
         const fetchEvents = async () => {

@@ -23,9 +23,15 @@ export const darkTheme = createTheme({
             contrastText: '#FFF',
             dark: '#111111'
         },
+
         background: {
             default: '#292929',
             paper: '#292929'
+        },
+        mint: {
+            main: '#00FFB0',
+            contrastText: '#000000',
+            dark: '#000000'
         }
     }
 });
