@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { NavLink, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { styled } from '@mui/material/styles';
 import Button from '@mui/material/Button';
@@ -24,14 +24,14 @@ const DrawerHeader = styled('div')(({ theme }) => ({
 function SidebarItem({ path }) {
     return (
         <ListItem disablePadding>
-            <NavLink
+            <Link
                 style={{ color: 'white', textDecoration: 'none', width: '100%' }}
                 to={`/maintab/${path}`}
             >
                 <ListItemButton>
                     <ListItemText sx={{ textAlign: 'right' }} primary={path} />
                 </ListItemButton>
-            </NavLink>
+            </Link>
         </ListItem>
     );
 }

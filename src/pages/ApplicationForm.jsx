@@ -5,7 +5,7 @@ import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
-import { useApplicationFormDetailApi, useAppliedUserApi } from '../hooks/Application';
+import { useApplicationFormDetailApi } from '../hooks/Application';
 import Header from '../components/common/Header';
 
 export default function ApplicationForm() {
@@ -15,8 +15,8 @@ export default function ApplicationForm() {
 
     const { title, introduction, questions } = form;
 
-    const appliers = useAppliedUserApi();
-    console.log(appliers);
+    // const appliers = useAppliedUserApi();
+    // console.log(appliers);
 
     const navigate = useNavigate();
     const navigateToMainTab = () => {

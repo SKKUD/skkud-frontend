@@ -1,10 +1,11 @@
 import * as React from 'react';
+import { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { styled } from '@mui/material/styles';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import Box from '@mui/material/Box';
-import { Routes, Route, Link } from 'react-router-dom';
+import { Routes, Route, Link, useLocation } from 'react-router-dom';
 import TabAboutUs from './TabAboutUs';
 import ProjectList from './Project/TabProject';
 import TabMember from './User/TabMember';
@@ -78,14 +79,21 @@ function a11yProps(index) {
 
 function MainTab() {
     let TabIndex = 0;
-    if (window.location.pathname === '/project') {
-        TabIndex = 1;
-    } else if (window.location.pathname === '/member') {
-        TabIndex = 2;
-    } else {
-        TabIndex = 0;
-    }
     const [value, setValue] = React.useState(TabIndex);
+    const location = useLocation();
+
+    useEffect(() => {
+        if (location.pathname === '/maintab/project') {
+            TabIndex = 1;
+            setValue(TabIndex);
+        } else if (location.pathname === '/maintab/member') {
+            TabIndex = 2;
+            setValue(TabIndex);
+        } else {
+            TabIndex = 0;
+            setValue(TabIndex);
+        }
+    }, [location]);
 
     const handleChange = (event, newValue) => {
         setValue(newValue);
