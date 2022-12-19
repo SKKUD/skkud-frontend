@@ -1,30 +1,20 @@
-]import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo } from 'react';
 import axios from 'axios';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
-<<<<<<< HEAD
 import { UserContext } from './context/UserContext';
 import MainPage from './pages/MainPage';
 import './utils/font.css';
 // import SideBarDrawer from './components/common/SideBarDrawer';
 
 axios.defaults.withCredentials = true;
-=======
-import Header from './components/common/Header';
-import MainTabs from './components/Main/MainTabs';
-
->>>>>>> 5ab0976 (fix tab router)
 
 export const darkTheme = createTheme({
     palette: {
         mode: 'dark',
         primary: {
             main: '#00FFB0',
-<<<<<<< HEAD
             contrastText: '#222222',
-=======
-            contrastText: '#292929',
->>>>>>> cf06860 (add ProjectList)
             dark: '#027d56'
         },
         neutral: {
@@ -91,18 +81,11 @@ function App() {
     return (
         <ThemeProvider theme={darkTheme}>
             <CssBaseline />
-<<<<<<< HEAD
             <UserContext.Provider value={userValue}>
                 <div className="App" color="primary" style={{ paddingTop: '60px', width: '100%' }}>
                     <MainPage />
                 </div>
             </UserContext.Provider>
-=======
-            <div className="App" color="primary">
-                <Header position="static" />
-                <MainTabs />
-            </div>
->>>>>>> 5ab0976 (fix tab router)
         </ThemeProvider>
     );
 }
