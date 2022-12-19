@@ -43,21 +43,21 @@ export default function Login() {
 
     const authCheck = () => {
         console.log('cookies', cookies.id);
+
         const token = cookies.id;
         axios
             .post('http://localhost:8000/auth/verify')
             .then((res) => {
+                console.log(res);
                 console.log('id', res.data.data.userID);
-                if (res.data.data.userID === token) {
+                if (res.data.data.userID !== token) {
                     logoutBtn();
                 }
             })
             .catch((error) => console.log(error));
     };
     useEffect(() => {
-        if (cookies.id !== undefined) {
-            authCheck();
-        }
+        authCheck();
         console.log('user', ID);
     }, []);
 

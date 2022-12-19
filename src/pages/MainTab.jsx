@@ -12,6 +12,8 @@ import ProjectDetail from './Tabs/Project/ProjectDetail';
 import EditProject from './Tabs/Project/EditProject';
 import CreateUser from './Tabs/User/CreateUser';
 import EditUser from './Tabs/User/EditUser';
+import FrontendTab from './Tabs/User/FrontendTab';
+import BackendTab from './Tabs/User/BackendTab';
 
 function TabPanel(props) {
     const { children, value, index, ...other } = props;
@@ -71,6 +73,8 @@ export default function MainTab() {
                         <Route path="/editproject/:index" element={<EditProject />} />
                         <Route path="/projectdetail/:index" element={<ProjectDetail />} />
                         <Route path="/member" element={<TabMember />} />
+                        <Route path="/member/frontend" element={<FrontendTab />} />
+                        <Route path="/member/backend" element={<BackendTab />} />
                         <Route path="/createuser" element={<CreateUser />} />
                         <Route path="/edituser/:index" element={<EditUser />} />
                     </Routes>

@@ -1,6 +1,9 @@
 import * as React from 'react';
+import { useContext } from 'react';
+import { Link } from 'react-router-dom';
 import Button from '@mui/material/Button';
 import styled from '@emotion/styled';
+import { TrackContext } from '../../../context/TrackContext';
 
 const ButtonBlock = styled.div`
     * {
@@ -24,13 +27,54 @@ const ButtonBlock = styled.div`
 `;
 
 export default function MemberNav() {
+    const { trackTab, setTrackTab } = useContext(TrackContext);
+    const handleChange = (idx) => {
+        console.log('idxasaaaaaaaaaaaaa', idx);
+    };
+    console.log('nav track', trackTab);
+    function a11yProps(index) {
+        return {
+            id: `simple-tab-${index}`,
+            'aria-controls': `simple-tabpanel-${index}`
+        };
+    }
+
     return (
-        <ButtonBlock>
-            <Button className="design" type="button">
+        <ButtonBlock value={trackTab} onChange={handleChange} aria-label="mainTabs" centered>
+            <Button
+                className="design"
+                type="button"
+                {...a11yProps(0)}
+                component={Link}
+                to="/member"
+                onClick={() => {
+                    setTrackTab('design');
+                }}
+            >
                 UI/UX Designer
             </Button>
-            <Button type="button">Frontend</Button>
-            <Button type="button">Backend</Button>
+            <Button
+                type="button"
+                {...a11yProps(1)}
+                component={Link}
+                to="/member/frontend"
+                onClick={() => {
+                    setTrackTab('frontend');
+                }}
+            >
+                Frontend
+            </Button>
+            <Button
+                type="button"
+                {...a11yProps(1)}
+                component={Link}
+                to="/member/backend"
+                onClick={() => {
+                    setTrackTab('backend');
+                }}
+            >
+                Backend
+            </Button>
         </ButtonBlock>
     );
 }
