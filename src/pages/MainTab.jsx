@@ -8,6 +8,7 @@ import TabAboutUs from './Tabs/TabAboutUs';
 import ProjectList from './Tabs/TabProject';
 // import ProjectList from './project/ProjectList';
 import TabMember from './Tabs/TabMember';
+import TabStudy from './Tabs/TabStudy';
 
 function TabPanel(props) {
     const { children, value, index, ...other } = props;
@@ -56,6 +57,7 @@ export default function MainTab() {
                         <Tab label="about us" {...a11yProps(0)} component={Link} to="/" />
                         <Tab label="project" {...a11yProps(1)} component={Link} to="/project" />
                         <Tab label="member" {...a11yProps(2)} component={Link} to="/member" />
+                        <Tab label="study" {...a11yProps(2)} component={Link} to="/study" />
                     </Tabs>
                 </Box>
                 <TabPanel value={value} index={value}>
@@ -63,6 +65,7 @@ export default function MainTab() {
                         <Route path="/" element={<TabAboutUs />} />
                         <Route path="/project" element={<ProjectList />} />
                         <Route path="/member" element={<TabMember />} />
+                        <Route path="/study" element={<TabStudy />} />
                     </Routes>
                 </TabPanel>
             </Box>
