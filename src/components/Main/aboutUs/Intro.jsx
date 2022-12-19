@@ -1,23 +1,21 @@
 import * as React from 'react';
-import Card from '@mui/material/Card';
-import CardContent from '@mui/material/CardContent';
-import styled from '@emotion/styled';
-
-const Title = styled.div`
-    font-size: 20px;
-`;
-
-const Detail = styled.div`
-    font-size: 12px;
-`;
+import SKKKUDImg from '../../../assets/WeAreSKKUD.png';
+import IntroDesignImg from '../../../assets/IntroDesign.png';
 
 export default function Intro() {
     return (
+<<<<<<< HEAD
+        <>
+            <img src={IntroDesignImg} alt="introDesign" width="100%" />
+            <img src={SKKKUDImg} alt="WeAreSKKUD" width="100%" />
+        </>
+=======
         <Card sx={{ minWidth: 275 }}>
-            <CardContent>
+            <CardContent component="div">
                 <Title>SKKU.D</Title>
                 <Detail>The final step before becoming a developer</Detail>
             </CardContent>
         </Card>
+>>>>>>> cf06860 (add ProjectList)
     );
 }

@@ -4,11 +4,9 @@ import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import Box from '@mui/material/Box';
 import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
-import TabAboutUs from './Tabs/TabAboutUs';
-import ProjectList from './Tabs/TabProject';
+import TabAboutUs from './aboutUs/TabAboutUs';
+import ProjectList from './project/ProjectList';
 // import ProjectList from './project/ProjectList';
-import TabMember from './Tabs/TabMember';
-import TabStudy from './Tabs/TabStudy';
 
 function TabPanel(props) {
     const { children, value, index, ...other } = props;
@@ -42,7 +40,7 @@ function a11yProps(index) {
     };
 }
 
-export default function MainTab() {
+export default function MainTabs() {
     const [value, setValue] = React.useState(0);
 
     const handleChange = (event, newValue) => {
@@ -57,15 +55,13 @@ export default function MainTab() {
                         <Tab label="about us" {...a11yProps(0)} component={Link} to="/" />
                         <Tab label="project" {...a11yProps(1)} component={Link} to="/project" />
                         <Tab label="member" {...a11yProps(2)} component={Link} to="/member" />
-                        <Tab label="study" {...a11yProps(2)} component={Link} to="/study" />
                     </Tabs>
                 </Box>
                 <TabPanel value={value} index={value}>
                     <Routes>
                         <Route path="/" element={<TabAboutUs />} />
                         <Route path="/project" element={<ProjectList />} />
-                        <Route path="/member" element={<TabMember />} />
-                        <Route path="/study" element={<TabStudy />} />
+                        <Route path="/member" element={<TabAboutUs />} />
                     </Routes>
                 </TabPanel>
             </Box>

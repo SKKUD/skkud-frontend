@@ -14,7 +14,7 @@ const Detail = styled.div`
 export default function History() {
     return (
         <Card sx={{ minWidth: 275, mt: 1.5 }}>
-            <CardContent>
+            <CardContent component="div">
                 <Title>History of SKKU.D</Title>
                 <Detail variant="body2" sx={{ mt: 1.5 }}>
                     총 프로젝트 수 : 8

@@ -13,6 +13,16 @@
     "rules": {
         "import/no-unresolved": "off",
         "react/jsx-props-no-spreading": "off",
-        "react/react-in-jsx-scope": "off"
-    }
+        "react/react-in-jsx-scope": "off",
+        "react/array-callback-return": "off",
+        "no-underscore-dangle": "off",
+        "no-restricted-syntax": [
+            "error",
+            {
+                "selector": "ForOfStatement",
+                "message": "iterators/generators require regenerator-runtime, which is too heavyweight for this guide to allow them. Separately, loops should be avoided in favor of array iterations."
+            }
+        ]
+    },
+    "parser": "@babel/eslint-parser"
 }
