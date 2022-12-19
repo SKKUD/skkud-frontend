@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { useState } from 'react';
 import PropTypes from 'prop-types';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
@@ -6,6 +7,7 @@ import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
+import Button from '@mui/material/Button';
 
 export default function MemberCard({
     name,
@@ -16,8 +18,11 @@ export default function MemberCard({
     email,
     link1,
     insta,
-    link2
+    link2,
+    projects
 }) {
+    const [isVisible, setIsVisible] = useState(false);
+
     return (
         <Card sx={{ maxWidth: 350 }} style={{ marginBottom: 10 }}>
             <CardMedia component="img" image={img} alt={name} />
@@ -50,6 +55,16 @@ export default function MemberCard({
                         </Grid>
                     </Grid>
                 </Box>
+                <Button onClick={() => setIsVisible(!isVisible)}>Show Projects</Button>
+                {isVisible ? (
+                    <Box sx={{ width: '100%' }}>
+                        {projects.map((value) => (
+                            <Typography variant="body1" color="text.secondary">
+                                {value}
+                            </Typography>
+                        ))}
+                    </Box>
+                ) : null}
             </CardContent>
         </Card>
     );
@@ -64,5 +79,6 @@ MemberCard.propTypes = {
     email: PropTypes.string.isRequired,
     link1: PropTypes.string.isRequired,
     insta: PropTypes.string.isRequired,
-    link2: PropTypes.string.isRequired
+    link2: PropTypes.string.isRequired,
+    projects: PropTypes.string.isRequired
 };

@@ -12,7 +12,8 @@ const Members = [
         email: 'minjikim@g.skku.edu',
         link1: 'minjikim@g.skku.edu',
         insta: 'minjikim@g.skku.edu',
-        link2: 'minjikim@g.skku.edu'
+        link2: 'minjikim@g.skku.edu',
+        projects: ['스꾸디']
     },
     {
         name: '김민지2',
@@ -23,7 +24,8 @@ const Members = [
         email: 'minjikim@g.skku.edu',
         link1: 'minjikim@g.skku.edu',
         insta: 'minjikim@g.skku.edu',
-        link2: 'minjikim@g.skku.edu'
+        link2: 'minjikim@g.skku.edu',
+        projects: []
     },
     {
         name: '김민지3',
@@ -34,7 +36,8 @@ const Members = [
         email: 'minjikim@g.skku.edu',
         link1: 'minjikim@g.skku.edu',
         insta: 'minjikim@g.skku.edu',
-        link2: 'minjikim@g.skku.edu'
+        link2: 'minjikim@g.skku.edu',
+        projects: []
     }
 ];
 
@@ -53,6 +56,7 @@ export default function MemberList() {
                     link1={member.link1}
                     insta={member.insta}
                     link2={member.link2}
+                    projects={member.projects}
                 />
             ))}
         </>
