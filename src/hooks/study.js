@@ -8,7 +8,6 @@ export const useStudyGroupsApi = () => {
 
     useEffect(() => {
         axios.get(`${BASE_URL}study/studyGroups`).then(({ data: { data } }) => {
-            console.log(data);
             setStudyGroups(data);
         });
     }, []);
