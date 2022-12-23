@@ -12,7 +12,7 @@ export default function Login() {
     const { user, setUser } = useContext(UserContext);
     const [ID, setID] = useState('');
     const [PW, setPW] = useState('');
-    const [cookies, setCookie, removeCookie] = useCookies(['id']);
+    const [cookies, setCookie, removeCookie] = useCookies([]);
 
     const loginBtn = async (e) => {
         console.log('login bnt');
