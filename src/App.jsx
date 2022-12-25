@@ -19,9 +19,9 @@ export const darkTheme = createTheme({
             dark: '#027d56'
         },
         neutral: {
-            main: '#7c7c7c',
+            main: '#ffffff99',
             contrastText: '#FFF',
-            dark: '#111111'
+            dark: '#222222'
         },
         background: {
             default: '#222222',
@@ -31,6 +31,9 @@ export const darkTheme = createTheme({
             main: '#00FFB0',
             contrastText: '#000000',
             dark: '#000000'
+        },
+        white: {
+            main: '#FFF'
         }
     },
     typography: {
