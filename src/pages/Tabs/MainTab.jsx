@@ -17,7 +17,6 @@ import EditUser from './User/EditUser';
 import FrontendTab from './User/FrontendTab';
 import BackendTab from './User/BackendTab';
 import Header from '../../components/common/Header';
-import Login from '../../components/common/Login';
 
 function TabPanel(props) {
     const { children, value, index, ...other } = props;
@@ -52,7 +51,8 @@ const StyledTabs = styled((props) => (
 
 const StyledTab = styled((props) => <Tab disableRipple {...props} />)(({ theme }) => ({
     textTransform: 'none',
-    fontWeight: 500,
+    fontWeight: 600,
+    paddingBottom: '5px',
     fontSize: theme.typography.pxToRem(15),
     color: 'rgba(255, 255, 255, 0.7)',
     '&.Mui-selected': {
@@ -85,8 +85,8 @@ function MainTab() {
     const location = useLocation();
 
     useEffect(() => {
-        if (location.pathname === '/maintab/project') {
-            TabIndex = 1;
+        if (location.pathname === '/maintab') {
+            TabIndex = 0;
             setValue(TabIndex);
         } else if (
             location.pathname === '/maintab/frontend' ||
@@ -98,7 +98,7 @@ function MainTab() {
             TabIndex = 2;
             setValue(TabIndex);
         } else {
-            TabIndex = 0;
+            TabIndex = 1;
             setValue(TabIndex);
         }
     }, [location]);
@@ -110,7 +110,6 @@ function MainTab() {
     return (
         <Box sx={{ width: '100%' }}>
             <Header position="static" />
-            <Login sx={{ mt: '20px' }} />
             <Box
                 sx={{
                     display: 'flex',
@@ -122,7 +121,12 @@ function MainTab() {
                     onChange={handleChange}
                     aria-label="mainTabs"
                     variant="fullWidth"
-                    sx={{ width: '80%' }}
+                    sx={{
+                        width: '100%',
+                        position: 'fixed',
+                        backgroundColor: '#222222',
+                        marginTop: '25px'
+                    }}
                 >
                     <StyledTab label="about us" {...a11yProps(0)} component={Link} to="" />
                     <StyledTab label="project" {...a11yProps(1)} component={Link} to="project" />
@@ -130,7 +134,7 @@ function MainTab() {
                 </StyledTabs>
             </Box>
 
-            <TabPanel value={value} index={value}>
+            <TabPanel value={value} index={value} style={{ paddingTop: '70px' }}>
                 <Routes>
                     <Route path="" element={<TabAboutUs />} />
                     <Route path="project" element={<ProjectList />} />

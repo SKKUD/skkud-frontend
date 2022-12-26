@@ -13,15 +13,14 @@ function Header() {
                 sx={{
                     position: 'fixed',
                     width: '100%',
-                    backgroundColor: '#222222'
+                    backgroundColor: '#222222',
+                    paddingTop: '50px'
                 }}
             >
-                {/* <Box sx={{ fontWeight: 700 }}>SKKU.D</Box> */}
                 <Typography variant="h6" noWrap sx={{ width: '98%' }} component="div">
                     SKKU.D
                 </Typography>
                 <SideBar />
-                {/* <SideBarBtn /> */}
             </Toolbar>
         </AppBar>
     );
