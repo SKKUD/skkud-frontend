@@ -58,7 +58,7 @@ export default function ApplicationForm() {
         <Box>
             <Header />
 
-            <form>
+            <form style={{ paddingTop: '60px' }}>
                 <Typography variant="h4">{title}</Typography>
                 <p>{introduction}</p>
                 <Typography variant="h6">인적사항</Typography>

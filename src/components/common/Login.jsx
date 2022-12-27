@@ -7,7 +7,7 @@ import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import { useCookies } from 'react-cookie';
 import { UserContext } from '../../context/UserContext';
-import skkud from '../../assets/SKKU.D.png';
+import skkud from '../../assets/SKKUD_green.jpeg';
 import Header from './Header';
 
 export default function Login() {
@@ -16,14 +16,14 @@ export default function Login() {
     const [PW, setPW] = useState('');
     const [cookies, setCookie, removeCookie] = useCookies([]);
     const navigate = useNavigate();
-        const navigateToMainTab = () => {
-            navigate('/maintab');
-        };
+    const navigateToMainTab = () => {
+        navigate('/maintab');
+    };
 
     const loginBtn = async (e) => {
         console.log('login bnt');
         e.preventDefault();
-        
+
         await axios
             .post('http://localhost:8000/auth/login', { userID: ID, passwd: PW })
             .then((userData) => {

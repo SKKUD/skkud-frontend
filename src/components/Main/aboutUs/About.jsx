@@ -1,7 +1,7 @@
 import * as React from 'react';
 import styled from '@emotion/styled';
 
-import SKKUD from '../../../assets/SKKU.D.png';
+import SKKUD from '../../../assets/SKKUD_green.jpeg';
 
 const StyledCard = styled.div`
     box-sizing: border-box;
@@ -45,7 +45,12 @@ export default function About() {
             <img
                 src={SKKUD}
                 alt="SKKUD"
-                style={{ marginLeft: 'auto', display: 'block', marginRight: '21px' }}
+                style={{
+                    marginLeft: 'auto',
+                    display: 'block',
+                    marginRight: '21px',
+                    width: '213px'
+                }}
             />
             <Detail1>
                 우리는 웹 개발자가 되고 싶은 학생들을 위해

@@ -58,14 +58,13 @@ export default function SideBar() {
                 aria-label="open drawer"
                 edge="end"
                 onClick={toggleDrawer(true)}
-                sx={{ ...(open && { display: 'none' }) }}
             >
-                <MenuIcon />
+                <MenuIcon sx={{ fontSize: 35 }} />
             </IconButton>
             <Drawer open={open} onClose={toggleDrawer(false)} anchor="right">
-                <DrawerHeader>
+                <DrawerHeader sx={{ marginTop: '45px' }}>
                     <IconButton onClick={toggleDrawer(false)}>
-                        <MenuIcon />
+                        <MenuIcon sx={{ fontSize: 35 }} />
                     </IconButton>
                 </DrawerHeader>
 

@@ -12,7 +12,6 @@ import PreImages from '../../../components/Main/project/PreImages';
 import { useProjectPostDetailApi } from '../../../hooks/Project';
 
 export default function EditProject() {
-    // const history = createBrowserHistory();
     const navigate = useNavigate();
     const navigateToProject = () => {
         navigate('/maintab/project');
@@ -31,7 +30,6 @@ export default function EditProject() {
 
     const uploadImgFile = (event) => {
         const fileArr = event.target.files;
-        // console.log(Array.from(fileArr));
         setNewImages(Array.from(fileArr)); // 업로드할 이미지 배열 저장
         const fileURLs = [];
         const filesLength = fileArr.length > 10 ? 10 : fileArr.length;
@@ -57,7 +55,9 @@ export default function EditProject() {
             const formData = new FormData();
             formData.append('title', title);
             formData.append('body', body);
-            formData.append('tags', tags);
+            for (let i = 0; i < tags.length; i++) {
+                formData.append('tags', tags[i]);
+            }
 
             const convertURLtoFile = async (imageUrl) => {
                 const response = await fetch(imageUrl);

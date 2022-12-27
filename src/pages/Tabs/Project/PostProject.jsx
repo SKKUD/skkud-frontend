@@ -49,7 +49,9 @@ export default function PostProject() {
             const formData = new FormData();
             formData.append('title', title);
             formData.append('body', body);
-            formData.append('tags', tags);
+            for (let i = 0; i < tags.length; i++) {
+                formData.append('tags', tags[i]);
+            }
             formData.append('language', language);
             images.map((image) => formData.append('images', image));
 
@@ -91,7 +93,6 @@ export default function PostProject() {
                 variant="filled"
                 onChange={(e) => {
                     const tagsArray = e.target.value.split(',');
-                    console.log(tagsArray);
                     setTags(tagsArray);
                 }}
             />
