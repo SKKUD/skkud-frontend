@@ -8,7 +8,7 @@ export default function DeleteBtn(_id) {
     const { state } = _id;
     const navigate = useNavigate();
     const navigateToProject = () => {
-        navigate('/project');
+        navigate('/maintab/project');
     };
 
     return (

@@ -125,7 +125,7 @@ function MainTab() {
                         width: '100%',
                         position: 'fixed',
                         backgroundColor: '#222222',
-                        marginTop: '25px'
+                        marginTop: '40px'
                     }}
                 >
                     <StyledTab label="about us" {...a11yProps(0)} component={Link} to="" />
@@ -134,7 +134,7 @@ function MainTab() {
                 </StyledTabs>
             </Box>
 
-            <TabPanel value={value} index={value} style={{ paddingTop: '70px' }}>
+            <TabPanel value={value} index={value} style={{ marginTop: '85px' }}>
                 <Routes>
                     <Route path="" element={<TabAboutUs />} />
                     <Route path="project" element={<ProjectList />} />

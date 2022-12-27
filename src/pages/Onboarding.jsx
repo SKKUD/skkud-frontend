@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router';
-import skkud from '../assets/SKKU.D.png';
+import skkud from '../assets/SKKUD_green.jpeg';
 
 export default function () {
     const navigate = useNavigate();

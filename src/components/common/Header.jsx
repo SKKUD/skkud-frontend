@@ -5,6 +5,7 @@ import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 // import SideBarBtn from './SideBarBtn';
 import SideBar from './SideBar';
+import SKKUDLOGO from '../../assets/SKKUD_LOGO.jpeg';
 
 function Header() {
     return (
@@ -14,12 +15,19 @@ function Header() {
                     position: 'fixed',
                     width: '100%',
                     backgroundColor: '#222222',
-                    paddingTop: '50px'
+                    padding: '50px 24px 10px',
+                    display: 'flex',
+                    justifyContent: 'space-between'
                 }}
             >
-                <Typography variant="h6" noWrap sx={{ width: '98%' }} component="div">
-                    SKKU.D
-                </Typography>
+                <img
+                    src={SKKUDLOGO}
+                    alt="SKKUD"
+                    style={{
+                        width: '167px',
+                        margin: 0
+                    }}
+                />
                 <SideBar />
             </Toolbar>
         </AppBar>

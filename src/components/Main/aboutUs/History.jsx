@@ -1,6 +1,6 @@
 import * as React from 'react';
 import styled from '@emotion/styled';
-import SKKUD from '../../../assets/SKKU.D.png';
+import SKKUD from '../../../assets/SKKUD_green.jpeg';
 import dashed from '../../../assets/dashedCard.png';
 
 const Title = styled.div`
@@ -54,7 +54,8 @@ export default function History() {
                     marginLeft: 'auto',
                     display: 'block',
                     marginRight: '11px',
-                    marginBottom: '35px'
+                    marginBottom: '35px',
+                    width: '213px'
                 }}
             />
 
