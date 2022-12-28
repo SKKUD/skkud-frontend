@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router';
-import skkud from '../assets/SKKUD_green.jpeg';
+import skkud_BI from '../assets/SKKUD_BI.png';
 
 export default function () {
     const navigate = useNavigate();
@@ -17,10 +17,29 @@ export default function () {
         <div
             style={{
                 display: 'flex',
-                justifyContent: 'center'
+                justifyContent: 'center',
+                backgroundColor: '#05E49F',
+                marginTop: '-60px',
+                width: '100vw',
+                height: '100vh'
             }}
         >
-            <img src={skkud} alt="SKKUD" />
+            <div
+                style={{
+                    display: 'flex',
+                    flexDirection: 'column',
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                    marginTop: '-80px'
+                }}
+            >
+                <img
+                    src={skkud_BI}
+                    alt="SKKUD"
+                    style={{ width: '74px', height: '66px', marginBottom: '29px' }}
+                />
+                <div style={{ color: '#292929', fontWeight: 800, fontSize: '1.5rem' }}>SKKU.D</div>
+            </div>
         </div>
     );
 }
