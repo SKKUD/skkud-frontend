@@ -1,13 +1,15 @@
 import * as React from 'react';
-// import Box from '@mui/material/Box';
+import { useNavigate } from 'react-router';
 import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
-import Typography from '@mui/material/Typography';
-// import SideBarBtn from './SideBarBtn';
 import SideBar from './SideBar';
 import SKKUDLOGO from '../../assets/SKKUD_LOGO.png';
 
 function Header() {
+    const navigate = useNavigate();
+    const navigateToMaintab = () => {
+        navigate('/maintab');
+    };
     return (
         <AppBar>
             <Toolbar
@@ -27,6 +29,7 @@ function Header() {
                         width: '167px',
                         margin: 0
                     }}
+                    onClick={navigateToMaintab}
                 />
                 <SideBar />
             </Toolbar>
