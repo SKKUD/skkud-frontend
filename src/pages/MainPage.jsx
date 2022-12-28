@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Routes, Route } from 'react-router-dom';
 import Onboarding from './Onboarding';
-import Login from '../components/common/Login';
+import Login from './Login';
 import MainTab from './Tabs/MainTab';
 import ApplicationForm from './ApplicationForm';
 

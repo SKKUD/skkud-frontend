@@ -6,9 +6,9 @@ import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import { useCookies } from 'react-cookie';
-import { UserContext } from '../../context/UserContext';
-import skkud from '../../assets/SKKUD_green.jpeg';
-import Header from './Header';
+import { UserContext } from '../context/UserContext';
+import skkud from '../assets/SKKUD_LOGO.png';
+import Header from '../components/common/Header';
 
 export default function Login() {
     const { user, setUser } = useContext(UserContext);
@@ -91,7 +91,8 @@ export default function Login() {
                 <>
                     <Box
                         sx={{
-                            height: '700px',
+                            height: '100vh',
+                            marginTop: '-80px',
                             display: 'flex',
                             flexDirection: 'column',
                             alignItems: 'center',
@@ -99,19 +100,37 @@ export default function Login() {
                             '& > :not(style)': { m: 1 }
                         }}
                     >
-                        <img src={skkud} alt="SKKUD" />
+                        <img
+                            src={skkud}
+                            alt="SKKUD"
+                            style={{ width: '149px', marginBottom: '127px' }}
+                        />
                         <TextField
                             id="demo-helper-text-aligned"
                             label="ID"
                             onChange={(e) => setID(e.target.value)}
+                            size="small"
                         />
 
                         <TextField
                             id="demo-helper-text-aligned"
                             label="PW"
                             onChange={(e) => setPW(e.target.value)}
+                            size="small"
+                            sx={{ paddingBottom: '100px' }}
                         />
-                        <Button variant="contained" onClick={loginBtn}>
+                        <Button
+                            variant="contained"
+                            onClick={loginBtn}
+                            color="mint"
+                            sx={{
+                                borderRadius: '20px',
+                                width: '120px',
+                                height: '40px',
+                                fontWeight: 500,
+                                fontSize: '1.12rem'
+                            }}
+                        >
                             Login
                         </Button>
                         <div style={{ textDecoration: 'underline' }} onClick={navigateToMainTab}>

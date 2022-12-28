@@ -5,7 +5,7 @@ import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 // import SideBarBtn from './SideBarBtn';
 import SideBar from './SideBar';
-import SKKUDLOGO from '../../assets/SKKUD_LOGO.jpeg';
+import SKKUDLOGO from '../../assets/SKKUD_LOGO.png';
 
 function Header() {
     return (
