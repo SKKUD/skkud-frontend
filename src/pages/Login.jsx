@@ -8,6 +8,7 @@ import Button from '@mui/material/Button';
 import { useCookies } from 'react-cookie';
 import { UserContext } from '../context/UserContext';
 import skkud from '../assets/SKKUD_LOGO.png';
+import avatar_f from '../assets/avatar_f.png';
 import Header from '../components/common/Header';
 
 export default function Login() {
@@ -82,10 +83,58 @@ export default function Login() {
             {user ? (
                 <div>
                     <Header />
-                    <div style={{ margin: '30px' }}>{cookies.id}님 안녕하세요</div>
-                    <Button variant="contained" onClick={logoutBtn}>
-                        Logout
-                    </Button>
+                    <div
+                        style={{
+                            marginTop: '-70px',
+                            height: '100vh',
+                            display: 'flex',
+                            flexDirection: 'column',
+                            justifyContent: 'center',
+                            alignItems: 'center'
+                        }}
+                    >
+                        <div
+                            style={{
+                                width: '150px',
+                                height: '150px',
+                                backgroundColor: 'rgba(255, 255, 255, 0.9)',
+                                display: 'flex',
+                                justifyContent: 'center',
+                                alignItems: 'center',
+                                borderRadius: '100%'
+                            }}
+                        >
+                            <img
+                                src={avatar_f}
+                                alt="avatar"
+                                style={{ width: '149px', marginTop: '-30px' }}
+                            />
+                        </div>
+                        <div
+                            style={{
+                                marginTop: '40px',
+                                marginBottom: '40px',
+                                fontSize: '1.25rem',
+                                fontWeight: 400
+                            }}
+                        >
+                            {cookies.id}님, 안녕하세요
+                        </div>
+                        <Button
+                            variant="contained"
+                            onClick={logoutBtn}
+                            color="mint"
+                            sx={{
+                                borderRadius: '20px',
+                                width: '120px',
+                                height: '40px',
+                                fontWeight: 500,
+                                fontSize: '1.12rem'
+                            }}
+                        >
+                            Logout
+                        </Button>
+                    </div>
                 </div>
             ) : (
                 <>
