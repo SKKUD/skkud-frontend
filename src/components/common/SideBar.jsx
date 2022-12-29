@@ -21,7 +21,7 @@ const DrawerHeader = styled('div')(({ theme }) => ({
     justifyContent: 'flex-end'
 }));
 
-function SidebarItem({ path }) {
+function SidebarItem({ path, name }) {
     return (
         <ListItem disablePadding>
             <Link
@@ -29,7 +29,7 @@ function SidebarItem({ path }) {
                 to={`/maintab/${path}`}
             >
                 <ListItemButton>
-                    <ListItemText sx={{ textAlign: 'right' }} primary={path} />
+                    <ListItemText sx={{ textAlign: 'right' }} primary={name} />
                 </ListItemButton>
             </Link>
         </ListItem>
@@ -82,8 +82,9 @@ export default function SideBar() {
                     onKeyDown={toggleDrawer(false)}
                 >
                     <List>
-                        <SidebarItem path="project" sx={{ pr: '0px' }} />
-                        <SidebarItem path="member" />
+                        <SidebarItem path="" name="about us" sx={{ pr: '0px' }} />
+                        <SidebarItem path="project" name="project" />
+                        <SidebarItem path="frontend" name="member" />
                     </List>
 
                     <div
@@ -95,8 +96,8 @@ export default function SideBar() {
                         }}
                     />
                     <List>
-                        <SidebarItem path="project" />
-                        <SidebarItem path="project" />
+                        <SidebarItem path="project" name="schedule" />
+                        <SidebarItem path="project" name="study" />
                     </List>
                 </Box>
                 <Link

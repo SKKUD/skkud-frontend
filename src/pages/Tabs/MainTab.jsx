@@ -85,7 +85,7 @@ function MainTab() {
     const location = useLocation();
 
     useEffect(() => {
-        if (location.pathname === '/maintab') {
+        if (location.pathname === '/maintab' || location.pathname === '/maintab/') {
             TabIndex = 0;
             setValue(TabIndex);
         } else if (

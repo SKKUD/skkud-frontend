@@ -28,7 +28,7 @@ export default function MemberNav() {
     };
     console.log('nav track', trackTab);
     useEffect(() => {
-        if (location.pathname === '/maintab/frontend') {
+        if (location.pathname === '/maintab/frontend')  {
             setTrackTab('frontend');
         }
     }, [location]);

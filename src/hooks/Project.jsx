@@ -36,6 +36,7 @@ export const useProjectPostDetailApi = () => {
     const [title, setTitle] = useState('');
     const [body, setBody] = useState('');
     const [tags, setTags] = useState([]);
+    const [language, setLanguage] = useState('');
     const [images, setImages] = useState([]);
 
     // :id 파라미터
@@ -50,6 +51,7 @@ export const useProjectPostDetailApi = () => {
             setTitle(data.title);
             setBody(data.body);
             setTags(data.tags);
+            setLanguage(data.language);
             setImages(data.images);
         });
     }, []);
@@ -58,6 +60,7 @@ export const useProjectPostDetailApi = () => {
         [title, setTitle],
         [body, setBody],
         [tags, setTags],
+        [language, setLanguage],
         [images, setImages]
     ];
 };
