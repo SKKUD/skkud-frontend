@@ -17,11 +17,11 @@ export default function EditProject() {
         navigate('/maintab/project');
     };
     const PostDetail = useProjectPostDetailApi();
-
     const [title, setTitle] = PostDetail[0];
     const [body, setBody] = PostDetail[1];
     const [tags, setTags] = PostDetail[2];
-    const [images] = PostDetail[3];
+    const [language, setLanguage] = PostDetail[3];
+    const [images] = PostDetail[4];
     const [newImages, setNewImages] = useState([]);
     const [PreviewImg, setPreviewImg] = useState('');
 
@@ -58,6 +58,7 @@ export default function EditProject() {
             for (let i = 0; i < tags.length; i++) {
                 formData.append('tags', tags[i]);
             }
+            formData.append('language', language);
 
             const convertURLtoFile = async (imageUrl) => {
                 const response = await fetch(imageUrl);
@@ -133,6 +134,14 @@ export default function EditProject() {
                     const tagsArray = e.target.value.split(',');
                     setTags(tagsArray);
                 }}
+            />
+            <TextField
+                fullWidth
+                label="# language"
+                id="language"
+                variant="filled"
+                value={language || ''}
+                onChange={(e) => setLanguage(e.target.value)}
             />
             <Box
                 sx={{
