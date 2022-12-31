@@ -135,8 +135,6 @@ export default function EditProject() {
                     setTags(tagsArray);
                 }}
             />
-<<<<<<< HEAD
-=======
             <TextField
                 fullWidth
                 label="# language"
@@ -145,7 +143,6 @@ export default function EditProject() {
                 value={language || ''}
                 onChange={(e) => setLanguage(e.target.value)}
             />
->>>>>>> d5c18b8e361e5977abcd8a0b5e7fa6c6c6e2be79
             <Box
                 sx={{
                     display: 'flex',

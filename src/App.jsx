@@ -3,10 +3,7 @@ import axios from 'axios';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 import { UserContext } from './context/UserContext';
-<<<<<<< HEAD
-=======
 import { TrackContext } from './context/TrackContext';
->>>>>>> d5c18b8e361e5977abcd8a0b5e7fa6c6c6e2be79
 import MainPage from './pages/MainPage';
 import './utils/font.css';
 // import SideBarDrawer from './components/common/SideBarDrawer';
@@ -29,8 +26,6 @@ export const darkTheme = createTheme({
         background: {
             default: '#222222',
             paper: '#222222'
-<<<<<<< HEAD
-=======
         },
         mint: {
             main: '#05E49F',
@@ -39,7 +34,6 @@ export const darkTheme = createTheme({
         },
         white: {
             main: '#FFF'
->>>>>>> d5c18b8e361e5977abcd8a0b5e7fa6c6c6e2be79
         }
     },
     typography: {
@@ -83,13 +77,9 @@ export const darkTheme = createTheme({
 
 function App() {
     const [user, setUser] = useState();
-<<<<<<< HEAD
-    const userValue = useMemo(() => ({ user, setUser }), [user, setUser]);
-=======
     const [trackTab, setTrackTab] = useState();
     const userValue = useMemo(() => ({ user, setUser }), [user, setUser]);
     const trackValue = useMemo(() => ({ trackTab, setTrackTab }), [trackTab, setTrackTab]);
->>>>>>> d5c18b8e361e5977abcd8a0b5e7fa6c6c6e2be79
     // useEffect(() => {
     //     axios
     //         .post(
@@ -103,11 +93,6 @@ function App() {
         <ThemeProvider theme={darkTheme}>
             <CssBaseline />
             <UserContext.Provider value={userValue}>
-<<<<<<< HEAD
-                <div className="App" color="primary" style={{ paddingTop: '60px', width: '100%' }}>
-                    <MainPage />
-                </div>
-=======
                 <TrackContext.Provider value={trackValue}>
                     <div
                         className="App"
@@ -117,7 +102,6 @@ function App() {
                         <MainPage />
                     </div>
                 </TrackContext.Provider>
->>>>>>> d5c18b8e361e5977abcd8a0b5e7fa6c6c6e2be79
             </UserContext.Provider>
         </ThemeProvider>
     );

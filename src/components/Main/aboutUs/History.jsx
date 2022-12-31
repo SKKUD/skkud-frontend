@@ -45,25 +45,6 @@ const Num = styled.div`
 
 export default function History() {
     return (
-<<<<<<< HEAD
-        <Card sx={{ minWidth: 275, mt: 1.5 }}>
-            <CardContent component="div">
-                <Title>History of SKKU.D</Title>
-                <Detail variant="body2" sx={{ mt: 1.5 }}>
-                    총 프로젝트 수 : 8
-                </Detail>
-                <Detail variant="body2" sx={{ mt: 1.5 }}>
-                    수상경력 : 8
-                </Detail>
-                <Detail variant="body2" sx={{ mt: 1.5 }}>
-                    총 프로젝트 수 : 8
-                </Detail>
-                <Detail variant="body2" sx={{ mt: 1.5 }}>
-                    수상경력 : 8
-                </Detail>
-            </CardContent>
-        </Card>
-=======
         <div>
             <Title>History of</Title>
             <img
@@ -109,6 +90,5 @@ export default function History() {
                 </Card1>
             </div>
         </div>
->>>>>>> d5c18b8e361e5977abcd8a0b5e7fa6c6c6e2be79
     );
 }

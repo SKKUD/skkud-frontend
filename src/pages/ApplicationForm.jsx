@@ -9,21 +9,10 @@ import { useApplicationFormDetailApi } from '../hooks/Application';
 import Header from '../components/common/Header';
 
 export default function ApplicationForm() {
-<<<<<<< HEAD
-    // const [form, setForm] = useState({});
-
-=======
->>>>>>> d5c18b8e361e5977abcd8a0b5e7fa6c6c6e2be79
     const form = useApplicationFormDetailApi();
 
     const { title, introduction, questions } = form;
 
-<<<<<<< HEAD
-    // const appliers = useAppliedUserApi();
-    // console.log(appliers);
-
-=======
->>>>>>> d5c18b8e361e5977abcd8a0b5e7fa6c6c6e2be79
     const navigate = useNavigate();
     const navigateToMainTab = () => {
         navigate('/maintab');

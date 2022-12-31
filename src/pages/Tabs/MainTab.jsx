@@ -12,18 +12,11 @@ import TabMember from './User/TabMember';
 import PostProject from './Project/PostProject';
 import ProjectDetail from './Project/ProjectDetail';
 import EditProject from './Project/EditProject';
-<<<<<<< HEAD
-// import CreateUser from './Tabs/User/CreateUser';
-// import EditUser from './Tabs/User/EditUser';
-import Header from '../../components/common/Header';
-import Login from '../../components/common/Login';
-=======
 import CreateUser from './User/CreateUser';
 import EditUser from './User/EditUser';
 import FrontendTab from './User/FrontendTab';
 import BackendTab from './User/BackendTab';
 import Header from '../../components/common/Header';
->>>>>>> d5c18b8e361e5977abcd8a0b5e7fa6c6c6e2be79
 
 function TabPanel(props) {
     const { children, value, index, ...other } = props;
