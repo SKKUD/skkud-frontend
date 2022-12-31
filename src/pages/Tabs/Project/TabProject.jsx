@@ -1,14 +1,16 @@
 import * as React from 'react';
 // import { useEffect, useState } from 'react';
-import { useContext } from 'react';
+// import { useContext } from 'react';
 // import axios from 'axios';
+import { useCookies } from 'react-cookie';
 import { Link } from 'react-router-dom';
 import PostBtn from '../../../components/Main/project/PostBtn';
 import ProjectList from '../../../components/Main/project/ProjectList';
-import { UserContext } from '../../../context/UserContext';
+// import { UserContext } from '../../../context/UserContext';
 
 export default function TabProject() {
-    const { user } = useContext(UserContext);
+    // const { user } = useContext(UserContext);
+    const [cookies] = useCookies(['id']);
     // const [postList, setPostList] = useState([]);
 
     // useEffect(() => {
@@ -23,7 +25,7 @@ export default function TabProject() {
 
     return (
         <>
-            {user ? (
+            {cookies ? (
                 <Link to="/maintab/postproject" style={{ textDecoration: 'inherit' }}>
                     <PostBtn />
                 </Link>

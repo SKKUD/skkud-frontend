@@ -12,17 +12,16 @@ import PreImages from '../../../components/Main/project/PreImages';
 import { useProjectPostDetailApi } from '../../../hooks/Project';
 
 export default function EditProject() {
-    // const history = createBrowserHistory();
     const navigate = useNavigate();
     const navigateToProject = () => {
         navigate('/maintab/project');
     };
     const PostDetail = useProjectPostDetailApi();
-
     const [title, setTitle] = PostDetail[0];
     const [body, setBody] = PostDetail[1];
     const [tags, setTags] = PostDetail[2];
-    const [images] = PostDetail[3];
+    const [language, setLanguage] = PostDetail[3];
+    const [images] = PostDetail[4];
     const [newImages, setNewImages] = useState([]);
     const [PreviewImg, setPreviewImg] = useState('');
 
@@ -31,7 +30,6 @@ export default function EditProject() {
 
     const uploadImgFile = (event) => {
         const fileArr = event.target.files;
-        // console.log(Array.from(fileArr));
         setNewImages(Array.from(fileArr)); // 업로드할 이미지 배열 저장
         const fileURLs = [];
         const filesLength = fileArr.length > 10 ? 10 : fileArr.length;
@@ -57,7 +55,10 @@ export default function EditProject() {
             const formData = new FormData();
             formData.append('title', title);
             formData.append('body', body);
-            formData.append('tags', tags);
+            for (let i = 0; i < tags.length; i++) {
+                formData.append('tags', tags[i]);
+            }
+            formData.append('language', language);
 
             const convertURLtoFile = async (imageUrl) => {
                 const response = await fetch(imageUrl);
@@ -134,6 +135,17 @@ export default function EditProject() {
                     setTags(tagsArray);
                 }}
             />
+<<<<<<< HEAD
+=======
+            <TextField
+                fullWidth
+                label="# language"
+                id="language"
+                variant="filled"
+                value={language || ''}
+                onChange={(e) => setLanguage(e.target.value)}
+            />
+>>>>>>> d5c18b8e361e5977abcd8a0b5e7fa6c6c6e2be79
             <Box
                 sx={{
                     display: 'flex',

@@ -9,15 +9,21 @@ import { useApplicationFormDetailApi } from '../hooks/Application';
 import Header from '../components/common/Header';
 
 export default function ApplicationForm() {
+<<<<<<< HEAD
     // const [form, setForm] = useState({});
 
+=======
+>>>>>>> d5c18b8e361e5977abcd8a0b5e7fa6c6c6e2be79
     const form = useApplicationFormDetailApi();
 
     const { title, introduction, questions } = form;
 
+<<<<<<< HEAD
     // const appliers = useAppliedUserApi();
     // console.log(appliers);
 
+=======
+>>>>>>> d5c18b8e361e5977abcd8a0b5e7fa6c6c6e2be79
     const navigate = useNavigate();
     const navigateToMainTab = () => {
         navigate('/maintab');
@@ -58,16 +64,30 @@ export default function ApplicationForm() {
         <Box>
             <Header />
 
-            <form>
-                <Typography variant="h4">{title}</Typography>
-                <p>{introduction}</p>
-                <Typography variant="h6">인적사항</Typography>
+            <form
+                style={{
+                    marginTop: '70px',
+                    padding: '40px 20px 0',
+                    backgroundColor: '#252525',
+                    borderTopLeftRadius: '100px'
+                }}
+            >
+                <div style={{ textAlign: 'center', marginBottom: '30px' }}>
+                    <Typography variant="h5" mb={'20px'}>
+                        [ {title} ]
+                    </Typography>
+                    <Typography variant="h7">{introduction}</Typography>
+                </div>
+                <Typography variant="h6" ml={'5px'}>
+                    인적사항
+                </Typography>
                 <TextField
                     fullWidth
                     label="Name"
                     id="name"
                     sx={{ mt: '10px' }}
                     onChange={(e) => setName(e.target.value)}
+                    size="small"
                 />
                 <TextField
                     fullWidth
@@ -75,6 +95,7 @@ export default function ApplicationForm() {
                     id="StudentId"
                     sx={{ mt: '10px' }}
                     onChange={(e) => setStudentId(e.target.value)}
+                    size="small"
                 />
                 <TextField
                     fullWidth
@@ -82,6 +103,7 @@ export default function ApplicationForm() {
                     id="StudentId"
                     sx={{ mt: '10px' }}
                     onChange={(e) => setPhoneNumber(e.target.value)}
+                    size="small"
                 />
                 <TextField
                     fullWidth
@@ -89,8 +111,11 @@ export default function ApplicationForm() {
                     id="Email"
                     sx={{ mt: '10px', mb: '10px' }}
                     onChange={(e) => setEmail(e.target.value)}
+                    size="small"
                 />
-                <Typography variant="h6">질문</Typography>
+                <Typography variant="h6" ml={'5px'} mt={'15px'}>
+                    질문
+                </Typography>
                 <TextField
                     fullWidth
                     label={questions[0]}
@@ -118,7 +143,7 @@ export default function ApplicationForm() {
                         justifyContent: 'space-between'
                     }}
                 >
-                    <Button variant="contained" onClick={HandlPostSubmit}>
+                    <Button variant="contained" onClick={HandlPostSubmit} sx={{ margin: '0 auto' }}>
                         submit
                     </Button>
                 </Box>

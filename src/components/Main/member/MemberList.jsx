@@ -3,6 +3,7 @@ import { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
 import MemberCard from './MemberCard';
 import memberImg from '../../../assets/memberImg.png';
+<<<<<<< HEAD
 import MemberDeleteBtn from './MemberDeleteBtn';
 import MemberEditBtn from './MemberEditBtn';
 import { UserContext } from '../../../context/UserContext';
@@ -50,11 +51,27 @@ export default function MemberList() {
         const fetchEvents = async () => {
             const res = await axios.get('http://localhost:8000/users');
 
+=======
+import { TrackContext } from '../../../context/TrackContext';
+
+export default function MemberList() {
+    const [users, setUsers] = useState([]);
+    const [design, setDesign] = useState([]);
+    const [frontend, setFrontend] = useState([]);
+    const [backend, setBackend] = useState([]);
+    const { trackTab } = useContext(TrackContext);
+    const [data, setData] = useState([]);
+
+    useEffect(() => {
+        const fetchEvents = async () => {
+            const res = await axios.get('http://localhost:8000/users');
+>>>>>>> d5c18b8e361e5977abcd8a0b5e7fa6c6c6e2be79
             setUsers(res.data.data.users);
         };
         fetchEvents();
     }, []);
 
+<<<<<<< HEAD
     return (
         <>
             {Members.map((member) => (
@@ -90,6 +107,45 @@ export default function MemberList() {
                     <p>===============================================</p>
                 </div>
             ))}
+=======
+    useEffect(() => {
+        for (let i = 0; i < users.length; i += 1) {
+            if (users[i].track === 'design') {
+                setDesign([...design, users[i]]);
+            }
+            if (users[i].track === 'frontend') {
+                setFrontend([...frontend, users[i]]);
+            }
+            if (users[i].track === 'backend') {
+                setBackend([...backend, users[i]]);
+            }
+        }
+    }, [users]);
+
+    useEffect(() => {
+        if (trackTab === 'design') {
+            setData(design);
+        } else if (trackTab === 'frontend') {
+            setData(frontend);
+        } else if (trackTab === 'backend') {
+            setData(backend);
+        }
+    }, [users]);
+    return (
+        <>
+            {data.map((member) => (
+                <MemberCard
+                    id={member.userID}
+                    name={member.username}
+                    engname={member.usernameEng}
+                    bio={member.bio}
+                    img={memberImg}
+                    email={member.email}
+                    otherLinks={member.otherLinks}
+                    insta={member.insta}
+                />
+            ))}
+>>>>>>> d5c18b8e361e5977abcd8a0b5e7fa6c6c6e2be79
         </>
     );
 }
