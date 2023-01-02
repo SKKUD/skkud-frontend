@@ -13,10 +13,13 @@ import PostProject from './Project/PostProject';
 import ProjectDetail from './Project/ProjectDetail';
 import EditProject from './Project/EditProject';
 import CreateUser from './User/CreateUser';
+import CreateUser2 from './User/CreateUser2';
+import CreateUser3 from './User/CreateUser3';
 import EditUser from './User/EditUser';
 import FrontendTab from './User/FrontendTab';
 import BackendTab from './User/BackendTab';
 import Header from '../../components/common/Header';
+import FinishCreateUser from './User/FinishCreateUser';
 
 function TabPanel(props) {
     const { children, value, index, ...other } = props;
@@ -146,7 +149,10 @@ function MainTab() {
                     <Route path="frontend" element={<FrontendTab />} />
                     <Route path="backend" element={<BackendTab />} />
                     <Route path="createuser" element={<CreateUser />} />
+                    <Route path="createuser2" element={<CreateUser2 />} />
+                    <Route path="createuser3" element={<CreateUser3 />} />
                     <Route path="edituser/:index" element={<EditUser />} />
+                    <Route path="usercreated" element={<FinishCreateUser />} />
                 </Routes>
             </TabPanel>
         </Box>

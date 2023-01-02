@@ -1,9 +1,3 @@
-<<<<<<< HEAD
-import React from 'react';
-
-export default function () {
-    return <div>skkud</div>;
-=======
 import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router';
 import skkud_BI from '../assets/SKKUD_BI.png';
@@ -48,5 +42,4 @@ export default function () {
             </div>
         </div>
     );
->>>>>>> d5c18b8e361e5977abcd8a0b5e7fa6c6c6e2be79
 }
