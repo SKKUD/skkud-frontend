@@ -46,8 +46,7 @@ export default function CreateUser2() {
                     engName: engName,
                     track: track,
                     image: image,
-                    major: major,
-                    image: image
+                    major: major
                 }
             });
         }
@@ -59,6 +58,18 @@ export default function CreateUser2() {
         ...theme.mixins.toolbar,
         justifyContent: 'flex-end'
     }));
+    // const uploadImgFile = (event) => {
+    //     const file = event.target.file;
+    //     setImage(file);
+    //     const fileURL = '';
+    //     const reader = new FileReader();
+    //     reader.onload = () => {
+    //         fileURL = reader.result;
+    //         setPreviewImg(fileURL);
+    //     };
+    //     reader.readAsDataURL(file);
+    // };
+
     const uploadImgFile = (event) => {
         const fileArr = event.target.files;
         setImage(Array.from(fileArr));
@@ -90,7 +101,7 @@ export default function CreateUser2() {
                 alignItems: 'center'
             }}
         >
-            <backIcon>
+            {/* <backIcon>
                 <IconButton
                     color="primary"
                     aria-label="backBtn"
@@ -99,7 +110,7 @@ export default function CreateUser2() {
                 >
                     <ArrowBackIcon />
                 </IconButton>
-            </backIcon>
+            </backIcon> */}
             <Typography variant="h6" textAlign={'center'}>
                 회원가입
             </Typography>

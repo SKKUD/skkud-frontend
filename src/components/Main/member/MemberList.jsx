@@ -56,6 +56,7 @@ export default function MemberList() {
                     email={member.email}
                     otherLinks={member.otherLinks}
                     insta={member.insta}
+                    major={member.major}
                 />
             ))}
         </>

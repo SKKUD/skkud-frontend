@@ -49,7 +49,7 @@ export default function CreateUser3() {
                 .then((response) => console.log(response))
                 .catch((error) => console.log(error));
 
-            navigate('/maintab/usercreated', { state: { name: name, image: image[0] } });
+            navigate('/maintab/usercreated', { state: { name: name, image: image } });
         }
     }, [member]);
     const backBtn = () => {
@@ -74,14 +74,14 @@ export default function CreateUser3() {
                 회원가입
             </Typography>
             <div>
-                <IconButton
+                {/* <IconButton
                     color="primary"
                     aria-label="backBtn"
                     component="label"
                     onClick={backBtn}
                 >
                     <ArrowBackIcon />
-                </IconButton>
+                </IconButton> */}
             </div>
             <TextField
                 id="bio"

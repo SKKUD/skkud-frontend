@@ -12,6 +12,7 @@ export default function FinishCreateUser() {
     const location = useLocation();
     const name = location.state.name;
     const image = location.state.image;
+
     // const name = 'name';
     // const image = 'skkud-frontend/src/assets/memberImg.png';
     // useEffect(() => {
@@ -31,7 +32,7 @@ export default function FinishCreateUser() {
             <Typography variant="h7" fontWeight="bold">
                 가입을 축하합니다!
             </Typography>
-            <CardMedia sx={{ flexDirection: 'row' }} component="img" image={image} alt={name} />
+            <CardMedia sx={{ flexDirection: 'row' }} component="img" image={image[0]} alt={name} />
             <Typography variant="h7" color="#00FFA8">
                 가입 완료!
             </Typography>
@@ -46,8 +47,7 @@ export default function FinishCreateUser() {
                     color: 'white',
                     marginTop: '150px',
                     height: '48px',
-                    width: '312px',
-                    marginTop: '150px'
+                    width: '312px'
                 }}
             >
                 스꾸디 둘러보기
