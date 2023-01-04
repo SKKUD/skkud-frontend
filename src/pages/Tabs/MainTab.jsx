@@ -18,6 +18,7 @@ import CreateUser3 from './User/CreateUser3';
 import EditUser from './User/EditUser';
 import FrontendTab from './User/FrontendTab';
 import BackendTab from './User/BackendTab';
+import TabStudy from './TabStudy';
 import Header from '../../components/common/Header';
 import FinishCreateUser from './User/FinishCreateUser';
 
@@ -38,7 +39,12 @@ function TabPanel(props) {
 }
 
 const StyledTabs = styled((props) => (
-    <Tabs {...props} TabIndicatorProps={{ children: <span className="MuiTabs-indicatorSpan" /> }} />
+    <Tabs
+        variant="scrollable"
+        scrollButtons={false}
+        {...props}
+        TabIndicatorProps={{ children: <span className="MuiTabs-indicatorSpan" /> }}
+    />
 ))({
     '& .MuiTabs-indicator': {
         display: 'flex',
@@ -100,6 +106,9 @@ function MainTab() {
         ) {
             TabIndex = 2;
             setValue(TabIndex);
+        } else if (location.pathname === '/maintab/study') {
+            TabIndex = 3;
+            setValue(TabIndex);
         } else {
             TabIndex = 1;
             setValue(TabIndex);
@@ -127,13 +136,14 @@ function MainTab() {
                     sx={{
                         width: '100%',
                         position: 'fixed',
-                        backgroundColor: '#222222',
+                        bgcolor: 'background.paper',
                         marginTop: '40px'
                     }}
                 >
-                    <StyledTab label="about us" {...a11yProps(0)} component={Link} to="" />
-                    <StyledTab label="project" {...a11yProps(1)} component={Link} to="project" />
-                    <StyledTab label="member" {...a11yProps(2)} component={Link} to="frontend" />
+                    <StyledTab label="About us" {...a11yProps(0)} component={Link} to="" />
+                    <StyledTab label="Project" {...a11yProps(1)} component={Link} to="project" />
+                    <StyledTab label="Member" {...a11yProps(2)} component={Link} to="frontend" />
+                    <StyledTab label="Study" {...a11yProps(3)} component={Link} to="study" />
                 </StyledTabs>
             </Box>
 
@@ -152,6 +162,7 @@ function MainTab() {
                     <Route path="createuser2" element={<CreateUser2 />} />
                     <Route path="createuser3" element={<CreateUser3 />} />
                     <Route path="edituser/:index" element={<EditUser />} />
+                    <Route path="study" element={<TabStudy />} />
                     <Route path="usercreated" element={<FinishCreateUser />} />
                 </Routes>
             </TabPanel>

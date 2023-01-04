@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Button } from '@mui/material';
-import { useStudiesApi, useStudyGroupsApi } from '../../hooks/study';
+import { useStudiesApi, useStudyGroupsApi } from '../../hooks/Study.jsx';
 
 export default function TabStudy() {
     const [studyGroups] = useStudyGroupsApi();
@@ -22,10 +22,11 @@ export default function TabStudy() {
                 ))}
             </div>
             <div>
-                {studies.map((item) => (
-                    // eslint-disable-next-line no-underscore-dangle
-                    <div key={item._id}>{item.title}</div>
-                ))}
+                {studies &&
+                    studies.map((item) => (
+                        // eslint-disable-next-line no-underscore-dangle
+                        <div key={item._id}>{item.title}</div>
+                    ))}
             </div>
         </>
     );

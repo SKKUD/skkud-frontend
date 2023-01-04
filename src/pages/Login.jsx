@@ -50,7 +50,7 @@ export default function Login() {
             .then((userData) => console.log(userData))
             .catch((error) => console.log(error));
 
-        window.location.reload();
+        navigateToMainTab();
     };
 
     const authCheck = () => {

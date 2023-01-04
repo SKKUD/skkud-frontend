@@ -4,14 +4,14 @@ import skkud_BI from '../assets/SKKUD_BI.png';
 
 export default function () {
     const navigate = useNavigate();
-    const navigateToLogin = () => {
-        navigate('/login');
+    const navigateToMaintab = () => {
+        navigate('/maintab');
     };
 
     useEffect(() => {
         setTimeout(() => {
-            navigateToLogin();
-        }, 2000);
+            navigateToMaintab();
+        }, 1000);
     });
     return (
         <div

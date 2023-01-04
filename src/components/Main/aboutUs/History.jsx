@@ -15,7 +15,7 @@ const Card1 = styled.div`
     width: 158px;
     height: 158px;
     border-radius: 25px;
-    background-color: #ffffff;
+    background-color: #00ffa8;
     margin-bottom: 10px;
 `;
 const Card2 = styled.div`
@@ -68,8 +68,8 @@ export default function History() {
                 }}
             >
                 <Card1>
-                    <Content style={{ color: '#222222' }}>총 프로젝트 수</Content>
-                    <Num>8</Num>
+                    <Content style={{ color: '#3E3E3E' }}>총 프로젝트 수</Content>
+                    <Num style={{ color: '#3E3E3E' }}>8</Num>
                 </Card1>
                 <Card2>
                     <Content>수상경력</Content>
@@ -80,10 +80,17 @@ export default function History() {
                     <Num>20</Num>
                 </Card2>
                 <Card1>
-                    <Content style={{ color: '#222222' }}>운영 기간 </Content>
+                    <Content style={{ color: '#3E3E3E' }}>운영 기간 </Content>
                     <Num style={{ display: 'flex', justifyContent: 'center' }}>
-                        <div>2</div>
-                        <div style={{ fontSize: '2rem', alignSelf: 'center', marginTop: '20px' }}>
+                        <div style={{ color: '#3E3E3E' }}>2</div>
+                        <div
+                            style={{
+                                color: '#3E3E3E',
+                                fontSize: '2rem',
+                                alignSelf: 'center',
+                                marginTop: '20px'
+                            }}
+                        >
                             Y
                         </div>
                     </Num>

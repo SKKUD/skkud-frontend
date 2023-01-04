@@ -2,7 +2,6 @@ import * as React from 'react';
 import { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
 import MemberCard from './MemberCard';
-// import memberImg from '../../../assets/memberImg.png';
 import { TrackContext } from '../../../context/TrackContext';
 
 export default function MemberList() {
