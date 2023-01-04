@@ -11,7 +11,7 @@ export default function FinishCreateUser() {
     };
     const location = useLocation();
     const name = location.state.name;
-    const image = location.state.image;
+    const image = location.state.image.name;
 
     // const name = 'name';
     // const image = 'skkud-frontend/src/assets/memberImg.png';
@@ -20,6 +20,7 @@ export default function FinishCreateUser() {
     //         navigateToMaintab();
     //     }, 5000);
     // });
+    console.log(image);
     return (
         <div
             style={{
@@ -32,7 +33,7 @@ export default function FinishCreateUser() {
             <Typography variant="h7" fontWeight="bold">
                 가입을 축하합니다!
             </Typography>
-            <CardMedia sx={{ flexDirection: 'row' }} component="img" image={image[0]} alt={name} />
+            <CardMedia sx={{ flexDirection: 'row' }} component="img" image={image} alt={name} />
             <Typography variant="h7" color="#00FFA8">
                 가입 완료!
             </Typography>

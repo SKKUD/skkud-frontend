@@ -25,27 +25,25 @@ export default function CreateUser3() {
     const track = location.state.track;
     const image = location.state.image;
     const major = location.state.major;
-    // console.log(ID, pw, email, name, engName, track, image, major);
     const member = { ID, name, engName, email, pw, bio, track, insta, otherLinks, image, major };
     const submit = useCallback(async () => {
-        // console.log(member);
         if (bio === '' || insta === '') {
             alert('입력을 완료하세요');
         } else {
+            const formData = new FormData();
+            formData.append('userID', ID);
+            formData.append('username', name);
+            formData.append('usernameEng', engName);
+            formData.append('email', email);
+            formData.append('passwd', pw);
+            formData.append('bio', bio);
+            formData.append('track', track);
+            formData.append('insta', insta);
+            formData.append('otherLinks', otherLinks);
+            formData.append('image', image);
+            formData.append('major', major);
             await axios
-                .post('http://localhost:8000/users', {
-                    userID: member.ID,
-                    username: member.name,
-                    usernameEng: member.engName,
-                    email: member.email,
-                    passwd: member.pw,
-                    bio: member.bio,
-                    track: member.track,
-                    insta: member.insta,
-                    otherLinks: member.otherLinks,
-                    image: member.image,
-                    major: member.major
-                })
+                .post('http://localhost:8000/users', formData)
                 .then((response) => console.log(response))
                 .catch((error) => console.log(error));
 
@@ -100,7 +98,7 @@ export default function CreateUser3() {
                 id="link1"
                 label="기타 링크"
                 variant="standard"
-                onChange={(e) => setOtherLinks([...otherLinks, e.target.value])}
+                onChange={(e) => setOtherLinks([e.target.value])}
             />
 
             <Button

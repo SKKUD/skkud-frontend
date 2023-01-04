@@ -21,8 +21,7 @@ export default function CreateUser2() {
     const [name, setName] = useState('');
     const [engName, setEngName] = useState('');
     const [track, setTrack] = useState('');
-    const [image, setImage] = useState([]);
-    const [PreviewImg, setPreviewImg] = useState([]);
+    const [image, setImage] = useState('');
     const [major, setMajor] = useState('');
     const location = useLocation();
     const ID = location.state.id;
@@ -58,32 +57,16 @@ export default function CreateUser2() {
         ...theme.mixins.toolbar,
         justifyContent: 'flex-end'
     }));
-    // const uploadImgFile = (event) => {
-    //     const file = event.target.file;
-    //     setImage(file);
-    //     const fileURL = '';
-    //     const reader = new FileReader();
-    //     reader.onload = () => {
-    //         fileURL = reader.result;
-    //         setPreviewImg(fileURL);
-    //     };
-    //     reader.readAsDataURL(file);
-    // };
-
     const uploadImgFile = (event) => {
-        const fileArr = event.target.files;
-        setImage(Array.from(fileArr));
-        const fileURLs = [];
-        const filesLength = fileArr.length > 10 ? 10 : fileArr.length;
-        for (let i = 0; i < filesLength; i += 1) {
-            const file = fileArr[i];
-            const reader = new FileReader();
-            reader.onload = () => {
-                fileURLs[i] = reader.result;
-                setPreviewImg([...fileURLs]);
-            };
-            reader.readAsDataURL(file);
-        }
+        const file = event.target.files[0];
+        setImage(file);
+        // const fileURL = '';
+        // const reader = new FileReader();
+        // reader.onload = () => {
+        //     fileURL = reader.result;
+        //     setPreviewImg(fileURL);
+        // };
+        // reader.readAsDataURL(file);
     };
 
     return (
@@ -162,6 +145,7 @@ export default function CreateUser2() {
                 }}
             >
                 <FormLabel id="demo-row-radio-buttons-group-label">Image</FormLabel>
+                {image ? <p>o</p> : <p>x</p>}
                 <IconButton color="primary" aria-label="upload picture" component="label">
                     <input
                         hidden
@@ -174,7 +158,7 @@ export default function CreateUser2() {
                     <PhotoCamera />
                 </IconButton>
             </Box>
-            <PreImages imgFiles={PreviewImg} />
+
             <Button
                 variant="contained"
                 onClick={nextBtn}

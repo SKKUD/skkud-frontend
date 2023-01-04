@@ -12,7 +12,7 @@ import Box from '@mui/material/Box';
 import Divider from '@mui/material/Divider';
 import MemberDeleteBtn from './MemberDeleteBtn';
 import MemberEditBtn from './MemberEditBtn';
-// import { useCookies } from 'react-cookie';
+import { useCookies } from 'react-cookie';
 import { UserContext } from '../../../context/UserContext';
 
 export default function MemberCard({
@@ -27,7 +27,8 @@ export default function MemberCard({
     major
 }) {
     const { user } = useContext(UserContext);
-    // const [cookies] = useCookies(['id']);
+    const [cookies] = useCookies(['id']);
+
     return (
         <Card
             key={id}
@@ -48,29 +49,53 @@ export default function MemberCard({
                 <Grid item xs={1} sm container>
                     <Grid item xs container direction="column" spacing={2}>
                         <Grid item xs>
-                            <Grid item xs={1}>
-                                <Stack direction="row" spacing={2}>
-                                    <Grid item xs={6}>
-                                        <Stack direction="row" spacing={1}>
-                                            <Typography gutterBottom variant="p">
-                                                {name}
-                                            </Typography>
-                                            <Divider
-                                                orientation="vertical"
-                                                variant="inset"
-                                                flexItem
-                                                textAlign="left"
-                                                color="gray"
-                                            />
-                                            <Typography gutterBottom variant="p">
-                                                {engname}
-                                            </Typography>
-                                        </Stack>
-                                    </Grid>
-                                </Stack>
-                                <Grid item xs={6}>
+                            {/* <Grid item xs={5} container direction="column"> */}
+                            {/* <Stack direction="row" xs={5} spacing={2}>
+                                  
+                                    <Typography gutterBottom variant="p">
+                                        {name}
+                                    </Typography>
+                                    <Divider
+                                        orientation="vertical"
+                                        variant="inset"
+                                        flexItem
+                                        textAlign="left"
+                                        color="gray"
+                                    />
+                                    <Typography gutterBottom variant="p">
+                                        박고은박고은
+                                    </Typography>
+                               
+                                </Stack> */}
+                            {/* <Grid item xs={6}>
                                     <Typography gutterBottom variant="p">
                                         {bio}
+                                    </Typography>
+                                </Grid>
+                            </Grid> */}
+                            <Grid container spacing={1} columns={14} width={200}>
+                                <Grid item xs={12}>
+                                    <Typography
+                                        gutterBottom
+                                        variant="button"
+                                        align="center"
+                                        sx={{ fontWeight: 'bold' }}
+                                    >
+                                        {name}&nbsp;&nbsp;| &nbsp;
+                                    </Typography>
+                                    <Typography
+                                        gutterBottom
+                                        variant="caption"
+                                        align="left"
+                                        flex-wrap
+                                    >
+                                        {engname}
+                                    </Typography>
+                                </Grid>
+
+                                <Grid item xs={12}>
+                                    <Typography gutterBottom variant="body2">
+                                        "{bio}"
                                     </Typography>
                                 </Grid>
                             </Grid>
@@ -93,12 +118,12 @@ export default function MemberCard({
                                     <Grid item xs={8}>
                                         <Typography variant="caption">{otherLinks}</Typography>
                                     </Grid>
-                                    <Grid item xs={3}>
+                                    <Grid item xs={4}>
                                         <Typography sx={{ fontWeight: 'bold' }} variant="caption">
                                             MAJOR
                                         </Typography>
                                     </Grid>
-                                    <Grid item xs={9}>
+                                    <Grid item xs={8}>
                                         <Typography variant="caption">{major}</Typography>
                                     </Grid>
                                     <Grid item xs={4}>
@@ -116,7 +141,7 @@ export default function MemberCard({
                 </Grid>
             </Grid>
 
-            {user ? (
+            {cookies ? (
                 <>
                     <MemberDeleteBtn _id={id} />
                     <MemberEditBtn _id={id} />

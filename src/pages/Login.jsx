@@ -22,16 +22,12 @@ export default function Login() {
     };
 
     const loginBtn = async (e) => {
-        console.log('login bnt');
         e.preventDefault();
 
         await axios
             .post('http://localhost:8000/auth/login', { userID: ID, passwd: PW })
             .then((userData) => {
-                console.log(userData);
-                console.log(user);
                 if (userData.data.loginSuccess === true) {
-                    console.log('login success');
                     setUser(ID);
                     setCookie('id', ID);
                     navigateToMainTab();
@@ -42,45 +38,41 @@ export default function Login() {
                 }
             })
             .catch((error) => console.log(error));
+        // window.location.reload();
     };
 
     const logoutBtn = async () => {
         setUser('');
         removeCookie('id');
-        console.log('remove cookies', cookies);
+
         await axios
             .post('http://localhost:8000/auth/logout')
             .then((userData) => console.log(userData))
             .catch((error) => console.log(error));
+
+        window.location.reload();
     };
 
     const authCheck = () => {
-        console.log('cookies', cookies.id);
-
         const token = cookies.id;
         axios
             .post('http://localhost:8000/auth/verify')
             .then((res) => {
-                console.log(res);
-                console.log('id', res.data.data.userID);
                 if (res.data.data.userID !== token) {
-                    alert('세션이 만료되었습니다.');
+                    // alert('세션이 만료되었습니다.');
                     logoutBtn();
                 } else {
-                    console.log('login 유지');
                 }
             })
             .catch((error) => console.log(error));
     };
     useEffect(() => {
         authCheck();
-        console.log('user', ID);
-        console.log('cookies', cookies);
     }, []);
 
     return (
         <div>
-            {user ? (
+            {cookies.id ? (
                 <div>
                     <Header />
                     <div
