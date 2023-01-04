@@ -2,21 +2,17 @@ import * as React from 'react';
 import { useContext, useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 // import Button from '@mui/material/Button';
-// import styled from '@emotion/styled';
+import styled from '@emotion/styled';
 import ToggleButton from '@mui/material/ToggleButton';
 import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
 import { TrackContext } from '../../../context/TrackContext';
 
-// const ButtonBlock = styled.div`
-//     * {
-//         border-radius: 20px;
-//         font-family: 'Pretendard';
-//         font-style: normal;
-//         font-weight: 400;
-//         font-size: 14px;
-//         line-height: 14px;
-//     }
-// `;
+const colorToogleBtn = styled(ToggleButton)({
+    '&.Mui-selected': {
+        color: '#222222',
+        backgroundColor: '#00FFA8'
+    }
+});
 
 export default function MemberNav() {
     const { trackTab, setTrackTab } = useContext(TrackContext);
@@ -40,6 +36,12 @@ export default function MemberNav() {
             exclusive
             onChange={handleChange}
             aria-label="Platform"
+            style={{
+                display: 'flex',
+                flexDirection: 'row',
+                justifyContent: 'center',
+                alignItems: 'center'
+            }}
         >
             <ToggleButton
                 value="frontend"
@@ -48,9 +50,15 @@ export default function MemberNav() {
                 onClick={() => {
                     setTrackTab('frontend');
                 }}
-                style={{ borderRadius: '20px', border: '1px solid #00ffb0' }}
+                style={{
+                    borderRadius: '33px',
+                    border: '1px solid #00FFA8',
+                    padding: '4px 18px',
+                    width: '122px',
+                    height: '22px'
+                }}
             >
-                frontend
+                <p style={{ fontSize: '0.7rem' }}>frontend</p>
             </ToggleButton>
             <ToggleButton
                 value="backend"
@@ -59,9 +67,15 @@ export default function MemberNav() {
                 onClick={() => {
                     setTrackTab('backend');
                 }}
-                style={{ borderRadius: '20px', border: '1px solid #00ffb0' }}
+                style={{
+                    borderRadius: '33px',
+                    border: '1px solid #00FFA8',
+                    padding: '4px 18px',
+                    width: '122px',
+                    height: '22px'
+                }}
             >
-                backend
+                <p style={{ fontSize: '0.7rem' }}>backend</p>
             </ToggleButton>
             <ToggleButton
                 value="design"
@@ -70,9 +84,15 @@ export default function MemberNav() {
                 onClick={() => {
                     setTrackTab('design');
                 }}
-                style={{ borderRadius: '20px', border: '1px solid #00ffb0' }}
+                style={{
+                    borderRadius: '33px',
+                    border: '1px solid #00FFA8',
+                    padding: '4px 18px',
+                    width: '122px',
+                    height: '22px'
+                }}
             >
-                UI/UX Designer
+                <p style={{ fontSize: '0.6rem' }}>UI/UX Designer</p>
             </ToggleButton>
         </ToggleButtonGroup>
     );
