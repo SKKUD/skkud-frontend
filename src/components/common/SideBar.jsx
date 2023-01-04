@@ -21,11 +21,7 @@ const DrawerHeader = styled('div')(({ theme }) => ({
     justifyContent: 'flex-end'
 }));
 
-<<<<<<< HEAD
-function SidebarItem({ path }) {
-=======
 function SidebarItem({ path, name }) {
->>>>>>> d5c18b8e361e5977abcd8a0b5e7fa6c6c6e2be79
     return (
         <ListItem disablePadding>
             <Link
@@ -33,11 +29,7 @@ function SidebarItem({ path, name }) {
                 to={`/maintab/${path}`}
             >
                 <ListItemButton>
-<<<<<<< HEAD
-                    <ListItemText sx={{ textAlign: 'right' }} primary={path} />
-=======
                     <ListItemText sx={{ textAlign: 'right' }} primary={name} />
->>>>>>> d5c18b8e361e5977abcd8a0b5e7fa6c6c6e2be79
                 </ListItemButton>
             </Link>
         </ListItem>
@@ -66,16 +58,6 @@ export default function SideBar() {
                 aria-label="open drawer"
                 edge="end"
                 onClick={toggleDrawer(true)}
-<<<<<<< HEAD
-                sx={{ ...(open && { display: 'none' }) }}
-            >
-                <MenuIcon />
-            </IconButton>
-            <Drawer open={open} onClose={toggleDrawer(false)} anchor="right">
-                <DrawerHeader>
-                    <IconButton onClick={toggleDrawer(false)}>
-                        <MenuIcon />
-=======
             >
                 <MenuIcon sx={{ fontSize: 35 }} />
             </IconButton>
@@ -83,7 +65,6 @@ export default function SideBar() {
                 <DrawerHeader sx={{ marginTop: '45px' }}>
                     <IconButton onClick={toggleDrawer(false)}>
                         <MenuIcon sx={{ fontSize: 35 }} />
->>>>>>> d5c18b8e361e5977abcd8a0b5e7fa6c6c6e2be79
                     </IconButton>
                 </DrawerHeader>
 
@@ -101,14 +82,9 @@ export default function SideBar() {
                     onKeyDown={toggleDrawer(false)}
                 >
                     <List>
-<<<<<<< HEAD
-                        <SidebarItem path="project" sx={{ pr: '0px' }} />
-                        <SidebarItem path="member" />
-=======
                         <SidebarItem path="" name="about us" sx={{ pr: '0px' }} />
                         <SidebarItem path="project" name="project" />
                         <SidebarItem path="frontend" name="member" />
->>>>>>> d5c18b8e361e5977abcd8a0b5e7fa6c6c6e2be79
                     </List>
 
                     <div
@@ -120,13 +96,8 @@ export default function SideBar() {
                         }}
                     />
                     <List>
-<<<<<<< HEAD
-                        <SidebarItem path="project" />
-                        <SidebarItem path="project" />
-=======
                         <SidebarItem path="project" name="schedule" />
                         <SidebarItem path="project" name="study" />
->>>>>>> d5c18b8e361e5977abcd8a0b5e7fa6c6c6e2be79
                     </List>
                 </Box>
                 <Link

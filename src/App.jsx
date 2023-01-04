@@ -28,9 +28,8 @@ export const darkTheme = createTheme({
             paper: '#222222'
         },
         mint: {
-            main: '#05E49F',
-            contrastText: '#FFF',
-            dark: '#000000'
+            main: '#00FFA8',
+            contrastText: '#222222'
         },
         white: {
             main: '#FFF'

@@ -9,7 +9,9 @@ export default function MemberDeleteBtn(_id) {
         await axios
             .delete(`http://localhost:8000/users/${id}`)
             .then((response) => console.log('delete', response));
+        window.location.reload();
     };
+
     return (
         <IconButton
             color="primary"
