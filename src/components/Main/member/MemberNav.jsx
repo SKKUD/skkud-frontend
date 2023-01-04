@@ -1,39 +1,4 @@
 import * as React from 'react';
-<<<<<<< HEAD
-import Button from '@mui/material/Button';
-import styled from '@emotion/styled';
-
-const ButtonBlock = styled.div`
-    * {
-        border-radius: 10px;
-        font-family: 'Pretendard';
-        font-style: normal;
-        font-weight: 400;
-        font-size: 12px;
-        line-height: 14px;
-    }
-    .design {
-        color: black;
-        background-color: #00ffb0;
-        border: 1px solid;
-    }
-    button {
-        color: white;
-        background: transparent;
-        border: 1px solid #00ffb0;
-    }
-`;
-
-export default function MemberNav() {
-    return (
-        <ButtonBlock>
-            <Button className="design" type="button">
-                UI/UX Designer
-            </Button>
-            <Button type="button">Frontend</Button>
-            <Button type="button">Backend</Button>
-        </ButtonBlock>
-=======
 import { useContext, useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 // import Button from '@mui/material/Button';
@@ -63,7 +28,7 @@ export default function MemberNav() {
     };
     console.log('nav track', trackTab);
     useEffect(() => {
-        if (location.pathname === '/maintab/frontend')  {
+        if (location.pathname === '/maintab/frontend') {
             setTrackTab('frontend');
         }
     }, [location]);
@@ -110,6 +75,5 @@ export default function MemberNav() {
                 UI/UX Designer
             </ToggleButton>
         </ToggleButtonGroup>
->>>>>>> d5c18b8e361e5977abcd8a0b5e7fa6c6c6e2be79
     );
 }

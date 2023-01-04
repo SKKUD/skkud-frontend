@@ -5,8 +5,6 @@ import axios from 'axios';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
-<<<<<<< HEAD
-=======
 import Radio from '@mui/material/Radio';
 import RadioGroup from '@mui/material/RadioGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
@@ -15,7 +13,6 @@ import FormLabel from '@mui/material/FormLabel';
 import IconButton from '@mui/material/IconButton';
 import PhotoCamera from '@mui/icons-material/PhotoCamera';
 import PreImages from '../../../components/Main/project/PreImages';
->>>>>>> d5c18b8e361e5977abcd8a0b5e7fa6c6c6e2be79
 
 export default function CreateUser() {
     const [ID, setID] = useState('');
@@ -23,9 +20,6 @@ export default function CreateUser() {
     const [engName, setEngName] = useState('');
     const [email, setEmail] = useState('');
     const [pw, setPw] = useState('');
-<<<<<<< HEAD
-    const member = { ID, name, engName, email, pw };
-=======
     const [bio, setBio] = useState('');
     const [track, setTrack] = useState('');
     const [insta, setInsta] = useState('');
@@ -33,7 +27,6 @@ export default function CreateUser() {
     const [images, setImages] = useState([]);
     const [PreviewImg, setPreviewImg] = useState([]);
     const member = { ID, name, engName, email, pw, bio, track, insta, otherLinks };
->>>>>>> d5c18b8e361e5977abcd8a0b5e7fa6c6c6e2be79
     const validEmail = '^[a-zA-Z0-9+-_.]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$';
     const navigate = useNavigate();
     const navigateToMember = () => {
@@ -41,9 +34,6 @@ export default function CreateUser() {
     };
     const submit = useCallback(async () => {
         console.log(member);
-<<<<<<< HEAD
-        if (ID === '' || name === '' || engName === '' || email === '' || pw === '') {
-=======
         if (
             ID === '' ||
             name === '' ||
@@ -54,7 +44,6 @@ export default function CreateUser() {
             track === '' ||
             insta === ''
         ) {
->>>>>>> d5c18b8e361e5977abcd8a0b5e7fa6c6c6e2be79
             alert('입력을 완료하세요');
         } else if (email.match(validEmail) == null) {
             alert('이메일 형식에 맞춰 입력하세요');
@@ -65,11 +54,6 @@ export default function CreateUser() {
                     username: member.name,
                     usernameEng: member.engName,
                     email: member.email,
-<<<<<<< HEAD
-                    passwd: member.pw
-                })
-                .then((response) => console.log(response));
-=======
                     passwd: member.pw,
                     bio: member.bio,
                     track: member.track,
@@ -78,14 +62,11 @@ export default function CreateUser() {
                 })
                 .then((response) => console.log(response));
 
->>>>>>> d5c18b8e361e5977abcd8a0b5e7fa6c6c6e2be79
             navigateToMember();
             alert('user create');
         }
     }, [member]);
 
-<<<<<<< HEAD
-=======
     const uploadImgFile = (event) => {
         const fileArr = event.target.files;
         setImages(Array.from(fileArr)); // 업로드할 이미지 배열 저장
@@ -104,7 +85,6 @@ export default function CreateUser() {
         }
     };
 
->>>>>>> d5c18b8e361e5977abcd8a0b5e7fa6c6c6e2be79
     return (
         <Box
             component="form"
@@ -144,8 +124,6 @@ export default function CreateUser() {
                 variant="outlined"
                 onChange={(e) => setPw(e.target.value)}
             />
-<<<<<<< HEAD
-=======
             <TextField
                 id="bio"
                 label="bio"
@@ -207,7 +185,6 @@ export default function CreateUser() {
                 </IconButton>
             </Box>
             <PreImages imgFiles={PreviewImg} />
->>>>>>> d5c18b8e361e5977abcd8a0b5e7fa6c6c6e2be79
 
             <Button variant="contained" onClick={submit}>
                 Submit
