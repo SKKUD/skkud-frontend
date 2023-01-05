@@ -84,16 +84,6 @@ export default function CreateUser2() {
                 alignItems: 'center'
             }}
         >
-            {/* <backIcon>
-                <IconButton
-                    color="primary"
-                    aria-label="backBtn"
-                    component="label"
-                    onClick={backBtn}
-                >
-                    <ArrowBackIcon />
-                </IconButton>
-            </backIcon> */}
             <Typography variant="h6" textAlign={'center'}>
                 회원가입
             </Typography>
@@ -149,8 +139,7 @@ export default function CreateUser2() {
                 <IconButton color="primary" aria-label="upload picture" component="label">
                     <input
                         hidden
-                        name="images"
-                        multiple
+                        name="image"
                         type="file"
                         accept="image/jpg,impge/png,image/jpeg,image/gif"
                         onChange={uploadImgFile}

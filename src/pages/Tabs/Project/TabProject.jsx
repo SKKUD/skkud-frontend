@@ -25,12 +25,12 @@ export default function TabProject() {
 
     return (
         <>
-            {cookies ? (
+            {cookies.id ? (
                 <Link to="/maintab/postproject" style={{ textDecoration: 'inherit' }}>
                     <PostBtn />
                 </Link>
             ) : (
-                <p>read only</p>
+                <div></div>
             )}
 
             {/* {Projects.map((project) => (

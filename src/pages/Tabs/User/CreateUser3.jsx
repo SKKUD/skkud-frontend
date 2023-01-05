@@ -47,7 +47,7 @@ export default function CreateUser3() {
                 .then((response) => console.log(response))
                 .catch((error) => console.log(error));
 
-            navigate('/maintab/usercreated', { state: { name: name, image: image } });
+            navigate('/maintab/usercreated', { state: { name: name, image: image, id: ID } });
         }
     }, [member]);
     const backBtn = () => {

@@ -46,7 +46,7 @@ export default function MemberList() {
             setData(backend);
         }
     }, [users]);
-
+    console.log('member', data[0]);
     return (
         <>
             {data.map((member) => (
@@ -55,7 +55,7 @@ export default function MemberList() {
                     name={member.username}
                     engname={member.usernameEng}
                     bio={member.bio}
-                    img={member.img}
+                    img={member.image}
                     email={member.email}
                     otherLinks={member.otherLinks}
                     insta={member.insta}

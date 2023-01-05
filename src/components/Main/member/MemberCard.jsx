@@ -11,7 +11,7 @@ import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import Divider from '@mui/material/Divider';
 import MemberDeleteBtn from './MemberDeleteBtn';
-import MemberEditBtn from './MemberEditBtn';
+import { MemberEditBtn } from './MemberEditBtn';
 import { useCookies } from 'react-cookie';
 import { UserContext } from '../../../context/UserContext';
 
@@ -33,46 +33,44 @@ export default function MemberCard({
         <Card
             key={id}
             sx={{ maxWidth: 350 }}
-            style={{ marginTop: 13, borderRadius: 20, padding: 8 }}
+            style={{
+                marginTop: 13,
+                borderRadius: 20,
+                paddingTop: '20px',
+                paddingBottom: '20px',
+                paddingLeft: '8px',
+                paddingRight: '8px',
+                backgroundColor: '#3A3A3A'
+            }}
         >
+            {cookies.id ? (
+                <div style={{ textAlign: 'right' }}>
+                    <MemberDeleteBtn _id={id} />
+                    <MemberEditBtn _id={id} />
+                </div>
+            ) : (
+                <div></div>
+            )}
             <Grid container spacing={1}>
-                <Grid item>
-                    <ButtonBase sx={{ width: 140, height: 157 }}>
+                <Grid item style={{ display: 'flex', alignItems: 'center' }}>
+                    <ButtonBase sx={{ width: 130, height: 140 }}>
                         <CardMedia
                             sx={{ flexDirection: 'row' }}
                             component="img"
                             image={img}
                             alt={name}
+                            style={{
+                                borderRadius: '150px',
+                                width: '120px',
+                                height: '120px'
+                            }}
                         />
+                        {/* <img src={img} alt={name} /> */}
                     </ButtonBase>
                 </Grid>
                 <Grid item xs={1} sm container>
                     <Grid item xs container direction="column" spacing={2}>
                         <Grid item xs>
-                            {/* <Grid item xs={5} container direction="column"> */}
-                            {/* <Stack direction="row" xs={5} spacing={2}>
-                                  
-                                    <Typography gutterBottom variant="p">
-                                        {name}
-                                    </Typography>
-                                    <Divider
-                                        orientation="vertical"
-                                        variant="inset"
-                                        flexItem
-                                        textAlign="left"
-                                        color="gray"
-                                    />
-                                    <Typography gutterBottom variant="p">
-                                        박고은박고은
-                                    </Typography>
-                               
-                                </Stack> */}
-                            {/* <Grid item xs={6}>
-                                    <Typography gutterBottom variant="p">
-                                        {bio}
-                                    </Typography>
-                                </Grid>
-                            </Grid> */}
                             <Grid container spacing={1} columns={14} width={200}>
                                 <Grid item xs={12}>
                                     <Typography
@@ -140,15 +138,6 @@ export default function MemberCard({
                     </Grid>
                 </Grid>
             </Grid>
-
-            {cookies ? (
-                <>
-                    <MemberDeleteBtn _id={id} />
-                    <MemberEditBtn _id={id} />
-                </>
-            ) : (
-                <p></p>
-            )}
         </Card>
     );
 }
