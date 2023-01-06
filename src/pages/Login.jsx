@@ -5,11 +5,13 @@ import axios from 'axios';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
+import Typography from '@mui/material/Typography';
 import { useCookies } from 'react-cookie';
 import { UserContext } from '../context/UserContext';
 import skkud from '../assets/SKKUD_LOGO.png';
 import avatar_f from '../assets/avatar_f.png';
 import Header from '../components/common/Header';
+import CreateUserBtn from '../components/Main/member/CreateUserBtn';
 
 export default function Login() {
     const { user, setUser } = useContext(UserContext);
@@ -20,7 +22,7 @@ export default function Login() {
     const navigateToMainTab = () => {
         navigate('/maintab');
     };
-
+    const [PreviewImg, setPreviewImg] = useState('');
     const loginBtn = async (e) => {
         e.preventDefault();
 
@@ -40,6 +42,15 @@ export default function Login() {
             .catch((error) => console.log(error));
         // window.location.reload();
     };
+    if (cookies.id) {
+        useEffect(() => {
+            const fetchEvents = async () => {
+                const res = await axios.get(`http://localhost:8000/users/${cookies.id}`);
+                setPreviewImg(res.data.data.user.image);
+            };
+            fetchEvents();
+        }, []);
+    }
 
     const logoutBtn = async () => {
         setUser('');
@@ -72,9 +83,9 @@ export default function Login() {
 
     return (
         <div>
+            <Header />
             {cookies.id ? (
                 <div>
-                    <Header />
                     <div
                         style={{
                             marginTop: '-70px',
@@ -97,9 +108,9 @@ export default function Login() {
                             }}
                         >
                             <img
-                                src={avatar_f}
+                                src={PreviewImg}
                                 alt="avatar"
-                                style={{ width: '149px', marginTop: '-30px' }}
+                                style={{ borderRadius: '100%', width: '149px', height: '149px' }}
                             />
                         </div>
                         <div
@@ -141,16 +152,20 @@ export default function Login() {
                             '& > :not(style)': { m: 1 }
                         }}
                     >
-                        <img
+                        {/* <img
                             src={skkud}
                             alt="SKKUD"
                             style={{ width: '149px', marginBottom: '127px' }}
-                        />
+                        /> */}
+                        <Typography variant="h7" fontWeight="bold" style={{ marginTop: '50px' }}>
+                            로그인
+                        </Typography>
                         <TextField
                             id="demo-helper-text-aligned"
                             label="ID"
-                            onChange={(e) => setID(e.target.value)}
                             size="small"
+                            onChange={(e) => setID(e.target.value)}
+                            style={{ width: '312px', height: '40px', paddingBottom: '20px' }}
                         />
 
                         <TextField
@@ -158,25 +173,27 @@ export default function Login() {
                             label="PW"
                             onChange={(e) => setPW(e.target.value)}
                             size="small"
-                            sx={{ paddingBottom: '100px' }}
+                            style={{ width: '312px', height: '40px', paddingBottom: '100px' }}
                         />
                         <Button
                             variant="contained"
                             onClick={loginBtn}
                             color="mint"
                             sx={{
-                                borderRadius: '20px',
-                                width: '120px',
-                                height: '40px',
+                                borderRadius: '99px',
+                                width: '312px',
+                                height: '48px',
                                 fontWeight: 500,
                                 fontSize: '1.12rem'
                             }}
                         >
-                            Login
+                            로그인하기
                         </Button>
                         <div style={{ textDecoration: 'underline' }} onClick={navigateToMainTab}>
                             나중에 로그인하기
                         </div>
+
+                        <CreateUserBtn />
                     </Box>
                 </>
             )}

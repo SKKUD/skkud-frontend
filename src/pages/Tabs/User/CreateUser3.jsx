@@ -50,71 +50,78 @@ export default function CreateUser3() {
             navigate('/maintab/usercreated', { state: { name: name, image: image, id: ID } });
         }
     }, [member]);
-    const backBtn = () => {
-        navigate('/maintab/createuser2');
-    };
+
     return (
-        <Box
-            component="form"
-            sx={{
-                '& > :not(style)': { m: 1, width: '25ch' }
-            }}
-            noValidate
-            autoComplete="off"
-            style={{
-                display: 'flex',
-                flexDirection: 'column',
-                justifyContent: 'center',
-                alignItems: 'center'
-            }}
-        >
-            <Typography variant="h6" textAlign={'center'}>
-                회원가입
-            </Typography>
-            <div>
-                {/* <IconButton
-                    color="primary"
-                    aria-label="backBtn"
-                    component="label"
-                    onClick={backBtn}
-                >
-                    <ArrowBackIcon />
-                </IconButton> */}
-            </div>
-            <TextField
-                id="bio"
-                label="한줄 소개"
-                variant="standard"
-                onChange={(e) => setBio(e.target.value)}
-            />
-
-            <TextField
-                id="insta"
-                label="인스타"
-                variant="standard"
-                onChange={(e) => setInsta(e.target.value)}
-            />
-            <TextField
-                id="link1"
-                label="기타 링크"
-                variant="standard"
-                onChange={(e) => setOtherLinks([e.target.value])}
-            />
-
-            <Button
-                variant="contained"
-                onClick={submit}
+        <div style={{ display: 'flex', justifyContent: 'center' }}>
+            <Box
+                component="form"
+                sx={{
+                    '& > :not(style)': { m: 1, width: '300px' }
+                }}
+                noValidate
+                autoComplete="off"
                 style={{
-                    position: 'absolute',
-                    borderRadius: '99px',
-                    width: '312px',
-                    height: '44px',
-                    left: '24px',
-                    top: '635px'
+                    display: 'flex',
+                    flexDirection: 'column',
+                    justifyContent: 'center',
+                    alignItems: 'center'
                 }}
             >
-                가입 완료
-            </Button>
-        </Box>
+                <Typography
+                    variant="h6"
+                    textAlign={'center'}
+                    style={{ fontWeight: 700, fontSize: '1rem' }}
+                >
+                    회원가입
+                </Typography>
+
+                <Typography style={{ fontWeight: '700', fontSize: '0.75rem' }}>
+                    1. 본인을 소개할 수 있는 sns 링크를 첨부해주세요. <br /> (인스타그램, 페이스북
+                    등)
+                </Typography>
+                <TextField
+                    id="insta"
+                    label="인스타"
+                    variant="standard"
+                    onChange={(e) => setInsta(e.target.value)}
+                />
+
+                <Typography style={{ fontWeight: '700', fontSize: '0.75rem' }}>
+                    2.본인을 소개할 수 있는 기타 링크를 첨부해주세요. <br /> (Figma, Github, GitLab,
+                    Behance 등)
+                </Typography>
+                <TextField
+                    id="bio"
+                    label="한줄 소개"
+                    variant="standard"
+                    onChange={(e) => setBio(e.target.value)}
+                />
+                <Typography style={{ fontWeight: '700', fontSize: '0.75rem' }}>
+                    3. 20자 내로 본인을 소개해주세요. <br /> (예시:스꾸디 신입 김OO)
+                </Typography>
+
+                <TextField
+                    id="link1"
+                    label="기타 링크"
+                    variant="standard"
+                    onChange={(e) => setOtherLinks([e.target.value])}
+                />
+
+                <Button
+                    variant="contained"
+                    onClick={submit}
+                    style={{
+                        position: 'absolute',
+                        borderRadius: '99px',
+                        width: '312px',
+                        height: '44px',
+                        left: '24px',
+                        top: '635px'
+                    }}
+                >
+                    가입 완료
+                </Button>
+            </Box>
+        </div>
     );
 }

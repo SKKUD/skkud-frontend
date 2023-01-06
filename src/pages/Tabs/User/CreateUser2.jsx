@@ -84,7 +84,11 @@ export default function CreateUser2() {
                 alignItems: 'center'
             }}
         >
-            <Typography variant="h6" textAlign={'center'}>
+            <Typography
+                variant="h6"
+                textAlign={'center'}
+                style={{ fontWeight: 700, fontSize: '1rem' }}
+            >
                 회원가입
             </Typography>
             <TextField
