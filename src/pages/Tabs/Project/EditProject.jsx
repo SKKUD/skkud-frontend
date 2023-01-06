@@ -17,13 +17,16 @@ export default function EditProject() {
         navigate('/maintab/project');
     };
     const PostDetail = useProjectPostDetailApi();
+
+    console.log(PostDetail);
     const [title, setTitle] = PostDetail[0];
     const [body, setBody] = PostDetail[1];
     const [tags, setTags] = PostDetail[2];
-    const [language, setLanguage] = PostDetail[3];
-    const [images] = PostDetail[4];
+    const [period, setPeriod] = PostDetail[3];
+    const [link, setLink] = PostDetail[4];
+    const [images] = PostDetail[5];
     const [newImages, setNewImages] = useState([]);
-    const [PreviewImg, setPreviewImg] = useState('');
+    const [PreviewImg, setPreviewImg] = useState([]);
 
     // :id 파라미터
     const { index } = useParams();
@@ -58,7 +61,8 @@ export default function EditProject() {
             for (let i = 0; i < tags.length; i++) {
                 formData.append('tags', tags[i]);
             }
-            formData.append('language', language);
+            formData.append('period', period);
+            formData.append('link', link);
 
             const convertURLtoFile = async (imageUrl) => {
                 const response = await fetch(imageUrl);
@@ -126,7 +130,7 @@ export default function EditProject() {
             />
             <TextField
                 fullWidth
-                label="# tags"
+                label="사용 기술"
                 id="ProjectTags"
                 variant="filled"
                 value={tags || ''}
@@ -137,11 +141,19 @@ export default function EditProject() {
             />
             <TextField
                 fullWidth
-                label="# language"
-                id="language"
+                label="개발 기간"
+                id="period"
                 variant="filled"
-                value={language || ''}
-                onChange={(e) => setLanguage(e.target.value)}
+                value={period || ''}
+                onChange={(e) => setPeriod(e.target.value)}
+            />
+            <TextField
+                fullWidth
+                label="연결 링크"
+                id="link"
+                variant="filled"
+                value={link || ''}
+                onChange={(e) => setLink(e.target.value)}
             />
             <Box
                 sx={{
@@ -157,7 +169,7 @@ export default function EditProject() {
                         name="images"
                         multiple
                         type="file"
-                        accept="image/jpg,impge/png,image/jpeg,image/gif"
+                        accept="image/jpg,image/png,image/jpeg,image/gif"
                         onChange={uploadImgFile}
                     />
                     <PhotoCamera />

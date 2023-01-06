@@ -18,7 +18,8 @@ export default function PostProject() {
     const [title, setTitle] = useState('');
     const [body, setBody] = useState('');
     const [tags, setTags] = useState([]);
-    const [language, setLanguage] = useState('');
+    const [period, setPeriod] = useState('');
+    const [link, setLink] = useState('');
     const [images, setImages] = useState([]);
     const [PreviewImg, setPreviewImg] = useState([]);
 
@@ -52,7 +53,8 @@ export default function PostProject() {
             for (let i = 0; i < tags.length; i++) {
                 formData.append('tags', tags[i]);
             }
-            formData.append('language', language);
+            formData.append('developPeriod', period);
+            formData.append('link', link);
             images.map((image) => formData.append('images', image));
 
             await axios
@@ -98,10 +100,17 @@ export default function PostProject() {
             />
             <TextField
                 fullWidth
-                label="# language"
-                id="language"
+                label="developPeriod"
+                id="developPeriod"
                 variant="filled"
-                onChange={(e) => setLanguage(e.target.value)}
+                onChange={(e) => setPeriod(e.target.value)}
+            />
+            <TextField
+                fullWidth
+                label="link"
+                id="link"
+                variant="filled"
+                onChange={(e) => setLink(e.target.value)}
             />
             <Box
                 sx={{
@@ -117,7 +126,7 @@ export default function PostProject() {
                         name="images"
                         multiple
                         type="file"
-                        accept="image/jpg,impge/png,image/jpeg,image/gif"
+                        accept="image/jpg,image/png,image/jpeg,image/gif"
                         onChange={uploadImgFile}
                     />
                     <PhotoCamera />
