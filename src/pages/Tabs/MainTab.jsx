@@ -21,6 +21,7 @@ import BackendTab from './User/BackendTab';
 import TabStudy from './TabStudy';
 import Header from '../../components/common/Header';
 import FinishCreateUser from './User/FinishCreateUser';
+import EditUserDetail from './User/EditUserDetail';
 
 function TabPanel(props) {
     const { children, value, index, ...other } = props;
@@ -164,6 +165,7 @@ function MainTab() {
                     <Route path="edituser/:index" element={<EditUser />} />
                     <Route path="study" element={<TabStudy />} />
                     <Route path="usercreated" element={<FinishCreateUser />} />
+                    <Route path="/edituserdetail/:index" element={<EditUserDetail />} />
                 </Routes>
             </TabPanel>
         </Box>

@@ -28,7 +28,7 @@ export default function ProjectDetail() {
             color: '#FFF'
         }
     }));
-
+    console.log('project img', images);
     return (
         <>
             <Box sx={{ display: 'flex', justifyContent: 'end', mb: '15px' }}>
