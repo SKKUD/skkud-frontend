@@ -88,7 +88,7 @@ export default function ProjectDetail() {
                                         alignItems: 'center'
                                     }}
                                 >
-                                    <img src={img} />
+                                    <img src={img} alt={name} />
                                 </div>
                                 <div
                                     style={{
