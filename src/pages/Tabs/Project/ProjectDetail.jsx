@@ -19,10 +19,11 @@ export default function ProjectDetail() {
     const StyledChip = styled((props) => <Chip {...props} />)(() => ({
         border: '1.5px solid #00FFB0',
         height: '22px',
-        fontSize: '0.6rem',
+        fontSize: '0.75rem',
         boxSizing: 'border-box',
+        padding: '5px',
         '& span': {
-            fontWeight: 700,
+            fontWeight: 600,
             color: '#FFF'
         }
     }));
@@ -104,7 +105,7 @@ export default function ProjectDetail() {
                     })}
                 </Box>
                 <Box mt="3px">
-                    <Box sx={{ padding: '0', fontWeight: 600, fontSize: '0.75rem' }}>
+                    <Box sx={{ padding: '0', fontWeight: 600, fontSize: '0.75rem', mb: '5px' }}>
                         {' '}
                         Skill Set
                     </Box>
