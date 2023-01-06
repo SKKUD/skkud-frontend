@@ -7,13 +7,6 @@ import ToggleButton from '@mui/material/ToggleButton';
 import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
 import { TrackContext } from '../../../context/TrackContext';
 
-const colorToogleBtn = styled(ToggleButton)({
-    '&.Mui-selected': {
-        color: '#222222',
-        backgroundColor: '#00FFA8'
-    }
-});
-
 export default function MemberNav() {
     const { trackTab, setTrackTab } = useContext(TrackContext);
     const [alignment, setAlignment] = useState('frontend');

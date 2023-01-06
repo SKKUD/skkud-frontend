@@ -1,14 +1,18 @@
 import * as React from 'react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useNavigate, useParams } from 'react-router-dom';
-// import { createBrowserHistory } from 'history';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
 import PhotoCamera from '@mui/icons-material/PhotoCamera';
 import Box from '@mui/material/Box';
 import PreImages from '../../../components/Main/project/PreImages';
+import List from '@mui/material/List';
+import ListItem from '@mui/material/ListItem';
+import ListItemButton from '@mui/material/ListItemButton';
+import ListItemText from '@mui/material/ListItemText';
+import Checkbox from '@mui/material/Checkbox';
 import { useProjectPostDetailApi } from '../../../hooks/Project';
 
 export default function EditProject() {
@@ -18,7 +22,6 @@ export default function EditProject() {
     };
     const PostDetail = useProjectPostDetailApi();
 
-    console.log(PostDetail);
     const [title, setTitle] = PostDetail[0];
     const [body, setBody] = PostDetail[1];
     const [tags, setTags] = PostDetail[2];
@@ -27,6 +30,16 @@ export default function EditProject() {
     const [images] = PostDetail[5];
     const [newImages, setNewImages] = useState([]);
     const [PreviewImg, setPreviewImg] = useState([]);
+    const [users, getUsers] = useState([]);
+    const [checked, setChecked] = React.useState([]);
+
+    useEffect(() => {
+        const fetchEvents = async () => {
+            const res = await axios.get('http://localhost:8000/users');
+            getUsers(res.data.data.users);
+        };
+        fetchEvents();
+    }, []);
 
     // :id 파라미터
     const { index } = useParams();
@@ -63,37 +76,34 @@ export default function EditProject() {
             }
             formData.append('period', period);
             formData.append('link', link);
+            newImages.map((image) => formData.append('images', image));
+            // const convertURLtoFile = async (imageUrl) => {
+            //     const response = await fetch(imageUrl);
+            //     const data = await response.blob();
+            //     const ext = imageUrl.split('.').pop();
+            //     const filename = imageUrl.split('/').pop();
+            //     const metadata = { type: `image/${ext}` };
 
-            const convertURLtoFile = async (imageUrl) => {
-                const response = await fetch(imageUrl);
-                const data = await response.blob();
-                const ext = imageUrl.split('.').pop();
-                const filename = imageUrl.split('/').pop();
-                const metadata = { type: `image/${ext}` };
+            //     const newfile = new File([data], filename, metadata);
+            //     formData.append('images', newfile);
+            //     // console.log(1);
+            //     // for (const value of formData.values()) {
+            //     //     console.log('after convert : ', value);
+            //     // }
+            // };
 
-                const newfile = new File([data], filename, metadata);
-                formData.append('images', newfile);
-                // console.log(1);
-                // for (const value of formData.values()) {
-                //     console.log('after convert : ', value);
-                // }
-            };
+            // images.map((image) => convertURLtoFile(image));
 
-            images.map((image) => convertURLtoFile(image));
-
-            newImages.map(
-                (image) =>
-                    // console.log(3);
-                    formData.append('images', image)
-                // for (const value of formData.values()) {
-                //     console.log('after append newfile : ', value);
-                // }
-            );
-
-            // console.log(formData);
-            // for (const pair of formData.entries()) {
-            //     console.log(pair[0] + ', ' + pair[1]);
-            // }
+            await axios
+                .patch(`http://localhost:8000/posts/contributor/${index}`, {
+                    contributors: checked
+                })
+                .then((response) => {
+                    console.log(response.status);
+                })
+                .catch((error) => {
+                    console.log(error);
+                });
 
             await axios
                 .post(`http://localhost:8000/posts/revise/${index}`, formData)
@@ -109,6 +119,60 @@ export default function EditProject() {
         }
     };
 
+    console.log(checked);
+    function CheckboxMemberList() {
+        const handleToggle = (id) => () => {
+            const currentIndex = checked.indexOf(id);
+            const newChecked = [...checked];
+
+            if (currentIndex === -1) {
+                newChecked.push(id);
+            } else {
+                newChecked.splice(currentIndex, 1);
+            }
+
+            setChecked(newChecked);
+        };
+
+        return (
+            <div style={{ backgroundColor: '#333', borderBottom: '1px solid #ffffff99' }}>
+                <div
+                    style={{
+                        fontSize: '0.75rem',
+                        color: '#ffffff99',
+                        padding: '12px 0px 0px 12px'
+                    }}
+                >
+                    참여 멤버
+                </div>
+                <List dense sx={{ width: '100%', maxWidth: 360, bgcolor: '#333' }}>
+                    {users.map((member) => {
+                        const id = member._id;
+                        const name = member.username;
+                        const labelId = `checkbox-list-secondary-label-${id}`;
+                        return (
+                            <ListItem
+                                key={id}
+                                secondaryAction={
+                                    <Checkbox
+                                        edge="end"
+                                        onChange={handleToggle(id)}
+                                        checked={checked.indexOf(id) !== -1}
+                                        inputProps={{ 'aria-labelledby': labelId }}
+                                    />
+                                }
+                                disablePadding
+                            >
+                                <ListItemButton>
+                                    <ListItemText id={labelId} primary={`${name}`} />
+                                </ListItemButton>
+                            </ListItem>
+                        );
+                    })}
+                </List>
+            </div>
+        );
+    }
     return (
         <form>
             <TextField
@@ -155,6 +219,7 @@ export default function EditProject() {
                 value={link || ''}
                 onChange={(e) => setLink(e.target.value)}
             />
+            <CheckboxMemberList members={users} />
             <Box
                 sx={{
                     display: 'flex',
@@ -185,8 +250,9 @@ export default function EditProject() {
                     submit
                 </Button>
             </Box>
-            {images && images.map((img) => <img src={img} alt={title} key={img} width="20%" />)}
-            {PreviewImg && <PreImages imgFiles={PreviewImg} />}
+            {PreviewImg.length === 0
+                ? images && images.map((img) => <img src={img} alt={title} key={img} width="20%" />)
+                : PreviewImg && <PreImages imgFiles={PreviewImg} />}
         </form>
     );
 }

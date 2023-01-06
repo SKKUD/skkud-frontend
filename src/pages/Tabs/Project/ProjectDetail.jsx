@@ -38,15 +38,12 @@ export default function ProjectDetail() {
                     mt: '20px'
                 }}
             >
-                <Box
-                    sx={{ lineHeight: '14.32px', ml: '5px', fontWeight: 600, fontSize: '0.75rem' }}
-                >
+                <Box sx={{ lineHeight: '14.32px', fontWeight: 600, fontSize: '0.75rem' }}>
                     연결 링크
                 </Box>
                 <Box
                     sx={{
                         lineHeight: '14.32pxpx',
-                        ml: '5px',
                         mt: '9px',
                         mb: '27px',
                         fontSize: '0.75rem',
@@ -55,29 +52,59 @@ export default function ProjectDetail() {
                 >
                     {link}
                 </Box>
-                <Box
-                    sx={{
-                        lineHeight: '14.32px',
-                        ml: '5px',
-                        fontWeight: 600,
-                        fontSize: '0.75rem'
-                    }}
-                >
-                    참여한 사람들
+                <Box sx={{ display: 'flex', lineHeight: '14.32px' }}>
+                    <Box
+                        sx={{
+                            fontWeight: 600,
+                            fontSize: '0.75rem'
+                        }}
+                    >
+                        참여한 사람들
+                    </Box>
+                    <Box sx={{ ml: '12px', fontSize: '0.563rem' }}>총 {user.length}명</Box>
                 </Box>
                 <Box
                     sx={{
-                        lineHeight: '36.5px',
-                        ml: '5px',
-                        fontWeight: 900,
-                        fontSize: '1.9rem',
-                        overflow: 'scroll'
+                        overflow: 'scroll',
+                        display: 'flex',
+                        mb: '10px'
                     }}
                 >
-                    {link}
+                    {user.map((member) => {
+                        const name = member.username;
+                        const img = member.image;
+                        const track = member.track;
+                        return (
+                            <div style={{ textAlign: 'center', margin: '12px 10px 0px 0px' }}>
+                                <div
+                                    style={{
+                                        width: '125px',
+                                        height: '125px',
+                                        borderRadius: '100%',
+                                        backgroundColor: '#fff',
+                                        display: 'flex',
+                                        justifyContent: 'center',
+                                        alignItems: 'center'
+                                    }}
+                                >
+                                    <img src={img} />
+                                </div>
+                                <div
+                                    style={{
+                                        fontSize: '0.6rem',
+                                        fontWeight: 500,
+                                        marginTop: '8px'
+                                    }}
+                                >
+                                    {name}
+                                </div>
+                                <div style={{ fontSize: '0.563rem' }}>{track}</div>
+                            </div>
+                        );
+                    })}
                 </Box>
                 <Box mt="3px">
-                    <Box sx={{ padding: '0', ml: '5px', fontWeight: 600, fontSize: '0.75rem' }}>
+                    <Box sx={{ padding: '0', fontWeight: 600, fontSize: '0.75rem' }}>
                         {' '}
                         Skill Set
                     </Box>
