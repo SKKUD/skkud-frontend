@@ -30,29 +30,8 @@ export default function TabProject() {
                     <PostBtn />
                 </Link>
             ) : (
-                <div></div>
+                ''
             )}
-
-            {/* {Projects.map((project) => (
-                <Link
-                    to={`/projectdetail/${project.name}`}
-                    style={{
-                        textDecoration: 'none',
-                        display: 'contents',
-                        width: '100%'
-                    }}
-                    key={project.name}
-                >
-                    <ProjectCard
-                        name={project.name}
-                        des={project.des}
-                        keywords={project.keywords}
-                        key={project.name}
-                    />
-                    <ProjectList />
-                </Link>
-            ))} */}
-
             <ProjectList />
         </>
     );

@@ -1,113 +1,133 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import { styled } from '@mui/material/styles';
 import Box from '@mui/material/Box';
-import Container from '@mui/material/Container';
 import Chip from '@mui/material/Chip';
 import Stack from '@mui/material/Stack';
-import DeleteBtn from '../../../components/Main/project/DeleteBtn';
-import EditBtn from '../../../components/Main/project/EditBtn';
-// import { UserContext } from '../../../context/UserContext';
-import { useProjectPostApi } from '../../../hooks/Project';
+import Card from '@mui/material/Card';
+import { useProjectPostApi, useProjectUserApi } from '../../../hooks/Project';
+import ProjectCard from '../../../components/Main/project/ProjectCard';
 
 export default function ProjectDetail() {
-    // const { user } = useContext(UserContext);
     const [post] = useProjectPostApi();
+    const [user] = useProjectUserApi();
+    const { tags, link } = post;
 
-    const { title, body, images, mainimage, tags, language, _id } = post;
-
+    console.log('참여한 유저 목록 : ');
+    console.log(user);
     // chip
 
     const StyledChip = styled((props) => <Chip {...props} />)(() => ({
         border: '1.5px solid #00FFB0',
-        height: '25px',
-        fontSize: '0.6rem',
+        height: '22px',
+        fontSize: '0.75rem',
         boxSizing: 'border-box',
+        padding: '5px',
         '& span': {
-            fontWeight: 700,
+            fontWeight: 600,
             color: '#FFF'
         }
     }));
-    console.log('project img', images);
+
     return (
-        <>
-            <Box sx={{ display: 'flex', justifyContent: 'end', mb: '15px' }}>
-                <Link
-                    to={`/maintab/editproject/${_id}`}
-                    style={{
-                        textDecoration: 'none',
-                        display: 'contents',
-                        width: '100%'
-                    }}
-                    state={{ title, body, images, mainimage, language, tags, _id }}
-                >
-                    <EditBtn />
-                </Link>
-                <DeleteBtn state={_id} />
-            </Box>
-            <img
-                src={mainimage}
-                alt={title}
-                style={{ width: '100vw', overflow: 'visible', marginLeft: '-24px' }}
-            />
+        <Card sx={{ borderRadius: '24px', pb: '40px' }}>
+            <ProjectCard project={post} />
             <Box
                 sx={{
                     display: 'flex',
-                    justifyContent: 'space-between',
-                    alignItems: 'center',
+                    flexDirection: 'column',
+                    pl: '21px',
                     mt: '20px'
                 }}
             >
-                <Box sx={{ lineHeight: '36.5px', ml: '5px', fontWeight: 900, fontSize: '1.9rem' }}>
-                    {title}
+                <Box sx={{ lineHeight: '14.32px', fontWeight: 600, fontSize: '0.75rem' }}>
+                    연결 링크
                 </Box>
-                <Chip
-                    key={language}
-                    label={`# ${language}`}
-                    color="primary"
+                <Box
                     sx={{
-                        fontWeight: 700,
-                        fontSize: '0.6rem',
-                        verticalAlign: 'middle',
-                        height: '24px'
-                    }}
-                />
-            </Box>
-            <Box mt="3px">
-                <Container sx={{ padding: '0', ml: '5px', fontSize: '0.75rem' }}> {body}</Container>
-                <Container
-                    sx={{
-                        padding: '10px',
-                        margin: '10px 0 20px',
-                        height: '42px',
-                        verticalAlign: 'middle',
-                        backgroundColor: '#545454',
-                        borderRadius: '5px'
+                        lineHeight: '14.32pxpx',
+                        mt: '9px',
+                        mb: '27px',
+                        fontSize: '0.75rem',
+                        textDecoration: 'underline'
                     }}
                 >
-                    <Stack direction="row" spacing={1.2} sx={{ backgroundColor: 'neutral' }}>
+                    {link}
+                </Box>
+                <Box sx={{ display: 'flex', lineHeight: '14.32px' }}>
+                    <Box
+                        sx={{
+                            fontWeight: 600,
+                            fontSize: '0.75rem'
+                        }}
+                    >
+                        참여한 사람들
+                    </Box>
+                    <Box sx={{ ml: '12px', fontSize: '0.563rem' }}>총 {user.length}명</Box>
+                </Box>
+                <Box
+                    sx={{
+                        overflow: 'scroll',
+                        display: 'flex',
+                        mb: '10px'
+                    }}
+                >
+                    {user.map((member) => {
+                        const name = member.username;
+                        const img = member.image;
+                        const track = member.track;
+                        return (
+                            <div style={{ textAlign: 'center', margin: '12px 10px 0px 0px' }}>
+                                <div
+                                    style={{
+                                        width: '125px',
+                                        height: '125px',
+                                        borderRadius: '100%',
+                                        backgroundColor: '#fff',
+                                        display: 'flex',
+                                        justifyContent: 'center',
+                                        alignItems: 'center'
+                                    }}
+                                >
+                                    <img src={img} />
+                                </div>
+                                <div
+                                    style={{
+                                        fontSize: '0.6rem',
+                                        fontWeight: 500,
+                                        marginTop: '8px'
+                                    }}
+                                >
+                                    {name}
+                                </div>
+                                <div style={{ fontSize: '0.563rem' }}>{track}</div>
+                            </div>
+                        );
+                    })}
+                </Box>
+                <Box mt="3px">
+                    <Box sx={{ padding: '0', fontWeight: 600, fontSize: '0.75rem', mb: '5px' }}>
+                        {' '}
+                        Skill Set
+                    </Box>
+
+                    <Stack
+                        direction="row"
+                        spacing={1.2}
+                        sx={{ justifyContent: 'left', flexWrap: 'wrap', width: '250px' }}
+                    >
                         {tags &&
                             tags.map((tag) => (
                                 <StyledChip
                                     key={tag}
-                                    label={`# ${tag}`}
+                                    label={tag}
                                     variant="outlined"
                                     color="primary"
-                                    style={{ marginTop: '-0.5px' }}
+                                    style={{ margin: '7px 8px 0px 0px' }}
                                 />
                             ))}
                     </Stack>
-                </Container>
-                {images &&
-                    images.map((img) => (
-                        <img
-                            src={img}
-                            alt={title}
-                            key={img}
-                            style={{ width: '100vw', overflow: 'visible', marginLeft: '-24px' }}
-                        />
-                    ))}
+                </Box>
             </Box>
-        </>
+        </Card>
     );
 }

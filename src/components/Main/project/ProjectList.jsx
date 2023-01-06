@@ -6,8 +6,19 @@ import { useProjectListApi } from '../../../hooks/Project';
 export default function ProjectList() {
     const [postList] = useProjectListApi();
 
-    function createData(index, _id, title, body, images, mainimage, tags, createdAt) {
-        return { index, _id, title, body, images, mainimage, tags, createdAt };
+    function createData(
+        index,
+        _id,
+        title,
+        body,
+        images,
+        mainimage,
+        tags,
+        developPeriod,
+        link,
+        createdAt
+    ) {
+        return { index, _id, title, body, images, mainimage, tags, developPeriod, link, createdAt };
     }
 
     const Projects = [];
@@ -20,6 +31,8 @@ export default function ProjectList() {
             postList[i].images,
             postList[i].mainimage,
             postList[i].tags,
+            postList[i].developPeriod,
+            postList[i].link,
             postList[i].createdAt
         );
     }

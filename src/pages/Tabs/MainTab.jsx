@@ -138,7 +138,8 @@ function MainTab() {
                         width: '100%',
                         position: 'fixed',
                         bgcolor: 'background.paper',
-                        marginTop: '40px'
+                        marginTop: '40px',
+                        zIndex: 1150
                     }}
                 >
                     <StyledTab label="About us" {...a11yProps(0)} component={Link} to="" />
