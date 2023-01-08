@@ -7,7 +7,7 @@ export default function PostBtn() {
         <Box sx={{ width: '100%', display: 'flex', flexDirection: 'row-reverse' }}>
             <Button
                 color="primary"
-                variant="outlined"
+                variant="contained"
                 size="small"
                 sx={{ mb: 1.5, textTransform: 'none' }}
             >
