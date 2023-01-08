@@ -1,4 +1,5 @@
 import * as React from 'react';
+import Footer from '../components/common/Footer';
 import { useState, useContext, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
@@ -197,6 +198,7 @@ export default function Login() {
                     </Box>
                 </>
             )}
+            <Footer />
         </div>
     );
 }
