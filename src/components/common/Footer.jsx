@@ -1,33 +1,73 @@
 import * as React from 'react';
-import { useNavigate } from 'react-router';
-import AppBar from '@mui/material/AppBar';
-import Toolbar from '@mui/material/Toolbar';
-import SideBar from './SideBar';
+import Box from '@mui/material/Box';
 import SKKUDLOGO from '../../assets/SKKUD_LOGO.png';
+import styled from '@emotion/styled';
+import insta from '../../assets/insta.png';
+import sender from '../../assets/send.png';
+
+const PngBox = styled.div`
+    position: absolute;
+    width: 16.5px;
+    height: 16.5px;
+    margin: 7px;
+`;
+
+const Typography = styled.div`
+    font-size: 0.625rem;
+    color: #3a3a3a;
+    font-weight: 700;
+    line-height: 12px;
+    align-items: center;
+`;
+
+const BottomDiv = styled.div`
+    display: flex;
+    flex-direction: column;
+    position: relative;
+`;
+
+const TopDiv = styled.div`
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+`;
 
 export default function Footer() {
     return (
-        <AppBar>
-            <Toolbar
-                sx={{
-                    width: '100%',
-                    backgroundColor: '#222222',
-                    padding: '50px 24px 10px',
-                    display: 'flex',
-                    justifyContent: 'space-between',
-                    overflow: 'hidden'
-                }}
-            >
+        <Box
+            style={{
+                width: '100%',
+                height: '125px',
+                backgroundColor: '#1b1b1b',
+
+                paddingTop: '10px'
+            }}
+        >
+            <TopDiv>
                 <img
                     src={SKKUDLOGO}
                     alt="SKKUD"
                     style={{
-                        width: '167px',
-                        margin: 0
+                        width: '100px',
+                        filter: 'opacity(0.5) drop-shadow(0 0 0 #000000)',
+                        position: 'relative',
+                        left: '6.69%',
+
+                        top: '14.4%'
                     }}
                 />
-                <SideBar />
-            </Toolbar>
-        </AppBar>
+                <PngBox style={{ left: '290px' }}>
+                    <img src={insta} />
+                </PngBox>
+                <PngBox style={{ left: '320px' }}>
+                    <img src={sender} />
+                </PngBox>
+            </TopDiv>
+            <BottomDiv style={{ left: '24px', top: '30px' }}>
+                <Typography>Sungkyunkwan University</Typography>
+                <Typography>Designer & Developer Group</Typography>
+                <Typography>Team Leader 강동헌</Typography>
+            </BottomDiv>
+        </Box>
     );
 }

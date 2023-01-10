@@ -90,21 +90,21 @@ export default function CreateUser3() {
                     2.본인을 소개할 수 있는 기타 링크를 첨부해주세요. <br /> (Figma, Github, GitLab,
                     Behance 등)
                 </Typography>
-                <TextField
-                    id="bio"
-                    label="한줄 소개"
-                    variant="standard"
-                    onChange={(e) => setBio(e.target.value)}
-                />
-                <Typography style={{ fontWeight: '700', fontSize: '0.75rem' }}>
-                    3. 20자 내로 본인을 소개해주세요. <br /> (예시:스꾸디 신입 김OO)
-                </Typography>
 
                 <TextField
                     id="link1"
                     label="기타 링크"
                     variant="standard"
                     onChange={(e) => setOtherLinks([e.target.value])}
+                />
+                <Typography style={{ fontWeight: '700', fontSize: '0.75rem' }}>
+                    3. 20자 내로 본인을 소개해주세요. <br /> (예시:스꾸디 신입 김OO)
+                </Typography>
+                <TextField
+                    id="bio"
+                    label="한줄 소개"
+                    variant="standard"
+                    onChange={(e) => setBio(e.target.value)}
                 />
 
                 <Button
