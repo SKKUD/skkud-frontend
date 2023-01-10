@@ -18,7 +18,7 @@ import CreateUser3 from './User/CreateUser3';
 import EditUser from './User/EditUser';
 import FrontendTab from './User/FrontendTab';
 import BackendTab from './User/BackendTab';
-import TabStudy from './TabStudy';
+import TabStudy from './Study/TabStudy';
 import Header from '../../components/common/Header';
 import Footer from '../../components/common/Footer';
 import FinishCreateUser from './User/FinishCreateUser';
