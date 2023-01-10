@@ -20,6 +20,7 @@ import FrontendTab from './User/FrontendTab';
 import BackendTab from './User/BackendTab';
 import TabStudy from './TabStudy';
 import Header from '../../components/common/Header';
+import Footer from '../../components/common/Footer';
 import FinishCreateUser from './User/FinishCreateUser';
 import EditUserDetail from './User/EditUserDetail';
 
@@ -169,6 +170,7 @@ function MainTab() {
                     <Route path="/edituserdetail/:index" element={<EditUserDetail />} />
                 </Routes>
             </TabPanel>
+            <Footer />
         </Box>
     );
 }

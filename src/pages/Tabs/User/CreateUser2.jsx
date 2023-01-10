@@ -12,8 +12,9 @@ import FormControl from '@mui/material/FormControl';
 import FormLabel from '@mui/material/FormLabel';
 import IconButton from '@mui/material/IconButton';
 import PhotoCamera from '@mui/icons-material/PhotoCamera';
-import PreImages from '../../../components/Main/project/PreImages';
-import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import InputLabel from '@mui/material/InputLabel';
+import MenuItem from '@mui/material/MenuItem';
+import Select from '@mui/material/Select';
 import Typography from '@mui/material/Typography';
 import styled from '@emotion/styled';
 
@@ -84,7 +85,11 @@ export default function CreateUser2() {
                 alignItems: 'center'
             }}
         >
-            <Typography variant="h6" textAlign={'center'}>
+            <Typography
+                variant="h6"
+                textAlign={'center'}
+                style={{ fontWeight: 700, fontSize: '1rem' }}
+            >
                 회원가입
             </Typography>
             <TextField
@@ -105,8 +110,48 @@ export default function CreateUser2() {
                 variant="standard"
                 onChange={(e) => setMajor(e.target.value)}
             />
-
-            <FormControl>
+            <FormControl variant="standard">
+                <InputLabel>지원트랙</InputLabel>
+                <Select
+                    value={track}
+                    onChange={(e) => {
+                        setTrack(e.target.value);
+                    }}
+                    label="track"
+                >
+                    <MenuItem
+                        value={'backend'}
+                        sx={{
+                            lineHeight: '20px',
+                            margin: '5px 17px 0px',
+                            borderBottom: '0.5px solid #757575',
+                            pl: '0px'
+                        }}
+                    >
+                        <div style={{ fontWeight: 500 }}>Backend</div>
+                    </MenuItem>
+                    <MenuItem
+                        value={'frontend'}
+                        sx={{
+                            margin: '5px 17px 0px',
+                            borderBottom: '0.5px solid #757575',
+                            pl: '0px'
+                        }}
+                    >
+                        <div style={{ fontWeight: 500 }}>Frontend</div>
+                    </MenuItem>
+                    <MenuItem
+                        value={'design'}
+                        sx={{
+                            margin: '5px 17px 0px',
+                            pl: '0px'
+                        }}
+                    >
+                        <div style={{ fontWeight: 500 }}>Design</div>
+                    </MenuItem>
+                </Select>
+            </FormControl>
+            {/* <FormControl>
                 <FormLabel id="demo-row-radio-buttons-group-label">지원트랙</FormLabel>
                 <RadioGroup row>
                     <FormControlLabel
@@ -125,7 +170,7 @@ export default function CreateUser2() {
                         label="frontend"
                     />
                 </RadioGroup>
-            </FormControl>
+            </FormControl> */}
             <Box
                 sx={{
                     display: 'flex',
@@ -135,7 +180,7 @@ export default function CreateUser2() {
                 }}
             >
                 <FormLabel id="demo-row-radio-buttons-group-label">Image</FormLabel>
-                {image ? <p>o</p> : <p>x</p>}
+                {image ? <p>등록완료</p> : <p></p>}
                 <IconButton color="primary" aria-label="upload picture" component="label">
                     <input
                         hidden

@@ -46,7 +46,6 @@ export default function MemberList() {
             setData(backend);
         }
     }, [users]);
-    console.log('member', data[0]);
     return (
         <>
             {data.map((member) => (
@@ -60,6 +59,7 @@ export default function MemberList() {
                     otherLinks={member.otherLinks}
                     insta={member.insta}
                     major={member.major}
+                    projects={member.projects}
                 />
             ))}
         </>

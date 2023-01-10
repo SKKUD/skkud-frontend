@@ -29,11 +29,23 @@ const PositionImageBlock = styled.div`
 
 export default function Position() {
     const [alignment, setAlignment] = React.useState('front');
-
+    const designDetail =
+        '서비스의 UX/UI를 담당하고 서비스 본질에 필요한 디자인 업무를 담당하게 됩니다.';
+    const frontDetail = '프론트엔드 디테일 입니다 ㅁㅁㅁㅁ';
+    const backDetail = '백엔드 디테일 입니다 ㅁㅁㅁㅁ';
+    const [detail, setDetail] = React.useState(frontDetail);
     const handleChange = (event, newAlignment) => {
         setAlignment(newAlignment);
     };
-
+    const changeDetailFront = () => {
+        setDetail(frontDetail);
+    };
+    const changeDetailBack = () => {
+        setDetail(backDetail);
+    };
+    const changeDetailDesign = () => {
+        setDetail(designDetail);
+    };
     return (
         <div>
             <Title>Position of</Title>
@@ -71,6 +83,7 @@ export default function Position() {
                 >
                     <ToggleButton
                         value="front"
+                        onClick={changeDetailFront}
                         style={{
                             borderRadius: '33px',
                             border: '1px solid #00FFA8',
@@ -84,6 +97,7 @@ export default function Position() {
                     </ToggleButton>
                     <ToggleButton
                         value="back"
+                        onClick={changeDetailBack}
                         style={{
                             borderRadius: '33px',
                             border: '1px solid #00FFA8',
@@ -97,6 +111,7 @@ export default function Position() {
                     </ToggleButton>
                     <ToggleButton
                         value="design"
+                        onClick={changeDetailDesign}
                         style={{
                             borderRadius: '33px',
                             border: '1px solid #00FFA8',
@@ -111,10 +126,7 @@ export default function Position() {
                 </ToggleButtonGroup>
 
                 <PositionImageBlock>
-                    <Detail>
-                        서비스의 UX/UI를 담당하고 서비스 본질에 필요한 디자인 업무를 담당하게
-                        됩니다.
-                    </Detail>
+                    <Detail>{detail}</Detail>
                 </PositionImageBlock>
             </div>
         </div>
