@@ -39,6 +39,7 @@ export const useProjectPostDetailApi = () => {
     const [period, setPeriod] = useState('');
     const [link, setLink] = useState('');
     const [images, setImages] = useState([]);
+    const [checked, setChecked] = useState([]);
 
     // :id 파라미터
     const { index } = useParams();
@@ -55,6 +56,7 @@ export const useProjectPostDetailApi = () => {
             setPeriod(data.developPeriod);
             setLink(data.link);
             setImages(data.images);
+            setChecked(data.users);
         });
     }, []);
 
@@ -64,12 +66,13 @@ export const useProjectPostDetailApi = () => {
         [tags, setTags],
         [period, setPeriod],
         [link, setLink],
-        [images, setImages]
+        [images, setImages],
+        [checked, setChecked]
     ];
 };
 
 export const useProjectUserApi = () => {
-    const [User, setUser] = useState([]);
+    const [user, setUser] = useState([]);
 
     // :id 파라미터
     const { index } = useParams();
@@ -83,5 +86,5 @@ export const useProjectUserApi = () => {
         fetchEvents();
     }, []);
 
-    return [User];
+    return [user];
 };

@@ -68,6 +68,9 @@ export default function PostProject() {
             for (let i = 0; i < tags.length; i++) {
                 formData.append('tags', tags[i]);
             }
+            // for (let i = 0; i < checked.length; i++) {
+            //     formData.append('initializeContributors', checked[i]);
+            // }
             formData.append('developPeriod', period);
             formData.append('link', link);
             images.map((image) => formData.append('images', image));
@@ -82,6 +85,7 @@ export default function PostProject() {
             //     .catch((error) => {
             //         console.log(error);
             //     });
+
             await axios
                 .post('http://localhost:8000/posts', formData)
                 .then((response) => {

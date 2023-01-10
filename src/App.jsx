@@ -96,7 +96,7 @@ function App() {
                     <div
                         className="App"
                         color="primary"
-                        style={{ paddingTop: '60px', width: '100%' }}
+                        style={{ paddingTop: '60px', width: '100%', overflow: 'hidden' }}
                     >
                         <MainPage />
                     </div>

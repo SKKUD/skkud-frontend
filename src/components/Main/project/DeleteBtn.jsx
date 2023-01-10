@@ -1,14 +1,19 @@
 import React from 'react';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import IconButton from '@mui/material/IconButton';
 import DeleteIcon from '@mui/icons-material/Delete';
 
 export default function DeleteBtn(_id) {
     const { state } = _id;
+    const location = useLocation();
     const navigate = useNavigate();
     const navigateToProject = () => {
-        navigate('/maintab/project');
+        if (location.pathname === '/maintab/project') {
+            window.location.reload();
+        } else {
+            navigate('/maintab/project');
+        }
     };
 
     return (
