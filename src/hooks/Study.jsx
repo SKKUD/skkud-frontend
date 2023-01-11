@@ -39,6 +39,7 @@ export const useStudyGroupsApi = () => {
 
 export const useStudiesApi = () => {
     const [studies, setStudies] = useState();
+    const [study, setStudy] = useState();
 
     const getData = () => {
         axios.get(`${BASE_URL}study/studies`).then(({ data: { data } }) => setStudies(data));
@@ -46,12 +47,12 @@ export const useStudiesApi = () => {
 
     const filterStudies = (key) => {
         const data = studies.filter((study) => String(study.groupId) === String(key));
-        setStudies(data);
+        setStudy(data);
     };
 
-    const createStudy = (body) => {
+    const createStudy = (body, studyGroupId) => {
         axios
-            .post(`${BASE_URL}study/studies`, body)
+            .post(`${BASE_URL}study/studies/${studyGroupId}`, body)
             .then((data) => console.log(data))
             .catch((error) => console.log(error));
     };
@@ -74,5 +75,5 @@ export const useStudiesApi = () => {
         getData();
     }, []);
 
-    return [studies, filterStudies, createStudy, updateStudy, deleteStudy];
+    return [studies, filterStudies, study, createStudy, updateStudy, deleteStudy];
 };

@@ -11,6 +11,7 @@ import Select from '@mui/material/Select';
 import { useApplicationFormDetailApi } from '../hooks/Application';
 import Header from '../components/common/Header';
 import img from '../assets/login_default.png';
+import Footer from '../components/common/Footer';
 
 export default function ApplicationForm() {
     const form = useApplicationFormDetailApi();
@@ -35,10 +36,8 @@ export default function ApplicationForm() {
     const [submit, setSubmit] = useState('');
 
     const HandlPostSubmit = async () => {
-        if (name === '') {
-            alert('이름을 입력하세요');
-        } else if (phoneNumber === '') {
-            alert('연락처를 입력하세요');
+        if (documentAnswer1 === '' || documentAnswer2 === '') {
+            alert('답변을 입력하세요.');
         } else {
             documentAnswers.push(documentAnswer1);
             documentAnswers.push(documentAnswer2);
@@ -63,7 +62,21 @@ export default function ApplicationForm() {
     };
 
     const HandleNext = () => {
-        setNext('next');
+        if (name === '') {
+            alert('이름을 입력하세요');
+        } else if (major === '') {
+            alert('학과를 입력하세요');
+        } else if (studentId === '') {
+            alert('학번을 입력하세요');
+        } else if (phoneNumber === '') {
+            alert('연락처를 입력하세요');
+        } else if (email === '') {
+            alert('이메일을 입력하세요');
+        } else if (track === '') {
+            alert('지원트랙을 입력하세요');
+        } else {
+            setNext('next');
+        }
     };
 
     return (
@@ -337,6 +350,7 @@ export default function ApplicationForm() {
                     </Button>
                 </div>
             )}
+            <Footer />
         </Box>
     );
 }

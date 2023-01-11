@@ -21,17 +21,16 @@ export default function EditProject() {
         navigate('/maintab/project');
     };
     const PostDetail = useProjectPostDetailApi();
-
     const [title, setTitle] = PostDetail[0];
     const [body, setBody] = PostDetail[1];
     const [tags, setTags] = PostDetail[2];
     const [period, setPeriod] = PostDetail[3];
     const [link, setLink] = PostDetail[4];
     const [images] = PostDetail[5];
+    const [checked, setChecked] = PostDetail[6];
     const [newImages, setNewImages] = useState([]);
     const [PreviewImg, setPreviewImg] = useState([]);
     const [users, getUsers] = useState([]);
-    const [checked, setChecked] = React.useState([]);
 
     useEffect(() => {
         const fetchEvents = async () => {
@@ -119,7 +118,6 @@ export default function EditProject() {
         }
     };
 
-    console.log(checked);
     function CheckboxMemberList() {
         const handleToggle = (id) => () => {
             const currentIndex = checked.indexOf(id);

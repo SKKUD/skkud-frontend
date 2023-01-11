@@ -19,8 +19,7 @@ function Header() {
                     backgroundColor: '#222222',
                     padding: '50px 24px 10px',
                     display: 'flex',
-                    justifyContent: 'space-between',
-                    overflow: 'hidden'
+                    justifyContent: 'space-between'
                 }}
             >
                 <img
