@@ -1,15 +1,14 @@
 import * as React from 'react';
-import { useState } from 'react';
 import styled from '@emotion/styled';
-// import PropTypes from 'prop-types';
 import Card from '@mui/material/Card';
 import IntroDesign from '../../../assets/IntroDesign.png';
 import Grid from '@mui/material/Grid';
 import CardMedia from '@mui/material/CardMedia';
-import CardContent from '@mui/material/CardContent';
+import Chip from '@mui/material/Chip';
+import Stack from '@mui/material/Stack';
 
 export default function StudyCard(props) {
-    console.log(props);
+    // console.log(props);
     const { attendance, content, groupId, location, studyTime, task, title, _id } = props.props;
     const StyledStudyCard = styled(Card)`
         display: flex;
@@ -18,6 +17,18 @@ export default function StudyCard(props) {
         margin-top: 10px;
         border-radius: 15px;
     `;
+    const StyledChip = styled((props) => <Chip {...props} />)(() => ({
+        border: '1.5px solid #444',
+        height: '18px',
+        fontSize: '0.5rem',
+        boxSizing: 'border-box',
+
+        '& span': {
+            fontWeight: 600,
+            color: '#ffffff8b',
+            padding: '5px'
+        }
+    }));
 
     return (
         <StyledStudyCard>
@@ -75,7 +86,7 @@ export default function StudyCard(props) {
                             fontSize: '0.625rem',
                             lineHeight: '1rem',
                             height: '80px',
-                            marginBottom: '10px',
+                            margin: '10px 0px',
                             overflow: 'hidden',
                             textOverflow: 'ellipsis'
                         }}
@@ -84,30 +95,30 @@ export default function StudyCard(props) {
                     </div>
                     <div
                         style={{
-                            display: 'flex',
-                            flexDirection: 'row',
                             width: '100%',
                             height: '24px',
-                            backgroundColor: '#4d4d4d',
-                            borderRadius: '10px',
-                            paddingLeft: '10px',
+
                             overflow: 'scroll'
                         }}
                     >
-                        {attendance.map((mem) => (
-                            <div
-                                style={{
-                                    width: '30px',
-                                    height: '24px',
-                                    lineHeight: '24px',
-                                    fontSize: '0.6rem',
-                                    textAlign: 'center',
-                                    marginRight: '5px'
-                                }}
-                            >
-                                {mem}
-                            </div>
-                        ))}
+                        <Stack
+                            direction="row"
+                            spacing={0.5}
+                            sx={{
+                                justifyContent: 'left',
+                                flexWrap: 'wrap'
+                            }}
+                        >
+                            {attendance &&
+                                attendance.map((mem) => (
+                                    <StyledChip
+                                        key={mem}
+                                        label={mem}
+                                        variant="outlined"
+                                        color="primary"
+                                    />
+                                ))}
+                        </Stack>
                     </div>
                 </Grid>
             </Grid>

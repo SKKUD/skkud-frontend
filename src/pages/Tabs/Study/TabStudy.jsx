@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import ToggleButton from '@mui/material/ToggleButton';
 import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
 import { useStudiesApi, useStudyGroupsApi } from '../../../hooks/Study.jsx';
@@ -9,6 +10,9 @@ export default function TabStudy() {
     const [studyGroups] = useStudyGroupsApi();
     const [studies, filterStudies, study] = useStudiesApi();
     const [selectedGroup, setGroup] = useState('636dece13ee7782e84583cee');
+    useEffect(() => {
+        studies && filterStudies(selectedGroup);
+    }, [studies]);
 
     return (
         <>
@@ -50,7 +54,18 @@ export default function TabStudy() {
                 {study &&
                     study.map((item) => (
                         // eslint-disable-next-line no-underscore-dangle
-                        <StudyCard key={item._id} props={item} />
+                        <Link
+                            to={`/maintab/study/${item._id}`}
+                            style={{
+                                textDecoration: 'none',
+                                display: 'contents',
+                                width: '100%'
+                            }}
+                            state={item}
+                            key={item._id}
+                        >
+                            <StudyCard props={item} />
+                        </Link>
                     ))}
             </div>
         </>

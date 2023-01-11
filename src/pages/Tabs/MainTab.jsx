@@ -19,6 +19,7 @@ import EditUser from './User/EditUser';
 import FrontendTab from './User/FrontendTab';
 import BackendTab from './User/BackendTab';
 import TabStudy from './Study/TabStudy';
+import StudyContent from './Study/StudyContent';
 import Header from '../../components/common/Header';
 import Footer from '../../components/common/Footer';
 import FinishCreateUser from './User/FinishCreateUser';
@@ -94,6 +95,7 @@ function MainTab() {
     let TabIndex = 0;
     const [value, setValue] = React.useState(TabIndex);
     const location = useLocation();
+    console.log(location);
 
     useEffect(() => {
         if (location.pathname === '/maintab' || location.pathname === '/maintab/') {
@@ -108,7 +110,7 @@ function MainTab() {
         ) {
             TabIndex = 2;
             setValue(TabIndex);
-        } else if (location.pathname === '/maintab/study') {
+        } else if (location.pathname.substring(0, 14) === '/maintab/study') {
             TabIndex = 3;
             setValue(TabIndex);
         } else {
@@ -166,6 +168,7 @@ function MainTab() {
                     <Route path="createuser3" element={<CreateUser3 />} />
                     <Route path="edituser/:index" element={<EditUser />} />
                     <Route path="study" element={<TabStudy />} />
+                    <Route path="study/:index" element={<StudyContent />} />
                     <Route path="usercreated" element={<FinishCreateUser />} />
                     <Route path="/edituserdetail/:index" element={<EditUserDetail />} />
                 </Routes>
