@@ -6,19 +6,18 @@ import Box from '@mui/material/Box';
 import Chip from '@mui/material/Chip';
 import Stack from '@mui/material/Stack';
 import Card from '@mui/material/Card';
-import StudyDeleteBtn from '../../../components/Main/study/StudyDeleteBtn';
-import EditBtn from '../../../components/common/EditBtn';
 import img from '../../../assets/introArt_black.jpeg';
 import FmdGoodOutlinedIcon from '@mui/icons-material/FmdGoodOutlined';
 
-export default function StudyContent() {
-    const [cookies] = useCookies(['id']);
-    // const [post] = useProjectPostApi();
-    // const [user] = useProjectUserApi();
+export default function EditStudy() {
+    // const [cookies] = useCookies(['id']);
+    // // const [post] = useProjectPostApi();
+    // // const [user] = useProjectUserApi();
 
     const loc = useLocation();
     const { attendance, content, groupId, location, studyTime, task, title, _id } = loc.state;
 
+    // console.log(location.state);
     // chip
 
     const StyledChip = styled((props) => <Chip {...props} />)(() => ({
@@ -35,35 +34,7 @@ export default function StudyContent() {
     }));
 
     return (
-        <Card sx={{ borderRadius: '24px', backgroundColor: '#1c1c1c' }}>
-            {cookies.id ? (
-                <div style={{ display: 'flex', justifyContent: 'end' }}>
-                    <Link
-                        to={`/maintab/study/edit/${_id}`}
-                        style={{
-                            textDecoration: 'none',
-                            display: 'contents',
-                            width: '100%'
-                        }}
-                        state={{
-                            attendance,
-                            content,
-                            groupId,
-                            location,
-                            studyTime,
-                            task,
-                            title,
-                            _id
-                        }}
-                    >
-                        <EditBtn />
-                    </Link>
-                    <StudyDeleteBtn state={_id} />
-                </div>
-            ) : (
-                ''
-            )}
-
+        <>
             <Card sx={{ borderRadius: '24px', pb: '40px' }}>
                 <Box
                     sx={{
@@ -109,13 +80,7 @@ export default function StudyContent() {
                         {location}
                     </div>
                     <Box mb={'21px'}>
-                        <Box
-                            sx={{
-                                display: 'flex',
-                                lineHeight: '14.32px',
-                                marginBottom: '10px'
-                            }}
-                        >
+                        <Box sx={{ display: 'flex', lineHeight: '14.32px', marginBottom: '10px' }}>
                             <Box
                                 sx={{
                                     color: 'rgba(255, 255, 255, 0.5)',
@@ -228,6 +193,6 @@ export default function StudyContent() {
                     </Box>
                 </Box>
             </Card>
-        </Card>
+        </>
     );
 }

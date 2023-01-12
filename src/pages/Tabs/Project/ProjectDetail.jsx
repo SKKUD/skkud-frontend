@@ -9,7 +9,7 @@ import Card from '@mui/material/Card';
 import { useProjectPostApi, useProjectUserApi } from '../../../hooks/Project';
 import ProjectCard from '../../../components/Main/project/ProjectCard';
 import DeleteBtn from '../../../components/Main/project/DeleteBtn';
-import EditBtn from '../../../components/Main/project/EditBtn';
+import EditBtn from '../../../components/common/EditBtn';
 
 export default function ProjectDetail() {
     const [cookies] = useCookies(['id']);

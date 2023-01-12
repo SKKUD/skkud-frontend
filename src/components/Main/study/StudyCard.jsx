@@ -122,21 +122,6 @@ export default function StudyCard(props) {
                     </div>
                 </Grid>
             </Grid>
-            {/* <div>
-                <div>{title}</div>
-                <div>{studyTime.slice(0, 10)}</div>
-            </div>
-            <div style={{ flexDirection: 'row' }}>
-                <img src={skkudBI} alt={title} style={{ width: '107px' }} />
-                <div style={{ flexDirection: 'column' }}>
-                    <div>{content}</div>
-                    <div>
-                        {attendance.map((mem) => (
-                            <div>{mem}</div>
-                        ))}
-                    </div>
-                </div>
-            </div> */}
         </StyledStudyCard>
     );
 }
