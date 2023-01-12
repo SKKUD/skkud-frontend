@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { useState, useCallback, useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
+import { useCookies } from 'react-cookie';
 import { MemberEditDetailBtn } from '../../../components/Main/member/MemberEditBtn';
 import axios from 'axios';
 import Box from '@mui/material/Box';
@@ -8,16 +9,19 @@ import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 
-export default function EditUser() {
+export default function MyPage() {
     const location = useLocation();
-    const id = location.pathname.split('/')[3];
-
+    // const id = location.pathname.split('/')[3];
+    const [cookies] = useCookies(['id']);
+    // const id = location.state.id;
+    const id = cookies.id;
     const [user, setUser] = useState([]);
     useEffect(() => {
         const fetchEvents = async () => {
             const res = await axios.get(`http://localhost:8000/users/${id}`);
             console.log('res', res.data.data.user);
             setUser(res.data.data.user);
+            setPreviewImg(res.data.data.user.image);
         };
         fetchEvents();
     }, []);
@@ -27,13 +31,15 @@ export default function EditUser() {
     const insta = user.insta;
     const otherLinks = user.otherLinks;
     const { email } = user;
-
+    const skill = user.skills;
     const [newname, setName] = useState(name);
     const [newemail, setEmail] = useState(email);
     const [newmajor, setMajor] = useState(major);
     const [newbio, setBio] = useState(bio);
     const [newinsta, setInsta] = useState(insta);
     const [newlinks, setLinks] = useState(otherLinks);
+    const [PreviewImg, setPreviewImg] = useState('');
+    const [newskill, setSkill] = useState(skill);
 
     useEffect(() => {
         setName(name);
@@ -42,7 +48,8 @@ export default function EditUser() {
         setBio(bio);
         setInsta(insta);
         setLinks(otherLinks);
-    }, [name, email, bio, insta, otherLinks, major]);
+        setSkill(skill);
+    }, [name, email, bio, insta, otherLinks, major, skill]);
 
     const validEmail = '^[a-zA-Z0-9+-_.]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$';
     const navigate = useNavigate();
@@ -69,11 +76,12 @@ export default function EditUser() {
                 major: newmajor,
                 otherLinks: newlinks,
                 insta: newinsta,
-                bio: newbio
+                bio: newbio,
+                skills: newskill
             });
             navigateToMember();
         }
-    }, [newname, newemail, newbio, newinsta, newlinks, newmajor]);
+    }, [newname, newemail, newbio, newinsta, newlinks, newmajor, newskill]);
 
     return (
         <Box
@@ -93,6 +101,23 @@ export default function EditUser() {
             <Typography variant="h6" textAlign={'center'}>
                 My Page
             </Typography>
+            <div
+                style={{
+                    width: '150px',
+                    height: '150px',
+                    backgroundColor: 'rgba(255, 255, 255, 0.9)',
+                    display: 'flex',
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                    borderRadius: '100%'
+                }}
+            >
+                <img
+                    src={PreviewImg}
+                    alt="avatar"
+                    style={{ borderRadius: '100%', width: '149px', height: '149px' }}
+                />
+            </div>
 
             <TextField
                 id="name"
@@ -137,6 +162,16 @@ export default function EditUser() {
                 variant="standard"
                 value={newbio || ''}
                 onChange={(e) => setBio(e.target.value)}
+            />
+            <TextField
+                id="skill"
+                label="skill set"
+                variant="standard"
+                value={newskill || ''}
+                onChange={(e) => {
+                    const skilArr = e.target.value.split(',');
+                    setSkill(skilArr);
+                }}
             />
 
             <Button

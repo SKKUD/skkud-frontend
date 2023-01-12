@@ -63,12 +63,12 @@ export default function MemberCard({
                         backgroundColor: '#3A3A3A'
                     }}
                 >
-                    {cookies.id ? (
+                    {/* {cookies.id ? (
                         <div style={{ textAlign: 'right' }}>
                             <MemberDeleteBtn _id={id} />
                             <MemberEditBtn _id={id} />
                         </div>
-                    ) : null}
+                    ) : null} */}
                     <Grid container spacing={1}>
                         <Grid item style={{ display: 'flex', alignItems: 'center' }}>
                             <CardMedia
@@ -170,7 +170,7 @@ export default function MemberCard({
                     </Grid>
                 </Card>
             </ButtonBase>
-            {isVisible ? <MemberCardDetail projects={projects} /> : null}
+            {isVisible ? <MemberCardDetail projects={projects} id={id} /> : null}
         </>
     );
 }

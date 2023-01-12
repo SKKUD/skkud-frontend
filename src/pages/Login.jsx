@@ -50,6 +50,7 @@ export default function Login() {
                 setPreviewImg(res.data.data.user.image);
             };
             fetchEvents();
+            console.log('cookied id', cookies.id);
         }, []);
     }
 

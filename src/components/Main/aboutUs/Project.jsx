@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import Button from '@mui/material/Button';
 import styled from '@emotion/styled';
 import Carousel from 'react-material-ui-carousel';
+import { useProjectListApi } from '../../../hooks/Project';
 
 const Title = styled.div`
     font-size: 2.5rem;
@@ -51,6 +52,8 @@ export default function Project() {
     const navigateToProject = () => {
         navigate('/maintab/project');
     };
+    // const projectImg = [];
+    // useProjectListApi;
     return (
         <div>
             <Title>Project of</Title>
