@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
 import axios from 'axios';
 
 export const useUserPostDetailApi = (index) => {
     const [project, setProject] = useState([]);
+
     useEffect(() => {
         const fetchEvents = async () => {
             const res = await axios.get(`http://localhost:8000/posts/${index}`);
@@ -12,4 +12,17 @@ export const useUserPostDetailApi = (index) => {
         fetchEvents();
     }, []);
     return [project];
+};
+
+export const useUserSkillsApi = (index) => {
+    const [skills, setSkills] = useState([]);
+    useEffect(() => {
+        const fetchEvents = async () => {
+            const res = await axios.get(`http://localhost:8000/users/${index}`);
+            setSkills(res.data.data.user.skills);
+            // console.log('skill api', res.data.data.user.skills);
+        };
+        fetchEvents();
+    }, []);
+    return [skills];
 };
