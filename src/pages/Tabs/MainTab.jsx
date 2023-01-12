@@ -15,7 +15,6 @@ import EditProject from './Project/EditProject';
 import CreateUser from './User/CreateUser';
 import CreateUser2 from './User/CreateUser2';
 import CreateUser3 from './User/CreateUser3';
-import EditUser from './User/EditUser';
 import FrontendTab from './User/FrontendTab';
 import BackendTab from './User/BackendTab';
 import TabStudy from './Study/TabStudy';
@@ -23,7 +22,8 @@ import StudyContent from './Study/StudyContent';
 import Header from '../../components/common/Header';
 import Footer from '../../components/common/Footer';
 import FinishCreateUser from './User/FinishCreateUser';
-import EditUserDetail from './User/EditUserDetail';
+import MyPageDetail from './User/MyPageDetail';
+import MyPage from './User/MyPage';
 
 function TabPanel(props) {
     const { children, value, index, ...other } = props;
@@ -166,11 +166,11 @@ function MainTab() {
                     <Route path="createuser" element={<CreateUser />} />
                     <Route path="createuser2" element={<CreateUser2 />} />
                     <Route path="createuser3" element={<CreateUser3 />} />
-                    <Route path="edituser/:index" element={<EditUser />} />
+                    <Route path="mypage" element={<MyPage />} />
                     <Route path="study" element={<TabStudy />} />
                     <Route path="study/:index" element={<StudyContent />} />
                     <Route path="usercreated" element={<FinishCreateUser />} />
-                    <Route path="/edituserdetail/:index" element={<EditUserDetail />} />
+                    <Route path="mypagedetail" element={<MyPageDetail />} />
                 </Routes>
             </TabPanel>
             <Footer />

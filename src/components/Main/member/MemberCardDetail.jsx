@@ -7,6 +7,7 @@ import Typography from '@mui/material/Typography';
 import ImageList from '@mui/material/ImageList';
 import ImageListItem from '@mui/material/ImageListItem';
 import { useUserPostDetailApi } from '../../../hooks/Member';
+import { useUserSkillsApi } from '../../../hooks/Member';
 
 const SkillBtn = styled.button`
     height: 22px;
@@ -20,22 +21,28 @@ const SkillBtn = styled.button`
     align-items: center;
     padding: 4px 18px;
     gap: 10px;
+    margin: 3px;
 `;
-export default function MemberCardDetail(projects) {
-    const proj = projects.projects;
+export default function MemberCardDetail(props) {
+    const proj = props.projects;
     const projectList = [];
     let projectCount = 0;
     if (proj) {
-        console.log('proj', projects.projects);
+        console.log('proj', props.projects);
         for (let i = 0; i < proj.length; i++) {
             if (proj[i] === null) {
                 projectCount = i;
                 break;
             }
             const [detail] = useUserPostDetailApi(proj[i]);
-            projectList.push([detail.mainimage, detail._id, detail.tags, detail.title]);
+            if (detail !== null) {
+                console.log('detail', detail);
+                projectList.push([detail.mainimage, detail._id, detail.tags, detail.title]);
+            }
         }
     }
+    const [userDetail] = useUserSkillsApi(props.id);
+    console.log('user', userDetail);
     console.log('tag', projectList);
     return (
         <Card
@@ -74,7 +81,7 @@ export default function MemberCardDetail(projects) {
                             key={item[1]}
                             style={{
                                 borderRadius: '15px',
-                                border: '1px solid red',
+                                border: '1px solid transparent',
                                 width: '125px',
                                 height: '125px',
                                 margin: '3px'
@@ -95,9 +102,11 @@ export default function MemberCardDetail(projects) {
                     {' '}
                     Skill Set
                 </Typography>
-                {projectList.map((item) => (
-                    <SkillBtn key={item[1]}>{item[2]}</SkillBtn>
-                ))}
+                <div style={{ display: 'flex', flexWrap: 'wrap' }}>
+                    {userDetail.map((item) => (
+                        <SkillBtn key={item}>{item}</SkillBtn>
+                    ))}
+                </div>
             </Box>
         </Card>
     );
