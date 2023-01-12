@@ -47,7 +47,9 @@ export default function CreateUser3() {
                 .then((response) => console.log(response))
                 .catch((error) => console.log(error));
 
-            navigate('/maintab/usercreated', { state: { name: name, image: image, id: ID } });
+            navigate('/maintab/member/usercreated', {
+                state: { name: name, image: image, id: ID }
+            });
         }
     }, [member]);
 
@@ -111,12 +113,11 @@ export default function CreateUser3() {
                     variant="contained"
                     onClick={submit}
                     style={{
-                        position: 'absolute',
+                        display: 'flex',
                         borderRadius: '99px',
                         width: '312px',
                         height: '44px',
-                        left: '24px',
-                        top: '635px'
+                        marginTop: '58px'
                     }}
                 >
                     가입 완료

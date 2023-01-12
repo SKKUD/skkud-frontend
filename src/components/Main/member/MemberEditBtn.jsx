@@ -31,7 +31,7 @@ export function MemberEditDetailBtn(_id) {
     const navigate = useNavigate();
     const navigateToUserDetail = () => {
         // navigate(`/maintab/edituserdetail/${id}`);
-        navigate('/maintab/mypagedetail');
+        navigate('/maintab/member/mypagedetail');
     };
 
     return (

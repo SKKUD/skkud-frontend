@@ -103,7 +103,11 @@ export default function SideBar() {
                         <SidebarItem path="/application" name="Recruitment" color="#00FFA8" />
                         {cookies.id ? (
                             <>
-                                <SidebarItem path="member/mypage" name="My Page" color="#00FFA8" />
+                                <SidebarItem
+                                    path="/maintab/member/mypage"
+                                    name="My Page"
+                                    color="#00FFA8"
+                                />
                                 <SidebarItem path="/login" name="Log Out" color="#00FFA8" />
                             </>
                         ) : (

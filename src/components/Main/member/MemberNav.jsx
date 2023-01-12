@@ -56,7 +56,7 @@ export default function MemberNav() {
             <ToggleButton
                 value="backend"
                 component={Link}
-                to="/maintab/backend"
+                to="/maintab/member/backend"
                 onClick={() => {
                     setTrackTab('backend');
                 }}
@@ -73,7 +73,7 @@ export default function MemberNav() {
             <ToggleButton
                 value="design"
                 component={Link}
-                to="/maintab/design"
+                to="/maintab/member/design"
                 onClick={() => {
                     setTrackTab('design');
                 }}

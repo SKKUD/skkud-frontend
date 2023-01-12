@@ -43,6 +43,7 @@ export default function Login() {
             .catch((error) => console.log(error));
         // window.location.reload();
     };
+
     if (cookies.id) {
         useEffect(() => {
             const fetchEvents = async () => {
@@ -57,7 +58,7 @@ export default function Login() {
     const logoutBtn = async () => {
         setUser('');
         removeCookie('id');
-
+        // authCheck();
         await axios
             .post('http://localhost:8000/auth/logout')
             .then((userData) => console.log(userData))
@@ -65,19 +66,27 @@ export default function Login() {
 
         navigateToMainTab();
     };
-
+    console.log('cookies x_auth', cookies.x_auth);
     const authCheck = () => {
         const token = cookies.id;
         axios
             .post('http://localhost:8000/auth/verify')
             .then((res) => {
+                console.log('authcheck', res);
                 if (res.data.data.userID !== token) {
                     // alert('세션이 만료되었습니다.');
                     logoutBtn();
                 } else {
                 }
+                // if (cookies.x_auth !== 'a') {
+                //     console.log(' verify');
+                //     logoutBtn();
+                // }
             })
-            .catch((error) => console.log(error));
+            .catch((error) => {
+                console.log(error);
+                removeCookie('id');
+            });
     };
     useEffect(() => {
         authCheck();

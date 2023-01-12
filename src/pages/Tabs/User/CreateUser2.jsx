@@ -31,13 +31,13 @@ export default function CreateUser2() {
     const navigate = useNavigate();
     // console.log(ID, pw, email);
     const backBtn = () => {
-        navigate('/maintab/createuser');
+        navigate('/maintab/member/createuser');
     };
     const nextBtn = () => {
         if (name === '' || engName === '' || track === '' || image === '' || major === '') {
             alert('입력을 완료하세요');
         } else {
-            navigate('/maintab/createuser3', {
+            navigate('/maintab/member/createuser3', {
                 state: {
                     id: ID,
                     pw: pw,
@@ -61,13 +61,6 @@ export default function CreateUser2() {
     const uploadImgFile = (event) => {
         const file = event.target.files[0];
         setImage(file);
-        // const fileURL = '';
-        // const reader = new FileReader();
-        // reader.onload = () => {
-        //     fileURL = reader.result;
-        //     setPreviewImg(fileURL);
-        // };
-        // reader.readAsDataURL(file);
     };
 
     return (
@@ -120,6 +113,16 @@ export default function CreateUser2() {
                     label="track"
                 >
                     <MenuItem
+                        value={'frontend'}
+                        sx={{
+                            margin: '5px 17px 0px',
+                            borderBottom: '0.5px solid #757575',
+                            pl: '0px'
+                        }}
+                    >
+                        <div style={{ fontWeight: 500 }}>Frontend</div>
+                    </MenuItem>{' '}
+                    <MenuItem
                         value={'backend'}
                         sx={{
                             lineHeight: '20px',
@@ -129,16 +132,6 @@ export default function CreateUser2() {
                         }}
                     >
                         <div style={{ fontWeight: 500 }}>Backend</div>
-                    </MenuItem>
-                    <MenuItem
-                        value={'frontend'}
-                        sx={{
-                            margin: '5px 17px 0px',
-                            borderBottom: '0.5px solid #757575',
-                            pl: '0px'
-                        }}
-                    >
-                        <div style={{ fontWeight: 500 }}>Frontend</div>
                     </MenuItem>
                     <MenuItem
                         value={'design'}
@@ -179,6 +172,7 @@ export default function CreateUser2() {
                     justifyContent: 'space-between'
                 }}
             >
+                {' '}
                 <FormLabel id="demo-row-radio-buttons-group-label">Image</FormLabel>
                 {image ? <p>등록완료</p> : <p></p>}
                 <IconButton color="primary" aria-label="upload picture" component="label">
@@ -186,7 +180,7 @@ export default function CreateUser2() {
                         hidden
                         name="image"
                         type="file"
-                        accept="image/jpg,impge/png,image/jpeg,image/gif"
+                        accept="image/jpg,image/png,image/jpeg,image/gif"
                         onChange={uploadImgFile}
                     />
                     <PhotoCamera />
@@ -197,12 +191,13 @@ export default function CreateUser2() {
                 variant="contained"
                 onClick={nextBtn}
                 style={{
-                    position: 'absolute',
+                    display: 'flex',
                     borderRadius: '99px',
                     width: '312px',
                     height: '44px',
-                    left: '24px',
-                    top: '635px'
+                    marginTop: '94px'
+                    // left: '24px',
+                    // top: '635px'
                 }}
             >
                 다음

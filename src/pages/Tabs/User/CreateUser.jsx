@@ -21,7 +21,7 @@ export default function CreateUser() {
         } else if (pw !== repw) {
             alert('동일한 비밀번호가 아닙니다');
         } else {
-            navigate('/maintab/createuser2', { state: { id: ID, pw: pw, email: email } });
+            navigate('/maintab/member/createuser2', { state: { id: ID, pw: pw, email: email } });
         }
     };
 
@@ -77,12 +77,14 @@ export default function CreateUser() {
                     variant="contained"
                     onClick={nextBtn}
                     style={{
-                        position: 'absolute',
+                        display: 'flex',
                         borderRadius: '99px',
                         width: '312px',
                         height: '44px',
-                        left: '24px',
-                        top: '635px'
+                        marginTop: '150px'
+
+                        // left: '24px',
+                        // top: '635px'
                     }}
                 >
                     다음

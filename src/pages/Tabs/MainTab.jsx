@@ -161,18 +161,18 @@ function MainTab() {
                     <Route path="editproject/:index" element={<EditProject />} />
                     <Route path="projectdetail/:index" element={<ProjectDetail />} />
                     <Route path="member" element={<FrontendTab />} />
-                    <Route path="design" element={<TabMember />} />
+                    <Route path="member/design" element={<TabMember />} />
                     {/* <Route path="frontend" element={<FrontendTab />} /> */}
-                    <Route path="backend" element={<BackendTab />} />
-                    <Route path="createuser" element={<CreateUser />} />
-                    <Route path="createuser2" element={<CreateUser2 />} />
-                    <Route path="createuser3" element={<CreateUser3 />} />
+                    <Route path="member/backend" element={<BackendTab />} />
+                    <Route path="member/createuser" element={<CreateUser />} />
+                    <Route path="member/createuser2" element={<CreateUser2 />} />
+                    <Route path="member/createuser3" element={<CreateUser3 />} />
                     <Route path="member/mypage" element={<MyPage />} />
+                    <Route path="member/usercreated" element={<FinishCreateUser />} />
+                    <Route path="member/mypagedetail" element={<MyPageDetail />} />
                     <Route path="study" element={<TabStudy />} />
                     <Route path="study/:index" element={<StudyContent />} />
                     <Route path="study/edit/:index" element={<EditStudy />} />
-                    <Route path="usercreated" element={<FinishCreateUser />} />
-                    <Route path="mypagedetail" element={<MyPageDetail />} />
                 </Routes>
             </TabPanel>
             <Footer />
