@@ -147,7 +147,7 @@ function MainTab() {
                 >
                     <StyledTab label="About us" {...a11yProps(0)} component={Link} to="" />
                     <StyledTab label="Project" {...a11yProps(1)} component={Link} to="project" />
-                    <StyledTab label="Member" {...a11yProps(2)} component={Link} to="frontend" />
+                    <StyledTab label="Member" {...a11yProps(2)} component={Link} to="member" />
                     <StyledTab label="Study" {...a11yProps(3)} component={Link} to="study" />
                 </StyledTabs>
             </Box>
@@ -161,12 +161,12 @@ function MainTab() {
                     <Route path="projectdetail/:index" element={<ProjectDetail />} />
                     <Route path="member" element={<FrontendTab />} />
                     <Route path="design" element={<TabMember />} />
-                    <Route path="frontend" element={<FrontendTab />} />
+                    {/* <Route path="frontend" element={<FrontendTab />} /> */}
                     <Route path="backend" element={<BackendTab />} />
                     <Route path="createuser" element={<CreateUser />} />
                     <Route path="createuser2" element={<CreateUser2 />} />
                     <Route path="createuser3" element={<CreateUser3 />} />
-                    <Route path="mypage" element={<MyPage />} />
+                    <Route path="member/mypage" element={<MyPage />} />
                     <Route path="study" element={<TabStudy />} />
                     <Route path="study/:index" element={<StudyContent />} />
                     <Route path="usercreated" element={<FinishCreateUser />} />

@@ -77,8 +77,8 @@ export const useProjectUserApi = () => {
     useEffect(() => {
         const fetchEvents = async () => {
             const res = await axios.get(`http://localhost:8000/users/byProject/${index}`);
-            console.log('res', res.data.data.users.skills);
-            setUser(res.data.data.user.skills);
+            // console.log('res', res.data.data.users.skills);
+            setUser(res.data.data);
         };
         fetchEvents();
     }, []);

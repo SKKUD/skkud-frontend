@@ -87,7 +87,7 @@ export default function SideBar() {
                             color="#fff"
                         />
                         <SidebarItem path="/maintab/project" name="Project" color="#fff" />
-                        <SidebarItem path="/maintab/frontend" name="Member" color="#fff" />
+                        <SidebarItem path="/maintab/member" name="Member" color="#fff" />
                         <SidebarItem path="/maintab/study" name="Study" color="#fff" />
                         <div
                             style={{
@@ -103,11 +103,7 @@ export default function SideBar() {
                         <SidebarItem path="/application" name="Recruitment" color="#00FFA8" />
                         {cookies.id ? (
                             <>
-                                <SidebarItem
-                                    path="/maintab/mypage"
-                                    name="My Page"
-                                    color="#00FFA8"
-                                />
+                                <SidebarItem path="member/mypage" name="My Page" color="#00FFA8" />
                                 <SidebarItem path="/login" name="Log Out" color="#00FFA8" />
                             </>
                         ) : (

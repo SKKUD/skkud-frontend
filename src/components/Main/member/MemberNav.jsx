@@ -17,7 +17,7 @@ export default function MemberNav() {
     };
     console.log('nav track', trackTab);
     useEffect(() => {
-        if (location.pathname === '/maintab/frontend') {
+        if (location.pathname === '/maintab/member') {
             setTrackTab('frontend');
         }
     }, [location]);
@@ -39,7 +39,7 @@ export default function MemberNav() {
             <ToggleButton
                 value="frontend"
                 component={Link}
-                to="/maintab/frontend"
+                to="/maintab/member"
                 onClick={() => {
                     setTrackTab('frontend');
                 }}
