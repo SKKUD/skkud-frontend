@@ -1,10 +1,11 @@
 import * as React from 'react';
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useCookies } from 'react-cookie';
 import { useProjectListApi } from '../../../hooks/Project';
 import Box from '@mui/material/Box';
 import DeleteBtn from '../../../components/Main/project/DeleteBtn';
-import EditBtn from '../../../components/Main/project/EditBtn';
+import EditBtn from '../../common/EditBtn';
 import Card from '@mui/material/Card';
 import ProjectCard from './ProjectCard';
 
@@ -49,33 +50,6 @@ export default function ProjectList() {
             const { _id, body, title, images, mainimage, tags, developPeriod, link } = project;
             return (
                 <Card sx={{ borderRadius: '25px', mb: 2 }} key={project.index}>
-                    {cookies.id ? (
-                        <Box sx={{ display: 'flex', justifyContent: 'end' }}>
-                            <Link
-                                to={`/maintab/editproject/${_id}`}
-                                style={{
-                                    textDecoration: 'none',
-                                    display: 'contents',
-                                    width: '100%'
-                                }}
-                                state={{
-                                    _id,
-                                    body,
-                                    title,
-                                    images,
-                                    mainimage,
-                                    tags,
-                                    developPeriod,
-                                    link
-                                }}
-                            >
-                                <EditBtn />
-                            </Link>
-                            <DeleteBtn state={_id} />
-                        </Box>
-                    ) : (
-                        ''
-                    )}
                     <Link
                         to={`/maintab/projectdetail/${project._id}`}
                         style={{
