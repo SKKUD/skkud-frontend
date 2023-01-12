@@ -4,7 +4,7 @@ import * as React from 'react';
 // import axios from 'axios';
 import { useCookies } from 'react-cookie';
 import { Link } from 'react-router-dom';
-import PostBtn from '../../../components/Main/project/PostBtn';
+import PostBtn from '../../../components/common/PostBtn';
 import ProjectList from '../../../components/Main/project/ProjectList';
 // import { UserContext } from '../../../context/UserContext';
 
@@ -27,7 +27,7 @@ export default function TabProject() {
         <>
             {cookies.id ? (
                 <Link to="/maintab/postproject" style={{ textDecoration: 'inherit' }}>
-                    <PostBtn />
+                    <PostBtn content="Add New Post" />
                 </Link>
             ) : (
                 ''

@@ -21,6 +21,7 @@ import BackendTab from './User/BackendTab';
 import TabStudy from './Study/TabStudy';
 import StudyContent from './Study/StudyContent';
 import EditStudy from './Study/EditStudy';
+import PostStudy from './Study/PostStudy';
 import Header from '../../components/common/Header';
 import Footer from '../../components/common/Footer';
 import FinishCreateUser from './User/FinishCreateUser';
@@ -171,6 +172,7 @@ function MainTab() {
                     <Route path="study" element={<TabStudy />} />
                     <Route path="study/:index" element={<StudyContent />} />
                     <Route path="study/edit/:index" element={<EditStudy />} />
+                    <Route path="study/post" element={<PostStudy />} />
                     <Route path="usercreated" element={<FinishCreateUser />} />
                     <Route path="/edituserdetail/:index" element={<EditUserDetail />} />
                 </Routes>
