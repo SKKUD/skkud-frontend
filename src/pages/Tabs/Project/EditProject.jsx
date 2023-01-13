@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useNavigate, useParams, useLocation } from 'react-router-dom';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
@@ -20,7 +20,9 @@ export default function EditProject() {
     const navigateToProject = () => {
         navigate('/maintab/project');
     };
+
     const PostDetail = useProjectPostDetailApi();
+
     const [title, setTitle] = PostDetail[0];
     const [body, setBody] = PostDetail[1];
     const [tags, setTags] = PostDetail[2];
@@ -248,8 +250,9 @@ export default function EditProject() {
                     submit
                 </Button>
             </Box>
+
             {PreviewImg.length === 0
-                ? images && images.map((img) => <img src={img} alt={title} key={img} width="20%" />)
+                ? images && <img src={images} alt={title} key={images} width="20%" />
                 : PreviewImg && <PreImages imgFiles={PreviewImg} />}
         </form>
     );

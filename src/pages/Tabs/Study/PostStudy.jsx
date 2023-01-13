@@ -6,20 +6,18 @@ import Box from '@mui/material/Box';
 import Chip from '@mui/material/Chip';
 import Stack from '@mui/material/Stack';
 import Card from '@mui/material/Card';
-import StudyDeleteBtn from '../../../components/Main/study/StudyDeleteBtn';
-import EditBtn from '../../../components/common/EditBtn';
 import img from '../../../assets/introArt_black.jpeg';
 import FmdGoodOutlinedIcon from '@mui/icons-material/FmdGoodOutlined';
 
-export default function StudyContent() {
-    const [cookies] = useCookies(['id']);
-    // const [post] = useProjectPostApi();
-    // const [user] = useProjectUserApi();
+export default function PostStudy() {
+    // const [cookies] = useCookies(['id']);
+    // // const [post] = useProjectPostApi();
+    // // const [user] = useProjectUserApi();
 
-    const loc = useLocation();
-    const { attendance, content, groupId, location, studyTime, task, title, _id } = loc.state;
-
+    // console.log(location.state);
     // chip
+    const attendance = ['dd', 'dd'];
+    const task = ['dd', 'dd'];
 
     const StyledChip = styled((props) => <Chip {...props} />)(() => ({
         border: '1.5px solid #444',
@@ -35,36 +33,8 @@ export default function StudyContent() {
     }));
 
     return (
-        <Card sx={{ borderRadius: '24px', backgroundColor: '#1c1c1c' }}>
-            {cookies.id ? (
-                <div style={{ display: 'flex', justifyContent: 'end' }}>
-                    <Link
-                        to={`/maintab/study/edit/${_id}`}
-                        style={{
-                            textDecoration: 'none',
-                            display: 'contents',
-                            width: '100%'
-                        }}
-                        state={{
-                            attendance,
-                            content,
-                            groupId,
-                            location,
-                            studyTime,
-                            task,
-                            title,
-                            _id
-                        }}
-                    >
-                        <EditBtn />
-                    </Link>
-                    <StudyDeleteBtn state={_id} />
-                </div>
-            ) : (
-                ''
-            )}
-
-            <Card sx={{ borderRadius: '24px', pb: '40px', pt: '8px' }}>
+        <>
+            <Card sx={{ borderRadius: '24px', pb: '40px' }}>
                 <Box
                     sx={{
                         display: 'flex',
@@ -81,7 +51,7 @@ export default function StudyContent() {
                             marginBottom: '8px'
                         }}
                     >
-                        {title}
+                        title
                     </Box>
                     <div
                         style={{
@@ -91,7 +61,7 @@ export default function StudyContent() {
                             marginBottom: '2px'
                         }}
                     >
-                        {studyTime.slice(0, 10)}
+                        studyTime.slice(0, 10)
                     </div>
                     <div
                         style={{
@@ -106,16 +76,10 @@ export default function StudyContent() {
                         <FmdGoodOutlinedIcon
                             sx={{ width: '14px', height: '16px', margin: '0px 8px 3px 0px' }}
                         />
-                        {location}
+                        location
                     </div>
                     <Box mb={'21px'}>
-                        <Box
-                            sx={{
-                                display: 'flex',
-                                lineHeight: '14.32px',
-                                marginBottom: '10px'
-                            }}
-                        >
+                        <Box sx={{ display: 'flex', lineHeight: '14.32px', marginBottom: '10px' }}>
                             <Box
                                 sx={{
                                     color: 'rgba(255, 255, 255, 0.5)',
@@ -132,7 +96,7 @@ export default function StudyContent() {
                                     color: 'rgba(255, 255, 255, 0.5)'
                                 }}
                             >
-                                총 {attendance.length}명
+                                총 attendance.length명
                             </Box>
                         </Box>
                         <Stack
@@ -168,7 +132,7 @@ export default function StudyContent() {
                                 mb: '11px'
                             }}
                         >
-                            {content}
+                            content
                         </Box>
                     </Box>
                     <Box mb={'18px'}>
@@ -184,7 +148,7 @@ export default function StudyContent() {
                         </Box>
                         <img
                             src={img}
-                            alt={title}
+                            alt={'title'}
                             style={{ width: '160px', height: '160px', borderRadius: '5px' }}
                         />
                     </Box>
@@ -213,14 +177,14 @@ export default function StudyContent() {
                                                 fontSize: '0.875rem'
                                             }}
                                         >
-                                            {item.task}
+                                            item.task
                                         </Box>
                                         <Box
                                             sx={{
                                                 fontSize: '0.75rem'
                                             }}
                                         >
-                                            {item.name}
+                                            item.name
                                         </Box>
                                     </div>
                                 ))}
@@ -228,6 +192,6 @@ export default function StudyContent() {
                     </Box>
                 </Box>
             </Card>
-        </Card>
+        </>
     );
 }

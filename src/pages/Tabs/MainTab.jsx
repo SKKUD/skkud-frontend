@@ -25,6 +25,7 @@ import Footer from '../../components/common/Footer';
 import FinishCreateUser from './User/FinishCreateUser';
 import MyPageDetail from './User/MyPageDetail';
 import MyPage from './User/MyPage';
+import PostStudy from './Study/PostStudy';
 
 function TabPanel(props) {
     const { children, value, index, ...other } = props;
@@ -173,6 +174,7 @@ function MainTab() {
                     <Route path="study" element={<TabStudy />} />
                     <Route path="study/:index" element={<StudyContent />} />
                     <Route path="study/edit/:index" element={<EditStudy />} />
+                    <Route path="study/post" element={<PostStudy />} />
                 </Routes>
             </TabPanel>
             <Footer />

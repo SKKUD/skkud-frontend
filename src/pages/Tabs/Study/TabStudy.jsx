@@ -1,12 +1,16 @@
 import * as React from 'react';
 import { useState, useEffect } from 'react';
+import { useCookies } from 'react-cookie';
 import { Link } from 'react-router-dom';
 import ToggleButton from '@mui/material/ToggleButton';
 import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
 import { useStudiesApi, useStudyGroupsApi } from '../../../hooks/Study.jsx';
 import StudyCard from '../../../components/Main/study/StudyCard.jsx';
+import PostBtn from '../../../components/common/PostBtn';
+import Box from '@mui/system/Box';
 
 export default function TabStudy() {
+    const [cookies] = useCookies(['id']);
     const [studyGroups] = useStudyGroupsApi();
     const [studies, filterStudies, study] = useStudiesApi();
     const [selectedGroup, setGroup] = useState('636dece13ee7782e84583cee');
@@ -50,6 +54,22 @@ export default function TabStudy() {
                     </ToggleButton>
                 ))}
             </ToggleButtonGroup>
+            {cookies.id ? (
+                <Box sx={{ display: 'flex', justifyContent: 'end' }}>
+                    <Link
+                        to={`/maintab/study/post`}
+                        style={{
+                            textDecoration: 'none',
+                            display: 'contents',
+                            width: '100%'
+                        }}
+                    >
+                        <PostBtn content="+ Post" />
+                    </Link>
+                </Box>
+            ) : (
+                ''
+            )}
             <div style={{ marginBottom: '18px' }}>
                 {study &&
                     study.map((item) => (
@@ -74,33 +94,33 @@ export default function TabStudy() {
 
 // return (
 //     <Card sx={{ borderRadius: '25px', mb: 2 }} key={project.index}>
-//         {cookies.id ? (
-//             <Box sx={{ display: 'flex', justifyContent: 'end' }}>
-//                 <Link
-//                     to={`/maintab/editproject/${_id}`}
-//                     style={{
-//                         textDecoration: 'none',
-//                         display: 'contents',
-//                         width: '100%'
-//                     }}
-//                     state={{
-//                         _id,
-//                         body,
-//                         title,
-//                         images,
-//                         mainimage,
-//                         tags,
-//                         developPeriod,
-//                         link
-//                     }}
-//                 >
-//                     <EditBtn />
-//                 </Link>
-//                 <DeleteBtn state={_id} />
-//             </Box>
-//         ) : (
-//             ''
-//         )}
+// {cookies.id ? (
+//     <Box sx={{ display: 'flex', justifyContent: 'end' }}>
+//         <Link
+//             to={`/maintab/editproject/${_id}`}
+//             style={{
+//                 textDecoration: 'none',
+//                 display: 'contents',
+//                 width: '100%'
+//             }}
+//             state={{
+//                 _id,
+//                 body,
+//                 title,
+//                 images,
+//                 mainimage,
+//                 tags,
+//                 developPeriod,
+//                 link
+//             }}
+//         >
+//             <EditBtn />
+//         </Link>
+//         <DeleteBtn state={_id} />
+//     </Box>
+// ) : (
+//     ''
+// )}
 //         <Link
 //             to={`/maintab/projectdetail/${project._id}`}
 //             style={{

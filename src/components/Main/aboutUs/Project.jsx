@@ -2,9 +2,12 @@ import * as React from 'react';
 import SKKUD from '../../../assets/SKKUD_green.jpeg';
 import projectImg from '../../../assets/project-img1.png';
 import { useNavigate } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import Button from '@mui/material/Button';
 import styled from '@emotion/styled';
 import Carousel from 'react-material-ui-carousel';
+import ImageList from '@mui/material/ImageList';
+import ImageListItem from '@mui/material/ImageListItem';
 import { useProjectListApi } from '../../../hooks/Project';
 
 const Title = styled.div`
@@ -52,8 +55,8 @@ export default function Project() {
     const navigateToProject = () => {
         navigate('/maintab/project');
     };
-    const [projectImg] = useProjectListApi();
-    console.log('proj img', projectImg);
+    const [projectList] = useProjectListApi();
+    console.log('proj img', projectList);
     return (
         <div>
             <Title>Project of</Title>
@@ -83,6 +86,35 @@ export default function Project() {
                     <Imgbox />
                 </ImgboxBlock>
             </Carousel>
+            {/* <ImageList
+                style={{
+                    display: 'grid',
+                    gridAutoFlow: 'column'
+                }}
+            >
+                {projectList.map((item) => (
+                    <ImageListItem
+                        key={item[1]}
+                        style={{
+                            borderRadius: '15px',
+                            border: '1px solid transparent',
+                            width: '125px',
+                            height: '125px',
+                            margin: '3px',
+                            objectFit: 'contain'
+                        }}
+                        // onClick={navigateToProject(item[1])}
+                    >
+                        <NavLink to={'/maintab/projectdetail/' + item[1]}>
+                            <img
+                                src={item[0]}
+                                alt={item[3]}
+                                // onClick={console.log('click', item[1])}
+                            />
+                        </NavLink>
+                    </ImageListItem>
+                ))}
+            </ImageList> */}
             <ButtonBlock
                 style={{
                     display: 'flex',
