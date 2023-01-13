@@ -12,8 +12,9 @@ import FormControl from '@mui/material/FormControl';
 import FormLabel from '@mui/material/FormLabel';
 import IconButton from '@mui/material/IconButton';
 import PhotoCamera from '@mui/icons-material/PhotoCamera';
-import PreImages from '../../../components/Main/project/PreImages';
-import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import InputLabel from '@mui/material/InputLabel';
+import MenuItem from '@mui/material/MenuItem';
+import Select from '@mui/material/Select';
 import Typography from '@mui/material/Typography';
 import styled from '@emotion/styled';
 
@@ -21,8 +22,7 @@ export default function CreateUser2() {
     const [name, setName] = useState('');
     const [engName, setEngName] = useState('');
     const [track, setTrack] = useState('');
-    const [image, setImage] = useState([]);
-    const [PreviewImg, setPreviewImg] = useState([]);
+    const [image, setImage] = useState('');
     const [major, setMajor] = useState('');
     const location = useLocation();
     const ID = location.state.id;
@@ -31,13 +31,13 @@ export default function CreateUser2() {
     const navigate = useNavigate();
     // console.log(ID, pw, email);
     const backBtn = () => {
-        navigate('/maintab/createuser');
+        navigate('/maintab/member/createuser');
     };
     const nextBtn = () => {
         if (name === '' || engName === '' || track === '' || image === '' || major === '') {
             alert('입력을 완료하세요');
         } else {
-            navigate('/maintab/createuser3', {
+            navigate('/maintab/member/createuser3', {
                 state: {
                     id: ID,
                     pw: pw,
@@ -46,8 +46,7 @@ export default function CreateUser2() {
                     engName: engName,
                     track: track,
                     image: image,
-                    major: major,
-                    image: image
+                    major: major
                 }
             });
         }
@@ -60,19 +59,8 @@ export default function CreateUser2() {
         justifyContent: 'flex-end'
     }));
     const uploadImgFile = (event) => {
-        const fileArr = event.target.files;
-        setImage(Array.from(fileArr));
-        const fileURLs = [];
-        const filesLength = fileArr.length > 10 ? 10 : fileArr.length;
-        for (let i = 0; i < filesLength; i += 1) {
-            const file = fileArr[i];
-            const reader = new FileReader();
-            reader.onload = () => {
-                fileURLs[i] = reader.result;
-                setPreviewImg([...fileURLs]);
-            };
-            reader.readAsDataURL(file);
-        }
+        const file = event.target.files[0];
+        setImage(file);
     };
 
     return (
@@ -90,17 +78,11 @@ export default function CreateUser2() {
                 alignItems: 'center'
             }}
         >
-            <backIcon>
-                <IconButton
-                    color="primary"
-                    aria-label="backBtn"
-                    component="label"
-                    onClick={backBtn}
-                >
-                    <ArrowBackIcon />
-                </IconButton>
-            </backIcon>
-            <Typography variant="h6" textAlign={'center'}>
+            <Typography
+                variant="h6"
+                textAlign={'center'}
+                style={{ fontWeight: 700, fontSize: '1rem' }}
+            >
                 회원가입
             </Typography>
             <TextField
@@ -121,8 +103,48 @@ export default function CreateUser2() {
                 variant="standard"
                 onChange={(e) => setMajor(e.target.value)}
             />
-
-            <FormControl>
+            <FormControl variant="standard">
+                <InputLabel>지원트랙</InputLabel>
+                <Select
+                    value={track}
+                    onChange={(e) => {
+                        setTrack(e.target.value);
+                    }}
+                    label="track"
+                >
+                    <MenuItem
+                        value={'frontend'}
+                        sx={{
+                            margin: '5px 17px 0px',
+                            borderBottom: '0.5px solid #757575',
+                            pl: '0px'
+                        }}
+                    >
+                        <div style={{ fontWeight: 500 }}>Frontend</div>
+                    </MenuItem>{' '}
+                    <MenuItem
+                        value={'backend'}
+                        sx={{
+                            lineHeight: '20px',
+                            margin: '5px 17px 0px',
+                            borderBottom: '0.5px solid #757575',
+                            pl: '0px'
+                        }}
+                    >
+                        <div style={{ fontWeight: 500 }}>Backend</div>
+                    </MenuItem>
+                    <MenuItem
+                        value={'design'}
+                        sx={{
+                            margin: '5px 17px 0px',
+                            pl: '0px'
+                        }}
+                    >
+                        <div style={{ fontWeight: 500 }}>Design</div>
+                    </MenuItem>
+                </Select>
+            </FormControl>
+            {/* <FormControl>
                 <FormLabel id="demo-row-radio-buttons-group-label">지원트랙</FormLabel>
                 <RadioGroup row>
                     <FormControlLabel
@@ -141,7 +163,7 @@ export default function CreateUser2() {
                         label="frontend"
                     />
                 </RadioGroup>
-            </FormControl>
+            </FormControl> */}
             <Box
                 sx={{
                     display: 'flex',
@@ -150,30 +172,32 @@ export default function CreateUser2() {
                     justifyContent: 'space-between'
                 }}
             >
+                {' '}
                 <FormLabel id="demo-row-radio-buttons-group-label">Image</FormLabel>
+                {image ? <p>등록완료</p> : <p></p>}
                 <IconButton color="primary" aria-label="upload picture" component="label">
                     <input
                         hidden
-                        name="images"
-                        multiple
+                        name="image"
                         type="file"
-                        accept="image/jpg,impge/png,image/jpeg,image/gif"
+                        accept="image/jpg,image/png,image/jpeg,image/gif"
                         onChange={uploadImgFile}
                     />
                     <PhotoCamera />
                 </IconButton>
             </Box>
-            <PreImages imgFiles={PreviewImg} />
+
             <Button
                 variant="contained"
                 onClick={nextBtn}
                 style={{
-                    position: 'absolute',
+                    display: 'flex',
                     borderRadius: '99px',
                     width: '312px',
                     height: '44px',
-                    left: '24px',
-                    top: '635px'
+                    marginTop: '94px'
+                    // left: '24px',
+                    // top: '635px'
                 }}
             >
                 다음

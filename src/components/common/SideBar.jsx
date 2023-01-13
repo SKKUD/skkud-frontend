@@ -1,14 +1,13 @@
 import * as React from 'react';
 import { Link } from 'react-router-dom';
+import { useCookies } from 'react-cookie';
 import PropTypes from 'prop-types';
 import { styled } from '@mui/material/styles';
-import Button from '@mui/material/Button';
 import List from '@mui/material/List';
 import IconButton from '@mui/material/IconButton';
 import Drawer from '@mui/material/Drawer';
 import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
-import ListItemText from '@mui/material/ListItemText';
 import MenuIcon from '@mui/icons-material/Menu';
 import Box from '@mui/material/Box';
 
@@ -21,15 +20,12 @@ const DrawerHeader = styled('div')(({ theme }) => ({
     justifyContent: 'flex-end'
 }));
 
-function SidebarItem({ path, name }) {
+function SidebarItem({ path, name, color }) {
     return (
-        <ListItem disablePadding>
-            <Link
-                style={{ color: 'white', textDecoration: 'none', width: '100%' }}
-                to={`/maintab/${path}`}
-            >
-                <ListItemButton>
-                    <ListItemText sx={{ textAlign: 'right' }} primary={name} />
+        <ListItem disablePadding sx={{ marginBottom: '10px' }}>
+            <Link style={{ color: `${color}`, textDecoration: 'none', width: '100%' }} to={path}>
+                <ListItemButton sx={{ justifyContent: 'end' }}>
+                    <div style={{ fontWeight: 600, fontSize: '0.93rem' }}>{name}</div>
                 </ListItemButton>
             </Link>
         </ListItem>
@@ -41,6 +37,7 @@ SidebarItem.propTypes = {
 };
 
 export default function SideBar() {
+    const [cookies] = useCookies(['id']);
     const [open, setOpen] = React.useState(false);
 
     const toggleDrawer = (val) => (event) => {
@@ -62,7 +59,7 @@ export default function SideBar() {
                 <MenuIcon sx={{ fontSize: 35 }} />
             </IconButton>
             <Drawer open={open} onClose={toggleDrawer(false)} anchor="right">
-                <DrawerHeader sx={{ marginTop: '45px' }}>
+                <DrawerHeader sx={{ marginTop: '45px', pr: '18px' }}>
                     <IconButton onClick={toggleDrawer(false)}>
                         <MenuIcon sx={{ fontSize: 35 }} />
                     </IconButton>
@@ -70,58 +67,54 @@ export default function SideBar() {
 
                 <Box
                     sx={{
-                        width: 200,
+                        width: '169px',
                         display: 'flex',
                         flexDirection: 'column',
                         flex: 1,
                         alignItems: 'flex-end',
-                        pr: '10px'
+                        pr: '12px',
+                        mt: '10px'
                     }}
                     role="presentation"
                     onClick={toggleDrawer(false)}
                     onKeyDown={toggleDrawer(false)}
                 >
                     <List>
-                        <SidebarItem path="" name="about us" sx={{ pr: '0px' }} />
-                        <SidebarItem path="project" name="project" />
-                        <SidebarItem path="frontend" name="member" />
-                    </List>
-
-                    <div
-                        style={{
-                            width: '80%',
-                            border: 'none',
-                            borderTop: '2px dashed gray',
-                            alignSelf: 'center'
-                        }}
-                    />
-                    <List>
-                        <SidebarItem path="project" name="schedule" />
-                        <SidebarItem path="project" name="study" />
+                        <SidebarItem
+                            path="/maintab"
+                            name="About us"
+                            sx={{ pr: '0px' }}
+                            color="#fff"
+                        />
+                        <SidebarItem path="/maintab/project" name="Project" color="#fff" />
+                        <SidebarItem path="/maintab/member" name="Member" color="#fff" />
+                        <SidebarItem path="/maintab/study" name="Study" color="#fff" />
+                        <div
+                            style={{
+                                width: '99px',
+                                border: 'none',
+                                height: '1px',
+                                backgroundColor: '#929292',
+                                marginRight: '12px',
+                                marginTop: '20px',
+                                marginBottom: '22px'
+                            }}
+                        />
+                        <SidebarItem path="/application" name="Recruitment" color="#00FFA8" />
+                        {cookies.id ? (
+                            <>
+                                <SidebarItem
+                                    path="/maintab/member/mypage"
+                                    name="My Page"
+                                    color="#00FFA8"
+                                />
+                                <SidebarItem path="/login" name="Log Out" color="#00FFA8" />
+                            </>
+                        ) : (
+                            <SidebarItem path="/login" name="Log In" color="#00FFA8" />
+                        )}
                     </List>
                 </Box>
-                <Link
-                    to="/application"
-                    style={{
-                        textDecoration: 'none',
-                        display: 'contents',
-                        width: '100%'
-                    }}
-                >
-                    <Button
-                        variant="contained"
-                        sx={{
-                            width: '70%',
-                            alignSelf: 'center',
-                            borderRadius: '20px',
-                            textTransform: 'none',
-                            marginTop: 'auto',
-                            mb: '100%'
-                        }}
-                    >
-                        recruitment
-                    </Button>
-                </Link>
             </Drawer>
         </>
     );

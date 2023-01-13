@@ -7,13 +7,6 @@ import ToggleButton from '@mui/material/ToggleButton';
 import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
 import { TrackContext } from '../../../context/TrackContext';
 
-const colorToogleBtn = styled(ToggleButton)({
-    '&.Mui-selected': {
-        color: '#222222',
-        backgroundColor: '#00FFA8'
-    }
-});
-
 export default function MemberNav() {
     const { trackTab, setTrackTab } = useContext(TrackContext);
     const [alignment, setAlignment] = useState('frontend');
@@ -24,7 +17,7 @@ export default function MemberNav() {
     };
     console.log('nav track', trackTab);
     useEffect(() => {
-        if (location.pathname === '/maintab/frontend') {
+        if (location.pathname === '/maintab/member') {
             setTrackTab('frontend');
         }
     }, [location]);
@@ -46,7 +39,7 @@ export default function MemberNav() {
             <ToggleButton
                 value="frontend"
                 component={Link}
-                to="/maintab/frontend"
+                to="/maintab/member"
                 onClick={() => {
                     setTrackTab('frontend');
                 }}
@@ -63,7 +56,7 @@ export default function MemberNav() {
             <ToggleButton
                 value="backend"
                 component={Link}
-                to="/maintab/backend"
+                to="/maintab/member/backend"
                 onClick={() => {
                     setTrackTab('backend');
                 }}
@@ -80,7 +73,7 @@ export default function MemberNav() {
             <ToggleButton
                 value="design"
                 component={Link}
-                to="/maintab/design"
+                to="/maintab/member/design"
                 onClick={() => {
                     setTrackTab('design');
                 }}

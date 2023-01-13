@@ -1,6 +1,7 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router';
 import { useLocation } from 'react-router-dom';
+import axios from 'axios';
 import Typography from '@mui/material/Typography';
 import CardMedia from '@mui/material/CardMedia';
 import Button from '@mui/material/Button';
@@ -12,13 +13,17 @@ export default function FinishCreateUser() {
     const location = useLocation();
     const name = location.state.name;
     const image = location.state.image;
-    // const name = 'name';
-    // const image = 'skkud-frontend/src/assets/memberImg.png';
-    // useEffect(() => {
-    //     setTimeout(() => {
-    //         navigateToMaintab();
-    //     }, 5000);
-    // });
+    const [PreviewImg, setPreviewImg] = useState('');
+    const id = location.state.id;
+    useEffect(() => {
+        const fetchEvents = async () => {
+            const res = await axios.get(`http://localhost:8000/users/${id}`);
+            setPreviewImg(res.data.data.user.image);
+        };
+        fetchEvents();
+    }, []);
+    console.log('id', id);
+    console.log('prev', PreviewImg);
     return (
         <div
             style={{
@@ -28,11 +33,17 @@ export default function FinishCreateUser() {
                 alignItems: 'center'
             }}
         >
-            <Typography variant="h7" fontWeight="bold">
+            <Typography variant="h7" fontWeight="bold" style={{ marginTop: '10px' }}>
                 가입을 축하합니다!
             </Typography>
-            <CardMedia sx={{ flexDirection: 'row' }} component="img" image={image} alt={name} />
-            <Typography variant="h7" color="#00FFA8">
+            <CardMedia
+                sx={{ flexDirection: 'row' }}
+                component="img"
+                image={PreviewImg}
+                alt={name}
+                style={{ width: '150px', height: '150px', borderRadius: '150px', margin: '40px' }}
+            />
+            <Typography variant="h7" color="#00FFA8" style={{ marginBottom: '10px' }}>
                 가입 완료!
             </Typography>
             <Typography variant="h5">{name}님, 환영해요</Typography>
@@ -46,8 +57,7 @@ export default function FinishCreateUser() {
                     color: 'white',
                     marginTop: '150px',
                     height: '48px',
-                    width: '312px',
-                    marginTop: '150px'
+                    width: '312px'
                 }}
             >
                 스꾸디 둘러보기

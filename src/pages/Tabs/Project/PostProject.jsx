@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import TextField from '@mui/material/TextField';
@@ -8,6 +8,11 @@ import IconButton from '@mui/material/IconButton';
 import PhotoCamera from '@mui/icons-material/PhotoCamera';
 import Box from '@mui/material/Box';
 import PreImages from '../../../components/Main/project/PreImages';
+import List from '@mui/material/List';
+import ListItem from '@mui/material/ListItem';
+import ListItemButton from '@mui/material/ListItemButton';
+import ListItemText from '@mui/material/ListItemText';
+import Checkbox from '@mui/material/Checkbox';
 
 export default function PostProject() {
     const navigate = useNavigate();
@@ -18,9 +23,20 @@ export default function PostProject() {
     const [title, setTitle] = useState('');
     const [body, setBody] = useState('');
     const [tags, setTags] = useState([]);
-    const [language, setLanguage] = useState('');
+    const [period, setPeriod] = useState('');
+    const [link, setLink] = useState('');
     const [images, setImages] = useState([]);
     const [PreviewImg, setPreviewImg] = useState([]);
+    const [users, getUsers] = useState([]);
+    const [checked, setChecked] = React.useState([]);
+
+    useEffect(() => {
+        const fetchEvents = async () => {
+            const res = await axios.get('http://localhost:8000/users');
+            getUsers(res.data.data.users);
+        };
+        fetchEvents();
+    }, []);
 
     const uploadImgFile = (event) => {
         const fileArr = event.target.files;
@@ -52,8 +68,23 @@ export default function PostProject() {
             for (let i = 0; i < tags.length; i++) {
                 formData.append('tags', tags[i]);
             }
-            formData.append('language', language);
+            // for (let i = 0; i < checked.length; i++) {
+            //     formData.append('initializeContributors', checked[i]);
+            // }
+            formData.append('developPeriod', period);
+            formData.append('link', link);
             images.map((image) => formData.append('images', image));
+
+            // await axios
+            //     .patch(`http://localhost:8000/posts/contributor/${index}`, {
+            //         contributors: checked
+            //     })
+            //     .then((response) => {
+            //         console.log(response.status);
+            //     })
+            //     .catch((error) => {
+            //         console.log(error);
+            //     });
 
             await axios
                 .post('http://localhost:8000/posts', formData)
@@ -69,6 +100,48 @@ export default function PostProject() {
         }
     };
 
+    function CheckboxMemberList() {
+        const handleToggle = (id) => () => {
+            const currentIndex = checked.indexOf(id);
+            const newChecked = [...checked];
+
+            if (currentIndex === -1) {
+                newChecked.push(id);
+            } else {
+                newChecked.splice(currentIndex, 1);
+            }
+
+            setChecked(newChecked);
+        };
+
+        return (
+            <List dense sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>
+                {users.map((member) => {
+                    const id = member._id;
+                    const name = member.username;
+                    const labelId = `checkbox-list-secondary-label-${id}`;
+                    return (
+                        <ListItem
+                            key={id}
+                            secondaryAction={
+                                <Checkbox
+                                    edge="end"
+                                    onChange={handleToggle(id)}
+                                    checked={checked.indexOf(id) !== -1}
+                                    inputProps={{ 'aria-labelledby': labelId }}
+                                />
+                            }
+                            disablePadding
+                        >
+                            <ListItemButton>
+                                <ListItemText id={labelId} primary={`${name}`} />
+                            </ListItemButton>
+                        </ListItem>
+                    );
+                })}
+            </List>
+        );
+    }
     return (
         <form encType="multipart/form-data">
             <TextField
@@ -98,11 +171,19 @@ export default function PostProject() {
             />
             <TextField
                 fullWidth
-                label="# language"
-                id="language"
+                label="developPeriod"
+                id="developPeriod"
                 variant="filled"
-                onChange={(e) => setLanguage(e.target.value)}
+                onChange={(e) => setPeriod(e.target.value)}
             />
+            <TextField
+                fullWidth
+                label="link"
+                id="link"
+                variant="filled"
+                onChange={(e) => setLink(e.target.value)}
+            />
+            <CheckboxMemberList members={users} />
             <Box
                 sx={{
                     display: 'flex',
@@ -117,7 +198,7 @@ export default function PostProject() {
                         name="images"
                         multiple
                         type="file"
-                        accept="image/jpg,impge/png,image/jpeg,image/gif"
+                        accept="image/jpg,image/png,image/jpeg,image/gif"
                         onChange={uploadImgFile}
                     />
                     <PhotoCamera />

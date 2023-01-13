@@ -3,15 +3,20 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
-import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
+import InputLabel from '@mui/material/InputLabel';
+import MenuItem from '@mui/material/MenuItem';
+import FormControl from '@mui/material/FormControl';
+import Select from '@mui/material/Select';
 import { useApplicationFormDetailApi } from '../hooks/Application';
 import Header from '../components/common/Header';
+import img from '../assets/login_default.png';
+import Footer from '../components/common/Footer';
 
 export default function ApplicationForm() {
     const form = useApplicationFormDetailApi();
 
-    const { title, introduction, questions } = form;
+    const { title, questions } = form;
 
     const navigate = useNavigate();
     const navigateToMainTab = () => {
@@ -22,26 +27,33 @@ export default function ApplicationForm() {
     const [studentId, setStudentId] = useState('');
     const [phoneNumber, setPhoneNumber] = useState('');
     const [email, setEmail] = useState('');
+    const [major, setMajor] = React.useState('');
+    const [track, setTrack] = React.useState('');
     const [documentAnswer1, setDocumentAnswer1] = useState('');
     const [documentAnswer2, setDocumentAnswer2] = useState('');
     const documentAnswers = [];
+    const [next, setNext] = useState('');
+    const [submit, setSubmit] = useState('');
 
     const HandlPostSubmit = async () => {
-        if (name === '') {
-            alert('이름을 입력하세요');
-        } else if (phoneNumber === '') {
-            alert('연락처를 입력하세요');
+        if (documentAnswer1 === '' || documentAnswer2 === '') {
+            alert('답변을 입력하세요.');
         } else {
             documentAnswers.push(documentAnswer1);
             documentAnswers.push(documentAnswer2);
-            const application = { name, studentId, phoneNumber, email, documentAnswers };
+            const application = {
+                name,
+                studentId,
+                phoneNumber,
+                email,
+                major,
+                track,
+                documentAnswers
+            };
             await axios
                 .post('http://localhost:8000/applies/appliedUsers', application)
-                .then((response) => {
-                    console.log(response.status);
-                })
                 .then(() => {
-                    navigateToMainTab();
+                    setSubmit('submit');
                 })
                 .catch((error) => {
                     console.log(error);
@@ -49,94 +61,296 @@ export default function ApplicationForm() {
         }
     };
 
+    const HandleNext = () => {
+        if (name === '') {
+            alert('이름을 입력하세요');
+        } else if (major === '') {
+            alert('학과를 입력하세요');
+        } else if (studentId === '') {
+            alert('학번을 입력하세요');
+        } else if (phoneNumber === '') {
+            alert('연락처를 입력하세요');
+        } else if (email === '') {
+            alert('이메일을 입력하세요');
+        } else if (track === '') {
+            alert('지원트랙을 입력하세요');
+        } else {
+            setNext('next');
+        }
+    };
+
     return (
         <Box>
             <Header />
-
-            <form
-                style={{
-                    marginTop: '70px',
-                    padding: '40px 20px 0',
-                    backgroundColor: '#252525',
-                    borderTopLeftRadius: '100px'
-                }}
-            >
-                <div style={{ textAlign: 'center', marginBottom: '30px' }}>
-                    <Typography variant="h5" mb={'20px'}>
-                        [ {title} ]
-                    </Typography>
-                    <Typography variant="h7">{introduction}</Typography>
-                </div>
-                <Typography variant="h6" ml={'5px'}>
-                    인적사항
-                </Typography>
-                <TextField
-                    fullWidth
-                    label="Name"
-                    id="name"
-                    sx={{ mt: '10px' }}
-                    onChange={(e) => setName(e.target.value)}
-                    size="small"
-                />
-                <TextField
-                    fullWidth
-                    label="Student Id"
-                    id="StudentId"
-                    sx={{ mt: '10px' }}
-                    onChange={(e) => setStudentId(e.target.value)}
-                    size="small"
-                />
-                <TextField
-                    fullWidth
-                    label="Phone number"
-                    id="StudentId"
-                    sx={{ mt: '10px' }}
-                    onChange={(e) => setPhoneNumber(e.target.value)}
-                    size="small"
-                />
-                <TextField
-                    fullWidth
-                    label="Email"
-                    id="Email"
-                    sx={{ mt: '10px', mb: '10px' }}
-                    onChange={(e) => setEmail(e.target.value)}
-                    size="small"
-                />
-                <Typography variant="h6" ml={'5px'} mt={'15px'}>
-                    질문
-                </Typography>
-                <TextField
-                    fullWidth
-                    label={questions[0]}
-                    id="ProjectDetail"
-                    sx={{ mt: '10px' }}
-                    multiline
-                    rows={10}
-                    onChange={(e) => setDocumentAnswer1(e.target.value)}
-                />
-                <TextField
-                    fullWidth
-                    label={questions[1]}
-                    id="ProjectDetail"
-                    sx={{ mt: '10px', mb: '10px' }}
-                    multiline
-                    rows={10}
-                    onChange={(e) => setDocumentAnswer2(e.target.value)}
-                />
-
-                <Box
-                    sx={{
+            {submit === '' ? (
+                <form
+                    style={{
+                        width: '100%',
+                        marginTop: '60px',
+                        padding: '40px 20px 0',
                         display: 'flex',
-                        mt: '5px',
-                        alignContent: 'center',
-                        justifyContent: 'space-between'
+                        flexDirection: 'column',
+                        alignItems: 'center'
                     }}
                 >
-                    <Button variant="contained" onClick={HandlPostSubmit} sx={{ margin: '0 auto' }}>
-                        submit
+                    <div style={{ textAlign: 'center', marginBottom: '30px' }}>
+                        <div style={{ fontSize: '1.35rem', fontWeight: 700 }}>{title}</div>
+                        {/* <Typography variant="h7">{introduction}</Typography> */}
+                    </div>
+                    {next === '' ? (
+                        <>
+                            <div
+                                id="firstForm"
+                                style={{
+                                    width: '100%',
+                                    display: 'flex',
+                                    flexDirection: 'column',
+                                    alignItems: 'center'
+                                }}
+                            >
+                                <TextField
+                                    label="이름"
+                                    id="name"
+                                    onChange={(e) => setName(e.target.value)}
+                                    variant="standard"
+                                    sx={{ mt: '10px', width: '95%' }}
+                                    InputLabelProps={{
+                                        style: {
+                                            marginLeft: '10px'
+                                        }
+                                    }}
+                                    inputProps={{
+                                        style: {
+                                            height: '35px',
+                                            paddingLeft: '10px'
+                                        }
+                                    }}
+                                />
+                                <TextField
+                                    label="학과"
+                                    id="major"
+                                    onChange={(e) => setMajor(e.target.value)}
+                                    variant="standard"
+                                    sx={{ mt: '10px', width: '95%' }}
+                                    InputLabelProps={{
+                                        style: {
+                                            marginLeft: '10px'
+                                        }
+                                    }}
+                                    inputProps={{
+                                        style: {
+                                            height: '35px',
+                                            paddingLeft: '10px'
+                                        }
+                                    }}
+                                />
+                                <TextField
+                                    label="학번"
+                                    id="StudentId"
+                                    onChange={(e) => setStudentId(e.target.value)}
+                                    variant="standard"
+                                    sx={{ mt: '10px', width: '95%' }}
+                                    InputLabelProps={{
+                                        style: {
+                                            marginLeft: '10px'
+                                        }
+                                    }}
+                                    inputProps={{
+                                        style: {
+                                            height: '35px',
+                                            paddingLeft: '10px'
+                                        }
+                                    }}
+                                />
+                                <TextField
+                                    label="전화번호"
+                                    id="StudentId"
+                                    onChange={(e) => setPhoneNumber(e.target.value)}
+                                    variant="standard"
+                                    sx={{ mt: '10px', width: '95%' }}
+                                    InputLabelProps={{
+                                        style: {
+                                            marginLeft: '10px'
+                                        }
+                                    }}
+                                    inputProps={{
+                                        style: {
+                                            height: '35px',
+                                            paddingLeft: '10px'
+                                        }
+                                    }}
+                                />
+                                <TextField
+                                    label="Email"
+                                    id="Email"
+                                    onChange={(e) => setEmail(e.target.value)}
+                                    variant="standard"
+                                    sx={{ mt: '10px', width: '95%' }}
+                                    InputLabelProps={{
+                                        style: {
+                                            marginLeft: '10px'
+                                        }
+                                    }}
+                                    inputProps={{
+                                        style: {
+                                            height: '35px',
+                                            paddingLeft: '10px'
+                                        }
+                                    }}
+                                />
+                                <FormControl variant="standard" sx={{ mt: '10px', width: '95%' }}>
+                                    <InputLabel sx={{ marginLeft: '10px' }}>지원트랙</InputLabel>
+                                    <Select
+                                        value={track}
+                                        onChange={(e) => {
+                                            setTrack(e.target.value);
+                                        }}
+                                        label="track"
+                                        sx={{ height: '45px' }}
+                                    >
+                                        <MenuItem
+                                            value={'backend'}
+                                            sx={{
+                                                lineHeight: '20px',
+                                                margin: '5px 17px 0px',
+                                                borderBottom: '0.5px solid #757575',
+                                                pl: '0px'
+                                            }}
+                                        >
+                                            <div style={{ fontWeight: 500 }}>Backend</div>
+                                            {/* <div style={{ marginLeft: '20px', fontWeight: 300 }}>백엔드</div> */}
+                                        </MenuItem>
+                                        <MenuItem
+                                            value={'frontend'}
+                                            sx={{
+                                                margin: '5px 17px 0px',
+                                                borderBottom: '0.5px solid #757575',
+                                                pl: '0px'
+                                            }}
+                                        >
+                                            <div style={{ fontWeight: 500 }}>Frontend</div>
+                                            {/* <div style={{ marginLeft: '18px', fontWeight: 300 }}>프론트엔드</div> */}
+                                        </MenuItem>
+                                        <MenuItem
+                                            value={'design'}
+                                            sx={{
+                                                margin: '5px 17px 0px',
+                                                pl: '0px'
+                                            }}
+                                        >
+                                            <div style={{ fontWeight: 500 }}>Design</div>
+                                            {/* <div style={{ marginLeft: '30px', fontWeight: 300 }}>디자인</div> */}
+                                        </MenuItem>
+                                    </Select>
+                                </FormControl>
+                            </div>
+                            <Button
+                                variant="contained"
+                                onClick={HandleNext}
+                                sx={{
+                                    margin: '100px 0px 59px',
+                                    padding: '12px 156px',
+                                    borderRadius: '99px',
+                                    fontWeight: 600
+                                }}
+                            >
+                                다음
+                            </Button>
+                        </>
+                    ) : (
+                        <div id="secondForm" style={{ marginTop: '30px' }}>
+                            <div style={{ fontWeight: 700, fontSize: '0.85rem' }}>
+                                Q1. {questions[0]}
+                            </div>
+                            <TextField
+                                fullWidth
+                                variant="filled"
+                                label="답변을 입력하세요."
+                                id="ProjectDetail"
+                                sx={{ mt: '10px' }}
+                                multiline
+                                rows={10}
+                                onChange={(e) => setDocumentAnswer1(e.target.value)}
+                            />
+                            <div
+                                style={{ fontWeight: 700, fontSize: '0.85rem', marginTop: '40px' }}
+                            >
+                                Q2. {questions[1]}
+                            </div>
+                            <TextField
+                                fullWidth
+                                variant="filled"
+                                label="답변을 입력하세요."
+                                id="ProjectDetail"
+                                sx={{ mt: '10px', mb: '10px' }}
+                                multiline
+                                rows={10}
+                                onChange={(e) => setDocumentAnswer2(e.target.value)}
+                            />
+
+                            <Button
+                                variant="contained"
+                                onClick={HandlPostSubmit}
+                                sx={{
+                                    margin: '40px 0px 59px',
+                                    padding: '12px 140px',
+                                    borderRadius: '99px',
+                                    fontWeight: 600
+                                }}
+                            >
+                                지원 완료
+                            </Button>
+                        </div>
+                    )}
+                </form>
+            ) : (
+                <div
+                    style={{
+                        display: 'flex',
+                        flexDirection: 'column',
+                        alignItems: 'center',
+                        textAlign: 'center',
+                        marginTop: '120px'
+                    }}
+                >
+                    <div style={{ fontSize: '1.8rem' }}>지원이 접수되었습니다!</div>
+                    <div style={{ fontSize: '1.2rem', marginTop: '5px', color: '#00FFA8' }}>
+                        지원 완료!
+                    </div>
+                    <div
+                        style={{
+                            width: '160px',
+                            height: '160px',
+                            borderRadius: '100%',
+                            backgroundColor: '#844AFF',
+                            marginTop: '41px'
+                        }}
+                    >
+                        <img src={img} alt="emoji" style={{ width: '100%', marginLeft: '-10px' }} />
+                    </div>
+                    <div style={{ fontSize: '1.2rem', fontWeight: 700, marginTop: '31px' }}>
+                        확인 후 입력하신 이메일로
+                        <br />
+                        안내 드리겠습니다!
+                    </div>
+                    <Button
+                        variant="contained"
+                        onClick={navigateToMainTab}
+                        sx={{
+                            margin: '170px 0px 59px',
+                            padding: '12px 140px',
+                            borderRadius: '99px',
+                            fontWeight: 700,
+                            color: '#fff',
+                            border: '1px solid #727272',
+                            backgroundColor: '#2C2C2E'
+                        }}
+                    >
+                        스꾸디 둘러보기
                     </Button>
-                </Box>
-            </form>
+                </div>
+            )}
+            <Footer />
         </Box>
     );
 }

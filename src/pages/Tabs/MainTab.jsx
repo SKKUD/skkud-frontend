@@ -15,11 +15,17 @@ import EditProject from './Project/EditProject';
 import CreateUser from './User/CreateUser';
 import CreateUser2 from './User/CreateUser2';
 import CreateUser3 from './User/CreateUser3';
-import EditUser from './User/EditUser';
 import FrontendTab from './User/FrontendTab';
 import BackendTab from './User/BackendTab';
+import TabStudy from './Study/TabStudy';
+import StudyContent from './Study/StudyContent';
+import EditStudy from './Study/EditStudy';
 import Header from '../../components/common/Header';
+import Footer from '../../components/common/Footer';
 import FinishCreateUser from './User/FinishCreateUser';
+import MyPageDetail from './User/MyPageDetail';
+import MyPage from './User/MyPage';
+import PostStudy from './Study/PostStudy';
 
 function TabPanel(props) {
     const { children, value, index, ...other } = props;
@@ -38,7 +44,12 @@ function TabPanel(props) {
 }
 
 const StyledTabs = styled((props) => (
-    <Tabs {...props} TabIndicatorProps={{ children: <span className="MuiTabs-indicatorSpan" /> }} />
+    <Tabs
+        variant="scrollable"
+        scrollButtons={false}
+        {...props}
+        TabIndicatorProps={{ children: <span className="MuiTabs-indicatorSpan" /> }}
+    />
 ))({
     '& .MuiTabs-indicator': {
         display: 'flex',
@@ -86,6 +97,7 @@ function MainTab() {
     let TabIndex = 0;
     const [value, setValue] = React.useState(TabIndex);
     const location = useLocation();
+    console.log(location);
 
     useEffect(() => {
         if (location.pathname === '/maintab' || location.pathname === '/maintab/') {
@@ -99,6 +111,9 @@ function MainTab() {
             location.pathname === '/maintab/member'
         ) {
             TabIndex = 2;
+            setValue(TabIndex);
+        } else if (location.pathname.substring(0, 14) === '/maintab/study') {
+            TabIndex = 3;
             setValue(TabIndex);
         } else {
             TabIndex = 1;
@@ -127,13 +142,15 @@ function MainTab() {
                     sx={{
                         width: '100%',
                         position: 'fixed',
-                        backgroundColor: '#222222',
-                        marginTop: '40px'
+                        bgcolor: 'background.paper',
+                        marginTop: '40px',
+                        zIndex: 1150
                     }}
                 >
-                    <StyledTab label="about us" {...a11yProps(0)} component={Link} to="" />
-                    <StyledTab label="project" {...a11yProps(1)} component={Link} to="project" />
-                    <StyledTab label="member" {...a11yProps(2)} component={Link} to="frontend" />
+                    <StyledTab label="About us" {...a11yProps(0)} component={Link} to="" />
+                    <StyledTab label="Project" {...a11yProps(1)} component={Link} to="project" />
+                    <StyledTab label="Member" {...a11yProps(2)} component={Link} to="member" />
+                    <StyledTab label="Study" {...a11yProps(3)} component={Link} to="study" />
                 </StyledTabs>
             </Box>
 
@@ -145,16 +162,22 @@ function MainTab() {
                     <Route path="editproject/:index" element={<EditProject />} />
                     <Route path="projectdetail/:index" element={<ProjectDetail />} />
                     <Route path="member" element={<FrontendTab />} />
-                    <Route path="design" element={<TabMember />} />
-                    <Route path="frontend" element={<FrontendTab />} />
-                    <Route path="backend" element={<BackendTab />} />
-                    <Route path="createuser" element={<CreateUser />} />
-                    <Route path="createuser2" element={<CreateUser2 />} />
-                    <Route path="createuser3" element={<CreateUser3 />} />
-                    <Route path="edituser/:index" element={<EditUser />} />
-                    <Route path="usercreated" element={<FinishCreateUser />} />
+                    <Route path="member/design" element={<TabMember />} />
+                    {/* <Route path="frontend" element={<FrontendTab />} /> */}
+                    <Route path="member/backend" element={<BackendTab />} />
+                    <Route path="member/createuser" element={<CreateUser />} />
+                    <Route path="member/createuser2" element={<CreateUser2 />} />
+                    <Route path="member/createuser3" element={<CreateUser3 />} />
+                    <Route path="member/mypage" element={<MyPage />} />
+                    <Route path="member/usercreated" element={<FinishCreateUser />} />
+                    <Route path="member/mypagedetail" element={<MyPageDetail />} />
+                    <Route path="study" element={<TabStudy />} />
+                    <Route path="study/:index" element={<StudyContent />} />
+                    <Route path="study/edit/:index" element={<EditStudy />} />
+                    <Route path="study/post" element={<PostStudy />} />
                 </Routes>
             </TabPanel>
+            <Footer />
         </Box>
     );
 }
