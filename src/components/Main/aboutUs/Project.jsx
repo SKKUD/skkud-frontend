@@ -52,8 +52,8 @@ export default function Project() {
     const navigateToProject = () => {
         navigate('/maintab/project');
     };
-    // const projectImg = [];
-    // useProjectListApi;
+    const [projectImg] = useProjectListApi();
+    console.log('proj img', projectImg);
     return (
         <div>
             <Title>Project of</Title>
