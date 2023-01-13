@@ -97,7 +97,6 @@ function MainTab() {
     let TabIndex = 0;
     const [value, setValue] = React.useState(TabIndex);
     const location = useLocation();
-    console.log(location);
 
     useEffect(() => {
         if (location.pathname === '/maintab' || location.pathname === '/maintab/') {

@@ -64,7 +64,7 @@ export default function StudyContent() {
                 ''
             )}
 
-            <Card sx={{ borderRadius: '24px', pb: '40px' }}>
+            <Card sx={{ borderRadius: '24px', pb: '40px', pt: '8px' }}>
                 <Box
                     sx={{
                         display: 'flex',

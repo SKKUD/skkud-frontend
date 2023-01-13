@@ -39,6 +39,7 @@ export const useProjectPostDetailApi = () => {
     const [period, setPeriod] = useState('');
     const [link, setLink] = useState('');
     const [images, setImages] = useState([]);
+    const [checked, setChecked] = useState([]);
 
     // :id 파라미터
     const { index } = useParams();
@@ -55,6 +56,7 @@ export const useProjectPostDetailApi = () => {
             setPeriod(data.developPeriod);
             setLink(data.link);
             setImages(data.images);
+            setChecked(data.users);
         });
     }, []);
 
@@ -64,7 +66,8 @@ export const useProjectPostDetailApi = () => {
         [tags, setTags],
         [period, setPeriod],
         [link, setLink],
-        [images, setImages]
+        [images, setImages],
+        [checked, setChecked]
     ];
 };
 
@@ -77,8 +80,7 @@ export const useProjectUserApi = () => {
     useEffect(() => {
         const fetchEvents = async () => {
             const res = await axios.get(`http://localhost:8000/users/byProject/${index}`);
-            console.log('res', res.data.data.users.skills);
-            setUser(res.data.data.user.skills);
+            setUser(res.data.data);
         };
         fetchEvents();
     }, []);

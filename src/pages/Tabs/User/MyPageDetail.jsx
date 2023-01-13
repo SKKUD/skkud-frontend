@@ -80,7 +80,8 @@ export default function MyPageDetail() {
         <Box
             component="form"
             sx={{
-                '& > :not(style)': { m: 1, width: '25ch' }
+                '& > :not(style)': { m: 1, width: '100%' },
+                overflow: 'hidden'
             }}
             noValidate
             autoComplete="off"
@@ -127,23 +128,20 @@ export default function MyPageDetail() {
                 onChange={(e) => setPw(e.target.value)}
             />
             <TextField
+                fullWidth
                 id="newPW2"
                 label="새 비밀번호 확인"
                 variant="standard"
                 // value={newpw || ''}
                 onChange={(e) => setrePw(e.target.value)}
             />
-
             <Button
                 variant="contained"
                 onClick={submit}
                 style={{
-                    position: 'absolute',
                     borderRadius: '99px',
                     width: '312px',
-                    height: '44px',
-                    left: '24px',
-                    top: '635px'
+                    height: '44px'
                 }}
             >
                 비밀번호 바꾸기
