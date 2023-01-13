@@ -58,22 +58,28 @@ export default function MyPageDetail() {
     const navigateToIDpw = () => {
         navigate('/maintab/edituserdetail');
     };
+    const [checker, setChecker] = useState(true);
     const checkPw = () => {
         console.log(newpw, newrepw);
-        if (newpw && newpw !== newrepw) {
-            alert('비밀번호가 일치하지 않습니다.');
+        if (newpw !== newrepw) {
+            setChecker(false);
+            console.log(checker);
         }
     };
 
     const submit = useCallback(async () => {
-        checkPw();
-        await axios.patch(`http://localhost:8000/users/${id}`, {
-            userID: newID,
-            passwd: newpw
-        });
-        navigateToMember();
-        logoutBtn();
-        alert('user edit');
+        if (checker === true) {
+            await axios
+                .patch(`http://localhost:8000/users/${id}`, {
+                    userID: newID,
+                    passwd: newpw
+                })
+                .then((res) => console.log(res));
+
+            alert('user edit');
+            navigateToMember();
+            logoutBtn();
+        }
     }, [newID]);
 
     return (
@@ -131,7 +137,10 @@ export default function MyPageDetail() {
                 label="새 비밀번호 확인"
                 variant="standard"
                 // value={newpw || ''}
-                onChange={(e) => setrePw(e.target.value)}
+                onChange={(e) => {
+                    setrePw(e.target.value);
+                    checkPw();
+                }}
             />
 
             <Button

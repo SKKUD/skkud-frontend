@@ -27,20 +27,22 @@ export default function MemberCardDetail(props) {
     const proj = props.projects;
     const projectList = [];
     let projectCount = 0;
+
     if (proj) {
-        console.log('proj', props.projects);
+        console.log('proj aaa', proj);
         for (let i = 0; i < proj.length; i++) {
             if (proj[i] === null) {
-                projectCount = i;
-                break;
+                projectCount = projectCount;
             }
             const [detail] = useUserPostDetailApi(proj[i]);
             if (detail !== null) {
                 console.log('detail', detail);
                 projectList.push([detail.mainimage, detail._id, detail.tags, detail.title]);
+                projectCount += 1;
             }
         }
     }
+    console.log('proj count', projectCount);
     const [userDetail] = useUserSkillsApi(props.id);
     console.log('user', userDetail);
     console.log('tag', projectList);
@@ -84,7 +86,8 @@ export default function MemberCardDetail(props) {
                                 border: '1px solid transparent',
                                 width: '125px',
                                 height: '125px',
-                                margin: '3px'
+                                margin: '3px',
+                                objectFit: 'contain'
                             }}
                             // onClick={navigateToProject(item[1])}
                         >

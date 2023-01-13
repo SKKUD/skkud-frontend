@@ -34,13 +34,17 @@ export default function Login() {
                     setUser(ID);
                     setCookie('id', ID);
                     navigateToMainTab();
-                } else if (userData.data.message === '비밀번호가 틀렸습니다.') {
-                    alert('비밀번호가 틀렸습니다.');
-                } else {
-                    alert('아이디에 해당하는 유저 정보가 없습니다.');
                 }
+                // } else if (userData.data.message === '비밀번호가 틀렸습니다.') {
+                //     alert('비밀번호가 틀렸습니다.');
+                // } else {
+                //     alert('아이디에 해당하는 유저 정보가 없습니다.');
+                // }
             })
-            .catch((error) => console.log(error));
+            .catch((error) => {
+                console.log('error', error);
+                alert(error.response.data.message);
+            });
         // window.location.reload();
     };
 
@@ -58,7 +62,7 @@ export default function Login() {
     const logoutBtn = async () => {
         setUser('');
         removeCookie('id');
-        // authCheck();
+        authCheck();
         await axios
             .post('http://localhost:8000/auth/logout')
             .then((userData) => console.log(userData))
@@ -76,7 +80,6 @@ export default function Login() {
                 if (res.data.data.userID !== token) {
                     // alert('세션이 만료되었습니다.');
                     logoutBtn();
-                } else {
                 }
                 // if (cookies.x_auth !== 'a') {
                 //     console.log(' verify');
@@ -84,7 +87,7 @@ export default function Login() {
                 // }
             })
             .catch((error) => {
-                console.log(error);
+                console.log('auth check error');
                 removeCookie('id');
             });
     };
