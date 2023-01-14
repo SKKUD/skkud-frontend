@@ -55,6 +55,10 @@ export default function MyPage() {
         setInsta(insta);
         setLinks(otherLinks);
         setSkill(skill);
+        console.log(newskill);
+        if (newskill === []) {
+            setSkill('skill set을 입력하세요.');
+        }
     }, [name, email, bio, insta, otherLinks, major, skill]);
 
     const validEmail = '^[a-zA-Z0-9+-_.]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$';

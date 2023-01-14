@@ -20,12 +20,12 @@ import BackendTab from './User/BackendTab';
 import TabStudy from './Study/TabStudy';
 import StudyContent from './Study/StudyContent';
 import EditStudy from './Study/EditStudy';
+import PostStudy from './Study/PostStudy';
 import Header from '../../components/common/Header';
 import Footer from '../../components/common/Footer';
 import FinishCreateUser from './User/FinishCreateUser';
 import MyPageDetail from './User/MyPageDetail';
 import MyPage from './User/MyPage';
-import PostStudy from './Study/PostStudy';
 
 function TabPanel(props) {
     const { children, value, index, ...other } = props;
@@ -97,19 +97,12 @@ function MainTab() {
     let TabIndex = 0;
     const [value, setValue] = React.useState(TabIndex);
     const location = useLocation();
-    console.log(location);
 
     useEffect(() => {
         if (location.pathname === '/maintab' || location.pathname === '/maintab/') {
             TabIndex = 0;
             setValue(TabIndex);
-        } else if (
-            location.pathname === '/maintab/frontend' ||
-            location.pathname === '/maintab/backend' ||
-            location.pathname === '/maintab/design' ||
-            location.pathname === '/maintab/createuser' ||
-            location.pathname === '/maintab/member'
-        ) {
+        } else if (location.pathname.substring(0, 15) === '/maintab/member') {
             TabIndex = 2;
             setValue(TabIndex);
         } else if (location.pathname.substring(0, 14) === '/maintab/study') {

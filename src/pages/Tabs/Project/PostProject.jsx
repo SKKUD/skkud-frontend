@@ -207,7 +207,19 @@ export default function PostProject() {
                     submit
                 </Button>
             </Box>
-            <PreImages imgFiles={PreviewImg} />
+            {PreviewImg.length !== 0 ? (
+                <Box
+                    mt="12px"
+                    sx={{
+                        border: '1px solid #00FFA8',
+                        boxSizing: 'border-box',
+                        height: '205px',
+                        overflow: 'hidden'
+                    }}
+                >
+                    <PreImages imgFiles={PreviewImg} />
+                </Box>
+            ) : null}
         </form>
     );
 }

@@ -5,7 +5,7 @@ function PreImages({ imgFiles }) {
     return (
         <>
             {imgFiles.map((url) => (
-                <img alt={url} key={url} src={url} width="20%" />
+                <img alt={url} key={url} src={url} width="100%" />
             ))}
         </>
     );
