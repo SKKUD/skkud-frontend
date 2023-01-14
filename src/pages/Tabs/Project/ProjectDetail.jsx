@@ -119,10 +119,15 @@ export default function ProjectDetail() {
                                         backgroundColor: '#fff',
                                         display: 'flex',
                                         justifyContent: 'center',
-                                        alignItems: 'center'
+                                        alignItems: 'center',
+                                        overflow: 'hidden'
                                     }}
                                 >
-                                    <img src={img} alt={name} />
+                                    <img
+                                        src={img}
+                                        alt={name}
+                                        style={{ width: '132px', height: '132px' }}
+                                    />
                                 </div>
                                 <div
                                     style={{

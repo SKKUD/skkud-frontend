@@ -6,7 +6,7 @@ import Box from '@mui/material/Box';
 export default function CreateUserBtn() {
     const navigate = useNavigate();
     const navigateToCreateUser = () => {
-        navigate('/maintab/createuser');
+        navigate('/maintab/member/createuser');
     };
     return (
         <Box sx={{ width: '100%', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>

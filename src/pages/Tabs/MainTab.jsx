@@ -102,13 +102,7 @@ function MainTab() {
         if (location.pathname === '/maintab' || location.pathname === '/maintab/') {
             TabIndex = 0;
             setValue(TabIndex);
-        } else if (
-            location.pathname === '/maintab/frontend' ||
-            location.pathname === '/maintab/backend' ||
-            location.pathname === '/maintab/design' ||
-            location.pathname === '/maintab/createuser' ||
-            location.pathname === '/maintab/member'
-        ) {
+        } else if (location.pathname.substring(0, 15) === '/maintab/member') {
             TabIndex = 2;
             setValue(TabIndex);
         } else if (location.pathname.substring(0, 14) === '/maintab/study') {
@@ -148,7 +142,7 @@ function MainTab() {
                 >
                     <StyledTab label="About us" {...a11yProps(0)} component={Link} to="" />
                     <StyledTab label="Project" {...a11yProps(1)} component={Link} to="project" />
-                    <StyledTab label="Member" {...a11yProps(2)} component={Link} to="frontend" />
+                    <StyledTab label="Member" {...a11yProps(2)} component={Link} to="member" />
                     <StyledTab label="Study" {...a11yProps(3)} component={Link} to="study" />
                 </StyledTabs>
             </Box>
@@ -161,19 +155,19 @@ function MainTab() {
                     <Route path="editproject/:index" element={<EditProject />} />
                     <Route path="projectdetail/:index" element={<ProjectDetail />} />
                     <Route path="member" element={<FrontendTab />} />
-                    <Route path="design" element={<TabMember />} />
-                    <Route path="frontend" element={<FrontendTab />} />
-                    <Route path="backend" element={<BackendTab />} />
-                    <Route path="createuser" element={<CreateUser />} />
-                    <Route path="createuser2" element={<CreateUser2 />} />
-                    <Route path="createuser3" element={<CreateUser3 />} />
-                    <Route path="mypage" element={<MyPage />} />
+                    <Route path="member/design" element={<TabMember />} />
+                    {/* <Route path="frontend" element={<FrontendTab />} /> */}
+                    <Route path="member/backend" element={<BackendTab />} />
+                    <Route path="member/createuser" element={<CreateUser />} />
+                    <Route path="member/createuser2" element={<CreateUser2 />} />
+                    <Route path="member/createuser3" element={<CreateUser3 />} />
+                    <Route path="member/mypage" element={<MyPage />} />
+                    <Route path="member/usercreated" element={<FinishCreateUser />} />
+                    <Route path="member/mypagedetail" element={<MyPageDetail />} />
                     <Route path="study" element={<TabStudy />} />
                     <Route path="study/:index" element={<StudyContent />} />
                     <Route path="study/edit/:index" element={<EditStudy />} />
                     <Route path="study/post" element={<PostStudy />} />
-                    <Route path="usercreated" element={<FinishCreateUser />} />
-                    <Route path="mypagedetail" element={<MyPageDetail />} />
                 </Routes>
             </TabPanel>
             <Footer />

@@ -250,10 +250,19 @@ export default function EditProject() {
                     submit
                 </Button>
             </Box>
-
-            {PreviewImg.length === 0
-                ? images && <img src={images} alt={title} key={images} width="20%" />
-                : PreviewImg && <PreImages imgFiles={PreviewImg} />}
+            <Box
+                mt="12px"
+                sx={{
+                    border: '1px solid #00FFA8',
+                    boxSizing: 'border-box',
+                    height: '205px',
+                    overflow: 'hidden'
+                }}
+            >
+                {PreviewImg.length === 0
+                    ? images && <img src={images} alt={title} key={images} width="100%" />
+                    : PreviewImg && <PreImages imgFiles={PreviewImg} />}
+            </Box>
         </form>
     );
 }

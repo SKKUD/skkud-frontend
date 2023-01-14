@@ -6,8 +6,12 @@ import { MemberEditDetailBtn } from '../../../components/Main/member/MemberEditB
 import axios from 'axios';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
+import IconButton from '@mui/material/IconButton';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
+import PhotoCamera from '@mui/icons-material/PhotoCamera';
+import MemberDeleteBtn from '../../../components/Main/member/MemberDeleteBtn';
+import { ButtonBase } from '@mui/material';
 
 export default function MyPage() {
     const location = useLocation();
@@ -32,10 +36,12 @@ export default function MyPage() {
     const otherLinks = user.otherLinks;
     const { email } = user;
     const skill = user.skills;
+    const image = user.image;
     const [newname, setName] = useState(name);
     const [newemail, setEmail] = useState(email);
     const [newmajor, setMajor] = useState(major);
     const [newbio, setBio] = useState(bio);
+    const [newimage, setImage] = useState(image);
     const [newinsta, setInsta] = useState(insta);
     const [newlinks, setLinks] = useState(otherLinks);
     const [PreviewImg, setPreviewImg] = useState('');
@@ -61,6 +67,20 @@ export default function MyPage() {
         navigate('/maintab/member');
     };
 
+    const uploadImgFile = (event) => {
+        const file = event.target.files[0];
+        const fileURL = [];
+        setImage(file);
+        const reader = new FileReader();
+        reader.onload = () => {
+            fileURL[0] = reader.result;
+            setPreviewImg(fileURL[0]);
+        };
+        reader.readAsDataURL(file);
+        // setPreviewImg(file);
+        // console.log('file', file);
+    };
+
     const submit = useCallback(async () => {
         if (
             newname === '' ||
@@ -74,18 +94,21 @@ export default function MyPage() {
         } else if (newemail.match(validEmail) == null) {
             alert('이메일 형식에 맞춰 입력하세요');
         } else {
-            await axios.patch(`http://localhost:8000/users/${id}`, {
-                username: newname,
-                email: newemail,
-                major: newmajor,
-                otherLinks: newlinks,
-                insta: newinsta,
-                bio: newbio,
-                skills: newskill
-            });
+            await axios
+                .patch(`http://localhost:8000/users/${id}`, {
+                    username: newname,
+                    email: newemail,
+                    major: newmajor,
+                    otherLinks: newlinks,
+                    insta: newinsta,
+                    bio: newbio,
+                    skills: newskill,
+                    image: PreviewImg
+                })
+                .catch((error) => console.log(error));
             navigateToMember();
         }
-    }, [newname, newemail, newbio, newinsta, newlinks, newmajor, newskill]);
+    }, [newname, newemail, newbio, newinsta, newlinks, newmajor, newskill, PreviewImg]);
 
     return (
         <Box
@@ -116,12 +139,24 @@ export default function MyPage() {
                     borderRadius: '100%'
                 }}
             >
-                <img
-                    src={PreviewImg}
-                    alt="avatar"
-                    style={{ borderRadius: '100%', width: '149px', height: '149px' }}
-                />
+                <ButtonBase>
+                    <img
+                        src={PreviewImg}
+                        alt={name}
+                        style={{ borderRadius: '100%', width: '149px', height: '149px' }}
+                    />{' '}
+                </ButtonBase>
             </div>
+            <IconButton color="primary" aria-label="upload picture" component="label">
+                <input
+                    hidden
+                    name="image"
+                    type="file"
+                    accept="image/jpg,image/png,image/jpeg,image/gif"
+                    onChange={uploadImgFile}
+                />
+                <PhotoCamera />
+            </IconButton>
 
             <TextField
                 id="name"
@@ -195,6 +230,7 @@ export default function MyPage() {
             >
                 회원정보 수정
             </Button>
+            <MemberDeleteBtn />
         </Box>
     );
 }

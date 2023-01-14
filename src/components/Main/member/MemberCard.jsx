@@ -66,7 +66,6 @@ export default function MemberCard({
                     {/* {cookies.id ? (
                         <div style={{ textAlign: 'right' }}>
                             <MemberDeleteBtn _id={id} />
-                            <MemberEditBtn _id={id} />
                         </div>
                     ) : null} */}
                     <Grid container spacing={1}>
@@ -80,7 +79,9 @@ export default function MemberCard({
                                     borderRadius: '150px',
                                     width: '120px',
                                     height: '120px',
-                                    marginRight: '10px'
+                                    marginRight: '10px',
+                                    backgroundColor: 'white',
+                                    objectFit: 'contain'
                                 }}
                             />
                         </Grid>
