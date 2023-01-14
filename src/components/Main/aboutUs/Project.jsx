@@ -5,10 +5,11 @@ import { useNavigate } from 'react-router-dom';
 import { NavLink } from 'react-router-dom';
 import Button from '@mui/material/Button';
 import styled from '@emotion/styled';
-import Carousel from 'react-material-ui-carousel';
+// import Carousel from 'react-material-ui-carousel';
 import ImageList from '@mui/material/ImageList';
 import ImageListItem from '@mui/material/ImageListItem';
 import { useProjectListApi } from '../../../hooks/Project';
+import Carousel from './Carousel';
 
 const Title = styled.div`
     font-size: 2.5rem;
@@ -55,8 +56,16 @@ export default function Project() {
     const navigateToProject = () => {
         navigate('/maintab/project');
     };
+    const imgList = [];
     const [projectList] = useProjectListApi();
     console.log('proj img', projectList);
+    for (let i = 0; i < projectList.length; i++) {
+        // if (projectList[i].mainimage === undefined)
+        console.log('img', projectList[i].mainimage);
+        imgList.push(projectList[i].mainimage);
+    }
+    console.log('img list', imgList);
+
     return (
         <div>
             <Title>Project of</Title>
@@ -72,55 +81,15 @@ export default function Project() {
                 }}
             />
 
-            <Carousel autoPlay swipe animation="slide" duration={1600}>
-                <ImgboxBlock>
-                    <Imgbox />
-                    <Imgbox />
-                </ImgboxBlock>
-                <ImgboxBlock>
-                    <Imgbox />
-                    <Imgbox />
-                </ImgboxBlock>
-                <ImgboxBlock>
-                    <Imgbox />
-                    <Imgbox />
-                </ImgboxBlock>
-            </Carousel>
-            {/* <ImageList
-                style={{
-                    display: 'grid',
-                    gridAutoFlow: 'column'
-                }}
-            >
-                {projectList.map((item) => (
-                    <ImageListItem
-                        key={item[1]}
-                        style={{
-                            borderRadius: '15px',
-                            border: '1px solid transparent',
-                            width: '125px',
-                            height: '125px',
-                            margin: '3px',
-                            objectFit: 'contain'
-                        }}
-                        // onClick={navigateToProject(item[1])}
-                    >
-                        <NavLink to={'/maintab/projectdetail/' + item[1]}>
-                            <img
-                                src={item[0]}
-                                alt={item[3]}
-                                // onClick={console.log('click', item[1])}
-                            />
-                        </NavLink>
-                    </ImageListItem>
-                ))}
-            </ImageList> */}
+            <Carousel images={imgList} />
+
             <ButtonBlock
                 style={{
                     display: 'flex',
                     flexDirection: 'column',
                     justifyContent: 'center',
                     alignItems: 'center',
+                    marginTop: '30px',
                     marginBottom: '65px'
                 }}
             >
