@@ -107,6 +107,7 @@ export default function TabStudy() {
                             display: 'contents',
                             width: '100%'
                         }}
+                        state={{ id: `${selectedGroup}` }}
                     >
                         <PostBtn content="+ Post" />
                     </Link>
@@ -114,66 +115,25 @@ export default function TabStudy() {
             ) : null}
             <div style={{ marginBottom: '18px' }}>
                 {study &&
-                    study.map((item) => (
-                        // eslint-disable-next-line no-underscore-dangle
-                        <Link
-                            to={`/maintab/study/${item._id}`}
-                            style={{
-                                textDecoration: 'none',
-                                display: 'contents',
-                                width: '100%'
-                            }}
-                            state={item}
-                            key={item._id}
-                        >
-                            <StudyCard props={item} />
-                        </Link>
-                    ))}
+                    study
+                        .slice(0)
+                        .reverse()
+                        .map((item) => (
+                            // eslint-disable-next-line no-underscore-dangle
+                            <Link
+                                to={`/maintab/study/${item._id}`}
+                                style={{
+                                    textDecoration: 'none',
+                                    display: 'contents',
+                                    width: '100%'
+                                }}
+                                state={item}
+                                key={item._id}
+                            >
+                                <StudyCard props={item} />
+                            </Link>
+                        ))}
             </div>
         </>
     );
 }
-
-// return (
-//     <Card sx={{ borderRadius: '25px', mb: 2 }} key={project.index}>
-// {cookies.id ? (
-//     <Box sx={{ display: 'flex', justifyContent: 'end' }}>
-//         <Link
-//             to={`/maintab/editproject/${_id}`}
-//             style={{
-//                 textDecoration: 'none',
-//                 display: 'contents',
-//                 width: '100%'
-//             }}
-//             state={{
-//                 _id,
-//                 body,
-//                 title,
-//                 images,
-//                 mainimage,
-//                 tags,
-//                 developPeriod,
-//                 link
-//             }}
-//         >
-//             <EditBtn />
-//         </Link>
-//         <DeleteBtn state={_id} />
-//     </Box>
-// ) : (
-//     ''
-// )}
-//         <Link
-//             to={`/maintab/projectdetail/${project._id}`}
-//             style={{
-//                 textDecoration: 'none',
-//                 display: 'contents',
-//                 width: '100%'
-//             }}
-//             key={project.index}
-//             state={{ project }}
-//         >
-//             <ProjectCard project={project} />
-//         </Link>
-//     </Card>
-// );
