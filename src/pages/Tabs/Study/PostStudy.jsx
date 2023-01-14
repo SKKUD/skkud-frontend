@@ -1,46 +1,177 @@
 import React from 'react';
+import { useState, useEffect } from 'react';
 import { styled } from '@mui/material/styles';
-import { Link, useLocation } from 'react-router-dom';
-import { useCookies } from 'react-cookie';
+import { useLocation, useNavigate } from 'react-router-dom';
+import { useStudiesApi } from '../../../hooks/Study';
 import Box from '@mui/material/Box';
 import Chip from '@mui/material/Chip';
 import Stack from '@mui/material/Stack';
+import Input from '@mui/material/Input';
 import Card from '@mui/material/Card';
 import img from '../../../assets/introArt_black.jpeg';
 import FmdGoodOutlinedIcon from '@mui/icons-material/FmdGoodOutlined';
+import IconButton from '@mui/material/IconButton';
+import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
+import PhotoCamera from '@mui/icons-material/PhotoCamera';
+import dayjs from 'dayjs';
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker';
+import TextField from '@mui/material/TextField';
+import InputAdornment from '@mui/material/InputAdornment';
+import Button from '@mui/material/Button';
 
 export default function PostStudy() {
-    // const [cookies] = useCookies(['id']);
-    // // const [post] = useProjectPostApi();
-    // // const [user] = useProjectUserApi();
+    const [studies, filterStudies, study, createStudy, updateStudy, deleteStudy] = useStudiesApi();
+    const loc = useLocation();
+    const GroupId = loc.state.id;
+    const navigate = useNavigate();
+    const navigateToStudy = () => {
+        navigate('/maintab/study');
+        window.location.reload();
+    };
 
-    // console.log(location.state);
-    // chip
-    const attendance = ['dd', 'dd'];
-    const task = ['dd', 'dd'];
+    const [title, setTitle] = useState('');
+    const [content, setContent] = useState('');
+    const [location, setLocation] = useState('');
+    const [attendance, setAtd] = useState([]);
+    const [Task, setTask] = useState([]);
+    const [taskContent, setTaskContent] = useState('');
+    const [taskContents, setTaskContents] = useState([]);
+    const [taskName, setTaskName] = useState('');
+    const [taskNames, setTaskNames] = useState([]);
+    const [images, setImages] = useState([]);
+    const [PreviewImg, setPreviewImg] = useState([]);
+    const [studyTimeStart, setStart] = useState(dayjs());
+    const [studyTimeEnd, setEnd] = useState(dayjs());
 
-    const StyledChip = styled((props) => <Chip {...props} />)(() => ({
-        border: '1.5px solid #444',
-        height: '18px',
-        fontSize: '0.5rem',
-        boxSizing: 'border-box',
+    const handleChangeStart = (newValue) => {
+        setStart(newValue);
+    };
+    const handleChangeEnd = (newValue) => {
+        setEnd(newValue);
+    };
 
-        '& span': {
-            fontWeight: 600,
-            color: '#ffffff8b',
-            padding: '5px'
+    const uploadImgFile = (event) => {
+        const fileArr = event.target.files;
+        setImages(Array.from(fileArr)); // 업로드할 이미지 배열 저장
+        const fileURLs = [];
+        const filesLength = fileArr.length > 10 ? 10 : fileArr.length;
+
+        // 미리보기
+        for (let i = 0; i < filesLength; i += 1) {
+            const file = fileArr[i];
+            const reader = new FileReader();
+            reader.onload = () => {
+                fileURLs[i] = reader.result;
+                setPreviewImg([...fileURLs]);
+            };
+            reader.readAsDataURL(file);
         }
-    }));
+    };
+
+    const HandleAddTask = () => {
+        if (taskContent === '') {
+            alert('과제 내용을 입력하세요');
+        } else if (taskName === '') {
+            alert('이름을 입력하세요');
+        } else {
+            setTaskContents([...taskContents, taskContent]);
+            setTaskNames([...taskNames, taskName]);
+            setTask([...Task, { task: taskContent, name: taskName }]);
+            setTaskContent('');
+            setTaskName('');
+        }
+    };
+
+    const HandlPostSubmit = () => {
+        if (title === '') {
+            alert('제목을 입력하세요');
+        } else if (content === '') {
+            alert('내용을 입력하세요');
+        } else {
+            const formData = new FormData();
+            formData.append('title', title);
+            formData.append('content', content);
+            formData.append('location', location);
+            for (let i = 0; i < attendance.length; i++) {
+                formData.append('attendance', attendance[i]);
+            }
+            for (let i = 0; i < taskContents.length; i++) {
+                formData.append('taskContents', taskContents[i]);
+            }
+            for (let i = 0; i < taskNames.length; i++) {
+                formData.append('taskNames', taskNames[i]);
+            }
+            formData.append('studyTimeStart', studyTimeStart);
+            formData.append('studyTimeEnd', studyTimeEnd);
+            images.map((image) => formData.append('images', image));
+            // FormData의 key 확인
+            for (let key of formData.keys()) {
+                console.log(key);
+            }
+
+            // FormData의 value 확인
+            for (let value of formData.values()) {
+                console.log(value);
+            }
+            createStudy(formData, GroupId);
+            navigateToStudy();
+        }
+    };
+
+    function PreImages({ imgFiles }) {
+        return (
+            <Box
+                mt="12px"
+                sx={{
+                    display: 'flex',
+                    flexWrap: 'nowrap',
+                    overflowX: 'scroll',
+                    alignItems: 'center',
+                    border: '1px solid rgba(255, 255, 255, 0.5)',
+                    boxSizing: 'border-box',
+                    height: '180px'
+                }}
+            >
+                {imgFiles.map((url) => {
+                    return (
+                        <Box
+                            sx={{
+                                flex: '0 0 auto',
+                                width: '160px',
+                                height: '160px',
+                                borderRadius: '5px',
+                                overflow: 'hidden',
+                                mr: '10px'
+                            }}
+                        >
+                            <img alt={url} key={url} src={url} width="100%" />
+                        </Box>
+                    );
+                })}
+            </Box>
+        );
+    }
+
+    function TaskAddBtn() {
+        return (
+            <IconButton color="primary" aria-label="edit" component="label" onClick={HandleAddTask}>
+                <AddCircleOutlineIcon fontSize="small" />
+            </IconButton>
+        );
+    }
 
     return (
-        <>
+        <form encType="multipart/form-data">
             <Card sx={{ borderRadius: '24px', pb: '40px' }}>
                 <Box
                     sx={{
                         display: 'flex',
                         flexDirection: 'column',
-                        pl: '21px',
-                        mt: '20px'
+                        padding: '0 21px',
+                        mt: '20px',
+                        justifyContent: 'center'
                     }}
                 >
                     <Box
@@ -48,36 +179,71 @@ export default function PostStudy() {
                             fontSize: '1.125rem',
                             fontWeight: 600,
                             lineHeight: '21.48px',
-                            marginBottom: '8px'
+                            marginBottom: '8px',
+                            overflow: 'hidden'
                         }}
                     >
-                        title
+                        <Box
+                            sx={{
+                                color: 'rgba(255, 255, 255, 0.5)',
+                                fontWeight: 600,
+                                fontSize: '0.75rem'
+                            }}
+                        >
+                            스터디 제목
+                        </Box>
+                        <Input fullWidth onChange={(e) => setTitle(e.target.value)} />
                     </Box>
                     <div
                         style={{
                             color: 'rgba(255, 255, 255, 0.5)',
                             fontSize: '0.75rem',
                             lineHeight: '0.9rem',
-                            marginBottom: '2px'
+                            margin: '20px 0'
                         }}
                     >
-                        studyTime.slice(0, 10)
+                        <LocalizationProvider dateAdapter={AdapterDayjs}>
+                            <Stack spacing={2}>
+                                <DateTimePicker
+                                    label="스터디 시작 시간"
+                                    value={studyTimeStart}
+                                    onChange={handleChangeStart}
+                                    renderInput={(params) => (
+                                        <TextField {...params} size="small" variant="standard" />
+                                    )}
+                                />
+                                <DateTimePicker
+                                    label="스터디 종료 시간"
+                                    value={studyTimeEnd}
+                                    onChange={handleChangeEnd}
+                                    renderInput={(params) => (
+                                        <TextField {...params} size="small" variant="standard" />
+                                    )}
+                                />
+                                <TextField
+                                    label="location"
+                                    size="small"
+                                    fullWidth
+                                    variant="standard"
+                                    onChange={(e) => setLocation(e.target.value)}
+                                    InputProps={{
+                                        startAdornment: (
+                                            <InputAdornment position="start">
+                                                <FmdGoodOutlinedIcon
+                                                    sx={{
+                                                        width: '14px',
+                                                        height: '16px',
+                                                        margin: '0px 8px 3px 0px'
+                                                    }}
+                                                />
+                                            </InputAdornment>
+                                        )
+                                    }}
+                                />
+                            </Stack>
+                        </LocalizationProvider>
                     </div>
-                    <div
-                        style={{
-                            color: 'rgba(255, 255, 255, 0.5)',
-                            fontSize: '0.75rem',
-                            lineHeight: '0.9rem',
-                            display: 'flex',
-                            alignItems: 'center',
-                            marginBottom: '21px'
-                        }}
-                    >
-                        <FmdGoodOutlinedIcon
-                            sx={{ width: '14px', height: '16px', margin: '0px 8px 3px 0px' }}
-                        />
-                        location
-                    </div>
+
                     <Box mb={'21px'}>
                         <Box sx={{ display: 'flex', lineHeight: '14.32px', marginBottom: '10px' }}>
                             <Box
@@ -96,24 +262,17 @@ export default function PostStudy() {
                                     color: 'rgba(255, 255, 255, 0.5)'
                                 }}
                             >
-                                총 attendance.length명
+                                띄어쓰기 없이 ,로 구분하여 입력해주세요.
                             </Box>
                         </Box>
-                        <Stack
-                            direction="row"
-                            spacing={0.5}
-                            sx={{ justifyContent: 'left', flexWrap: 'wrap' }}
-                        >
-                            {attendance &&
-                                attendance.map((mem) => (
-                                    <StyledChip
-                                        key={mem}
-                                        label={mem}
-                                        variant="outlined"
-                                        color="primary"
-                                    />
-                                ))}
-                        </Stack>
+                        <Input
+                            multiline
+                            fullWidth
+                            onChange={(e) => {
+                                const tagsArray = e.target.value.split(',');
+                                setAtd(tagsArray);
+                            }}
+                        />
                     </Box>
                     <Box mb={'18px'}>
                         <Box
@@ -132,7 +291,11 @@ export default function PostStudy() {
                                 mb: '11px'
                             }}
                         >
-                            content
+                            <Input
+                                multiline
+                                fullWidth
+                                onChange={(e) => setContent(e.target.value)}
+                            />
                         </Box>
                     </Box>
                     <Box mb={'18px'}>
@@ -146,19 +309,38 @@ export default function PostStudy() {
                         >
                             스터디 자료
                         </Box>
-                        <img
-                            src={img}
-                            alt={'title'}
-                            style={{ width: '160px', height: '160px', borderRadius: '5px' }}
-                        />
+                        {PreviewImg.length !== 0 ? (
+                            <PreImages imgFiles={PreviewImg} />
+                        ) : (
+                            <Box
+                                mt="12px"
+                                sx={{
+                                    display: 'flex',
+                                    alignItems: 'center',
+                                    border: '1px solid rgba(255, 255, 255, 0.5)',
+                                    boxSizing: 'border-box',
+                                    height: '180px'
+                                }}
+                            ></Box>
+                        )}
+                        <IconButton color="primary" aria-label="upload picture" component="label">
+                            <input
+                                hidden
+                                name="images"
+                                multiple
+                                type="file"
+                                accept="image/jpg,image/png,image/jpeg,image/gif"
+                                onChange={uploadImgFile}
+                            />
+                            <PhotoCamera />
+                        </IconButton>
                     </Box>
                     <Box mb={'50px'}>
                         <Box
                             sx={{
                                 color: 'rgba(255, 255, 255, 0.5)',
                                 fontWeight: 600,
-                                fontSize: '0.75rem',
-                                mb: '11px'
+                                fontSize: '0.75rem'
                             }}
                         >
                             과제
@@ -166,32 +348,58 @@ export default function PostStudy() {
                         <Stack
                             direction="column"
                             spacing={0.5}
-                            sx={{ justifyContent: 'left', flexWrap: 'wrap', width: '250px' }}
+                            sx={{ justifyContent: 'left', flexWrap: 'wrap' }}
                         >
-                            {task &&
-                                task.map((item) => (
-                                    <div style={{ marginBottom: '10px' }}>
+                            {Task &&
+                                Task.map((item) => (
+                                    <div style={{ marginBottom: '10px' }} key={item.task}>
                                         <Box
                                             sx={{
                                                 fontWeight: 700,
                                                 fontSize: '0.875rem'
                                             }}
                                         >
-                                            item.task
+                                            {item.task}
                                         </Box>
                                         <Box
                                             sx={{
                                                 fontSize: '0.75rem'
                                             }}
                                         >
-                                            item.name
+                                            {item.name}
                                         </Box>
                                     </div>
                                 ))}
+                            <div style={{ display: 'flex', alignItems: 'flex-start' }}>
+                                <TaskAddBtn />
+                                <div style={{ flexDirection: 'column' }}>
+                                    <Input
+                                        multiline
+                                        fullWidth
+                                        placeholder="과제 내용"
+                                        onChange={(e) => setTaskContent(e.target.value)}
+                                        value={taskContent}
+                                    />
+                                    <Input
+                                        placeholder="이름"
+                                        onChange={(e) => setTaskName(e.target.value)}
+                                        value={taskName}
+                                    />
+                                </div>
+                            </div>
                         </Stack>
                     </Box>
+                    <Button
+                        color="primary"
+                        variant="contained"
+                        size="small"
+                        sx={{ mb: 1.5, textTransform: 'none' }}
+                        onClick={HandlPostSubmit}
+                    >
+                        Submit
+                    </Button>
                 </Box>
             </Card>
-        </>
+        </form>
     );
 }

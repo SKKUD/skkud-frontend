@@ -1,4 +1,5 @@
 import React from 'react';
+import { useState, useEffect } from 'react';
 import { styled } from '@mui/material/styles';
 import { Link, useLocation } from 'react-router-dom';
 import { useCookies } from 'react-cookie';
@@ -13,11 +14,28 @@ import FmdGoodOutlinedIcon from '@mui/icons-material/FmdGoodOutlined';
 
 export default function StudyContent() {
     const [cookies] = useCookies(['id']);
+    // const [Task, setTask] = useState([]);
+    const Task = [];
     // const [post] = useProjectPostApi();
     // const [user] = useProjectUserApi();
 
     const loc = useLocation();
-    const { attendance, content, groupId, location, studyTime, task, title, _id } = loc.state;
+    const {
+        attendance,
+        content,
+        groupId,
+        location,
+        studyTime,
+        taskContents,
+        taskNames,
+        title,
+        _id,
+        images
+    } = loc.state;
+
+    for (let i = 0; i < taskContents.length; i++) {
+        Task.push({ task: taskContents[i], name: taskNames[i] });
+    }
 
     // chip
 
@@ -33,6 +51,39 @@ export default function StudyContent() {
             padding: '5px'
         }
     }));
+
+    function ViewImages({ imgFiles }) {
+        return (
+            <Box
+                sx={{
+                    display: 'flex',
+                    flexWrap: 'nowrap',
+                    overflowX: 'scroll',
+                    alignItems: 'center',
+
+                    boxSizing: 'border-box',
+                    height: '180px'
+                }}
+            >
+                {imgFiles.map((url) => {
+                    return (
+                        <Box
+                            sx={{
+                                flex: '0 0 auto',
+                                width: '160px',
+                                height: '160px',
+                                borderRadius: '5px',
+                                overflow: 'hidden',
+                                mr: '10px'
+                            }}
+                        >
+                            <img alt={url} key={url} src={url} width="100%" />
+                        </Box>
+                    );
+                })}
+            </Box>
+        );
+    }
 
     return (
         <Card sx={{ borderRadius: '24px', backgroundColor: '#1c1c1c' }}>
@@ -51,7 +102,8 @@ export default function StudyContent() {
                             groupId,
                             location,
                             studyTime,
-                            task,
+                            taskContents,
+                            taskNames,
                             title,
                             _id
                         }}
@@ -91,7 +143,7 @@ export default function StudyContent() {
                             marginBottom: '2px'
                         }}
                     >
-                        {studyTime.slice(0, 10)}
+                        studytime
                     </div>
                     <div
                         style={{
@@ -182,11 +234,7 @@ export default function StudyContent() {
                         >
                             스터디 자료
                         </Box>
-                        <img
-                            src={img}
-                            alt={title}
-                            style={{ width: '160px', height: '160px', borderRadius: '5px' }}
-                        />
+                        <ViewImages imgFiles={images} />
                     </Box>
                     <Box mb={'50px'}>
                         <Box
@@ -204,9 +252,9 @@ export default function StudyContent() {
                             spacing={0.5}
                             sx={{ justifyContent: 'left', flexWrap: 'wrap', width: '250px' }}
                         >
-                            {task &&
-                                task.map((item) => (
-                                    <div style={{ marginBottom: '10px' }}>
+                            {Task &&
+                                Task.map((item) => (
+                                    <div style={{ marginBottom: '10px' }} key={item.task}>
                                         <Box
                                             sx={{
                                                 fontWeight: 700,

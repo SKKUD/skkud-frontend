@@ -9,7 +9,18 @@ import Stack from '@mui/material/Stack';
 
 export default function StudyCard(props) {
     // console.log(props);
-    const { attendance, content, groupId, location, studyTime, task, title, _id } = props.props;
+    const {
+        attendance,
+        content,
+        groupId,
+        location,
+        studyTime,
+        taskContents,
+        taskNames,
+        title,
+        _id,
+        images
+    } = props.props;
     const StyledStudyCard = styled(Card)`
         display: flex;
         align-items: center;
@@ -64,7 +75,7 @@ export default function StudyCard(props) {
                             lineHeight: '0.9rem'
                         }}
                     >
-                        {studyTime.slice(0, 10)}
+                        studytiem
                     </div>
                 </Grid>
                 <Grid item xs={6}>
@@ -125,14 +136,3 @@ export default function StudyCard(props) {
         </StyledStudyCard>
     );
 }
-
-// MemberCard.propTypes = {
-//     id: PropTypes.string.isRequired,
-//     name: PropTypes.string.isRequired,
-//     engname: PropTypes.string.isRequired,
-//     bio: PropTypes.string.isRequired,
-//     img: PropTypes.string.isRequired,
-//     email: PropTypes.string.isRequired,
-//     otherLinks: PropTypes.array.isRequired,
-//     insta: PropTypes.string.isRequired
-// };

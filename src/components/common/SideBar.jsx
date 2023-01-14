@@ -100,7 +100,7 @@ export default function SideBar() {
                                 marginBottom: '22px'
                             }}
                         />
-                        <SidebarItem path="/application" name="Recruitment" color="#00FFA8" />
+
                         {cookies.id ? (
                             <>
                                 <SidebarItem
@@ -111,7 +111,14 @@ export default function SideBar() {
                                 <SidebarItem path="/login" name="Log Out" color="#00FFA8" />
                             </>
                         ) : (
-                            <SidebarItem path="/login" name="Log In" color="#00FFA8" />
+                            <>
+                                <SidebarItem
+                                    path="/application"
+                                    name="Recruitment"
+                                    color="#00FFA8"
+                                />
+                                <SidebarItem path="/login" name="Log In" color="#00FFA8" />
+                            </>
                         )}
                     </List>
                 </Box>
