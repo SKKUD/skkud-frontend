@@ -59,7 +59,7 @@ export const useStudiesApi = () => {
 
     const updateStudy = (body, id) => {
         axios
-            .patch(`${BASE_URL}study/studies/${id}`, body)
+            .post(`${BASE_URL}study/studies/revise/${id}`, body)
             .then((data) => console.log(data))
             .catch((error) => console.log(error));
     };

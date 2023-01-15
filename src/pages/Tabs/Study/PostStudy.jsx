@@ -20,11 +20,14 @@ import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker';
 import TextField from '@mui/material/TextField';
 import InputAdornment from '@mui/material/InputAdornment';
 import Button from '@mui/material/Button';
+import BackspaceOutlinedIcon from '@mui/icons-material/BackspaceOutlined';
 
 export default function PostStudy() {
     const [studies, filterStudies, study, createStudy, updateStudy, deleteStudy] = useStudiesApi();
     const loc = useLocation();
+    console.log(loc);
     const GroupId = loc.state.id;
+
     const navigate = useNavigate();
     const navigateToStudy = () => {
         navigate('/maintab/study');
@@ -106,15 +109,7 @@ export default function PostStudy() {
             formData.append('studyTimeStart', studyTimeStart);
             formData.append('studyTimeEnd', studyTimeEnd);
             images.map((image) => formData.append('images', image));
-            // FormData의 key 확인
-            for (let key of formData.keys()) {
-                console.log(key);
-            }
 
-            // FormData의 value 확인
-            for (let value of formData.values()) {
-                console.log(value);
-            }
             createStudy(formData, GroupId);
             navigateToStudy();
         }
@@ -145,8 +140,13 @@ export default function PostStudy() {
                                 overflow: 'hidden',
                                 mr: '10px'
                             }}
+                            key={url}
                         >
-                            <img alt={url} key={url} src={url} width="100%" />
+                            <img
+                                alt={url}
+                                src={url}
+                                style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                            />
                         </Box>
                     );
                 })}
@@ -199,7 +199,8 @@ export default function PostStudy() {
                             color: 'rgba(255, 255, 255, 0.5)',
                             fontSize: '0.75rem',
                             lineHeight: '0.9rem',
-                            margin: '20px 0'
+                            margin: '20px 0',
+                            width: '60%'
                         }}
                     >
                         <LocalizationProvider dateAdapter={AdapterDayjs}>
@@ -352,14 +353,31 @@ export default function PostStudy() {
                         >
                             {Task &&
                                 Task.map((item) => (
-                                    <div style={{ marginBottom: '10px' }} key={item.task}>
+                                    <div style={{ margin: '10px 0' }} key={item.task}>
                                         <Box
                                             sx={{
                                                 fontWeight: 700,
-                                                fontSize: '0.875rem'
+                                                fontSize: '0.875rem',
+                                                display: 'flex',
+                                                alignItems: 'center'
                                             }}
                                         >
                                             {item.task}
+                                            <BackspaceOutlinedIcon
+                                                fontSize="0.6rem"
+                                                sx={{ ml: '10px' }}
+                                                onClick={() => {
+                                                    setTask(
+                                                        Task.filter((i) => i.task !== item.task)
+                                                    );
+                                                    setTaskNames(
+                                                        taskNames.filter((i) => i !== item.name)
+                                                    );
+                                                    setTaskContents(
+                                                        taskContents.filter((i) => i !== item.task)
+                                                    );
+                                                }}
+                                            />
                                         </Box>
                                         <Box
                                             sx={{
