@@ -8,7 +8,6 @@ import Chip from '@mui/material/Chip';
 import Stack from '@mui/material/Stack';
 
 export default function StudyCard(props) {
-    // console.log(props);
     const {
         attendance,
         content,
@@ -21,6 +20,7 @@ export default function StudyCard(props) {
         _id,
         images
     } = props.props;
+
     const StyledStudyCard = styled(Card)`
         display: flex;
         align-items: center;
@@ -79,17 +79,31 @@ export default function StudyCard(props) {
                     </div>
                 </Grid>
                 <Grid item xs={6}>
-                    <CardMedia
-                        component="img"
-                        image={IntroDesign}
-                        alt={title}
-                        style={{
-                            borderRadius: '5px',
-                            width: '107px',
-                            height: '107px',
-                            margin: '10px'
-                        }}
-                    />
+                    {images.length !== 0 ? (
+                        <CardMedia
+                            component="img"
+                            image={images[0]}
+                            alt={title}
+                            style={{
+                                borderRadius: '5px',
+                                width: '107px',
+                                height: '107px',
+                                margin: '10px'
+                            }}
+                        />
+                    ) : (
+                        <CardMedia
+                            component="img"
+                            image={IntroDesign}
+                            alt={title}
+                            style={{
+                                borderRadius: '5px',
+                                width: '107px',
+                                height: '107px',
+                                margin: '10px'
+                            }}
+                        />
+                    )}
                 </Grid>
                 <Grid item xs={6}>
                     <div

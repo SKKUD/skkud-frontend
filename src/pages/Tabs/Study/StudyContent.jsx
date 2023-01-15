@@ -76,8 +76,13 @@ export default function StudyContent() {
                                 overflow: 'hidden',
                                 mr: '10px'
                             }}
+                            key={url}
                         >
-                            <img alt={url} key={url} src={url} width="100%" />
+                            <img
+                                alt={url}
+                                src={url}
+                                style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                            />
                         </Box>
                     );
                 })}
@@ -105,7 +110,8 @@ export default function StudyContent() {
                             taskContents,
                             taskNames,
                             title,
-                            _id
+                            _id,
+                            images
                         }}
                     >
                         <EditBtn />

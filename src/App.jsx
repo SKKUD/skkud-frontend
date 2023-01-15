@@ -70,6 +70,45 @@ export const darkTheme = createTheme({
                     background: '#222222'
                 }
             }
+        },
+        MuiPaper: {
+            styleOverrides: {
+                root: {
+                    maxWidth: '390px'
+                }
+            }
+        },
+        MuiBackdrop: {
+            styleOverrides: {
+                root: {
+                    maxWidth: '390px',
+                    margin: '0 auto'
+                }
+            }
+        },
+        MuiAppBar: {
+            styleOverrides: {
+                root: {
+                    position: 'fixed',
+                    left: '50%',
+                    transform: 'translate(-50%)',
+                    maxWidth: '390px'
+                }
+            }
+        },
+        MuiToolbar: {
+            styleOverrides: {
+                root: {
+                    maxWidth: '390px'
+                }
+            }
+        },
+        MuiTabs: {
+            styleOverrides: {
+                root: {
+                    maxWidth: '390px'
+                }
+            }
         }
     }
 });
@@ -96,7 +135,7 @@ function App() {
                     <div
                         className="App"
                         color="primary"
-                        style={{ paddingTop: '60px', width: '100%', overflow: 'hidden' }}
+                        style={{ paddingTop: '60px', overflow: 'hidden', width: '390px' }}
                     >
                         <MainPage />
                     </div>

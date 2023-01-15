@@ -5,12 +5,7 @@ import styled from '@emotion/styled';
 import insta from '../../assets/insta.png';
 import sender from '../../assets/send.png';
 
-const PngBox = styled.div`
-    position: absolute;
-    width: 16.5px;
-    height: 16.5px;
-    margin: 7px;
-`;
+const PngBox = styled.div``;
 
 const Typography = styled.div`
     font-size: 0.625rem;
@@ -20,16 +15,17 @@ const Typography = styled.div`
     align-items: center;
 `;
 
-const BottomDiv = styled.div`
-    display: flex;
-    flex-direction: column;
-    position: relative;
-`;
-
 const TopDiv = styled.div`
+    height: 18px;
     display: flex;
     flex-direction: row;
     align-items: center;
+    justify-content: space-between;
+`;
+const BottomDiv = styled.div`
+    margin-top: 27.5px;
+    display: flex;
+    flex-direction: column;
 `;
 
 export default function Footer() {
@@ -40,7 +36,9 @@ export default function Footer() {
                 height: '125px',
                 backgroundColor: '#1b1b1b',
 
-                paddingTop: '10px'
+                paddingTop: '16px',
+                paddingLeft: '25px',
+                paddingRight: '23px'
             }}
         >
             <TopDiv>
@@ -49,24 +47,18 @@ export default function Footer() {
                     alt="SKKUD"
                     style={{
                         width: '100px',
-                        filter: 'opacity(0.5) drop-shadow(0 0 0 #000000)',
-                        position: 'relative',
-                        left: '6.69%',
-
-                        top: '14.4%'
+                        filter: 'opacity(0.5) drop-shadow(0 0 0 #000000)'
                     }}
                 />
-                <PngBox style={{ left: '290px' }}>
-                    <img src={insta} />
-                </PngBox>
-                <PngBox style={{ left: '320px' }}>
+                <div style={{ height: '18px' }}>
+                    <img src={insta} style={{ marginRight: '16px' }} />
                     <img src={sender} />
-                </PngBox>
+                </div>
             </TopDiv>
-            <BottomDiv style={{ left: '24px', top: '30px' }}>
+            <BottomDiv>
                 <Typography>Sungkyunkwan University</Typography>
                 <Typography>Designer & Developer Group</Typography>
-                <Typography>Team Leader 강동헌</Typography>
+                <Typography style={{ marginTop: '6px' }}>Team Leader 강동헌</Typography>
             </BottomDiv>
         </Box>
     );
