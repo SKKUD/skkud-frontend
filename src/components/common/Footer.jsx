@@ -4,8 +4,7 @@ import SKKUDLOGO from '../../assets/SKKUD_LOGO.png';
 import styled from '@emotion/styled';
 import insta from '../../assets/insta.png';
 import sender from '../../assets/send.png';
-
-const PngBox = styled.div``;
+import { calculateNewValue } from '@testing-library/user-event/dist/utils';
 
 const Typography = styled.div`
     font-size: 0.625rem;

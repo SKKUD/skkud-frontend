@@ -115,17 +115,9 @@ export default function EditStudy() {
             }
             formData.append('studyTimeStart', studyTimeStart);
             formData.append('studyTimeEnd', studyTimeEnd);
-            newimages.map((image) => formData.append('images', image));
-
-            // /* key 확인하기 */
-            // for (let key of formData.keys()) {
-            //     console.log(key);
-            // }
-
-            // /* value 확인하기 */
-            // for (let value of formData.values()) {
-            //     console.log(value);
-            // }
+            if (newimages.length > 0) {
+                newimages.map((image) => formData.append('images', image));
+            }
 
             updateStudy(formData, postId);
             navigateToStudy();
@@ -217,7 +209,7 @@ export default function EditStudy() {
                             fontSize: '0.75rem',
                             lineHeight: '0.9rem',
                             margin: '20px 0',
-                            width: '60%'
+                            width: '70%'
                         }}
                     >
                         <LocalizationProvider dateAdapter={AdapterDayjs}>

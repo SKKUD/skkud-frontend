@@ -27,7 +27,7 @@ function Header() {
                     src={SKKUDLOGO}
                     alt="SKKUD"
                     style={{
-                        width: '167px',
+                        width: '146px',
                         margin: 0
                     }}
                     onClick={navigateToMaintab}

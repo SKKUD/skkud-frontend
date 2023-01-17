@@ -31,8 +31,9 @@ export default function MemberNav() {
             aria-label="Platform"
             style={{
                 display: 'flex',
+                width: '100%',
                 flexDirection: 'row',
-                justifyContent: 'center',
+                justifyContent: 'space-evenly',
                 alignItems: 'center'
             }}
         >
@@ -47,11 +48,13 @@ export default function MemberNav() {
                     borderRadius: '33px',
                     border: '1px solid #00FFA8',
                     padding: '4px 18px',
-                    width: '122px',
-                    height: '22px'
+                    height: '22px',
+                    fontSize: '0.75rem',
+                    fontWeight: 600,
+                    textTransform: 'none'
                 }}
             >
-                <p style={{ fontSize: '0.7rem' }}>frontend</p>
+                Frontend
             </ToggleButton>
             <ToggleButton
                 value="backend"
@@ -64,11 +67,13 @@ export default function MemberNav() {
                     borderRadius: '33px',
                     border: '1px solid #00FFA8',
                     padding: '4px 18px',
-                    width: '122px',
-                    height: '22px'
+                    height: '22px',
+                    fontSize: '0.75rem',
+                    fontWeight: 600,
+                    textTransform: 'none'
                 }}
             >
-                <p style={{ fontSize: '0.7rem' }}>backend</p>
+                Backend
             </ToggleButton>
             <ToggleButton
                 value="design"
@@ -81,11 +86,13 @@ export default function MemberNav() {
                     borderRadius: '33px',
                     border: '1px solid #00FFA8',
                     padding: '4px 18px',
-                    width: '122px',
-                    height: '22px'
+                    height: '22px',
+                    fontSize: '0.75rem',
+                    fontWeight: 600,
+                    textTransform: 'none'
                 }}
             >
-                <p style={{ fontSize: '0.6rem' }}>UI/UX Designer</p>
+                UI/UX Designer
             </ToggleButton>
         </ToggleButtonGroup>
     );
