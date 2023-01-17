@@ -175,6 +175,19 @@ export default function EditProject() {
     }
     return (
         <form>
+            <Box
+                mb="12px"
+                sx={{
+                    border: '1px solid #00FFA8',
+                    boxSizing: 'border-box',
+                    height: '205px',
+                    overflow: 'hidden'
+                }}
+            >
+                {PreviewImg.length === 0
+                    ? images && <img src={images} alt=".image" key={images} width="100%" />
+                    : PreviewImg && <PreImages imgFiles={PreviewImg} />}
+            </Box>
             <TextField
                 fullWidth
                 label="Project Title"
@@ -249,19 +262,6 @@ export default function EditProject() {
                 >
                     submit
                 </Button>
-            </Box>
-            <Box
-                mt="12px"
-                sx={{
-                    border: '1px solid #00FFA8',
-                    boxSizing: 'border-box',
-                    height: '205px',
-                    overflow: 'hidden'
-                }}
-            >
-                {PreviewImg.length === 0
-                    ? images && <img src={images} alt={title} key={images} width="100%" />
-                    : PreviewImg && <PreImages imgFiles={PreviewImg} />}
             </Box>
         </form>
     );

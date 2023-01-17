@@ -9,7 +9,7 @@ import Stack from '@mui/material/Stack';
 import Card from '@mui/material/Card';
 import StudyDeleteBtn from '../../../components/Main/study/StudyDeleteBtn';
 import EditBtn from '../../../components/common/EditBtn';
-import img from '../../../assets/introArt_black.jpeg';
+import img from '../../../assets/IntroDesign.png';
 import FmdGoodOutlinedIcon from '@mui/icons-material/FmdGoodOutlined';
 
 export default function StudyContent() {
@@ -20,18 +20,21 @@ export default function StudyContent() {
     // const [user] = useProjectUserApi();
 
     const loc = useLocation();
+
     const {
         attendance,
         content,
         groupId,
         location,
-        studyTime,
+        studyTimeEnd,
+        studyTimeStart,
         taskContents,
         taskNames,
         title,
         _id,
         images
     } = loc.state;
+    console.log(loc);
 
     for (let i = 0; i < taskContents.length; i++) {
         Task.push({ task: taskContents[i], name: taskNames[i] });
@@ -106,7 +109,8 @@ export default function StudyContent() {
                             content,
                             groupId,
                             location,
-                            studyTime,
+                            studyTimeEnd,
+                            studyTimeStart,
                             taskContents,
                             taskNames,
                             title,
@@ -240,7 +244,14 @@ export default function StudyContent() {
                         >
                             스터디 자료
                         </Box>
-                        <ViewImages imgFiles={images} />
+                        {images.length > 0 ? (
+                            <ViewImages imgFiles={images} />
+                        ) : (
+                            <img
+                                src={img}
+                                style={{ width: '160px', height: '160px', borderRadius: '5px' }}
+                            />
+                        )}
                     </Box>
                     <Box mb={'50px'}>
                         <Box

@@ -144,6 +144,19 @@ export default function PostProject() {
     }
     return (
         <form encType="multipart/form-data">
+            {PreviewImg.length !== 0 ? (
+                <Box
+                    mb="12px"
+                    sx={{
+                        border: '1px solid #00FFA8',
+                        boxSizing: 'border-box',
+                        height: '205px',
+                        overflow: 'hidden'
+                    }}
+                >
+                    <PreImages imgFiles={PreviewImg} />
+                </Box>
+            ) : null}
             <TextField
                 fullWidth
                 label="Project Title"
@@ -207,19 +220,6 @@ export default function PostProject() {
                     submit
                 </Button>
             </Box>
-            {PreviewImg.length !== 0 ? (
-                <Box
-                    mt="12px"
-                    sx={{
-                        border: '1px solid #00FFA8',
-                        boxSizing: 'border-box',
-                        height: '205px',
-                        overflow: 'hidden'
-                    }}
-                >
-                    <PreImages imgFiles={PreviewImg} />
-                </Box>
-            ) : null}
         </form>
     );
 }

@@ -57,7 +57,7 @@ const StyledTabs = styled((props) => (
         backgroundColor: 'transparent'
     },
     '& .MuiTabs-indicatorSpan': {
-        maxWidth: 80,
+        maxWidth: 70,
         width: '100%',
         backgroundColor: '#00FFB0'
     }
@@ -66,7 +66,7 @@ const StyledTabs = styled((props) => (
 const StyledTab = styled((props) => <Tab disableRipple {...props} />)(({ theme }) => ({
     textTransform: 'none',
     fontWeight: 600,
-    paddingBottom: '5px',
+    padding: '12px 15px 5px',
     fontSize: theme.typography.pxToRem(15),
     color: 'rgba(255, 255, 255, 0.7)',
     '&.Mui-selected': {
@@ -134,6 +134,7 @@ function MainTab() {
                     variant="fullWidth"
                     sx={{
                         width: '100%',
+                        padding: '0 8px',
                         position: 'fixed',
                         bgcolor: 'background.paper',
                         marginTop: '40px',

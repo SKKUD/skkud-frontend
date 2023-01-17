@@ -38,6 +38,7 @@ SidebarItem.propTypes = {
 
 export default function SideBar() {
     const [cookies] = useCookies(['id']);
+
     const [open, setOpen] = React.useState(false);
 
     const toggleDrawer = (val) => (event) => {

@@ -77,11 +77,12 @@ export default function ProjectDetail() {
                         lineHeight: '14.32pxpx',
                         mt: '9px',
                         mb: '27px',
-                        fontSize: '0.75rem',
-                        textDecoration: 'underline'
+                        fontSize: '0.75rem'
                     }}
                 >
-                    {link}
+                    <a href={link} style={{ color: '#fff' }}>
+                        {link}
+                    </a>
                 </Box>
                 <Box sx={{ display: 'flex', lineHeight: '14.32px' }}>
                     <Box
