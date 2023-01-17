@@ -200,7 +200,7 @@ export default function PostStudy() {
                             fontSize: '0.75rem',
                             lineHeight: '0.9rem',
                             margin: '20px 0',
-                            width: '60%'
+                            width: '70%'
                         }}
                     >
                         <LocalizationProvider dateAdapter={AdapterDayjs}>

@@ -47,7 +47,7 @@ export default function MemberCard({
     return (
         <>
             <ButtonBase
-                sx={{ width: 350, display: 'flex', flexDirection: 'column' }}
+                sx={{ width: '100%', display: 'flex', flexDirection: 'column' }}
                 onClick={() => setIsVisible(!isVisible)}
             >
                 <Card
