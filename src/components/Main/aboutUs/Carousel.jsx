@@ -5,7 +5,7 @@ import 'slick-carousel/slick/slick-theme.css';
 import ImageList from '@mui/material/ImageList';
 
 export default function Carousel(props) {
-    const settings = { dots: true, infinite: true, speed: 500 };
+    // const settings = { dots: true, infinite: true, speed: 500 };
     const imgList = props.images;
     return (
         <div
