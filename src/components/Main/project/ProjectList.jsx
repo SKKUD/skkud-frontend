@@ -1,16 +1,10 @@
 import * as React from 'react';
-import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { useCookies } from 'react-cookie';
 import { useProjectListApi } from '../../../hooks/Project';
-import Box from '@mui/material/Box';
-import DeleteBtn from '../../../components/Main/project/DeleteBtn';
-import EditBtn from '../../common/EditBtn';
 import Card from '@mui/material/Card';
 import ProjectCard from './ProjectCard';
 
 export default function ProjectList() {
-    const [cookies] = useCookies(['id']);
     const [postList] = useProjectListApi();
 
     function createData(
@@ -47,7 +41,6 @@ export default function ProjectList() {
     return Projects.slice(0)
         .reverse()
         .map((project) => {
-            const { _id, body, title, images, mainimage, tags, developPeriod, link } = project;
             return (
                 <Card sx={{ borderRadius: '25px', mb: 2 }} key={project.index}>
                     <Link

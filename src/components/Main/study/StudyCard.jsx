@@ -7,19 +7,17 @@ import CardMedia from '@mui/material/CardMedia';
 import Chip from '@mui/material/Chip';
 import Stack from '@mui/material/Stack';
 
+function getDayOfWeek(date) {
+    const week = ['일', '월', '화', '수', '목', '금', '토'];
+    const dayOfWeek = week[new Date(date).getDay()];
+
+    return dayOfWeek;
+}
 export default function StudyCard(props) {
-    const {
-        attendance,
-        content,
-        groupId,
-        location,
-        studyTime,
-        taskContents,
-        taskNames,
-        title,
-        _id,
-        images
-    } = props.props;
+    const { attendance, content, studyTimeStart, title, images } = props.props;
+
+    const date = studyTimeStart.substring(0, 10).replaceAll('-', '.');
+    const day = getDayOfWeek(date);
 
     const StyledStudyCard = styled(Card)`
         display: flex;
@@ -75,7 +73,7 @@ export default function StudyCard(props) {
                             lineHeight: '0.9rem'
                         }}
                     >
-                        studytiem
+                        {date + '(' + day + ')'}
                     </div>
                 </Grid>
                 <Grid item xs={6}>

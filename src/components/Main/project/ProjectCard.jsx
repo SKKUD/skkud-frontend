@@ -4,7 +4,7 @@ import Card from '@mui/material/Card';
 
 export default function ProjectCard(project) {
     const projectPosts = { ...project };
-    const { title, body, images, mainimage, tags, developPeriod } = projectPosts.project;
+    const { title, body, mainimage, tags, developPeriod } = projectPosts.project;
     const InnerCard = styled(Card)`
         height: 295px;
         border-radius: 25px;
