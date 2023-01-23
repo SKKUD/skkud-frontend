@@ -42,6 +42,8 @@ export default function EditProject() {
         fetchEvents();
     }, []);
 
+    console.log(users);
+
     // :id 파라미터
     const { index } = useParams();
 
