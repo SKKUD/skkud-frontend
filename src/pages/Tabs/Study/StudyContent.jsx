@@ -34,7 +34,6 @@ export default function StudyContent() {
         _id,
         images
     } = loc.state;
-    console.log(loc);
 
     for (let i = 0; i < taskContents.length; i++) {
         Task.push({ task: taskContents[i], name: taskNames[i] });

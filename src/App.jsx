@@ -2,11 +2,9 @@ import React, { useState, useMemo } from 'react';
 import axios from 'axios';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
-import { UserContext } from './context/UserContext';
 import { TrackContext } from './context/TrackContext';
 import MainPage from './pages/MainPage';
 import './utils/font.css';
-// import SideBarDrawer from './components/common/SideBarDrawer';
 
 axios.defaults.withCredentials = true;
 
@@ -114,33 +112,23 @@ export const darkTheme = createTheme({
 });
 
 function App() {
-    const [user, setUser] = useState();
     const [trackTab, setTrackTab] = useState();
-    const userValue = useMemo(() => ({ user, setUser }), [user, setUser]);
+
     const trackValue = useMemo(() => ({ trackTab, setTrackTab }), [trackTab, setTrackTab]);
-    // useEffect(() => {
-    //     axios
-    //         .post(
-    //             'http://localhost:8000/auth/login',
-    //             { userID: 'skkud', passwd: 'skkud' },
-    //             { withCredentials: true }
-    //         )
-    //         .then((user) => console.log(user));
-    // }, []);
+
     return (
         <ThemeProvider theme={darkTheme}>
             <CssBaseline />
-            <UserContext.Provider value={userValue}>
-                <TrackContext.Provider value={trackValue}>
-                    <div
-                        className="App"
-                        color="primary"
-                        style={{ paddingTop: '60px', overflow: 'hidden', maxWidth: '390px' }}
-                    >
-                        <MainPage />
-                    </div>
-                </TrackContext.Provider>
-            </UserContext.Provider>
+
+            <TrackContext.Provider value={trackValue}>
+                <div
+                    className="App"
+                    color="primary"
+                    style={{ paddingTop: '60px', overflow: 'hidden', maxWidth: '390px' }}
+                >
+                    <MainPage />
+                </div>
+            </TrackContext.Provider>
         </ThemeProvider>
     );
 }

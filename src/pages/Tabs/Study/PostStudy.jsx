@@ -21,11 +21,13 @@ import TextField from '@mui/material/TextField';
 import InputAdornment from '@mui/material/InputAdornment';
 import Button from '@mui/material/Button';
 import BackspaceOutlinedIcon from '@mui/icons-material/BackspaceOutlined';
+import Alert from '@mui/material/Alert';
+import Snackbar from '@mui/material/Snackbar';
 
 export default function PostStudy() {
     const [studies, filterStudies, study, createStudy, updateStudy, deleteStudy] = useStudiesApi();
     const loc = useLocation();
-    console.log(loc);
+
     const GroupId = loc.state.id;
 
     const navigate = useNavigate();
@@ -33,6 +35,10 @@ export default function PostStudy() {
         navigate('/maintab/study');
         window.location.reload();
     };
+    const [alertTitle, setAlertTitle] = useState(false);
+    const [alertContent, setAlertContent] = useState(false);
+    const [alertTaskContent, setAlertTaskContent] = useState(false);
+    const [alertTaskName, setAlertTaskName] = useState(false);
 
     const [title, setTitle] = useState('');
     const [content, setContent] = useState('');
@@ -75,9 +81,11 @@ export default function PostStudy() {
 
     const HandleAddTask = () => {
         if (taskContent === '') {
-            alert('과제 내용을 입력하세요');
+            // alert('과제 내용을 입력하세요');
+            setAlertTaskContent(true);
         } else if (taskName === '') {
-            alert('이름을 입력하세요');
+            // alert('이름을 입력하세요');
+            setAlertTaskName(true);
         } else {
             setTaskContents([...taskContents, taskContent]);
             setTaskNames([...taskNames, taskName]);
@@ -89,9 +97,11 @@ export default function PostStudy() {
 
     const HandlPostSubmit = () => {
         if (title === '') {
-            alert('제목을 입력하세요');
+            // alert('제목을 입력하세요');
+            setAlertTitle(true);
         } else if (content === '') {
-            alert('내용을 입력하세요');
+            // alert('내용을 입력하세요');
+            setAlertContent(true);
         } else {
             const formData = new FormData();
             formData.append('title', title);
@@ -163,90 +173,27 @@ export default function PostStudy() {
     }
 
     return (
-        <form encType="multipart/form-data">
-            <Card sx={{ borderRadius: '24px', pb: '40px' }}>
-                <Box
-                    sx={{
-                        display: 'flex',
-                        flexDirection: 'column',
-                        padding: '0 21px',
-                        mt: '20px',
-                        justifyContent: 'center'
-                    }}
-                >
+        <>
+            <form encType="multipart/form-data">
+                <Card sx={{ borderRadius: '24px', pb: '40px' }}>
                     <Box
-                        style={{
-                            fontSize: '1.125rem',
-                            fontWeight: 600,
-                            lineHeight: '21.48px',
-                            marginBottom: '8px',
-                            overflow: 'hidden'
+                        sx={{
+                            display: 'flex',
+                            flexDirection: 'column',
+                            padding: '0 21px',
+                            mt: '20px',
+                            justifyContent: 'center'
                         }}
                     >
                         <Box
-                            sx={{
-                                color: 'rgba(255, 255, 255, 0.5)',
+                            style={{
+                                fontSize: '1.125rem',
                                 fontWeight: 600,
-                                fontSize: '0.75rem'
+                                lineHeight: '21.48px',
+                                marginBottom: '8px',
+                                overflow: 'hidden'
                             }}
                         >
-                            스터디 제목
-                        </Box>
-                        <Input fullWidth onChange={(e) => setTitle(e.target.value)} />
-                    </Box>
-                    <div
-                        style={{
-                            color: 'rgba(255, 255, 255, 0.5)',
-                            fontSize: '0.75rem',
-                            lineHeight: '0.9rem',
-                            margin: '20px 0',
-                            width: '70%'
-                        }}
-                    >
-                        <LocalizationProvider dateAdapter={AdapterDayjs}>
-                            <Stack spacing={2}>
-                                <DateTimePicker
-                                    label="스터디 시작 시간"
-                                    value={studyTimeStart}
-                                    onChange={handleChangeStart}
-                                    renderInput={(params) => (
-                                        <TextField {...params} size="small" variant="standard" />
-                                    )}
-                                />
-                                <DateTimePicker
-                                    label="스터디 종료 시간"
-                                    value={studyTimeEnd}
-                                    onChange={handleChangeEnd}
-                                    renderInput={(params) => (
-                                        <TextField {...params} size="small" variant="standard" />
-                                    )}
-                                />
-                                <TextField
-                                    label="location"
-                                    size="small"
-                                    fullWidth
-                                    variant="standard"
-                                    onChange={(e) => setLocation(e.target.value)}
-                                    InputProps={{
-                                        startAdornment: (
-                                            <InputAdornment position="start">
-                                                <FmdGoodOutlinedIcon
-                                                    sx={{
-                                                        width: '14px',
-                                                        height: '16px',
-                                                        margin: '0px 8px 3px 0px'
-                                                    }}
-                                                />
-                                            </InputAdornment>
-                                        )
-                                    }}
-                                />
-                            </Stack>
-                        </LocalizationProvider>
-                    </div>
-
-                    <Box mb={'21px'}>
-                        <Box sx={{ display: 'flex', lineHeight: '14.32px', marginBottom: '10px' }}>
                             <Box
                                 sx={{
                                     color: 'rgba(255, 255, 255, 0.5)',
@@ -254,170 +201,275 @@ export default function PostStudy() {
                                     fontSize: '0.75rem'
                                 }}
                             >
-                                참여자
+                                스터디 제목
                             </Box>
+                            <Input fullWidth onChange={(e) => setTitle(e.target.value)} />
+                        </Box>
+                        <div
+                            style={{
+                                color: 'rgba(255, 255, 255, 0.5)',
+                                fontSize: '0.75rem',
+                                lineHeight: '0.9rem',
+                                margin: '20px 0',
+                                width: '70%'
+                            }}
+                        >
+                            <LocalizationProvider dateAdapter={AdapterDayjs}>
+                                <Stack spacing={2}>
+                                    <DateTimePicker
+                                        label="스터디 시작 시간"
+                                        value={studyTimeStart}
+                                        onChange={handleChangeStart}
+                                        renderInput={(params) => (
+                                            <TextField
+                                                {...params}
+                                                size="small"
+                                                variant="standard"
+                                            />
+                                        )}
+                                    />
+                                    <DateTimePicker
+                                        label="스터디 종료 시간"
+                                        value={studyTimeEnd}
+                                        onChange={handleChangeEnd}
+                                        renderInput={(params) => (
+                                            <TextField
+                                                {...params}
+                                                size="small"
+                                                variant="standard"
+                                            />
+                                        )}
+                                    />
+                                    <TextField
+                                        label="location"
+                                        size="small"
+                                        fullWidth
+                                        variant="standard"
+                                        onChange={(e) => setLocation(e.target.value)}
+                                        InputProps={{
+                                            startAdornment: (
+                                                <InputAdornment position="start">
+                                                    <FmdGoodOutlinedIcon
+                                                        sx={{
+                                                            width: '14px',
+                                                            height: '16px',
+                                                            margin: '0px 8px 3px 0px'
+                                                        }}
+                                                    />
+                                                </InputAdornment>
+                                            )
+                                        }}
+                                    />
+                                </Stack>
+                            </LocalizationProvider>
+                        </div>
+
+                        <Box mb={'21px'}>
                             <Box
                                 sx={{
-                                    ml: '12px',
-                                    fontSize: '0.563rem',
-                                    color: 'rgba(255, 255, 255, 0.5)'
+                                    display: 'flex',
+                                    lineHeight: '14.32px',
+                                    marginBottom: '10px'
                                 }}
                             >
-                                띄어쓰기 없이 ,로 구분하여 입력해주세요.
+                                <Box
+                                    sx={{
+                                        color: 'rgba(255, 255, 255, 0.5)',
+                                        fontWeight: 600,
+                                        fontSize: '0.75rem'
+                                    }}
+                                >
+                                    참여자
+                                </Box>
+                                <Box
+                                    sx={{
+                                        ml: '12px',
+                                        fontSize: '0.563rem',
+                                        color: 'rgba(255, 255, 255, 0.5)'
+                                    }}
+                                >
+                                    띄어쓰기 없이 ,로 구분하여 입력해주세요.
+                                </Box>
                             </Box>
-                        </Box>
-                        <Input
-                            multiline
-                            fullWidth
-                            onChange={(e) => {
-                                const tagsArray = e.target.value.split(',');
-                                setAtd(tagsArray);
-                            }}
-                        />
-                    </Box>
-                    <Box mb={'18px'}>
-                        <Box
-                            sx={{
-                                color: 'rgba(255, 255, 255, 0.5)',
-                                fontWeight: 600,
-                                fontSize: '0.75rem',
-                                mb: '11px'
-                            }}
-                        >
-                            스터디 내용
-                        </Box>
-                        <Box
-                            sx={{
-                                fontSize: '0.75rem',
-                                mb: '11px'
-                            }}
-                        >
                             <Input
                                 multiline
                                 fullWidth
-                                onChange={(e) => setContent(e.target.value)}
-                            />
-                        </Box>
-                    </Box>
-                    <Box mb={'18px'}>
-                        <Box
-                            sx={{
-                                color: 'rgba(255, 255, 255, 0.5)',
-                                fontWeight: 600,
-                                fontSize: '0.75rem',
-                                mb: '11px'
-                            }}
-                        >
-                            스터디 자료
-                        </Box>
-                        {PreviewImg.length !== 0 ? (
-                            <PreImages imgFiles={PreviewImg} />
-                        ) : (
-                            <Box
-                                mt="12px"
-                                sx={{
-                                    display: 'flex',
-                                    alignItems: 'center',
-                                    border: '1px solid rgba(255, 255, 255, 0.5)',
-                                    boxSizing: 'border-box',
-                                    height: '180px'
+                                onChange={(e) => {
+                                    const tagsArray = e.target.value.split(',');
+                                    setAtd(tagsArray);
                                 }}
-                            ></Box>
-                        )}
-                        <IconButton color="primary" aria-label="upload picture" component="label">
-                            <input
-                                hidden
-                                name="images"
-                                multiple
-                                type="file"
-                                accept="image/jpg,image/png,image/jpeg,image/gif"
-                                onChange={uploadImgFile}
                             />
-                            <PhotoCamera />
-                        </IconButton>
-                    </Box>
-                    <Box mb={'50px'}>
-                        <Box
-                            sx={{
-                                color: 'rgba(255, 255, 255, 0.5)',
-                                fontWeight: 600,
-                                fontSize: '0.75rem'
-                            }}
-                        >
-                            과제
                         </Box>
-                        <Stack
-                            direction="column"
-                            spacing={0.5}
-                            sx={{ justifyContent: 'left', flexWrap: 'wrap' }}
-                        >
-                            {Task &&
-                                Task.map((item) => (
-                                    <div style={{ margin: '10px 0' }} key={item.task}>
-                                        <Box
-                                            sx={{
-                                                fontWeight: 700,
-                                                fontSize: '0.875rem',
-                                                display: 'flex',
-                                                alignItems: 'center'
-                                            }}
-                                        >
-                                            {item.task}
-                                            <BackspaceOutlinedIcon
-                                                fontSize="0.6rem"
-                                                sx={{ ml: '10px' }}
-                                                onClick={() => {
-                                                    setTask(
-                                                        Task.filter((i) => i.task !== item.task)
-                                                    );
-                                                    setTaskNames(
-                                                        taskNames.filter((i) => i !== item.name)
-                                                    );
-                                                    setTaskContents(
-                                                        taskContents.filter((i) => i !== item.task)
-                                                    );
+                        <Box mb={'18px'}>
+                            <Box
+                                sx={{
+                                    color: 'rgba(255, 255, 255, 0.5)',
+                                    fontWeight: 600,
+                                    fontSize: '0.75rem',
+                                    mb: '11px'
+                                }}
+                            >
+                                스터디 내용
+                            </Box>
+                            <Box
+                                sx={{
+                                    fontSize: '0.75rem',
+                                    mb: '11px'
+                                }}
+                            >
+                                <Input
+                                    multiline
+                                    fullWidth
+                                    onChange={(e) => setContent(e.target.value)}
+                                />
+                            </Box>
+                        </Box>
+                        <Box mb={'18px'}>
+                            <Box
+                                sx={{
+                                    color: 'rgba(255, 255, 255, 0.5)',
+                                    fontWeight: 600,
+                                    fontSize: '0.75rem',
+                                    mb: '11px'
+                                }}
+                            >
+                                스터디 자료
+                            </Box>
+                            {PreviewImg.length !== 0 ? (
+                                <PreImages imgFiles={PreviewImg} />
+                            ) : (
+                                <Box
+                                    mt="12px"
+                                    sx={{
+                                        display: 'flex',
+                                        alignItems: 'center',
+                                        border: '1px solid rgba(255, 255, 255, 0.5)',
+                                        boxSizing: 'border-box',
+                                        height: '180px'
+                                    }}
+                                ></Box>
+                            )}
+                            <IconButton
+                                color="primary"
+                                aria-label="upload picture"
+                                component="label"
+                            >
+                                <input
+                                    hidden
+                                    name="images"
+                                    multiple
+                                    type="file"
+                                    accept="image/jpg,image/png,image/jpeg,image/gif"
+                                    onChange={uploadImgFile}
+                                />
+                                <PhotoCamera />
+                            </IconButton>
+                        </Box>
+                        <Box mb={'50px'}>
+                            <Box
+                                sx={{
+                                    color: 'rgba(255, 255, 255, 0.5)',
+                                    fontWeight: 600,
+                                    fontSize: '0.75rem'
+                                }}
+                            >
+                                과제
+                            </Box>
+                            <Stack
+                                direction="column"
+                                spacing={0.5}
+                                sx={{ justifyContent: 'left', flexWrap: 'wrap' }}
+                            >
+                                {Task &&
+                                    Task.map((item) => (
+                                        <div style={{ margin: '10px 0' }} key={item.task}>
+                                            <Box
+                                                sx={{
+                                                    fontWeight: 700,
+                                                    fontSize: '0.875rem',
+                                                    display: 'flex',
+                                                    alignItems: 'center'
                                                 }}
-                                            />
-                                        </Box>
-                                        <Box
-                                            sx={{
-                                                fontSize: '0.75rem'
-                                            }}
-                                        >
-                                            {item.name}
-                                        </Box>
+                                            >
+                                                {item.task}
+                                                <BackspaceOutlinedIcon
+                                                    fontSize="0.6rem"
+                                                    sx={{ ml: '10px' }}
+                                                    onClick={() => {
+                                                        setTask(
+                                                            Task.filter((i) => i.task !== item.task)
+                                                        );
+                                                        setTaskNames(
+                                                            taskNames.filter((i) => i !== item.name)
+                                                        );
+                                                        setTaskContents(
+                                                            taskContents.filter(
+                                                                (i) => i !== item.task
+                                                            )
+                                                        );
+                                                    }}
+                                                />
+                                            </Box>
+                                            <Box
+                                                sx={{
+                                                    fontSize: '0.75rem'
+                                                }}
+                                            >
+                                                {item.name}
+                                            </Box>
+                                        </div>
+                                    ))}
+                                <div style={{ display: 'flex', alignItems: 'flex-start' }}>
+                                    <TaskAddBtn />
+                                    <div style={{ flexDirection: 'column' }}>
+                                        <Input
+                                            multiline
+                                            fullWidth
+                                            placeholder="과제 내용"
+                                            onChange={(e) => setTaskContent(e.target.value)}
+                                            value={taskContent}
+                                        />
+                                        <Input
+                                            placeholder="이름"
+                                            onChange={(e) => setTaskName(e.target.value)}
+                                            value={taskName}
+                                        />
                                     </div>
-                                ))}
-                            <div style={{ display: 'flex', alignItems: 'flex-start' }}>
-                                <TaskAddBtn />
-                                <div style={{ flexDirection: 'column' }}>
-                                    <Input
-                                        multiline
-                                        fullWidth
-                                        placeholder="과제 내용"
-                                        onChange={(e) => setTaskContent(e.target.value)}
-                                        value={taskContent}
-                                    />
-                                    <Input
-                                        placeholder="이름"
-                                        onChange={(e) => setTaskName(e.target.value)}
-                                        value={taskName}
-                                    />
                                 </div>
-                            </div>
-                        </Stack>
+                            </Stack>
+                        </Box>
+                        <Button
+                            color="primary"
+                            variant="contained"
+                            size="small"
+                            sx={{ mb: 1.5, textTransform: 'none' }}
+                            onClick={HandlPostSubmit}
+                        >
+                            Submit
+                        </Button>
                     </Box>
-                    <Button
-                        color="primary"
-                        variant="contained"
-                        size="small"
-                        sx={{ mb: 1.5, textTransform: 'none' }}
-                        onClick={HandlPostSubmit}
-                    >
-                        Submit
-                    </Button>
-                </Box>
-            </Card>
-        </form>
+                </Card>
+            </form>
+            <Snackbar open={alertTaskName} autoHideDuration={1000}>
+                <Alert severity="error" sx={{ width: '100%' }}>
+                    이름을 입력하세요.
+                </Alert>
+            </Snackbar>
+            <Snackbar open={alertTaskContent} autoHideDuration={1000}>
+                <Alert severity="error" sx={{ width: '100%' }}>
+                    과제 내용을 입력하세요.
+                </Alert>
+            </Snackbar>
+            <Snackbar open={alertTitle} autoHideDuration={1000}>
+                <Alert severity="error" sx={{ width: '100%' }}>
+                    제목을 입력하세요.
+                </Alert>
+            </Snackbar>
+            <Snackbar open={alertContent} autoHideDuration={1000}>
+                <Alert severity="error" sx={{ width: '100%' }}>
+                    내용을 입력하세요.
+                </Alert>
+            </Snackbar>
+        </>
     );
 }

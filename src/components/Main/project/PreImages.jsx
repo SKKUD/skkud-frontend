@@ -13,6 +13,5 @@ function PreImages({ imgFiles }) {
 
 PreImages.propTypes = {
     imgFiles: PropTypes.arrayOf(PropTypes.string).isRequired
-    // imgFiles: PropTypes.string.isRequired,
 };
 export default PreImages;

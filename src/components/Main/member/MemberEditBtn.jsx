@@ -8,7 +8,6 @@ export function MemberEditBtn(_id) {
     const id = Object.values(_id)[0];
     const navigate = useNavigate();
     const navigateToMemberEdit = () => {
-        // navigate(`/maintab/mypage/${id}`);
         navigate('/maintab/mypage', { state: { id: id } });
     };
 
@@ -30,7 +29,6 @@ export function MemberEditDetailBtn(_id) {
     const id = Object.values(_id)[0];
     const navigate = useNavigate();
     const navigateToUserDetail = () => {
-        // navigate(`/maintab/edituserdetail/${id}`);
         navigate('/maintab/member/mypagedetail');
     };
 

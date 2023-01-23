@@ -9,8 +9,6 @@ import Typography from '@mui/material/Typography';
 import ButtonBase from '@mui/material/ButtonBase';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
-import MemberDeleteBtn from './MemberDeleteBtn';
-import { MemberEditBtn } from './MemberEditBtn';
 import { useCookies } from 'react-cookie';
 import { UserContext } from '../../../context/UserContext';
 
@@ -40,8 +38,8 @@ export default function MemberCard({
     major,
     projects
 }) {
-    const { user } = useContext(UserContext);
-    const [cookies] = useCookies(['id']);
+    // const { user } = useContext(UserContext);
+    // const [cookies] = useCookies(['id']);
     const [isVisible, setIsVisible] = useState(false);
 
     return (
@@ -63,11 +61,6 @@ export default function MemberCard({
                         backgroundColor: '#3A3A3A'
                     }}
                 >
-                    {/* {cookies.id ? (
-                        <div style={{ textAlign: 'right' }}>
-                            <MemberDeleteBtn _id={id} />
-                        </div>
-                    ) : null} */}
                     <Grid container spacing={1}>
                         <Grid item style={{ display: 'flex', alignItems: 'center' }}>
                             <CardMedia

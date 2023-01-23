@@ -8,12 +8,13 @@ import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import { useCookies } from 'react-cookie';
-import { UserContext } from '../context/UserContext';
 import Header from '../components/common/Header';
 import CreateUserBtn from '../components/Main/member/CreateUserBtn';
+import Alert from '@mui/material/Alert';
+import Snackbar from '@mui/material/Snackbar';
 
 export default function Login() {
-    const { user, setUser } = useContext(UserContext);
+    const [errorMsg, setErrorMsg] = useState('');
     const [ID, setID] = useState('');
     const [PW, setPW] = useState('');
     const [cookies, setCookie, removeCookie] = useCookies([]);
@@ -30,21 +31,15 @@ export default function Login() {
             .post('http://localhost:8000/auth/login', { userID: ID, passwd: PW })
             .then((userData) => {
                 if (userData.data.loginSuccess === true) {
-                    setUser(ID);
                     setCookie('id', ID);
                     navigateToMainTab();
                 }
-                // } else if (userData.data.message === '비밀번호가 틀렸습니다.') {
-                //     alert('비밀번호가 틀렸습니다.');
-                // } else {
-                //     alert('아이디에 해당하는 유저 정보가 없습니다.');
-                // }
             })
             .catch((error) => {
                 console.log('error', error);
-                alert(error.response.data.message);
+                // alert(error.response.data.message);
+                setErrorMsg(error.response.data.message);
             });
-        // window.location.reload();
     };
 
     if (cookies.id) {
@@ -54,12 +49,10 @@ export default function Login() {
                 setPreviewImg(res.data.data.user.image);
             };
             fetchEvents();
-            console.log('cookied id', cookies.id);
         }, []);
     }
 
     const logoutBtn = async () => {
-        setUser('');
         removeCookie('id');
         authCheck();
         await axios
@@ -69,7 +62,7 @@ export default function Login() {
         navigateToMainTab();
         window.location.reload();
     };
-    console.log('cookies x_auth', cookies.x_auth);
+
     const authCheck = () => {
         const token = cookies.id;
         axios
@@ -77,13 +70,8 @@ export default function Login() {
             .then((res) => {
                 console.log('authcheck', res);
                 if (res.data.data.userID !== token) {
-                    // alert('세션이 만료되었습니다.');
                     logoutBtn();
                 }
-                // if (cookies.x_auth !== 'a') {
-                //     console.log(' verify');
-                //     logoutBtn();
-                // }
             })
             .catch((error) => {
                 console.log('auth check error');
@@ -112,11 +100,6 @@ export default function Login() {
                             '& > :not(style)': { m: 1 }
                         }}
                     >
-                        {/* <img
-                            src={skkud}
-                            alt="SKKUD"
-                            style={{ width: '149px', marginBottom: '127px' }}
-                        /> */}
                         <Typography variant="h7" fontWeight="bold" style={{ marginTop: '50px' }}>
                             로그인
                         </Typography>
@@ -158,6 +141,11 @@ export default function Login() {
                 </>
             )}
             <Footer />
+            <Snackbar open={errorMsg} autoHideDuration={1000}>
+                <Alert severity="error" sx={{ width: '100%' }}>
+                    {errorMsg}
+                </Alert>
+            </Snackbar>
         </div>
     );
 }
