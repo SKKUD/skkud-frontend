@@ -22,8 +22,7 @@ export default function FinishCreateUser() {
         };
         fetchEvents();
     }, []);
-    console.log('id', id);
-    console.log('prev', PreviewImg);
+
     return (
         <div
             style={{

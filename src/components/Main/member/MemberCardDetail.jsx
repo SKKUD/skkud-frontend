@@ -29,23 +29,20 @@ export default function MemberCardDetail(props) {
     let projectCount = 0;
 
     if (proj) {
-        console.log('proj aaa', proj);
         for (let i = 0; i < proj.length; i++) {
             if (proj[i] === null) {
                 projectCount = projectCount;
             }
             const [detail] = useUserPostDetailApi(proj[i]);
             if (detail !== null) {
-                console.log('detail', detail);
                 projectList.push([detail.mainimage, detail._id, detail.tags, detail.title]);
                 projectCount += 1;
             }
         }
     }
-    console.log('proj count', projectCount);
+
     const [userDetail] = useUserSkillsApi(props.id);
-    console.log('user', userDetail);
-    console.log('tag', projectList);
+
     return (
         <Card
             style={{
@@ -89,14 +86,9 @@ export default function MemberCardDetail(props) {
                                 margin: '3px',
                                 objectFit: 'contain'
                             }}
-                            // onClick={navigateToProject(item[1])}
                         >
                             <NavLink to={'/maintab/projectdetail/' + item[1]}>
-                                <img
-                                    src={item[0]}
-                                    alt={item[3]}
-                                    // onClick={console.log('click', item[1])}
-                                />
+                                <img src={item[0]} alt={item[3]} />
                             </NavLink>
                         </ImageListItem>
                     ))}

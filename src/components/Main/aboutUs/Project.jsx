@@ -58,13 +58,11 @@ export default function Project() {
     };
     const imgList = [];
     const [projectList] = useProjectListApi();
-    console.log('proj img', projectList);
     for (let i = 0; i < projectList.length; i++) {
         // if (projectList[i].mainimage === undefined)
-        console.log('img', projectList[i].mainimage);
+
         imgList.push(projectList[i].mainimage);
     }
-    console.log('img list', imgList);
 
     return (
         <div>

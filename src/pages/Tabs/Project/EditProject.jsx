@@ -6,6 +6,8 @@ import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
 import PhotoCamera from '@mui/icons-material/PhotoCamera';
+import Alert from '@mui/material/Alert';
+import Snackbar from '@mui/material/Snackbar';
 import Box from '@mui/material/Box';
 import PreImages from '../../../components/Main/project/PreImages';
 import List from '@mui/material/List';
@@ -22,7 +24,8 @@ export default function EditProject() {
     };
 
     const PostDetail = useProjectPostDetailApi();
-
+    const [alertTitle, setAlertTitle] = useState(false);
+    const [alertContent, setAlertContent] = useState(false);
     const [title, setTitle] = PostDetail[0];
     const [body, setBody] = PostDetail[1];
     const [tags, setTags] = PostDetail[2];
@@ -67,9 +70,11 @@ export default function EditProject() {
 
     const HandlPostSubmit = async () => {
         if (title === '') {
-            alert('제목을 입력하세요');
+            // alert('제목을 입력하세요');
+            setAlertTitle(true);
         } else if (body === '') {
-            alert('내용을 입력하세요');
+            // alert('내용을 입력하세요');
+            setAlertContent(true);
         } else {
             const formData = new FormData();
             formData.append('title', title);
@@ -80,22 +85,6 @@ export default function EditProject() {
             formData.append('period', period);
             formData.append('link', link);
             newImages.map((image) => formData.append('images', image));
-            // const convertURLtoFile = async (imageUrl) => {
-            //     const response = await fetch(imageUrl);
-            //     const data = await response.blob();
-            //     const ext = imageUrl.split('.').pop();
-            //     const filename = imageUrl.split('/').pop();
-            //     const metadata = { type: `image/${ext}` };
-
-            //     const newfile = new File([data], filename, metadata);
-            //     formData.append('images', newfile);
-            //     // console.log(1);
-            //     // for (const value of formData.values()) {
-            //     //     console.log('after convert : ', value);
-            //     // }
-            // };
-
-            // images.map((image) => convertURLtoFile(image));
 
             await axios
                 .patch(`http://localhost:8000/posts/contributor/${index}`, {
@@ -176,95 +165,107 @@ export default function EditProject() {
         );
     }
     return (
-        <form>
-            <Box
-                mb="12px"
-                sx={{
-                    border: '1px solid #00FFA8',
-                    boxSizing: 'border-box',
-                    height: '205px',
-                    overflow: 'hidden'
-                }}
-            >
-                {PreviewImg.length === 0
-                    ? images && <img src={images} alt=".image" key={images} width="100%" />
-                    : PreviewImg && <PreImages imgFiles={PreviewImg} />}
-            </Box>
-            <TextField
-                fullWidth
-                label="Project Title"
-                id="ProjectTitle"
-                value={title || ''}
-                onChange={(e) => setTitle(e.target.value)}
-            />
-            <TextField
-                fullWidth
-                label="Project Detail"
-                id="ProjectDetail"
-                sx={{ mt: '10px' }}
-                multiline
-                rows={10}
-                value={body || ''}
-                onChange={(e) => setBody(e.target.value)}
-            />
-            <TextField
-                fullWidth
-                label="사용 기술"
-                id="ProjectTags"
-                variant="filled"
-                value={tags || ''}
-                onChange={(e) => {
-                    const tagsArray = e.target.value.split(',');
-                    setTags(tagsArray);
-                }}
-            />
-            <TextField
-                fullWidth
-                label="개발 기간"
-                id="period"
-                variant="filled"
-                value={period || ''}
-                onChange={(e) => setPeriod(e.target.value)}
-            />
-            <TextField
-                fullWidth
-                label="연결 링크"
-                id="link"
-                variant="filled"
-                value={link || ''}
-                onChange={(e) => setLink(e.target.value)}
-            />
-            <CheckboxMemberList members={users} />
-            <Box
-                sx={{
-                    display: 'flex',
-                    mt: '5px',
-                    alignContent: 'center',
-                    justifyContent: 'space-between'
-                }}
-            >
-                <IconButton color="primary" aria-label="upload picture" component="label">
-                    <input
-                        hidden
-                        name="images"
-                        multiple
-                        type="file"
-                        accept="image/jpg,image/png,image/jpeg,image/gif"
-                        onChange={uploadImgFile}
-                    />
-                    <PhotoCamera />
-                </IconButton>
-                <Button
-                    variant="contained"
-                    onClick={() =>
-                        HandlPostSubmit().then(() => {
-                            navigateToProject();
-                        })
-                    }
+        <>
+            <form>
+                <Box
+                    mb="12px"
+                    sx={{
+                        border: '1px solid #00FFA8',
+                        boxSizing: 'border-box',
+                        height: '205px',
+                        overflow: 'hidden'
+                    }}
                 >
-                    submit
-                </Button>
-            </Box>
-        </form>
+                    {PreviewImg.length === 0
+                        ? images && <img src={images} alt=".image" key={images} width="100%" />
+                        : PreviewImg && <PreImages imgFiles={PreviewImg} />}
+                </Box>
+                <TextField
+                    fullWidth
+                    label="Project Title"
+                    id="ProjectTitle"
+                    value={title || ''}
+                    onChange={(e) => setTitle(e.target.value)}
+                />
+                <TextField
+                    fullWidth
+                    label="Project Detail"
+                    id="ProjectDetail"
+                    sx={{ mt: '10px' }}
+                    multiline
+                    rows={10}
+                    value={body || ''}
+                    onChange={(e) => setBody(e.target.value)}
+                />
+                <TextField
+                    fullWidth
+                    label="사용 기술"
+                    id="ProjectTags"
+                    variant="filled"
+                    value={tags || ''}
+                    onChange={(e) => {
+                        const tagsArray = e.target.value.split(',');
+                        setTags(tagsArray);
+                    }}
+                />
+                <TextField
+                    fullWidth
+                    label="개발 기간"
+                    id="period"
+                    variant="filled"
+                    value={period || ''}
+                    onChange={(e) => setPeriod(e.target.value)}
+                />
+                <TextField
+                    fullWidth
+                    label="연결 링크"
+                    id="link"
+                    variant="filled"
+                    value={link || ''}
+                    onChange={(e) => setLink(e.target.value)}
+                />
+                <CheckboxMemberList members={users} />
+                <Box
+                    sx={{
+                        display: 'flex',
+                        mt: '5px',
+                        alignContent: 'center',
+                        justifyContent: 'space-between'
+                    }}
+                >
+                    <IconButton color="primary" aria-label="upload picture" component="label">
+                        <input
+                            hidden
+                            name="images"
+                            multiple
+                            type="file"
+                            accept="image/jpg,image/png,image/jpeg,image/gif"
+                            onChange={uploadImgFile}
+                        />
+                        <PhotoCamera />
+                    </IconButton>
+                    <Button
+                        variant="contained"
+                        onClick={() =>
+                            HandlPostSubmit().then(() => {
+                                navigateToProject();
+                            })
+                        }
+                    >
+                        submit
+                    </Button>
+                </Box>
+            </form>
+            <Snackbar open={alertTitle} autoHideDuration={1000}>
+                <Alert severity="error" sx={{ width: '100%' }}>
+                    제목을 입력하세요.
+                </Alert>
+            </Snackbar>
+            <Snackbar open={alertContent} autoHideDuration={1000}>
+                <Alert severity="error" sx={{ width: '100%' }}>
+                    내용을 입력하세요.
+                </Alert>
+            </Snackbar>
+        </>
     );
 }

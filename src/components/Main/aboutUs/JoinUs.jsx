@@ -7,11 +7,11 @@ import styled from '@emotion/styled';
 import Typography from '@mui/material/Typography';
 
 const Title = styled.div`
-    font-size: 20px;
+    font-size: 1.25rem;
 `;
 
 const Detail = styled.div`
-    font-size: 12px;
+    font-size: 0.75rem;
 `;
 
 // const ButtonBlock = styled.div`
@@ -43,13 +43,13 @@ export default function JoinUs() {
         >
             <Typography
                 variant="h5"
-                style={{ fontWeight: '700', fontSize: '40px', lineHeight: '48px' }}
+                style={{ fontWeight: '700', fontSize: '2.5rem', lineHeight: '48px' }}
             >
                 Join us
             </Typography>
             <Detail
                 variant="body2"
-                style={{ fontWeight: '400', fontSize: '12px', lineHeight: '200%' }}
+                style={{ fontWeight: '400', fontSize: '0.75rem', lineHeight: '200%' }}
             >
                 여러분들의 개발자로의 여정, 저희 스꾸디가 도와드리겠습니다!
             </Detail>
