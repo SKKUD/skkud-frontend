@@ -5,12 +5,11 @@ import Button from '@mui/material/Button';
 import { useStudyGroupsApi } from '../../../hooks/Study';
 
 export default function StudyGroupEdit(id) {
-    const [studyGroups, setStudyGroups, createStudyGroup, updateStudyGroup, deleteStudyGroup] =
+    const [studyGroups, setStudyGroups, createStudyGroup, updateStudyGroup, deleteStudyGroup] = // eslint-disable-line no-unused-vars
         useStudyGroupsApi();
     const [groupName, setName] = useState('');
     const [studyDay, setDay] = useState('');
     const [members, setMembers] = useState([]);
-    const [group, setGroup] = useState('');
     const GroupId = id.id;
 
     useEffect(() => {

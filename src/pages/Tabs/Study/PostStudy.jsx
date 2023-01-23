@@ -1,10 +1,8 @@
 import React from 'react';
-import { useState, useEffect } from 'react';
-import { styled } from '@mui/material/styles';
+import { useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useStudiesApi } from '../../../hooks/Study';
 import Box from '@mui/material/Box';
-import Chip from '@mui/material/Chip';
 import Stack from '@mui/material/Stack';
 import Input from '@mui/material/Input';
 import Card from '@mui/material/Card';
@@ -25,7 +23,7 @@ import Alert from '@mui/material/Alert';
 import Snackbar from '@mui/material/Snackbar';
 
 export default function PostStudy() {
-    const [studies, filterStudies, study, createStudy, updateStudy, deleteStudy] = useStudiesApi();
+    const [studies, filterStudies, study, createStudy, updateStudy, deleteStudy] = useStudiesApi(); // eslint-disable-line no-unused-vars
     const loc = useLocation();
 
     const GroupId = loc.state.id;

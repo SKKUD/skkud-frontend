@@ -1,5 +1,4 @@
 import React from 'react';
-import { useState, useEffect } from 'react';
 import { styled } from '@mui/material/styles';
 import { Link, useLocation } from 'react-router-dom';
 import { useCookies } from 'react-cookie';
@@ -12,12 +11,17 @@ import EditBtn from '../../../components/common/EditBtn';
 import img from '../../../assets/IntroDesign.png';
 import FmdGoodOutlinedIcon from '@mui/icons-material/FmdGoodOutlined';
 
+function getDayOfWeek(date) {
+    const week = ['일', '월', '화', '수', '목', '금', '토'];
+    const dayOfWeek = week[new Date(date).getDay()];
+
+    return dayOfWeek;
+}
+
 export default function StudyContent() {
     const [cookies] = useCookies(['id']);
-    // const [Task, setTask] = useState([]);
+
     const Task = [];
-    // const [post] = useProjectPostApi();
-    // const [user] = useProjectUserApi();
 
     const loc = useLocation();
 
@@ -40,6 +44,11 @@ export default function StudyContent() {
     }
 
     // chip
+
+    const date = studyTimeStart.substring(0, 10).replaceAll('-', '.');
+    const day = getDayOfWeek(date);
+    const startTime = studyTimeStart.substring(11, 16);
+    const endTime = studyTimeEnd.substring(11, 16);
 
     const StyledChip = styled((props) => <Chip {...props} />)(() => ({
         border: '1.5px solid #444',
@@ -152,7 +161,7 @@ export default function StudyContent() {
                             marginBottom: '2px'
                         }}
                     >
-                        studytime
+                        {date + '(' + day + ') ' + startTime + ' - ' + endTime}
                     </div>
                     <div
                         style={{
@@ -248,6 +257,7 @@ export default function StudyContent() {
                         ) : (
                             <img
                                 src={img}
+                                alt="스터디자료"
                                 style={{ width: '160px', height: '160px', borderRadius: '5px' }}
                             />
                         )}
