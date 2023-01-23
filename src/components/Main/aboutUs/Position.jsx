@@ -2,10 +2,11 @@ import * as React from 'react';
 import SKKUD from '../../../assets/SKKUD_green.jpeg';
 import ToggleButton from '@mui/material/ToggleButton';
 import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
+import member from '../../../assets/memberImg.png';
 import styled from '@emotion/styled';
 
 const Detail = styled.div`
-    font-size: 12px;
+    font-size: 0.75rem;
 `;
 const Title = styled.div`
     font-size: 2.5rem;
@@ -17,7 +18,9 @@ const Title = styled.div`
 `;
 
 const PositionImageBlock = styled.div`
-    justify-content: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     border: 1px solid transparent;
     background: rgba(255, 255, 255, 0.2);
     box-shadow: 0px 8px 24px rgba(0, 0, 0, 0.15);
@@ -25,6 +28,7 @@ const PositionImageBlock = styled.div`
     width: 312px;
     height: 285px;
     margin-top: 20px;
+    padding: 10px;
 `;
 
 export default function Position() {
@@ -34,17 +38,21 @@ export default function Position() {
     const frontDetail = '프론트엔드 디테일 입니다 ㅁㅁㅁㅁ';
     const backDetail = '백엔드 디테일 입니다 ㅁㅁㅁㅁ';
     const [detail, setDetail] = React.useState(frontDetail);
+    const [image, setImage] = React.useState(member);
     const handleChange = (event, newAlignment) => {
         setAlignment(newAlignment);
     };
     const changeDetailFront = () => {
         setDetail(frontDetail);
+        setImage(member);
     };
     const changeDetailBack = () => {
         setDetail(backDetail);
+        setImage(member);
     };
     const changeDetailDesign = () => {
         setDetail(designDetail);
+        setImage(member);
     };
     return (
         <div>
@@ -127,6 +135,7 @@ export default function Position() {
 
                 <PositionImageBlock>
                     <Detail>{detail}</Detail>
+                    <img src={image} style={{ width: '230px', height: '230px' }} />
                 </PositionImageBlock>
             </div>
         </div>

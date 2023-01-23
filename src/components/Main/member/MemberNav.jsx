@@ -1,8 +1,6 @@
 import * as React from 'react';
 import { useContext, useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-// import Button from '@mui/material/Button';
-import styled from '@emotion/styled';
 import ToggleButton from '@mui/material/ToggleButton';
 import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
 import { TrackContext } from '../../../context/TrackContext';
@@ -13,9 +11,8 @@ export default function MemberNav() {
     const location = useLocation();
     const handleChange = (event, newAlignment) => {
         setAlignment(newAlignment);
-        console.log(alignment);
     };
-    console.log('nav track', trackTab);
+
     useEffect(() => {
         if (location.pathname === '/maintab/member') {
             setTrackTab('frontend');

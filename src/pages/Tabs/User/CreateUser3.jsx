@@ -7,10 +7,11 @@ import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
-import ArrowBackIcon from '@mui/icons-material/ArrowBack';
-import IconButton from '@mui/material/IconButton';
+import Alert from '@mui/material/Alert';
+import Snackbar from '@mui/material/Snackbar';
 
 export default function CreateUser3() {
+    const [alert, setAlert] = useState(false);
     const [bio, setBio] = useState('');
     const [insta, setInsta] = useState('');
     const [otherLinks, setOtherLinks] = useState([]);
@@ -28,7 +29,8 @@ export default function CreateUser3() {
     const member = { ID, name, engName, email, pw, bio, track, insta, otherLinks, image, major };
     const submit = useCallback(async () => {
         if (bio === '' || insta === '') {
-            alert('입력을 완료하세요');
+            // alert('입력을 완료하세요');
+            setAlert(true);
         } else {
             const formData = new FormData();
             formData.append('userID', ID);
@@ -123,6 +125,11 @@ export default function CreateUser3() {
                     가입 완료
                 </Button>
             </Box>
+            <Snackbar open={alert} autoHideDuration={1000}>
+                <Alert severity="error" sx={{ width: '100%' }}>
+                    입력을 완료하세요.
+                </Alert>
+            </Snackbar>
         </div>
     );
 }

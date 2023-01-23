@@ -13,12 +13,16 @@ import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemText from '@mui/material/ListItemText';
 import Checkbox from '@mui/material/Checkbox';
+import Alert from '@mui/material/Alert';
+import Snackbar from '@mui/material/Snackbar';
 
 export default function PostProject() {
     const navigate = useNavigate();
     const navigateToProject = () => {
         navigate('/maintab/project');
     };
+    const [alertTitle, setAlertTitle] = useState(false);
+    const [alertContent, setAlertContent] = useState(false);
 
     const [title, setTitle] = useState('');
     const [body, setBody] = useState('');
@@ -58,9 +62,11 @@ export default function PostProject() {
 
     const HandlPostSubmit = async () => {
         if (title === '') {
-            alert('제목을 입력하세요');
+            // alert('제목을 입력하세요');
+            setAlertTitle(true);
         } else if (body === '') {
-            alert('내용을 입력하세요');
+            // alert('내용을 입력하세요');
+            setAlertContent(true);
         } else {
             const formData = new FormData();
             formData.append('title', title);
@@ -68,23 +74,10 @@ export default function PostProject() {
             for (let i = 0; i < tags.length; i++) {
                 formData.append('tags', tags[i]);
             }
-            // for (let i = 0; i < checked.length; i++) {
-            //     formData.append('initializeContributors', checked[i]);
-            // }
+
             formData.append('developPeriod', period);
             formData.append('link', link);
             images.map((image) => formData.append('images', image));
-
-            // await axios
-            //     .patch(`http://localhost:8000/posts/contributor/${index}`, {
-            //         contributors: checked
-            //     })
-            //     .then((response) => {
-            //         console.log(response.status);
-            //     })
-            //     .catch((error) => {
-            //         console.log(error);
-            //     });
 
             await axios
                 .post('http://localhost:8000/posts', formData)
@@ -143,83 +136,95 @@ export default function PostProject() {
         );
     }
     return (
-        <form encType="multipart/form-data">
-            {PreviewImg.length !== 0 ? (
+        <>
+            <form encType="multipart/form-data">
+                {PreviewImg.length !== 0 ? (
+                    <Box
+                        mb="12px"
+                        sx={{
+                            border: '1px solid #00FFA8',
+                            boxSizing: 'border-box',
+                            height: '205px',
+                            overflow: 'hidden'
+                        }}
+                    >
+                        <PreImages imgFiles={PreviewImg} />
+                    </Box>
+                ) : null}
+                <TextField
+                    fullWidth
+                    label="Project Title"
+                    id="ProjectTitle"
+                    onChange={(e) => setTitle(e.target.value)}
+                />
+                <TextField
+                    fullWidth
+                    label="Project Detail"
+                    id="ProjectDetail"
+                    sx={{ mt: '10px' }}
+                    multiline
+                    rows={10}
+                    onChange={(e) => setBody(e.target.value)}
+                />
+                <TextField
+                    fullWidth
+                    label="# tags"
+                    id="ProjectTags"
+                    variant="filled"
+                    onChange={(e) => {
+                        const tagsArray = e.target.value.split(',');
+                        setTags(tagsArray);
+                    }}
+                />
+                <TextField
+                    fullWidth
+                    label="developPeriod"
+                    id="developPeriod"
+                    variant="filled"
+                    onChange={(e) => setPeriod(e.target.value)}
+                />
+                <TextField
+                    fullWidth
+                    label="link"
+                    id="link"
+                    variant="filled"
+                    onChange={(e) => setLink(e.target.value)}
+                />
+                <CheckboxMemberList members={users} />
                 <Box
-                    mb="12px"
                     sx={{
-                        border: '1px solid #00FFA8',
-                        boxSizing: 'border-box',
-                        height: '205px',
-                        overflow: 'hidden'
+                        display: 'flex',
+                        mt: '5px',
+                        alignContent: 'center',
+                        justifyContent: 'space-between'
                     }}
                 >
-                    <PreImages imgFiles={PreviewImg} />
+                    <IconButton color="primary" aria-label="upload picture" component="label">
+                        <input
+                            hidden
+                            name="images"
+                            multiple
+                            type="file"
+                            accept="image/jpg,image/png,image/jpeg,image/gif"
+                            onChange={uploadImgFile}
+                        />
+                        <PhotoCamera />
+                    </IconButton>
+                    <Button variant="contained" onClick={HandlPostSubmit}>
+                        submit
+                    </Button>
                 </Box>
-            ) : null}
-            <TextField
-                fullWidth
-                label="Project Title"
-                id="ProjectTitle"
-                onChange={(e) => setTitle(e.target.value)}
-            />
-            <TextField
-                fullWidth
-                label="Project Detail"
-                id="ProjectDetail"
-                sx={{ mt: '10px' }}
-                multiline
-                rows={10}
-                onChange={(e) => setBody(e.target.value)}
-            />
-            <TextField
-                fullWidth
-                label="# tags"
-                id="ProjectTags"
-                variant="filled"
-                onChange={(e) => {
-                    const tagsArray = e.target.value.split(',');
-                    setTags(tagsArray);
-                }}
-            />
-            <TextField
-                fullWidth
-                label="developPeriod"
-                id="developPeriod"
-                variant="filled"
-                onChange={(e) => setPeriod(e.target.value)}
-            />
-            <TextField
-                fullWidth
-                label="link"
-                id="link"
-                variant="filled"
-                onChange={(e) => setLink(e.target.value)}
-            />
-            <CheckboxMemberList members={users} />
-            <Box
-                sx={{
-                    display: 'flex',
-                    mt: '5px',
-                    alignContent: 'center',
-                    justifyContent: 'space-between'
-                }}
-            >
-                <IconButton color="primary" aria-label="upload picture" component="label">
-                    <input
-                        hidden
-                        name="images"
-                        multiple
-                        type="file"
-                        accept="image/jpg,image/png,image/jpeg,image/gif"
-                        onChange={uploadImgFile}
-                    />
-                    <PhotoCamera />
-                </IconButton>
-                <Button variant="contained" onClick={HandlPostSubmit}>
-                    submit
-                </Button>
-            </Box>
-        </form>
+            </form>
+            <Snackbar open={alertTitle} autoHideDuration={1000}>
+                <Alert severity="error" sx={{ width: '100%' }}>
+                    제목을 입력하세요.
+                </Alert>
+            </Snackbar>
+            <Snackbar open={alertContent} autoHideDuration={1000}>
+                <Alert severity="error" sx={{ width: '100%' }}>
+                    내용을 입력하세요.
+                </Alert>
+            </Snackbar>
+        </>
     );
 }
