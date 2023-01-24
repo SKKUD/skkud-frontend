@@ -15,7 +15,6 @@ import Snackbar from '@mui/material/Snackbar';
 
 export default function Login() {
     const [errorMsg, setErrorMsg] = useState('');
-    const [errorAlert, setErrorAlert] = useState(false);
     const [ID, setID] = useState('');
     const [PW, setPW] = useState('');
     const [cookies, setCookie, removeCookie] = useCookies([]);
@@ -37,7 +36,8 @@ export default function Login() {
                 }
             })
             .catch((error) => {
-                setErrorAlert(true);
+                console.log('error', error);
+                // alert(error.response.data.message);
                 setErrorMsg(error.response.data.message);
             });
     };
@@ -55,9 +55,10 @@ export default function Login() {
     const logoutBtn = async () => {
         removeCookie('id');
         authCheck();
-        await axios.post('http://localhost:8000/auth/logout');
-        // .then((userData) => console.log(userData))
-        // .catch((error) => console.log(error));
+        await axios
+            .post('http://localhost:8000/auth/logout')
+            .then((userData) => console.log(userData))
+            .catch((error) => console.log(error));
         navigateToMainTab();
         window.location.reload();
     };
@@ -67,11 +68,13 @@ export default function Login() {
         axios
             .post('http://localhost:8000/auth/verify')
             .then((res) => {
+                console.log('authcheck', res);
                 if (res.data.data.userID !== token) {
                     logoutBtn();
                 }
             })
             .catch((error) => {
+                console.log('auth check error');
                 removeCookie('id');
             });
     };
@@ -138,7 +141,7 @@ export default function Login() {
                 </>
             )}
             <Footer />
-            <Snackbar open={errorAlert} autoHideDuration={1000}>
+            <Snackbar open={errorMsg} autoHideDuration={1000}>
                 <Alert severity="error" sx={{ width: '100%' }}>
                     {errorMsg}
                 </Alert>
