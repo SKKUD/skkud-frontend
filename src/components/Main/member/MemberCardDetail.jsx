@@ -5,7 +5,6 @@ import Card from '@mui/material/Card';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import ImageList from '@mui/material/ImageList';
-import ImageListItem from '@mui/material/ImageListItem';
 import { useUserPostDetailApi } from '../../../hooks/Member';
 import { useUserSkillsApi } from '../../../hooks/Member';
 
@@ -30,9 +29,9 @@ export default function MemberCardDetail(props) {
 
     if (proj) {
         for (let i = 0; i < proj.length; i++) {
-            if (proj[i] === null) {
-                projectCount = projectCount;
-            }
+            // if (proj[i] === null) {
+            //     projectCount = projectCount;
+            // }
             const [detail] = useUserPostDetailApi(proj[i]);
             if (detail !== null) {
                 projectList.push([detail.mainimage, detail._id, detail.tags, detail.title]);

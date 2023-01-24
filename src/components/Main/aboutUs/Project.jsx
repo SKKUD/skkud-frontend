@@ -1,13 +1,9 @@
 import * as React from 'react';
 import SKKUD from '../../../assets/SKKUD_green.jpeg';
-import projectImg from '../../../assets/project-img1.png';
+// import projectImg from '../../../assets/project-img1.png';
 import { useNavigate } from 'react-router-dom';
-import { NavLink } from 'react-router-dom';
 import Button from '@mui/material/Button';
 import styled from '@emotion/styled';
-// import Carousel from 'react-material-ui-carousel';
-import ImageList from '@mui/material/ImageList';
-import ImageListItem from '@mui/material/ImageListItem';
 import { useProjectListApi } from '../../../hooks/Project';
 import Carousel from './Carousel';
 
@@ -20,26 +16,26 @@ const Title = styled.div`
     margin-bottom: 7px;
 `;
 
-const Imgbox = styled.div`
-    border: 1px solid transparent;
-    background-image: url(${projectImg});
-    background-size: 125px 125px;
-    box-shadow: 0px 8px 24px rgba(0, 0, 0, 0.15);
-    border-radius: 15px;
-    width: 125px;
-    height: 125px;
-    margin-right: 10px;
-    margin-left: 10px;
-    margin-top: 20px;
-`;
+// const Imgbox = styled.div`
+//     border: 1px solid transparent;
+//     background-image: url(${projectImg});
+//     background-size: 125px 125px;
+//     box-shadow: 0px 8px 24px rgba(0, 0, 0, 0.15);
+//     border-radius: 15px;
+//     width: 125px;
+//     height: 125px;
+//     margin-right: 10px;
+//     margin-left: 10px;
+//     margin-top: 20px;
+// `;
 
-const ImgboxBlock = styled.div`
-    display: flex;
-    flex-direction: row;
-    width: 350px;
-    align-items: center;
-    justify-content: center;
-`;
+// const ImgboxBlock = styled.div`
+//     display: flex;
+//     flex-direction: row;
+//     width: 350px;
+//     align-items: center;
+//     justify-content: center;
+// `;
 
 const ButtonBlock = styled.div`
     .projectBtn {

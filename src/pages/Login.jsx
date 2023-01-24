@@ -36,8 +36,6 @@ export default function Login() {
                 }
             })
             .catch((error) => {
-                console.log('error', error);
-                // alert(error.response.data.message);
                 setErrorMsg(error.response.data.message);
             });
     };
@@ -55,10 +53,9 @@ export default function Login() {
     const logoutBtn = async () => {
         removeCookie('id');
         authCheck();
-        await axios
-            .post('http://localhost:8000/auth/logout')
-            .then((userData) => console.log(userData))
-            .catch((error) => console.log(error));
+        await axios.post('http://localhost:8000/auth/logout');
+        // .then((userData) => console.log(userData))
+        // .catch((error) => console.log(error));
         navigateToMainTab();
         window.location.reload();
     };
@@ -68,13 +65,11 @@ export default function Login() {
         axios
             .post('http://localhost:8000/auth/verify')
             .then((res) => {
-                console.log('authcheck', res);
                 if (res.data.data.userID !== token) {
                     logoutBtn();
                 }
             })
             .catch((error) => {
-                console.log('auth check error');
                 removeCookie('id');
             });
     };

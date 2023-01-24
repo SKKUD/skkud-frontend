@@ -78,7 +78,7 @@ export default function MemberCard({
                                                 gutterBottom
                                                 variant="caption"
                                                 align="left"
-                                                flex-wrap
+                                                // flex-wrap
                                             >
                                                 {engname}
                                             </Typography>

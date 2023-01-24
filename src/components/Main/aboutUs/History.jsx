@@ -1,8 +1,8 @@
 import * as React from 'react';
 import styled from '@emotion/styled';
 import SKKUD from '../../../assets/SKKUD_green.jpeg';
-import dashed from '../../../assets/dashedCard.png';
-import Grid from '@mui/material/Unstable_Grid2';
+// import dashed from '../../../assets/dashedCard.png';
+// import Grid from '@mui/material/Unstable_Grid2';
 import CardImg from '../../../assets/four_square.png';
 
 const Title = styled.div`
@@ -102,7 +102,7 @@ export default function History() {
                         </Card1>
                     </Grid>
                 </Grid> */}
-                <img src={CardImg} style={{ width: '100%' }} />
+                <img src={CardImg} alt="cards" style={{ width: '100%' }} />
             </div>
         </div>
     );

@@ -22,7 +22,7 @@ import Alert from '@mui/material/Alert';
 import Snackbar from '@mui/material/Snackbar';
 
 export default function PostStudy() {
-    const [, , , createStudy, ,] = useStudiesApi();
+    const [studies, filterStudies, study, createStudy, updateStudy, deleteStudy] = useStudiesApi(); // eslint-disable-line no-unused-vars
     const loc = useLocation();
 
     const GroupId = loc.state.id;

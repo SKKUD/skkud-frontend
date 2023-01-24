@@ -50,6 +50,7 @@ export default function MemberList() {
         <>
             {data.map((member) => (
                 <MemberCard
+                    key={member.userID}
                     id={member.userID}
                     name={member.username}
                     engname={member.usernameEng}

@@ -4,7 +4,6 @@ import SKKUDLOGO from '../../assets/SKKUD_LOGO.png';
 import styled from '@emotion/styled';
 import insta from '../../assets/insta.png';
 import sender from '../../assets/send.png';
-import { calculateNewValue } from '@testing-library/user-event/dist/utils';
 
 const Typography = styled.div`
     font-size: 0.625rem;
@@ -50,8 +49,8 @@ export default function Footer() {
                     }}
                 />
                 <div style={{ height: '18px' }}>
-                    <img src={insta} style={{ marginRight: '16px' }} />
-                    <img src={sender} />
+                    <img src={insta} style={{ marginRight: '16px' }} alt="instagram" />
+                    <img src={sender} alt="send" />
                 </div>
             </TopDiv>
             <BottomDiv>

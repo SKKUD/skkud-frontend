@@ -46,6 +46,8 @@ export default function EditProject() {
         fetchEvents();
     }, []);
 
+    console.log(users);
+
     // :id 파라미터
     const { index } = useParams();
 
@@ -182,7 +184,7 @@ export default function EditProject() {
                     }}
                 >
                     {PreviewImg.length === 0
-                        ? images && <img src={images} alt={images} key={images} width="100%" />
+                        ? images && <img src={images} alt="project" key={images} width="100%" />
                         : PreviewImg && <PreImages imgFiles={PreviewImg} />}
                 </Box>
                 <TextField

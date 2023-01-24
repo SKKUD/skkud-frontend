@@ -25,7 +25,7 @@ export default function EditStudy() {
     const loc = useLocation();
     const state = loc.state;
 
-    const [, , , , updateStudy] = useStudiesApi();
+    const [studies, filterStudies, study, createStudy, updateStudy, deleteStudy] = useStudiesApi(); // eslint-disable-line no-unused-vars
 
     const postId = state._id;
     const navigate = useNavigate();
@@ -41,12 +41,11 @@ export default function EditStudy() {
     const [content, setContent] = useState(state.content);
     const [location, setLocation] = useState(state.location);
     const [attendance, setAtd] = useState(state.attendance);
-
     const [taskContent, setTaskContent] = useState('');
     const [taskContents, setTaskContents] = useState(state.taskContents);
     const [taskName, setTaskName] = useState('');
     const [taskNames, setTaskNames] = useState(state.taskNames);
-    const [images, setImages] = useState(state.images);
+    const [images, setImages] = useState(state.images); // eslint-disable-line no-unused-vars
     const [newimages, setnewImages] = useState([]);
     const [PreviewImg, setPreviewImg] = useState([]);
     const [studyTimeStart, setStart] = useState(dayjs(state.studyTimeStart));

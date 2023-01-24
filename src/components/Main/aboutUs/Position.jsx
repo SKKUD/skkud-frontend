@@ -135,7 +135,7 @@ export default function Position() {
 
                 <PositionImageBlock>
                     <Detail>{detail}</Detail>
-                    <img src={image} alt={image} style={{ width: '230px', height: '230px' }} />
+                    <img src={image} alt="emoji" style={{ width: '230px', height: '230px' }} />
                 </PositionImageBlock>
             </div>
         </div>

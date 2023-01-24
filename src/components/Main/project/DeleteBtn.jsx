@@ -13,6 +13,7 @@ export default function DeleteBtn(_id) {
             window.location.reload();
         } else {
             navigate('/maintab/project');
+            window.location.reload();
         }
     };
 
