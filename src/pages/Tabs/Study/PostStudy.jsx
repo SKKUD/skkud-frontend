@@ -6,7 +6,6 @@ import Box from '@mui/material/Box';
 import Stack from '@mui/material/Stack';
 import Input from '@mui/material/Input';
 import Card from '@mui/material/Card';
-import img from '../../../assets/introArt_black.jpeg';
 import FmdGoodOutlinedIcon from '@mui/icons-material/FmdGoodOutlined';
 import IconButton from '@mui/material/IconButton';
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';

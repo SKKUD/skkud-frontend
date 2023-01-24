@@ -7,7 +7,7 @@ import { TrackContext } from '../../../context/TrackContext';
 
 export default function MemberNav() {
     const { trackTab, setTrackTab } = useContext(TrackContext);
-    const [alignment, setAlignment] = useState('frontend');
+    const [, setAlignment] = useState('frontend');
     const location = useLocation();
     const handleChange = (event, newAlignment) => {
         setAlignment(newAlignment);

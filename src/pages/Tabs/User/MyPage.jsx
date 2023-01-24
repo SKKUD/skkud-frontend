@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { useState, useCallback, useEffect } from 'react';
-import { useNavigate, useLocation } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { useCookies } from 'react-cookie';
 import { MemberEditDetailBtn } from '../../../components/Main/member/MemberEditBtn';
 import axios from 'axios';
@@ -42,7 +42,7 @@ export default function MyPage() {
     const [newemail, setEmail] = useState(email);
     const [newmajor, setMajor] = useState(major);
     const [newbio, setBio] = useState(bio);
-    const [newimage, setImage] = useState(image);
+    const [, setImage] = useState(image);
     const [newinsta, setInsta] = useState(insta);
     const [newlinks, setLinks] = useState(otherLinks);
     const [PreviewImg, setPreviewImg] = useState('');

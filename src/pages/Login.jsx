@@ -1,6 +1,6 @@
 import * as React from 'react';
 import Footer from '../components/common/Footer';
-import { useState, useContext, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import Box from '@mui/material/Box';
@@ -23,7 +23,7 @@ export default function Login() {
     const navigateToMainTab = () => {
         navigate('/maintab');
     };
-    const [PreviewImg, setPreviewImg] = useState('');
+    const [, setPreviewImg] = useState('');
     const loginBtn = async (e) => {
         e.preventDefault();
 
@@ -36,8 +36,6 @@ export default function Login() {
                 }
             })
             .catch((error) => {
-                console.log('error', error);
-                // alert(error.response.data.message);
                 setErrorMsg(error.response.data.message);
             });
     };
@@ -55,10 +53,9 @@ export default function Login() {
     const logoutBtn = async () => {
         removeCookie('id');
         authCheck();
-        await axios
-            .post('http://localhost:8000/auth/logout')
-            .then((userData) => console.log(userData))
-            .catch((error) => console.log(error));
+        await axios.post('http://localhost:8000/auth/logout');
+        // .then((userData) => console.log(userData))
+        // .catch((error) => console.log(error));
         navigateToMainTab();
         window.location.reload();
     };
@@ -68,13 +65,11 @@ export default function Login() {
         axios
             .post('http://localhost:8000/auth/verify')
             .then((res) => {
-                console.log('authcheck', res);
                 if (res.data.data.userID !== token) {
                     logoutBtn();
                 }
             })
             .catch((error) => {
-                console.log('auth check error');
                 removeCookie('id');
             });
     };

@@ -26,7 +26,7 @@ export function MemberEditBtn(_id) {
 }
 
 export function MemberEditDetailBtn(_id) {
-    const id = Object.values(_id)[0];
+    // const id = Object.values(_id)[0];
     const navigate = useNavigate();
     const navigateToUserDetail = () => {
         navigate('/maintab/member/mypagedetail');

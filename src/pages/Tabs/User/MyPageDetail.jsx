@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { useState, useCallback, useEffect } from 'react';
-import { useNavigate, useLocation } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 import { useCookies } from 'react-cookie';
 import axios from 'axios';
@@ -12,7 +12,7 @@ import Alert from '@mui/material/Alert';
 import Snackbar from '@mui/material/Snackbar';
 
 export default function MyPageDetail() {
-    const [cookies, setCookie, removeCookie] = useCookies(['id']);
+    const [cookies, , removeCookie] = useCookies(['id']);
     const id = cookies.id;
     const [editAlert, setEditAlert] = useState(false);
     const [user, setUser] = useState([]);
@@ -56,9 +56,9 @@ export default function MyPageDetail() {
     const navigateToMember = () => {
         navigate('/maintab/member');
     };
-    const navigateToIDpw = () => {
-        navigate('/maintab/edituserdetail');
-    };
+    // const navigateToIDpw = () => {
+    //     navigate('/maintab/edituserdetail');
+    // };
     const [checker, setChecker] = useState(true);
     const checkPw = () => {
         if (newpw !== newrepw) {

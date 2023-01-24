@@ -12,7 +12,7 @@ export default function FinishCreateUser() {
     };
     const location = useLocation();
     const name = location.state.name;
-    const image = location.state.image;
+    // const image = location.state.image;
     const [PreviewImg, setPreviewImg] = useState('');
     const id = location.state.id;
     useEffect(() => {

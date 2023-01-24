@@ -1,7 +1,6 @@
 import * as React from 'react';
-import { useContext, useState } from 'react';
+import { useState } from 'react';
 import MemberCardDetail from './MemberCardDetail';
-import styled from '@emotion/styled';
 import PropTypes from 'prop-types';
 import Card from '@mui/material/Card';
 import CardMedia from '@mui/material/CardMedia';
@@ -9,22 +8,6 @@ import Typography from '@mui/material/Typography';
 import ButtonBase from '@mui/material/ButtonBase';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
-import { useCookies } from 'react-cookie';
-import { UserContext } from '../../../context/UserContext';
-
-const SkillBtn = styled.button`
-    height: 22px;
-    border: 1px solid #00ffa8;
-    border-radius: 33px;
-    background-color: transparent;
-    color: white;
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    padding: 4px 18px;
-    gap: 10px;
-`;
 
 export default function MemberCard({
     id,
@@ -95,7 +78,7 @@ export default function MemberCard({
                                                 gutterBottom
                                                 variant="caption"
                                                 align="left"
-                                                flex-wrap
+                                                // flex-wrap
                                             >
                                                 {engname}
                                             </Typography>
