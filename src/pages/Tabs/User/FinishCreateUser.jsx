@@ -12,7 +12,7 @@ export default function FinishCreateUser() {
     };
     const location = useLocation();
     const name = location.state.name;
-    // const image = location.state.image;
+
     const [PreviewImg, setPreviewImg] = useState('');
     const id = location.state.id;
     useEffect(() => {
@@ -35,12 +35,22 @@ export default function FinishCreateUser() {
             <Typography variant="h7" fontWeight="bold" style={{ marginTop: '10px' }}>
                 가입을 축하합니다!
             </Typography>
+
             <CardMedia
                 sx={{ flexDirection: 'row' }}
                 component="img"
                 image={PreviewImg}
                 alt={name}
-                style={{ width: '150px', height: '150px', borderRadius: '150px', margin: '40px' }}
+                style={{
+                    backgroundColor: 'rgba(255, 255, 255, 0.9)',
+                    width: '150px',
+                    height: '150px',
+                    display: 'flex',
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                    borderRadius: '100%',
+                    margin: '40px'
+                }}
             />
             <Typography variant="h7" color="#00FFA8" style={{ marginBottom: '10px' }}>
                 가입 완료!
