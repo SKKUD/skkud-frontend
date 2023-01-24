@@ -1,6 +1,6 @@
 import * as React from 'react';
 import Footer from '../components/common/Footer';
-import { useState, useContext, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import Box from '@mui/material/Box';
@@ -23,7 +23,7 @@ export default function Login() {
     const navigateToMainTab = () => {
         navigate('/maintab');
     };
-    const [PreviewImg, setPreviewImg] = useState('');
+    const [, setPreviewImg] = useState('');
     const loginBtn = async (e) => {
         e.preventDefault();
 

@@ -1,5 +1,4 @@
 import React from 'react';
-import { useState, useEffect } from 'react';
 import { styled } from '@mui/material/styles';
 import { Link, useLocation } from 'react-router-dom';
 import { useCookies } from 'react-cookie';
@@ -248,6 +247,7 @@ export default function StudyContent() {
                         ) : (
                             <img
                                 src={img}
+                                alt={img}
                                 style={{ width: '160px', height: '160px', borderRadius: '5px' }}
                             />
                         )}

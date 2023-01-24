@@ -46,7 +46,7 @@ export default function MemberCardDetail(props) {
     return (
         <Card
             style={{
-                width: '350px',
+                width: '341px',
                 marginTop: -25,
                 borderRadius: 20,
                 paddingTop: '40px',
@@ -76,21 +76,18 @@ export default function MemberCardDetail(props) {
                     }}
                 >
                     {projectList.map((item) => (
-                        <ImageListItem
-                            key={item[1]}
-                            style={{
-                                borderRadius: '15px',
-                                border: '1px solid transparent',
-                                width: '125px',
-                                height: '125px',
-                                margin: '3px',
-                                objectFit: 'contain'
-                            }}
-                        >
-                            <NavLink to={'/maintab/projectdetail/' + item[1]}>
-                                <img src={item[0]} alt={item[3]} />
-                            </NavLink>
-                        </ImageListItem>
+                        <NavLink to={'/maintab/projectdetail/' + item[1]}>
+                            <img
+                                src={item[0]}
+                                alt={item[3]}
+                                style={{
+                                    width: '125px',
+                                    height: '125px',
+                                    borderRadius: '15px',
+                                    margin: '3px'
+                                }}
+                            />
+                        </NavLink>
                     ))}
                 </ImageList>
                 <Typography sx={{ fontWeight: '700', fontSize: '0.75rem' }} variant="caption">

@@ -1,5 +1,5 @@
 import React from 'react';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useStudiesApi } from '../../../hooks/Study';
 import Box from '@mui/material/Box';
@@ -25,7 +25,7 @@ export default function EditStudy() {
     const loc = useLocation();
     const state = loc.state;
 
-    const [studies, filterStudies, study, createStudy, updateStudy, deleteStudy] = useStudiesApi();
+    const [, , , , updateStudy] = useStudiesApi();
 
     const postId = state._id;
     const navigate = useNavigate();

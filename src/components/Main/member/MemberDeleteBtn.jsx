@@ -23,7 +23,7 @@ export default function MemberDeleteBtn(_id) {
 
         navigateToMainTab();
     };
-    const [cookies, setCookie, removeCookie] = useCookies([]);
+    const [cookies, , removeCookie] = useCookies([]);
     const id = cookies.id;
     const deleteEvent = async () => {
         if (window.confirm('계정을 삭제합니다')) {

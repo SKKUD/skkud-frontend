@@ -11,13 +11,13 @@ export default function StudyCard(props) {
     const {
         attendance,
         content,
-        groupId,
-        location,
-        studyTime,
-        taskContents,
-        taskNames,
+        // groupId,
+        // location,
+        // studyTime,
+        // taskContents,
+        // taskNames,
         title,
-        _id,
+        // _id,
         images
     } = props.props;
 
