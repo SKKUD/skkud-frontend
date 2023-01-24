@@ -20,7 +20,6 @@ export const useUserSkillsApi = (index) => {
         const fetchEvents = async () => {
             const res = await axios.get(`http://localhost:8000/users/${index}`);
             setSkills(res.data.data.user.skills);
-            // console.log('skill api', res.data.data.user.skills);
         };
         fetchEvents();
     }, []);
