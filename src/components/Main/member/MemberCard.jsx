@@ -21,8 +21,6 @@ export default function MemberCard({
     major,
     projects
 }) {
-    // const { user } = useContext(UserContext);
-    // const [cookies] = useCookies(['id']);
     const [isVisible, setIsVisible] = useState(false);
 
     return (
