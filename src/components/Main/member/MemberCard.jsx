@@ -21,8 +21,6 @@ export default function MemberCard({
     major,
     projects
 }) {
-    // const { user } = useContext(UserContext);
-    // const [cookies] = useCookies(['id']);
     const [isVisible, setIsVisible] = useState(false);
 
     return (
@@ -44,7 +42,7 @@ export default function MemberCard({
                         backgroundColor: '#3A3A3A'
                     }}
                 >
-                    <Grid container spacing={1}>
+                    <Grid container spacing={1} style={{ flexWrap: 'nowrap' }}>
                         <Grid item style={{ display: 'flex', alignItems: 'center' }}>
                             <CardMedia
                                 sx={{ flexDirection: 'row' }}

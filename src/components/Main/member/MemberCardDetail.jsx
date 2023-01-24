@@ -5,6 +5,7 @@ import Card from '@mui/material/Card';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import ImageList from '@mui/material/ImageList';
+
 import { useUserPostDetailApi } from '../../../hooks/Member';
 import { useUserSkillsApi } from '../../../hooks/Member';
 
@@ -24,19 +25,16 @@ const SkillBtn = styled.button`
 `;
 export default function MemberCardDetail(props) {
     const proj = props.projects;
-    const projectList = [];
-    let projectCount = 0;
+    let projectList = [];
 
     if (proj) {
         for (let i = 0; i < proj.length; i++) {
-            // if (proj[i] === null) {
-            //     projectCount = projectCount;
-            // }
             const [detail] = useUserPostDetailApi(proj[i]);
             if (detail !== null) {
                 projectList.push([detail.mainimage, detail._id, detail.tags, detail.title]);
-                projectCount += 1;
+                // projectCount += 1;
             }
+            projectList = [...new Set(projectList.map(JSON.stringify))].map(JSON.parse);
         }
     }
 
@@ -45,7 +43,7 @@ export default function MemberCardDetail(props) {
     return (
         <Card
             style={{
-                width: '341px',
+                width: '342.5px',
                 marginTop: -25,
                 borderRadius: 20,
                 paddingTop: '40px',
@@ -67,22 +65,26 @@ export default function MemberCardDetail(props) {
                     {' '}
                     진행한 프로젝트{' '}
                 </Typography>
-                <span style={{ fontSize: '0.563rem' }}> &nbsp; 총 {projectCount}개</span>
+                <span style={{ fontSize: '0.563rem' }}> &nbsp; 총 {projectList.length}개</span>
                 <ImageList
                     style={{
                         display: 'grid',
-                        gridAutoFlow: 'column'
+                        gridAutoFlow: 'column',
+                        gridTemplateColumns: 'repeat(auto-fill)',
+                        justifyContent: 'start'
                     }}
                 >
                     {projectList.map((item) => (
-                        <NavLink to={'/maintab/projectdetail/' + item[1]}>
+                        <NavLink key={item[1]} to={'/maintab/projectdetail/' + item[1]}>
                             <img
+                                key={item[1]}
                                 src={item[0]}
-                                alt={item[3]}
+                                alt={item[1]}
                                 style={{
                                     width: '125px',
                                     height: '125px',
                                     borderRadius: '15px',
+
                                     margin: '3px'
                                 }}
                             />

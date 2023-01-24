@@ -15,6 +15,7 @@ import Snackbar from '@mui/material/Snackbar';
 
 export default function Login() {
     const [errorMsg, setErrorMsg] = useState('');
+    const [errorAlert, setErrorAlert] = useState(false);
     const [ID, setID] = useState('');
     const [PW, setPW] = useState('');
     const [cookies, setCookie, removeCookie] = useCookies([]);
@@ -36,6 +37,7 @@ export default function Login() {
                 }
             })
             .catch((error) => {
+                setErrorAlert(true);
                 setErrorMsg(error.response.data.message);
             });
     };
@@ -136,7 +138,7 @@ export default function Login() {
                 </>
             )}
             <Footer />
-            <Snackbar open={errorMsg} autoHideDuration={1000}>
+            <Snackbar open={errorAlert} autoHideDuration={1000}>
                 <Alert severity="error" sx={{ width: '100%' }}>
                     {errorMsg}
                 </Alert>
