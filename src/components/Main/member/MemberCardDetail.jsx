@@ -84,8 +84,8 @@ export default function MemberCardDetail(props) {
                                     width: '125px',
                                     height: '125px',
                                     borderRadius: '15px',
-
-                                    margin: '3px'
+                                    margin: '3px',
+                                    objectFit: 'cover'
                                 }}
                             />
                         </NavLink>

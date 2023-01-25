@@ -36,17 +36,14 @@ export default function EditProject() {
     const [newImages, setNewImages] = useState([]);
     const [PreviewImg, setPreviewImg] = useState([]);
     const [users, getUsers] = useState([]);
-    console.log('post detail', PostDetail);
+
     useEffect(() => {
         const fetchEvents = async () => {
             const res = await axios.get('http://localhost:8000/users');
             getUsers(res.data.data.users);
-            console.log('console user', res.data.data.users);
         };
         fetchEvents();
     }, []);
-
-    console.log(users);
 
     // :id 파라미터
     const { index } = useParams();
@@ -115,8 +112,6 @@ export default function EditProject() {
     function CheckboxMemberList() {
         const handleToggle = (id) => () => {
             const currentIndex = checked.indexOf(id);
-            console.log('list checked', checked);
-            console.log('list checked indexof', checked.indexOf(id));
 
             const newChecked = [...checked];
 
@@ -143,9 +138,6 @@ export default function EditProject() {
                 <List dense sx={{ width: '100%', maxWidth: 360, bgcolor: '#333' }}>
                     {users.map((member) => {
                         const id = member._id;
-                        console.log('checked', checked);
-                        console.log('id', id);
-                        console.log('id check', checked.indexOf(id));
                         const name = member.username;
                         const labelId = `checkbox-list-secondary-label-${id}`;
                         return (
