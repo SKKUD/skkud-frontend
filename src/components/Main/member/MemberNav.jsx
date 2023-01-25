@@ -1,69 +1,20 @@
 import * as React from 'react';
-<<<<<<< HEAD
-import Button from '@mui/material/Button';
-import styled from '@emotion/styled';
-
-const ButtonBlock = styled.div`
-    * {
-        border-radius: 10px;
-        font-family: 'Pretendard';
-        font-style: normal;
-        font-weight: 400;
-        font-size: 12px;
-        line-height: 14px;
-    }
-    .design {
-        color: black;
-        background-color: #00ffb0;
-        border: 1px solid;
-    }
-    button {
-        color: white;
-        background: transparent;
-        border: 1px solid #00ffb0;
-    }
-`;
-
-export default function MemberNav() {
-    return (
-        <ButtonBlock>
-            <Button className="design" type="button">
-                UI/UX Designer
-            </Button>
-            <Button type="button">Frontend</Button>
-            <Button type="button">Backend</Button>
-        </ButtonBlock>
-=======
 import { useContext, useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-// import Button from '@mui/material/Button';
-// import styled from '@emotion/styled';
 import ToggleButton from '@mui/material/ToggleButton';
 import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
 import { TrackContext } from '../../../context/TrackContext';
 
-// const ButtonBlock = styled.div`
-//     * {
-//         border-radius: 20px;
-//         font-family: 'Pretendard';
-//         font-style: normal;
-//         font-weight: 400;
-//         font-size: 14px;
-//         line-height: 14px;
-//     }
-// `;
-
 export default function MemberNav() {
     const { trackTab, setTrackTab } = useContext(TrackContext);
-    const [alignment, setAlignment] = useState('frontend');
+    const [, setAlignment] = useState('frontend');
     const location = useLocation();
     const handleChange = (event, newAlignment) => {
         setAlignment(newAlignment);
-        console.log(alignment);
     };
-    console.log('nav track', trackTab);
+
     useEffect(() => {
-        if (location.pathname === '/maintab/frontend')  {
+        if (location.pathname === '/maintab/member') {
             setTrackTab('frontend');
         }
     }, [location]);
@@ -75,41 +26,71 @@ export default function MemberNav() {
             exclusive
             onChange={handleChange}
             aria-label="Platform"
+            style={{
+                display: 'flex',
+                width: '100%',
+                flexDirection: 'row',
+                justifyContent: 'space-evenly',
+                alignItems: 'center'
+            }}
         >
             <ToggleButton
                 value="frontend"
                 component={Link}
-                to="/maintab/frontend"
+                to="/maintab/member"
                 onClick={() => {
                     setTrackTab('frontend');
                 }}
-                style={{ borderRadius: '20px', border: '1px solid #00ffb0' }}
+                style={{
+                    borderRadius: '33px',
+                    border: '1px solid #00FFA8',
+                    padding: '4px 18px',
+                    height: '22px',
+                    fontSize: '0.75rem',
+                    fontWeight: 600,
+                    textTransform: 'none'
+                }}
             >
-                frontend
+                Frontend
             </ToggleButton>
             <ToggleButton
                 value="backend"
                 component={Link}
-                to="/maintab/backend"
+                to="/maintab/member/backend"
                 onClick={() => {
                     setTrackTab('backend');
                 }}
-                style={{ borderRadius: '20px', border: '1px solid #00ffb0' }}
+                style={{
+                    borderRadius: '33px',
+                    border: '1px solid #00FFA8',
+                    padding: '4px 18px',
+                    height: '22px',
+                    fontSize: '0.75rem',
+                    fontWeight: 600,
+                    textTransform: 'none'
+                }}
             >
-                backend
+                Backend
             </ToggleButton>
             <ToggleButton
                 value="design"
                 component={Link}
-                to="/maintab/design"
+                to="/maintab/member/design"
                 onClick={() => {
                     setTrackTab('design');
                 }}
-                style={{ borderRadius: '20px', border: '1px solid #00ffb0' }}
+                style={{
+                    borderRadius: '33px',
+                    border: '1px solid #00FFA8',
+                    padding: '4px 18px',
+                    height: '22px',
+                    fontSize: '0.75rem',
+                    fontWeight: 600,
+                    textTransform: 'none'
+                }}
             >
                 UI/UX Designer
             </ToggleButton>
         </ToggleButtonGroup>
->>>>>>> d5c18b8e361e5977abcd8a0b5e7fa6c6c6e2be79
     );
 }

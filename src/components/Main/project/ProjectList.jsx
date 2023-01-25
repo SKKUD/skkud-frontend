@@ -1,13 +1,25 @@
 import * as React from 'react';
 import { Link } from 'react-router-dom';
-import ProjectCard from './ProjectCard';
 import { useProjectListApi } from '../../../hooks/Project';
+import Card from '@mui/material/Card';
+import ProjectCard from './ProjectCard';
 
 export default function ProjectList() {
     const [postList] = useProjectListApi();
 
-    function createData(index, _id, title, body, images, mainimage, tags, createdAt) {
-        return { index, _id, title, body, images, mainimage, tags, createdAt };
+    function createData(
+        index,
+        _id,
+        title,
+        body,
+        images,
+        mainimage,
+        tags,
+        developPeriod,
+        link,
+        createdAt
+    ) {
+        return { index, _id, title, body, images, mainimage, tags, developPeriod, link, createdAt };
     }
 
     const Projects = [];
@@ -20,24 +32,30 @@ export default function ProjectList() {
             postList[i].images,
             postList[i].mainimage,
             postList[i].tags,
+            postList[i].developPeriod,
+            postList[i].link,
             postList[i].createdAt
         );
     }
 
     return Projects.slice(0)
         .reverse()
-        .map((project) => (
-            <Link
-                to={`/maintab/projectdetail/${project._id}`}
-                style={{
-                    textDecoration: 'none',
-                    display: 'contents',
-                    width: '100%'
-                }}
-                key={project.index}
-                state={{ project }}
-            >
-                <ProjectCard project={project} key={project.index} />
-            </Link>
-        ));
+        .map((project) => {
+            return (
+                <Card sx={{ borderRadius: '25px', mb: 2 }} key={project.index}>
+                    <Link
+                        to={`/maintab/projectdetail/${project._id}`}
+                        style={{
+                            textDecoration: 'none',
+                            display: 'contents',
+                            width: '100%'
+                        }}
+                        key={project.index}
+                        state={{ project }}
+                    >
+                        <ProjectCard project={project} />
+                    </Link>
+                </Card>
+            );
+        });
 }

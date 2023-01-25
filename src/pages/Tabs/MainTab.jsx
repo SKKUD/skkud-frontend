@@ -13,10 +13,19 @@ import PostProject from './Project/PostProject';
 import ProjectDetail from './Project/ProjectDetail';
 import EditProject from './Project/EditProject';
 import CreateUser from './User/CreateUser';
-import EditUser from './User/EditUser';
+import CreateUser2 from './User/CreateUser2';
+import CreateUser3 from './User/CreateUser3';
 import FrontendTab from './User/FrontendTab';
 import BackendTab from './User/BackendTab';
+import TabStudy from './Study/TabStudy';
+import StudyContent from './Study/StudyContent';
+import EditStudy from './Study/EditStudy';
+import PostStudy from './Study/PostStudy';
 import Header from '../../components/common/Header';
+import Footer from '../../components/common/Footer';
+import FinishCreateUser from './User/FinishCreateUser';
+import MyPageDetail from './User/MyPageDetail';
+import MyPage from './User/MyPage';
 
 function TabPanel(props) {
     const { children, value, index, ...other } = props;
@@ -35,7 +44,12 @@ function TabPanel(props) {
 }
 
 const StyledTabs = styled((props) => (
-    <Tabs {...props} TabIndicatorProps={{ children: <span className="MuiTabs-indicatorSpan" /> }} />
+    <Tabs
+        variant="scrollable"
+        scrollButtons={false}
+        {...props}
+        TabIndicatorProps={{ children: <span className="MuiTabs-indicatorSpan" /> }}
+    />
 ))({
     '& .MuiTabs-indicator': {
         display: 'flex',
@@ -43,7 +57,7 @@ const StyledTabs = styled((props) => (
         backgroundColor: 'transparent'
     },
     '& .MuiTabs-indicatorSpan': {
-        maxWidth: 80,
+        maxWidth: 70,
         width: '100%',
         backgroundColor: '#00FFB0'
     }
@@ -52,7 +66,7 @@ const StyledTabs = styled((props) => (
 const StyledTab = styled((props) => <Tab disableRipple {...props} />)(({ theme }) => ({
     textTransform: 'none',
     fontWeight: 600,
-    paddingBottom: '5px',
+    padding: '12px 15px 5px',
     fontSize: theme.typography.pxToRem(15),
     color: 'rgba(255, 255, 255, 0.7)',
     '&.Mui-selected': {
@@ -88,14 +102,11 @@ function MainTab() {
         if (location.pathname === '/maintab' || location.pathname === '/maintab/') {
             TabIndex = 0;
             setValue(TabIndex);
-        } else if (
-            location.pathname === '/maintab/frontend' ||
-            location.pathname === '/maintab/backend' ||
-            location.pathname === '/maintab/design' ||
-            location.pathname === '/maintab/createuser' ||
-            location.pathname === '/maintab/member'
-        ) {
+        } else if (location.pathname.substring(0, 15) === '/maintab/member') {
             TabIndex = 2;
+            setValue(TabIndex);
+        } else if (location.pathname.substring(0, 14) === '/maintab/study') {
+            TabIndex = 3;
             setValue(TabIndex);
         } else {
             TabIndex = 1;
@@ -123,14 +134,17 @@ function MainTab() {
                     variant="fullWidth"
                     sx={{
                         width: '100%',
+                        padding: '0 8px',
                         position: 'fixed',
-                        backgroundColor: '#222222',
-                        marginTop: '40px'
+                        bgcolor: 'background.paper',
+                        marginTop: '40px',
+                        zIndex: 1150
                     }}
                 >
-                    <StyledTab label="about us" {...a11yProps(0)} component={Link} to="" />
-                    <StyledTab label="project" {...a11yProps(1)} component={Link} to="project" />
-                    <StyledTab label="member" {...a11yProps(2)} component={Link} to="frontend" />
+                    <StyledTab label="About us" {...a11yProps(0)} component={Link} to="" />
+                    <StyledTab label="Project" {...a11yProps(1)} component={Link} to="project" />
+                    <StyledTab label="Member" {...a11yProps(2)} component={Link} to="member" />
+                    <StyledTab label="Study" {...a11yProps(3)} component={Link} to="study" />
                 </StyledTabs>
             </Box>
 
@@ -142,13 +156,22 @@ function MainTab() {
                     <Route path="editproject/:index" element={<EditProject />} />
                     <Route path="projectdetail/:index" element={<ProjectDetail />} />
                     <Route path="member" element={<FrontendTab />} />
-                    <Route path="design" element={<TabMember />} />
-                    <Route path="frontend" element={<FrontendTab />} />
-                    <Route path="backend" element={<BackendTab />} />
-                    <Route path="createuser" element={<CreateUser />} />
-                    <Route path="edituser/:index" element={<EditUser />} />
+                    <Route path="member/design" element={<TabMember />} />
+                    {/* <Route path="frontend" element={<FrontendTab />} /> */}
+                    <Route path="member/backend" element={<BackendTab />} />
+                    <Route path="member/createuser" element={<CreateUser />} />
+                    <Route path="member/createuser2" element={<CreateUser2 />} />
+                    <Route path="member/createuser3" element={<CreateUser3 />} />
+                    <Route path="member/mypage" element={<MyPage />} />
+                    <Route path="member/usercreated" element={<FinishCreateUser />} />
+                    <Route path="member/mypagedetail" element={<MyPageDetail />} />
+                    <Route path="study" element={<TabStudy />} />
+                    <Route path="study/:index" element={<StudyContent />} />
+                    <Route path="study/edit/:index" element={<EditStudy />} />
+                    <Route path="study/post" element={<PostStudy />} />
                 </Routes>
             </TabPanel>
+            <Footer />
         </Box>
     );
 }

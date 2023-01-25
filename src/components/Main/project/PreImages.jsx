@@ -5,7 +5,7 @@ function PreImages({ imgFiles }) {
     return (
         <>
             {imgFiles.map((url) => (
-                <img alt={url} key={url} src={url} width="20%" />
+                <img alt={url} key={url} src={url} width="100%" />
             ))}
         </>
     );
@@ -13,6 +13,5 @@ function PreImages({ imgFiles }) {
 
 PreImages.propTypes = {
     imgFiles: PropTypes.arrayOf(PropTypes.string).isRequired
-    // imgFiles: PropTypes.string.isRequired,
 };
 export default PreImages;

@@ -36,8 +36,10 @@ export const useProjectPostDetailApi = () => {
     const [title, setTitle] = useState('');
     const [body, setBody] = useState('');
     const [tags, setTags] = useState([]);
-    const [language, setLanguage] = useState('');
+    const [period, setPeriod] = useState('');
+    const [link, setLink] = useState('');
     const [images, setImages] = useState([]);
+    const [checked, setChecked] = useState([]);
 
     // :id 파라미터
     const { index } = useParams();
@@ -51,8 +53,10 @@ export const useProjectPostDetailApi = () => {
             setTitle(data.title);
             setBody(data.body);
             setTags(data.tags);
-            setLanguage(data.language);
+            setPeriod(data.developPeriod);
+            setLink(data.link);
             setImages(data.images);
+            setChecked(data.users);
         });
     }, []);
 
@@ -60,7 +64,26 @@ export const useProjectPostDetailApi = () => {
         [title, setTitle],
         [body, setBody],
         [tags, setTags],
-        [language, setLanguage],
-        [images, setImages]
+        [period, setPeriod],
+        [link, setLink],
+        [images, setImages],
+        [checked, setChecked]
     ];
+};
+
+export const useProjectUserApi = () => {
+    const [User, setUser] = useState([]);
+
+    // :id 파라미터
+    const { index } = useParams();
+
+    useEffect(() => {
+        const fetchEvents = async () => {
+            const res = await axios.get(`http://localhost:8000/users/byProject/${index}`);
+            setUser(res.data.data);
+        };
+        fetchEvents();
+    }, []);
+
+    return [User];
 };
