@@ -45,7 +45,7 @@ export default function CreateUser3() {
             formData.append('image', image);
             formData.append('major', major);
             await axios
-                .post('http://localhost:8000/users', formData)
+                .post('http://3.38.103.20:8000/users', formData)
                 .then((response) => console.log(response))
                 .catch((error) => console.log(error));
 

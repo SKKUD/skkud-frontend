@@ -6,7 +6,7 @@ export const useApplicationFormApi = () => {
 
     useEffect(() => {
         const fetchEvents = async () => {
-            const res = await axios.get(`http://localhost:8000/applies/appliers`);
+            const res = await axios.get(`http://3.38.103.20:8000/applies/appliers`);
             setform(res.data.data);
         };
         fetchEvents();
@@ -20,7 +20,7 @@ export const useAppliedUserApi = () => {
 
     useEffect(() => {
         const fetchEvents = async () => {
-            const res = await axios.get(`http://localhost:8000/applies/appliedUsers`);
+            const res = await axios.get(`http://3.38.103.20:8000/applies/appliedUsers`);
             setUsers(res.data.data);
         };
         fetchEvents();
@@ -37,7 +37,7 @@ export const useApplicationFormDetailApi = () => {
 
     useEffect(() => {
         const fetchEvents = async () => {
-            const res = await axios.get(`http://localhost:8000/applies/appliers`);
+            const res = await axios.get(`http://3.38.103.20:8000/applies/appliers`);
             return res.data.data;
         };
         fetchEvents().then((data) => {

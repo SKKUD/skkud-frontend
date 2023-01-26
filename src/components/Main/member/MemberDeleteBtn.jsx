@@ -17,7 +17,7 @@ export default function MemberDeleteBtn(_id) {
     const logoutBtn = async () => {
         removeCookie('id');
         await axios
-            .post('http://localhost:8000/auth/logout')
+            .post('http://3.38.103.20:8000/auth/logout')
             .then((userData) => console.log(userData))
             .catch((error) => console.log(error));
 
@@ -30,7 +30,7 @@ export default function MemberDeleteBtn(_id) {
             // alert('계정이 삭제되었습니다.');
             setAlert(true);
             await axios
-                .delete(`http://localhost:8000/users/${id}`)
+                .delete(`http://3.38.103.20:8000/users/${id}`)
                 .then((response) => console.log('delete', response));
             logoutBtn();
             // window.location.reload();

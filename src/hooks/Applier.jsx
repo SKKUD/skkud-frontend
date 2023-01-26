@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
-const BASE_URI = 'http://localhost:8000';
+const BASE_URI = 'http://3.38.103.20:8000';
 
 export const useApplierApi = () => {
     const [appliers, setAppliers] = useState({});

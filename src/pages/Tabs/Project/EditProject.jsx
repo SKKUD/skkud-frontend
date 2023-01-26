@@ -39,7 +39,7 @@ export default function EditProject() {
 
     useEffect(() => {
         const fetchEvents = async () => {
-            const res = await axios.get('http://localhost:8000/users');
+            const res = await axios.get('http://3.38.103.20:8000/users');
             getUsers(res.data.data.users);
         };
         fetchEvents();
@@ -85,7 +85,7 @@ export default function EditProject() {
             newImages.map((image) => formData.append('images', image));
 
             await axios
-                .patch(`http://localhost:8000/posts/contributor/${index}`, {
+                .patch(`http://3.38.103.20:8000/posts/contributor/${index}`, {
                     contributors: checked
                 })
                 .then((response) => {
@@ -96,7 +96,7 @@ export default function EditProject() {
                 });
 
             await axios
-                .post(`http://localhost:8000/posts/revise/${index}`, formData)
+                .post(`http://3.38.103.20:8000/posts/revise/${index}`, formData)
                 .then((response) => {
                     console.log(response.status);
                 })

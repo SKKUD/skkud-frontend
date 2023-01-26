@@ -20,7 +20,7 @@ export default function StudyDeleteBtn(_id) {
             component="label"
             onClick={() => {
                 const deleteEvents = async () => {
-                    await axios.delete(`http://localhost:8000/study/studies/${state}`);
+                    await axios.delete(`http://3.38.103.20:8000/study/studies/${state}`);
                 };
                 deleteEvents();
                 navigateToStudy();

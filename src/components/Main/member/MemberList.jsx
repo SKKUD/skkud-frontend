@@ -14,7 +14,7 @@ export default function MemberList() {
 
     useEffect(() => {
         const fetchEvents = async () => {
-            const res = await axios.get('http://localhost:8000/users');
+            const res = await axios.get('http://3.38.103.20:8000/users');
             setUsers(res.data.data.users);
         };
         fetchEvents();
