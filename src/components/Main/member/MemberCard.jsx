@@ -55,7 +55,7 @@ export default function MemberCard({
                                     height: '120px',
                                     marginRight: '10px',
                                     backgroundColor: 'white',
-                                    objectFit: 'contain'
+                                    objectFit: 'cover'
                                 }}
                             />
                         </Grid>
