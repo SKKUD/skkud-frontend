@@ -68,45 +68,6 @@ export const darkTheme = createTheme({
                     background: '#222222'
                 }
             }
-        },
-        MuiPaper: {
-            styleOverrides: {
-                root: {
-                    maxWidth: '390px'
-                }
-            }
-        },
-        MuiBackdrop: {
-            styleOverrides: {
-                root: {
-                    maxWidth: '390px',
-                    margin: '0 auto'
-                }
-            }
-        },
-        MuiAppBar: {
-            styleOverrides: {
-                root: {
-                    position: 'fixed',
-                    left: '50%',
-                    transform: 'translate(-50%)',
-                    maxWidth: '390px'
-                }
-            }
-        },
-        MuiToolbar: {
-            styleOverrides: {
-                root: {
-                    maxWidth: '390px'
-                }
-            }
-        },
-        MuiTabs: {
-            styleOverrides: {
-                root: {
-                    maxWidth: '390px'
-                }
-            }
         }
     }
 });
@@ -121,11 +82,7 @@ function App() {
             <CssBaseline />
 
             <TrackContext.Provider value={trackValue}>
-                <div
-                    className="App"
-                    color="primary"
-                    style={{ paddingTop: '60px', overflow: 'hidden', maxWidth: '390px' }}
-                >
+                <div className="App" color="primary" style={{ overflow: 'hidden' }}>
                     <MainPage />
                 </div>
             </TrackContext.Provider>

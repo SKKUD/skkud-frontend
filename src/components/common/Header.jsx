@@ -18,7 +18,7 @@ function Header() {
                     position: 'fixed',
                     width: '100%',
                     backgroundColor: '#222222',
-                    padding: '50px 24px 10px',
+                    padding: '30px 24px 10px',
                     display: 'flex',
                     justifyContent: 'space-between'
                 }}

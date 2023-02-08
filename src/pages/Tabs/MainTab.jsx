@@ -57,7 +57,7 @@ const StyledTabs = styled((props) => (
         backgroundColor: 'transparent'
     },
     '& .MuiTabs-indicatorSpan': {
-        maxWidth: 70,
+        maxWidth: 68,
         width: '100%',
         backgroundColor: '#00FFB0'
     }
@@ -119,7 +119,7 @@ function MainTab() {
     };
 
     return (
-        <Box sx={{ width: '100%' }}>
+        <Box sx={{ width: '100%', paddingTop: '91px' }}>
             <Header position="static" />
             <Box
                 sx={{
@@ -137,7 +137,6 @@ function MainTab() {
                         padding: '0 8px',
                         position: 'fixed',
                         bgcolor: 'background.paper',
-                        marginTop: '40px',
                         zIndex: 1150
                     }}
                 >
@@ -148,7 +147,14 @@ function MainTab() {
                 </StyledTabs>
             </Box>
 
-            <TabPanel value={value} index={value} style={{ marginTop: '85px' }}>
+            <TabPanel
+                value={value}
+                index={value}
+                style={{
+                    margin: '40px auto 0px',
+                    maxWidth: '390px'
+                }}
+            >
                 <Routes>
                     <Route path="" element={<TabAboutUs />} />
                     <Route path="project" element={<ProjectList />} />
