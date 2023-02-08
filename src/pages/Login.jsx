@@ -95,7 +95,7 @@ export default function Login() {
                             flexDirection: 'column',
                             alignItems: 'center',
                             marginTop: '80px',
-                            marginBottom: '30px',
+                            marginBottom: '50px',
                             '& > :not(style)': { m: 1 }
                         }}
                     >

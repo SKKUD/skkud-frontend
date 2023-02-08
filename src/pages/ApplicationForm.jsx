@@ -119,6 +119,7 @@ export default function ApplicationForm() {
                                     id="firstForm"
                                     style={{
                                         width: '100%',
+                                        maxWidth: '500px',
                                         display: 'flex',
                                         flexDirection: 'column',
                                         alignItems: 'center'
@@ -282,6 +283,8 @@ export default function ApplicationForm() {
                             <div
                                 id="secondForm"
                                 style={{
+                                    width: '100%',
+                                    maxWidth: '500px',
                                     marginTop: '30px',
                                     display: 'flex',
                                     flexDirection: 'column',
