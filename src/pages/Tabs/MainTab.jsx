@@ -66,7 +66,7 @@ const StyledTabs = styled((props) => (
 const StyledTab = styled((props) => <Tab disableRipple {...props} />)(({ theme }) => ({
     textTransform: 'none',
     fontWeight: 600,
-    padding: '12px 15px 5px',
+    padding: '5px 15px 5px',
     fontSize: theme.typography.pxToRem(15),
     color: 'rgba(255, 255, 255, 0.7)',
     '&.Mui-selected': {
@@ -119,7 +119,7 @@ function MainTab() {
     };
 
     return (
-        <Box sx={{ width: '100%', paddingTop: '91px' }}>
+        <Box sx={{ width: '100%', paddingTop: '71px' }}>
             <Header position="static" />
             <Box
                 sx={{

@@ -91,12 +91,11 @@ export default function Login() {
                 <>
                     <Box
                         sx={{
-                            height: '100vh',
-                            marginTop: '-80px',
                             display: 'flex',
                             flexDirection: 'column',
                             alignItems: 'center',
-                            justifyContent: 'center',
+                            marginTop: '80px',
+                            marginBottom: '30px',
                             '& > :not(style)': { m: 1 }
                         }}
                     >
@@ -126,13 +125,20 @@ export default function Login() {
                                 borderRadius: '99px',
                                 width: '312px',
                                 height: '48px',
-                                fontWeight: 500,
-                                fontSize: '1.12rem'
+                                fontWeight: 700,
+                                fontSize: '0.875rem'
                             }}
                         >
                             로그인하기
                         </Button>
-                        <div style={{ textDecoration: 'underline' }} onClick={navigateToMainTab}>
+                        <div
+                            style={{
+                                color: '#fff',
+                                borderBottom: '0.5px solid #c2c2c2',
+                                fontSize: '0.875rem'
+                            }}
+                            onClick={navigateToMainTab}
+                        >
                             나중에 로그인하기
                         </div>
 
