@@ -83,6 +83,15 @@ export default function EditProject() {
             formData.append('period', period);
             formData.append('link', link);
             newImages.map((image) => formData.append('images', image));
+            // formData.append('addCotributors', checked);
+            // console.log(checked);
+            // console.log(PreviousChecked);
+            // console.log(checked.filter((x) => !PreviousChecked.includes(x)));
+            // console.log(PreviousChecked.filter((x) => !checked.includes(x)));
+            // formData.append(
+            //     'deleteContributors',
+            //     PreviousChecked.filter((x) => !checked.includes(x))
+            // );
 
             await axios
                 .patch(`http://localhost:8000/posts/contributor/${index}`, {

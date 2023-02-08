@@ -36,8 +36,6 @@ export default function TabStudy() {
                             justifyContent: 'space-evenly',
                             marginBottom: '21px',
                             marginTop: '21px'
-
-                            // alignContent: 'space-between'
                         }}
                     >
                         {studyGroups.map((group) => (
@@ -72,8 +70,6 @@ export default function TabStudy() {
                         flexDirection: 'row',
                         justifyContent: 'space-evenly',
                         marginBottom: '21px'
-
-                        // alignContent: 'space-between'
                     }}
                 >
                     {studyGroups.map((group) => (
@@ -113,7 +109,7 @@ export default function TabStudy() {
                     </Link>
                 </Box>
             ) : null}
-            <div style={{ marginBottom: '18px' }}>
+            <div>
                 {study &&
                     study
                         .slice(0)
