@@ -60,7 +60,7 @@ export default function SideBar() {
                 <MenuIcon sx={{ fontSize: 35 }} />
             </IconButton>
             <Drawer open={open} onClose={toggleDrawer(false)} anchor="right">
-                <DrawerHeader sx={{ marginTop: '25px', pr: '18px' }}>
+                <DrawerHeader sx={{ marginTop: '18px', pr: '18px' }}>
                     <IconButton onClick={toggleDrawer(false)}>
                         <MenuIcon sx={{ fontSize: 35 }} />
                     </IconButton>
