@@ -23,7 +23,7 @@ export default function PostProject() {
     };
     const [alertTitle, setAlertTitle] = useState(false);
     const [alertContent, setAlertContent] = useState(false);
-
+    const [alertPeriod, setAlertPeriod] = useState(false);
     const [title, setTitle] = useState('');
     const [body, setBody] = useState('');
     const [tags, setTags] = useState([]);
@@ -33,7 +33,11 @@ export default function PostProject() {
     const [PreviewImg, setPreviewImg] = useState([]);
     const [users, getUsers] = useState([]);
     const [checked, setChecked] = React.useState([]);
-
+    const handleClose = (event, reason) => {
+        setAlertContent(false);
+        setAlertTitle(false);
+        setAlertPeriod(false);
+    };
     useEffect(() => {
         const fetchEvents = async () => {
             const res = await axios.get('http://localhost:8000/users');
@@ -62,11 +66,11 @@ export default function PostProject() {
 
     const HandlPostSubmit = async () => {
         if (title === '') {
-            // alert('제목을 입력하세요');
             setAlertTitle(true);
         } else if (body === '') {
-            // alert('내용을 입력하세요');
             setAlertContent(true);
+        } else if (period === '') {
+            setAlertPeriod(true);
         } else {
             const formData = new FormData();
             formData.append('title', title);
@@ -215,14 +219,19 @@ export default function PostProject() {
                     </Button>
                 </Box>
             </form>
-            <Snackbar open={alertTitle} autoHideDuration={1000}>
+            <Snackbar open={alertTitle} autoHideDuration={700} onClose={handleClose}>
                 <Alert severity="error" sx={{ width: '100%' }}>
                     제목을 입력하세요.
                 </Alert>
             </Snackbar>
-            <Snackbar open={alertContent} autoHideDuration={1000}>
+            <Snackbar open={alertContent} autoHideDuration={700} onClose={handleClose}>
                 <Alert severity="error" sx={{ width: '100%' }}>
                     내용을 입력하세요.
+                </Alert>
+            </Snackbar>
+            <Snackbar open={alertPeriod} autoHideDuration={700} onClose={handleClose}>
+                <Alert severity="error" sx={{ width: '100%' }}>
+                    개발 기간을 입력하세요.
                 </Alert>
             </Snackbar>
         </>

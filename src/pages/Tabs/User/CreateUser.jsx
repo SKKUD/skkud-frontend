@@ -18,6 +18,11 @@ export default function CreateUser() {
     const [repw, setrePw] = useState('');
     const validEmail = '^[a-zA-Z0-9+-_.]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$';
     const navigate = useNavigate();
+    const handleClose = (event, reason) => {
+        setAlert(false);
+        setEmailAlert(false);
+        setPwAlert(false);
+    };
     const nextBtn = () => {
         if (ID === '' || email === '' || pw === '') {
             // alert('입력을 완료하세요');
@@ -100,17 +105,17 @@ export default function CreateUser() {
                     </Button>
                 </Box>
             </userForm>
-            <Snackbar open={alert} autoHideDuration={1000}>
+            <Snackbar open={alert} autoHideDuration={700} onClose={handleClose}>
                 <Alert severity="error" sx={{ width: '100%' }}>
                     입력을 완료하세요.
                 </Alert>
             </Snackbar>
-            <Snackbar open={emailAlert} autoHideDuration={1000}>
+            <Snackbar open={emailAlert} autoHideDuration={700} onClose={handleClose}>
                 <Alert severity="error" sx={{ width: '100%' }}>
                     이메일 형식에 맞춰 입력하세요.
                 </Alert>
             </Snackbar>
-            <Snackbar open={pwAlert} autoHideDuration={1000}>
+            <Snackbar open={pwAlert} autoHideDuration={700} onClose={handleClose}>
                 <Alert severity="error" sx={{ width: '100%' }}>
                     동일한 비밀번호가 아닙니다.
                 </Alert>

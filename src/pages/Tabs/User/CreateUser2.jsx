@@ -28,10 +28,11 @@ export default function CreateUser2() {
     const pw = location.state.pw;
     const email = location.state.email;
     const navigate = useNavigate();
-
+    const handleClose = (event, reason) => {
+        setAlert(false);
+    };
     const nextBtn = () => {
         if (name === '' || engName === '' || track === '' || image === '' || major === '') {
-            // alert('입력을 완료하세요');
             setAlert(true);
         } else {
             navigate('/maintab/member/createuser3', {
@@ -174,7 +175,7 @@ export default function CreateUser2() {
                     다음
                 </Button>
             </Box>
-            <Snackbar open={alert} autoHideDuration={1000}>
+            <Snackbar open={alert} autoHideDuration={700} onClose={handleClose}>
                 <Alert severity="error" sx={{ width: '100%' }}>
                     입력을 완료하세요.
                 </Alert>
