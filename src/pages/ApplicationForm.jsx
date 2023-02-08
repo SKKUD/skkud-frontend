@@ -42,6 +42,15 @@ export default function ApplicationForm() {
     const documentAnswers = [];
     const [next, setNext] = useState('');
     const [submit, setSubmit] = useState('');
+    const handleClose = (event, reason) => {
+        setAnswerAlert(false);
+        setNameAlert(false);
+        setMajorAlert(false);
+        setStudentIdAlert(false);
+        setTrackAlert(false);
+        setNumAlert(false);
+        setEmailAlert(false);
+    };
 
     const HandlPostSubmit = async () => {
         if (documentAnswer1 === '' || documentAnswer2 === '') {
@@ -392,37 +401,37 @@ export default function ApplicationForm() {
                 )}
                 <Footer />
             </Box>
-            <Snackbar open={answerAlert} autoHideDuration={300}>
+            <Snackbar open={answerAlert} autoHideDuration={700} onClose={handleClose}>
                 <Alert severity="error" sx={{ width: '100%' }}>
                     답변을 입력하세요.
                 </Alert>
             </Snackbar>
-            <Snackbar open={nameAlert} autoHideDuration={300}>
+            <Snackbar open={nameAlert} autoHideDuration={700} onClose={handleClose}>
                 <Alert severity="error" sx={{ width: '100%' }}>
                     이름을 입력하세요.
                 </Alert>
             </Snackbar>
-            <Snackbar open={majorAlert} autoHideDuration={300}>
+            <Snackbar open={majorAlert} autoHideDuration={700} onClose={handleClose}>
                 <Alert severity="error" sx={{ width: '100%' }}>
                     학과를 입력하세요.
                 </Alert>
             </Snackbar>
-            <Snackbar open={numAlert} autoHideDuration={300}>
+            <Snackbar open={numAlert} autoHideDuration={700} onClose={handleClose}>
                 <Alert severity="error" sx={{ width: '100%' }}>
                     연락처를 입력하세요.
                 </Alert>
             </Snackbar>
-            <Snackbar open={studentIdAlert} autoHideDuration={300}>
+            <Snackbar open={studentIdAlert} autoHideDuration={700} onClose={handleClose}>
                 <Alert severity="error" sx={{ width: '100%' }}>
                     학번을 입력하세요.
                 </Alert>
             </Snackbar>
-            <Snackbar open={trackAlert} autoHideDuration={3000}>
+            <Snackbar open={trackAlert} autoHideDuration={700} onClose={handleClose}>
                 <Alert severity="error" sx={{ width: '100%' }}>
                     지원트랙을 입력하세요.
                 </Alert>
             </Snackbar>
-            <Snackbar open={emailAlert} autoHideDuration={300}>
+            <Snackbar open={emailAlert} autoHideDuration={700} onClose={handleClose}>
                 <Alert severity="error" sx={{ width: '100%' }}>
                     이메일을 입력하세요.
                 </Alert>
