@@ -153,7 +153,7 @@ export default function ProjectDetail() {
                     <Stack
                         direction="row"
                         spacing={1.2}
-                        sx={{ justifyContent: 'left', flexWrap: 'wrap', width: '250px' }}
+                        sx={{ justifyContent: 'left', flexWrap: 'wrap', width: '270px' }}
                     >
                         {tags &&
                             tags.map((tag) => (

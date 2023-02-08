@@ -106,7 +106,8 @@ export default function ApplicationForm() {
                             padding: '40px 20px 0',
                             display: 'flex',
                             flexDirection: 'column',
-                            alignItems: 'center'
+                            alignItems: 'center',
+                            justifyContent: 'center'
                         }}
                     >
                         <div style={{ textAlign: 'center', marginBottom: '30px' }}>
@@ -278,7 +279,15 @@ export default function ApplicationForm() {
                                 </Button>
                             </>
                         ) : (
-                            <div id="secondForm" style={{ marginTop: '30px' }}>
+                            <div
+                                id="secondForm"
+                                style={{
+                                    marginTop: '30px',
+                                    display: 'flex',
+                                    flexDirection: 'column',
+                                    alignItems: 'center'
+                                }}
+                            >
                                 <div style={{ fontWeight: 700, fontSize: '0.85rem' }}>
                                     Q1. {questions[0]}
                                 </div>
@@ -380,37 +389,37 @@ export default function ApplicationForm() {
                 )}
                 <Footer />
             </Box>
-            <Snackbar open={answerAlert} autoHideDuration={1000}>
+            <Snackbar open={answerAlert} autoHideDuration={300}>
                 <Alert severity="error" sx={{ width: '100%' }}>
                     답변을 입력하세요.
                 </Alert>
             </Snackbar>
-            <Snackbar open={nameAlert} autoHideDuration={1000}>
+            <Snackbar open={nameAlert} autoHideDuration={300}>
                 <Alert severity="error" sx={{ width: '100%' }}>
                     이름을 입력하세요.
                 </Alert>
             </Snackbar>
-            <Snackbar open={majorAlert} autoHideDuration={1000}>
+            <Snackbar open={majorAlert} autoHideDuration={300}>
                 <Alert severity="error" sx={{ width: '100%' }}>
-                    학과을 입력하세요.
+                    학과를 입력하세요.
                 </Alert>
             </Snackbar>
-            <Snackbar open={numAlert} autoHideDuration={1000}>
+            <Snackbar open={numAlert} autoHideDuration={300}>
                 <Alert severity="error" sx={{ width: '100%' }}>
-                    연락처을 입력하세요.
+                    연락처를 입력하세요.
                 </Alert>
             </Snackbar>
-            <Snackbar open={studentIdAlert} autoHideDuration={1000}>
+            <Snackbar open={studentIdAlert} autoHideDuration={300}>
                 <Alert severity="error" sx={{ width: '100%' }}>
                     학번을 입력하세요.
                 </Alert>
             </Snackbar>
-            <Snackbar open={trackAlert} autoHideDuration={1000}>
+            <Snackbar open={trackAlert} autoHideDuration={3000}>
                 <Alert severity="error" sx={{ width: '100%' }}>
                     지원트랙을 입력하세요.
                 </Alert>
             </Snackbar>
-            <Snackbar open={emailAlert} autoHideDuration={1000}>
+            <Snackbar open={emailAlert} autoHideDuration={300}>
                 <Alert severity="error" sx={{ width: '100%' }}>
                     이메일을 입력하세요.
                 </Alert>

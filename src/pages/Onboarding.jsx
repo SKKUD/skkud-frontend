@@ -19,7 +19,6 @@ export default function () {
                 display: 'flex',
                 justifyContent: 'center',
                 backgroundColor: '#05E49F',
-                marginTop: '-60px',
                 width: '100vw',
                 height: '100vh'
             }}
@@ -29,8 +28,7 @@ export default function () {
                     display: 'flex',
                     flexDirection: 'column',
                     justifyContent: 'center',
-                    alignItems: 'center',
-                    marginTop: '-80px'
+                    alignItems: 'center'
                 }}
             >
                 <img
