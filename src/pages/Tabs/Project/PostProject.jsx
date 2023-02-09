@@ -40,7 +40,7 @@ export default function PostProject() {
     };
     useEffect(() => {
         const fetchEvents = async () => {
-            const res = await axios.get('http://localhost:8000/users');
+            const res = await axios.get('https://api.skku.dev/users');
             getUsers(res.data.data.users);
         };
         fetchEvents();
@@ -84,7 +84,7 @@ export default function PostProject() {
             images.map((image) => formData.append('images', image));
 
             await axios
-                .post('http://localhost:8000/posts', formData)
+                .post('https://api.skku.dev/posts', formData)
                 .then((response) => {
                     console.log(response.status);
                 })
