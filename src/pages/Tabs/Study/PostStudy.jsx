@@ -50,7 +50,12 @@ export default function PostStudy() {
     const [PreviewImg, setPreviewImg] = useState([]);
     const [studyTimeStart, setStart] = useState(dayjs());
     const [studyTimeEnd, setEnd] = useState(dayjs());
-
+    const handleClose = (event, reason) => {
+        setAlertTitle(false);
+        setAlertContent(false);
+        setAlertTaskContent(false);
+        setAlertTaskName(false);
+    };
     const handleChangeStart = (newValue) => {
         setStart(newValue);
     };
@@ -447,22 +452,22 @@ export default function PostStudy() {
                     </Box>
                 </Card>
             </form>
-            <Snackbar open={alertTaskName} autoHideDuration={1000}>
+            <Snackbar open={alertTaskName} autoHideDuration={700} onClose={handleClose}>
                 <Alert severity="error" sx={{ width: '100%' }}>
                     이름을 입력하세요.
                 </Alert>
             </Snackbar>
-            <Snackbar open={alertTaskContent} autoHideDuration={1000}>
+            <Snackbar open={alertTaskContent} autoHideDuration={700} onClose={handleClose}>
                 <Alert severity="error" sx={{ width: '100%' }}>
                     과제 내용을 입력하세요.
                 </Alert>
             </Snackbar>
-            <Snackbar open={alertTitle} autoHideDuration={1000}>
+            <Snackbar open={alertTitle} autoHideDuration={700} onClose={handleClose}>
                 <Alert severity="error" sx={{ width: '100%' }}>
                     제목을 입력하세요.
                 </Alert>
             </Snackbar>
-            <Snackbar open={alertContent} autoHideDuration={1000}>
+            <Snackbar open={alertContent} autoHideDuration={700} onClose={handleClose}>
                 <Alert severity="error" sx={{ width: '100%' }}>
                     내용을 입력하세요.
                 </Alert>

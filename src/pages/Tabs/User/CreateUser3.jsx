@@ -16,7 +16,9 @@ export default function CreateUser3() {
     const [insta, setInsta] = useState('');
     const [otherLinks, setOtherLinks] = useState([]);
     const navigate = useNavigate();
-
+    const handleClose = (event, reason) => {
+        setAlert(false);
+    };
     const location = useLocation();
     const ID = location.state.id;
     const pw = location.state.pw;
@@ -125,7 +127,7 @@ export default function CreateUser3() {
                     가입 완료
                 </Button>
             </Box>
-            <Snackbar open={alert} autoHideDuration={1000}>
+            <Snackbar open={alert} autoHideDuration={700} onClose={handleClose}>
                 <Alert severity="error" sx={{ width: '100%' }}>
                     입력을 완료하세요.
                 </Alert>
