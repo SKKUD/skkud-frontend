@@ -5,8 +5,7 @@ import Button from '@mui/material/Button';
 import { useStudyGroupsApi } from '../../../hooks/Study';
 
 export default function StudyGroupPost() {
-    const [studyGroups, setStudyGroups, createStudyGroup, updateStudyGroup, deleteStudyGroup] = // eslint-disable-line no-unused-vars
-        useStudyGroupsApi();
+    const [, , createStudyGroup, ,] = useStudyGroupsApi();
     const [groupName, setName] = useState('');
     const [studyDay, setDay] = useState('');
     const [members, setMembers] = useState([]);

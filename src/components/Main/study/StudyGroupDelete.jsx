@@ -9,7 +9,6 @@ import Checkbox from '@mui/material/Checkbox';
 import Button from '@mui/material/Button';
 
 export default function StudyGroupDelete() {
-
     const [studyGroups, , , , deleteStudyGroup] = useStudyGroupsApi();
 
     const [checked, setChecked] = useState('');

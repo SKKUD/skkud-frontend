@@ -26,6 +26,7 @@ export default function EditProject() {
     const PostDetail = useProjectPostDetailApi();
     const [alertTitle, setAlertTitle] = useState(false);
     const [alertContent, setAlertContent] = useState(false);
+    const [alertPeriod, setAlertPeriod] = useState(false);
     const [title, setTitle] = PostDetail[0];
     const [body, setBody] = PostDetail[1];
     const [tags, setTags] = PostDetail[2];
@@ -36,7 +37,11 @@ export default function EditProject() {
     const [newImages, setNewImages] = useState([]);
     const [PreviewImg, setPreviewImg] = useState([]);
     const [users, getUsers] = useState([]);
-
+    const handleClose = (event, reason) => {
+        setAlertContent(false);
+        setAlertTitle(false);
+        setAlertPeriod(false);
+    };
     useEffect(() => {
         const fetchEvents = async () => {
             const res = await axios.get('http://localhost:8000/users');
@@ -73,6 +78,8 @@ export default function EditProject() {
         } else if (body === '') {
             // alert('내용을 입력하세요');
             setAlertContent(true);
+        } else if (period === '') {
+            setAlertPeriod(true);
         } else {
             const formData = new FormData();
             formData.append('title', title);
@@ -83,6 +90,15 @@ export default function EditProject() {
             formData.append('period', period);
             formData.append('link', link);
             newImages.map((image) => formData.append('images', image));
+            // formData.append('addCotributors', checked);
+            // console.log(checked);
+            // console.log(PreviousChecked);
+            // console.log(checked.filter((x) => !PreviousChecked.includes(x)));
+            // console.log(PreviousChecked.filter((x) => !checked.includes(x)));
+            // formData.append(
+            //     'deleteContributors',
+            //     PreviousChecked.filter((x) => !checked.includes(x))
+            // );
 
             await axios
                 .patch(`http://localhost:8000/posts/contributor/${index}`, {
@@ -255,14 +271,19 @@ export default function EditProject() {
                     </Button>
                 </Box>
             </form>
-            <Snackbar open={alertTitle} autoHideDuration={1000}>
+            <Snackbar open={alertTitle} autoHideDuration={700} onClose={handleClose}>
                 <Alert severity="error" sx={{ width: '100%' }}>
                     제목을 입력하세요.
                 </Alert>
             </Snackbar>
-            <Snackbar open={alertContent} autoHideDuration={1000}>
+            <Snackbar open={alertContent} autoHideDuration={700} onClose={handleClose}>
                 <Alert severity="error" sx={{ width: '100%' }}>
                     내용을 입력하세요.
+                </Alert>
+            </Snackbar>
+            <Snackbar open={alertPeriod} autoHideDuration={700} onClose={handleClose}>
+                <Alert severity="error" sx={{ width: '100%' }}>
+                    개발 기간을 입력하세요.
                 </Alert>
             </Snackbar>
         </>

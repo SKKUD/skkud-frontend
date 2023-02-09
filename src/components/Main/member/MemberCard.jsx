@@ -34,12 +34,11 @@ export default function MemberCard({
                     sx={{ maxWidth: 350 }}
                     style={{
                         marginTop: 13,
-                        borderRadius: 20,
+                        borderRadius: '15px',
                         paddingTop: '20px',
                         paddingBottom: '20px',
                         paddingLeft: '8px',
-                        paddingRight: '8px',
-                        backgroundColor: '#3A3A3A'
+                        paddingRight: '8px'
                     }}
                 >
                     <Grid container spacing={1} style={{ flexWrap: 'nowrap' }}>
@@ -55,7 +54,7 @@ export default function MemberCard({
                                     height: '120px',
                                     marginRight: '10px',
                                     backgroundColor: 'white',
-                                    objectFit: 'contain'
+                                    objectFit: 'cover'
                                 }}
                             />
                         </Grid>
