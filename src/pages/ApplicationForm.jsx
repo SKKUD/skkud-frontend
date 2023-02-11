@@ -280,7 +280,7 @@ export default function ApplicationForm() {
                                     onClick={HandleNext}
                                     sx={{
                                         margin: '100px 0px 59px',
-                                        padding: '12px 156px',
+                                        padding: '12px 45%',
                                         borderRadius: '99px',
                                         fontWeight: 600
                                     }}
@@ -338,7 +338,7 @@ export default function ApplicationForm() {
                                     onClick={HandlPostSubmit}
                                     sx={{
                                         margin: '40px 0px 59px',
-                                        padding: '12px 140px',
+                                        padding: '12px 40%',
                                         borderRadius: '99px',
                                         fontWeight: 600
                                     }}
@@ -387,7 +387,7 @@ export default function ApplicationForm() {
                             onClick={navigateToMainTab}
                             sx={{
                                 margin: '170px 0px 59px',
-                                padding: '12px 140px',
+                                padding: '12px 30%',
                                 borderRadius: '99px',
                                 fontWeight: 700,
                                 color: '#fff',
