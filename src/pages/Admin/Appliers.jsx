@@ -1,10 +1,10 @@
 import React from 'react';
 import { useEffect } from 'react';
-import { Routes, Route, useLocation } from 'react-router-dom';
+import { Routes, Route, useLocation, Link } from 'react-router-dom';
 import EditApplicationForm from './EditApplicationForm';
 import ApplicantsList from './ApplicantsList';
 import PropTypes from 'prop-types';
-import { Tab, Tabs, Box, Link } from '@mui/material';
+import { Tab, Tabs, Box } from '@mui/material';
 import styled from '@emotion/styled';
 import Header from '../../components/common/Header';
 import Footer from '../../components/common/Footer';
@@ -136,7 +136,7 @@ function Appliers() {
             >
                 <Routes>
                     <Route path="" element={<EditApplicationForm />} />
-                    <Route path="applicants" element={<ApplicantsList />} />
+                    <Route path="/applicants" element={<ApplicantsList />} />
                 </Routes>
             </TabPanel>
             <Footer />

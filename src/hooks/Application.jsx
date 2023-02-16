@@ -43,18 +43,11 @@ export const useAppliedUserDetailApi = ({ id }) => {
     return [userDetail];
 };
 
-export const useAppliedUserEditApi = ({ id, documentScore }) => {
-    useEffect(() => {
-        const fetchEvents = async () => {
-            const res = await axios.patch(
-                `http://localhost:8000/applies/appliedUsers/${id}`,
-                documentScore
-            );
-        };
-        fetchEvents();
-    }, []);
-
-    
+export const useAppliedUserEditApi = (id, body) => {
+    axios
+        .patch(`http://localhost:8000/applies/appliedUsers/${id}`, body)
+        .then((data) => console.log(data))
+        .catch((error) => console.log(error));
 };
 
 export const useApplicationFormDetailApi = () => {
