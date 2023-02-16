@@ -3,7 +3,7 @@ import axios from 'axios';
 const BASE_URI = 'http://localhost:8000';
 
 export const useApplierApi = () => {
-    const [appliers, setAppliers] = useState({});
+    const [appliers, setAppliers] = useState({ title: '', introduction: '', questions: [] });
 
     const fetchApplier = async () => {
         const data = await axios.get(BASE_URI + '/applies/appliers');
@@ -15,6 +15,7 @@ export const useApplierApi = () => {
             .patch(BASE_URI + '/applies/appliers/', appliers)
             .then(() => fetchApplier())
             .catch((error) => {
+                alert('응애');
                 alert(error.response.data.error);
             });
     };

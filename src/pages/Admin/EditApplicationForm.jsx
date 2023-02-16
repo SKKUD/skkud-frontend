@@ -28,9 +28,10 @@ export default function EditApplicationForm() {
             <div style={{ display: 'flex', flexDirection: 'row' }}>
                 <Typography variant="h6">질문</Typography>
                 <Button
-                    onClick={() =>
-                        setAppliers({ ...appliers, questions: [...appliers.questions, ''] })
-                    }
+                    onClick={() => {
+                        console.log(appliers);
+                        setAppliers({ ...appliers, questions: [...appliers.questions, ''] });
+                    }}
                 >
                     질문추가
                 </Button>
