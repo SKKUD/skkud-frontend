@@ -22,7 +22,7 @@ export default function MyPageDetail() {
     };
     useEffect(() => {
         const fetchEvents = async () => {
-            const res = await axios.get(`https://api.skku.dev/users/${id}`);
+            const res = await axios.get(`http://localhost:8000/users/${id}`);
 
             setUser(res.data.data.user);
         };
@@ -33,7 +33,7 @@ export default function MyPageDetail() {
         removeCookie('id');
 
         await axios
-            .post('https://api.skku.dev/auth/logout')
+            .post('http://localhost:8000/auth/logout')
             .then((userData) => console.log(userData))
             .catch((error) => console.log(error));
 
@@ -69,7 +69,7 @@ export default function MyPageDetail() {
     const submit = useCallback(async () => {
         if (checker === true) {
             await axios
-                .patch(`https://api.skku.dev/users/${id}`, {
+                .patch(`http://localhost:8000/users/${id}`, {
                     userID: newID,
                     passwd: newpw
                 })

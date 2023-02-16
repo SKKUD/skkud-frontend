@@ -27,8 +27,6 @@ export default function ApplicantCardDetail({
 }) {
     const [form] = useApplicationFormApi();
 
-    console.log(form[0]);
-
     const questions = [];
     form[0] && form[0].questions.map((item) => questions.push(item));
     const rendering = () => {
@@ -38,17 +36,9 @@ export default function ApplicantCardDetail({
                 result.push(
                     <div>
                         <div style={{ fontWeight: '600', color: '#00ffa8' }}>{questions[i]}</div>
-                        <Card sx={{ margin: '10px', padding: '5px' }}>{documentAnswers[i]}</Card>
-                        <div
-                            style={{
-                                fontWeight: '300',
-                                color: '#00ffa8',
-                                fontSize: '0.8rem',
-                                textAlign: 'end'
-                            }}
-                        >
-                            답변 점수 : {documentScores[i]}
-                        </div>
+                        <Card sx={{ margin: '10px 0px', padding: '10px' }}>
+                            {documentAnswers[i]}
+                        </Card>
                     </div>
                 );
             }
@@ -62,15 +52,36 @@ export default function ApplicantCardDetail({
                 width: '342.5px',
                 marginTop: -25,
                 borderRadius: 20,
-                paddingTop: '40px',
-                paddingBottom: '20px',
-                paddingLeft: '8px',
-                paddingRight: '8px',
+                padding: '40px 20px',
                 backgroundColor: '#303030',
                 zIndex: '-1'
             }}
         >
             {rendering()}
+            <Box mt="15px">
+                {documentScores &&
+                    documentScores.map((score, index) => (
+                        <div
+                            style={{
+                                fontWeight: '300',
+                                color: '#00ffa8',
+                                fontSize: '0.8rem'
+                            }}
+                        >
+                            {index + 1}번째 질문 점수 : {score}
+                        </div>
+                    ))}
+
+                <div
+                    style={{
+                        fontWeight: '300',
+                        color: '#00ffa8',
+                        fontSize: '0.8rem'
+                    }}
+                >
+                    면접 점수 : {interviewScores}
+                </div>
+            </Box>
         </Card>
     );
 }
