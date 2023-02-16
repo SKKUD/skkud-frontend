@@ -1,8 +1,16 @@
 import React from 'react';
-import { useAppliedUserApi } from '../../hooks/Application';
-import { TextField, Typography, Button } from '@mui/material';
-import Box from '@mui/material/Box';
+import { useAppliedUserApi, useAppliedUserDeleteApi } from '../../hooks/Application';
+import { TextField, Typography, Button, Box } from '@mui/material';
 import ApplicantCard from '../../components/applicant/ApplicantCard';
+
+function confirmModal() {
+    if (window.confirm('정말 삭제하시겠습니까?')) {
+        useAppliedUserDeleteApi();
+        window.location.reload();
+    } else {
+        console.log('취소. 변화 없음');
+    }
+}
 
 export default function ApplicantsList() {
     const [users] = useAppliedUserApi();
@@ -73,6 +81,9 @@ export default function ApplicantsList() {
                         major={user.major}
                     />
                 ))}
+            <Button variant="outlined" color="error" onClick={confirmModal}>
+                지원서 모두 삭제하기
+            </Button>
         </Box>
     );
 }
