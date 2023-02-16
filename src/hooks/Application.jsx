@@ -50,6 +50,13 @@ export const useAppliedUserEditApi = (id, body) => {
         .catch((error) => console.log(error));
 };
 
+export const useAppliedUserDeleteApi = () => {
+    axios
+        .delete(`http://localhost:8000/applies/appliedUsers`)
+        .then((data) => console.log(data))
+        .catch((error) => console.log(error));
+};
+
 export const useApplicationFormDetailApi = () => {
     const [title, setTitle] = useState('');
     const [introduction, setIntro] = useState('');

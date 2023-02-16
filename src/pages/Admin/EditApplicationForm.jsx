@@ -1,10 +1,13 @@
 import React from 'react';
+import { useEffect } from 'react';
 import { useApplierApi } from '../../hooks/Applier';
 import { TextField, Typography, Button } from '@mui/material';
 import Box from '@mui/material/Box';
 
 export default function EditApplicationForm() {
     const [appliers, setAppliers, updateApplier] = useApplierApi();
+    console.log(appliers);
+
     return (
         <Box>
             <Typography variant="h6">모집공고 제목</Typography>

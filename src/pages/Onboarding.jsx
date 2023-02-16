@@ -3,16 +3,16 @@ import { useNavigate } from 'react-router';
 import skkud_BI from '../assets/SKKUD_BI.png';
 
 export default function () {
-    const navigate = useNavigate();
-    const navigateToMaintab = () => {
-        navigate('/maintab');
-    };
+    // const navigate = useNavigate();
+    // const navigateToMaintab = () => {
+    //     navigate('/maintab');
+    // };
 
-    useEffect(() => {
-        setTimeout(() => {
-            navigateToMaintab();
-        }, 1000);
-    });
+    // useEffect(() => {
+    //     setTimeout(() => {
+    //         navigateToMaintab();
+    //     }, 1000);
+    // });
     return (
         <div
             style={{
