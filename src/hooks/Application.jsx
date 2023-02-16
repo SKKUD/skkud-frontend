@@ -43,6 +43,20 @@ export const useAppliedUserDetailApi = ({ id }) => {
     return [userDetail];
 };
 
+export const useAppliedUserEditApi = ({ id, documentScore }) => {
+    useEffect(() => {
+        const fetchEvents = async () => {
+            const res = await axios.patch(
+                `http://localhost:8000/applies/appliedUsers/${id}`,
+                documentScore
+            );
+        };
+        fetchEvents();
+    }, []);
+
+    
+};
+
 export const useApplicationFormDetailApi = () => {
     const [title, setTitle] = useState('');
     const [introduction, setIntro] = useState('');
