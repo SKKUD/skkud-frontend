@@ -28,7 +28,7 @@ export default function Login() {
         e.preventDefault();
 
         await axios
-            .post('https://api.skku.dev/auth/login', { userID: ID, passwd: PW })
+            .post('http://localhost:8000/auth/login', { userID: ID, passwd: PW })
             .then((userData) => {
                 if (userData.data.loginSuccess === true) {
                     setCookie('id', ID);
@@ -45,7 +45,7 @@ export default function Login() {
     if (cookies.id) {
         useEffect(() => {
             const fetchEvents = async () => {
-                const res = await axios.get(`https://api.skku.dev/users/${cookies.id}`);
+                const res = await axios.get(`http://localhost:8000/users/${cookies.id}`);
                 setPreviewImg(res.data.data.user.image);
             };
             fetchEvents();
@@ -56,7 +56,7 @@ export default function Login() {
         removeCookie('id');
         authCheck();
         await axios
-            .post('https://api.skku.dev/auth/logout')
+            .post('http://localhost:8000/auth/logout')
             .then((userData) => console.log(userData))
             .catch((error) => console.log(error));
         navigateToMainTab();
@@ -66,7 +66,7 @@ export default function Login() {
     const authCheck = () => {
         const token = cookies.id;
         axios
-            .post('https://api.skku.dev/auth/verify')
+            .post('http://localhost:8000/auth/verify')
             .then((res) => {
                 console.log('authcheck', res);
                 if (res.data.data.userID !== token) {

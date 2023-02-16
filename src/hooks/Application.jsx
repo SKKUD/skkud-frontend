@@ -6,7 +6,7 @@ export const useApplicationFormApi = () => {
 
     useEffect(() => {
         const fetchEvents = async () => {
-            const res = await axios.get(`https://api.skku.dev/applies/appliers`);
+            const res = await axios.get(`http://localhost:8000/applies/appliers`);
             setform(res.data.data);
         };
         fetchEvents();
@@ -20,13 +20,27 @@ export const useAppliedUserApi = () => {
 
     useEffect(() => {
         const fetchEvents = async () => {
-            const res = await axios.get(`https://api.skku.dev/applies/appliedUsers`);
+            const res = await axios.get(`http://localhost:8000/applies/appliedUsers`);
             setUsers(res.data.data);
         };
         fetchEvents();
     }, []);
 
     return [users];
+};
+
+export const useAppliedUserDetailApi = ({ id }) => {
+    const [userDetail, setUser] = useState({});
+
+    useEffect(() => {
+        const fetchEvents = async () => {
+            const res = await axios.get(`http://localhost:8000/applies/appliedUsers/:id`);
+            setUser(res.data.data);
+        };
+        fetchEvents();
+    }, []);
+
+    return [userDetail];
 };
 
 export const useApplicationFormDetailApi = () => {
