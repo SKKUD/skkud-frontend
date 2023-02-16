@@ -29,6 +29,20 @@ export const useAppliedUserApi = () => {
     return [users];
 };
 
+export const useAppliedUserDetailApi = ({ id }) => {
+    const [userDetail, setUser] = useState({});
+
+    useEffect(() => {
+        const fetchEvents = async () => {
+            const res = await axios.get(`http://localhost:8000/applies/appliedUsers/:id`);
+            setUser(res.data.data);
+        };
+        fetchEvents();
+    }, []);
+
+    return [userDetail];
+};
+
 export const useApplicationFormDetailApi = () => {
     const [title, setTitle] = useState('');
     const [introduction, setIntro] = useState('');
