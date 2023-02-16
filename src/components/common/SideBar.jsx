@@ -109,6 +109,7 @@ export default function SideBar() {
                                     name="My Page"
                                     color="#00FFA8"
                                 />
+                                <SidebarItem path="/applier" name="Recruitment" color="#00FFA8" />
                                 <SidebarItem path="/login" name="Log Out" color="#00FFA8" />
                             </>
                         ) : (
