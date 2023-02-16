@@ -90,7 +90,7 @@ export default function StudyGroupEdit(id) {
                     sx={{ mt: 1.5, textTransform: 'none' }}
                     onClick={handleSubmit}
                 >
-                    Create
+                    Edit
                 </Button>
             </div>
         </form>

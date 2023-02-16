@@ -152,7 +152,7 @@ export default function EditStudy() {
                                 height: '160px',
                                 borderRadius: '5px',
                                 overflow: 'hidden',
-                                mr: '10px'
+                                margin: '0px 5px'
                             }}
                             key={url}
                         >

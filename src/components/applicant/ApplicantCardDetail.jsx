@@ -4,6 +4,7 @@ import Card from '@mui/material/Card';
 import Box from '@mui/material/Box';
 
 import { useApplicationFormApi } from '../../hooks/Application';
+import EditApplicantScore from './EditApplicantScore';
 
 const SkillBtn = styled.button`
     height: 22px;
@@ -58,30 +59,12 @@ export default function ApplicantCardDetail({
             }}
         >
             {rendering()}
-            <Box mt="15px">
-                {documentScores &&
-                    documentScores.map((score, index) => (
-                        <div
-                            style={{
-                                fontWeight: '300',
-                                color: '#00ffa8',
-                                fontSize: '0.8rem'
-                            }}
-                        >
-                            {index + 1}번째 질문 점수 : {score}
-                        </div>
-                    ))}
 
-                <div
-                    style={{
-                        fontWeight: '300',
-                        color: '#00ffa8',
-                        fontSize: '0.8rem'
-                    }}
-                >
-                    면접 점수 : {interviewScores}
-                </div>
-            </Box>
+            <EditApplicantScore
+                documentScores={documentScores}
+                interviewScores={interviewScores}
+                id={id}
+            />
         </Card>
     );
 }

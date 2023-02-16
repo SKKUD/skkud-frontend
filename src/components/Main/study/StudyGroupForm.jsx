@@ -22,7 +22,7 @@ export default function StudyGroupForm(id) {
                 component="label"
                 onClick={() => {
                     setTask('edit');
-                    setOpen(!open);
+                    setOpen(true);
                 }}
             >
                 <EditIcon fontSize="small" />
@@ -38,15 +38,8 @@ export default function StudyGroupForm(id) {
                 component="label"
                 onClick={() => {
                     setTask('delete');
-                    setOpen(!open);
+                    setOpen(true);
                 }}
-                // onClick={() => {
-                //     const deleteEvents = async () => {
-                //         await axios.delete(`http://localhost:8000/posts/${state}`);
-                //     };
-                //     deleteEvents();
-                //     navigateToProject();
-                // }}
             >
                 <DeleteIcon fontSize="small" />
             </IconButton>
@@ -61,15 +54,8 @@ export default function StudyGroupForm(id) {
                 component="label"
                 onClick={() => {
                     setTask('post');
-                    setOpen(!open);
+                    setOpen(true);
                 }}
-                // onClick={() => {
-                //     const deleteEvents = async () => {
-                //         await axios.delete(`http://localhost:8000/posts/${state}`);
-                //     };
-                //     deleteEvents();
-                //     navigateToProject();
-                // }}
             >
                 <GroupAddIcon fontSize="small" />
             </IconButton>
