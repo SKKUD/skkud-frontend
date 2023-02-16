@@ -10,7 +10,7 @@ export const useProjectPostApi = () => {
 
     useEffect(() => {
         const fetchEvents = async () => {
-            const res = await axios.get(`https://api.skku.dev/posts/${index}`);
+            const res = await axios.get(`http://localhost:8000/posts/${index}`);
             setPost(res.data.data);
         };
         fetchEvents();
@@ -24,7 +24,7 @@ export const useProjectListApi = () => {
 
     useEffect(() => {
         const fetchEvents = async () => {
-            const res = await axios.get('https://api.skku.dev/posts');
+            const res = await axios.get('http://localhost:8000/posts');
             setPostList(res.data.data);
         };
         fetchEvents();
@@ -46,7 +46,7 @@ export const useProjectPostDetailApi = () => {
 
     useEffect(() => {
         const fetchEvents = async () => {
-            const res = await axios.get(`https://api.skku.dev/posts/${index}`);
+            const res = await axios.get(`http://localhost:8000/posts/${index}`);
             return res.data.data;
         };
         fetchEvents().then((data) => {
@@ -79,7 +79,7 @@ export const useProjectUserApi = () => {
 
     useEffect(() => {
         const fetchEvents = async () => {
-            const res = await axios.get(`https://api.skku.dev/users/byProject/${index}`);
+            const res = await axios.get(`http://localhost:8000/users/byProject/${index}`);
             setUser(res.data.data);
         };
         fetchEvents();
