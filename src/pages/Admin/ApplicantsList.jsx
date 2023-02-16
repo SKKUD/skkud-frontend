@@ -9,7 +9,6 @@ export default function ApplicantsList() {
     const frontend = [];
     const backend = [];
     const design = [];
-    console.log(users);
 
     for (let i = 0; i < users.length; i++) {
         if (users[i].track === 'frontend') {

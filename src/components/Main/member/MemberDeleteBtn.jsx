@@ -17,7 +17,7 @@ export default function MemberDeleteBtn(_id) {
     const logoutBtn = async () => {
         removeCookie('id');
         await axios
-            .post('https://api.skku.dev/auth/logout')
+            .post('http://localhost:8000/auth/logout')
             .then((userData) => console.log(userData))
             .catch((error) => console.log(error));
 
@@ -30,7 +30,7 @@ export default function MemberDeleteBtn(_id) {
             // alert('계정이 삭제되었습니다.');
             setAlert(true);
             await axios
-                .delete(`https://api.skku.dev/users/${id}`)
+                .delete(`http://localhost:8000/users/${id}`)
                 .then((response) => console.log('delete', response));
             logoutBtn();
             // window.location.reload();

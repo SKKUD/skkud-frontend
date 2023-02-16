@@ -43,6 +43,20 @@ export const useAppliedUserDetailApi = ({ id }) => {
     return [userDetail];
 };
 
+export const useAppliedUserEditApi = ({ id, documentScore }) => {
+    useEffect(() => {
+        const fetchEvents = async () => {
+            const res = await axios.patch(
+                `http://localhost:8000/applies/appliedUsers/${id}`,
+                documentScore
+            );
+        };
+        fetchEvents();
+    }, []);
+
+    
+};
+
 export const useApplicationFormDetailApi = () => {
     const [title, setTitle] = useState('');
     const [introduction, setIntro] = useState('');
@@ -51,7 +65,7 @@ export const useApplicationFormDetailApi = () => {
 
     useEffect(() => {
         const fetchEvents = async () => {
-            const res = await axios.get(`https://api.skku.dev/applies/appliers`);
+            const res = await axios.get(`http://localhost:8000/applies/appliers`);
             return res.data.data;
         };
         fetchEvents().then((data) => {
