@@ -14,7 +14,7 @@ export default function MemberList() {
 
     useEffect(() => {
         const fetchEvents = async () => {
-            const res = await axios.get('http://localhost:8000/users');
+            const res = await axios.get('https://api.skku.dev/users');
             setUsers(res.data.data.users);
         };
         fetchEvents();

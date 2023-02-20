@@ -17,7 +17,7 @@ export default function FinishCreateUser() {
     const id = location.state.id;
     useEffect(() => {
         const fetchEvents = async () => {
-            const res = await axios.get(`http://localhost:8000/users/${id}`);
+            const res = await axios.get(`https://api.skku.dev/users/${id}`);
             setPreviewImg(res.data.data.user.image);
         };
         fetchEvents();

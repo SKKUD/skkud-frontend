@@ -44,7 +44,7 @@ export default function EditProject() {
     };
     useEffect(() => {
         const fetchEvents = async () => {
-            const res = await axios.get('http://localhost:8000/users');
+            const res = await axios.get('https://api.skku.dev/users');
             getUsers(res.data.data.users);
         };
         fetchEvents();
@@ -101,7 +101,7 @@ export default function EditProject() {
             // );
 
             await axios
-                .patch(`http://localhost:8000/posts/contributor/${index}`, {
+                .patch(`https://api.skku.dev/posts/contributor/${index}`, {
                     contributors: checked
                 })
                 .then((response) => {
@@ -112,7 +112,7 @@ export default function EditProject() {
                 });
 
             await axios
-                .post(`http://localhost:8000/posts/revise/${index}`, formData)
+                .post(`https://api.skku.dev/posts/revise/${index}`, formData)
                 .then((response) => {
                     console.log(response.status);
                 })

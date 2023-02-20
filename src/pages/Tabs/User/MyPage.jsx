@@ -23,7 +23,7 @@ export default function MyPage() {
     const [user, setUser] = useState([]);
     useEffect(() => {
         const fetchEvents = async () => {
-            const res = await axios.get(`http://localhost:8000/users/${id}`);
+            const res = await axios.get(`https://api.skku.dev/users/${id}`);
 
             setUser(res.data.data.user);
             setPreviewImg(res.data.data.user.image);
@@ -96,7 +96,7 @@ export default function MyPage() {
             setEmailAlert(true);
         } else {
             await axios
-                .patch(`http://localhost:8000/users/${id}`, {
+                .patch(`https://api.skku.dev/users/${id}`, {
                     username: newname,
                     email: newemail,
                     major: newmajor,
