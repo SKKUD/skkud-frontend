@@ -145,7 +145,12 @@ export default function MyPage() {
                         <img
                             src={PreviewImg}
                             alt={name}
-                            style={{ borderRadius: '100%', width: '149px', height: '149px' }}
+                            style={{
+                                borderRadius: '100%',
+                                width: '149px',
+                                height: '149px',
+                                objectFit: 'cover'
+                            }}
                         />{' '}
                     </ButtonBase>
                 </div>

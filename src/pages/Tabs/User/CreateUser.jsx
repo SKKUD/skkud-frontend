@@ -44,7 +44,7 @@ export default function CreateUser() {
                 <Box
                     component="form"
                     sx={{
-                        '& > :not(style)': { m: 1, width: '25ch' }
+                        '& > :not(style)': { m: 1, width: '30ch' }
                     }}
                     noValidate
                     autoComplete="off"
@@ -52,7 +52,8 @@ export default function CreateUser() {
                         display: 'flex',
                         flexDirection: 'column',
                         justifyContent: 'center',
-                        alignItems: 'center'
+                        alignItems: 'center',
+                        paddingTop: '40px'
                     }}
                 >
                     {' '}
@@ -78,12 +79,14 @@ export default function CreateUser() {
                     <TextField
                         id="pw"
                         label="비밀번호 입력"
+                        type="password"
                         variant="standard"
                         onChange={(e) => setPw(e.target.value)}
                     />
                     <TextField
                         id="repw"
                         label="비밀번호 확인"
+                        type="password"
                         variant="standard"
                         onChange={(e) => setrePw(e.target.value)}
                     />

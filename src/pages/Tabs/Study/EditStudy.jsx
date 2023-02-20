@@ -140,7 +140,8 @@ export default function EditStudy() {
                     alignItems: 'center',
                     border: '1px solid rgba(255, 255, 255, 0.5)',
                     boxSizing: 'border-box',
-                    height: '180px'
+                    height: '180px',
+                    '&::-webkit-scrollbar': { display: 'none' }
                 }}
             >
                 {imgFiles.map((url) => {

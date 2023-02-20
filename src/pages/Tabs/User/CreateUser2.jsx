@@ -60,7 +60,7 @@ export default function CreateUser2() {
             <Box
                 component="form"
                 sx={{
-                    '& > :not(style)': { m: 1, width: '25ch' }
+                    '& > :not(style)': { m: 1, width: '30ch' }
                 }}
                 noValidate
                 autoComplete="off"
@@ -68,7 +68,8 @@ export default function CreateUser2() {
                     display: 'flex',
                     flexDirection: 'column',
                     justifyContent: 'center',
-                    alignItems: 'center'
+                    alignItems: 'center',
+                    paddingTop: '40px'
                 }}
             >
                 <Typography
@@ -141,8 +142,7 @@ export default function CreateUser2() {
                 <Box
                     sx={{
                         display: 'flex',
-                        mt: '5px',
-                        alignContent: 'center',
+                        alignItems: 'center',
                         justifyContent: 'space-between'
                     }}
                 >

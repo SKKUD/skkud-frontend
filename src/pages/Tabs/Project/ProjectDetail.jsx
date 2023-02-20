@@ -100,7 +100,8 @@ export default function ProjectDetail() {
                         overflow: 'scroll',
                         display: 'flex',
                         mb: '10px',
-                        pb: '5px'
+                        pb: '5px',
+                        '&::-webkit-scrollbar': { display: 'none' }
                     }}
                 >
                     {user.map((member) => {

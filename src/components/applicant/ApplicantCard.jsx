@@ -22,7 +22,7 @@ export default function ApplicantCard({
     _id
 }) {
     const [isVisible, setIsVisible] = useState(false);
-    
+
     return (
         <>
             <ButtonBase
