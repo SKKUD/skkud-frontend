@@ -69,7 +69,7 @@ export default function ApplicationForm() {
                 documentAnswers
             };
             await axios
-                .post('https://api.skku.dev/applies/appliedUsers', application)
+                .post('http://localhost:8000/applies/appliedUsers', application)
                 .then(() => {
                     setSubmit('submit');
                 })

@@ -14,7 +14,7 @@ export default function MemberList() {
 
     useEffect(() => {
         const fetchEvents = async () => {
-            const res = await axios.get('https://api.skku.dev/users');
+            const res = await axios.get('http://localhost:8000/users');
             setUsers(res.data.data.users);
         };
         fetchEvents();
@@ -45,7 +45,7 @@ export default function MemberList() {
         } else if (trackTab === 'backend') {
             setData(backend);
         }
-    }, [users]);
+    }, [design]);
     return (
         <>
             {data.map((member) => (
