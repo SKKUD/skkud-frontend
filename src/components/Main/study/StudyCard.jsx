@@ -121,7 +121,9 @@ export default function StudyCard(props) {
                             width: '100%',
                             height: '24px',
 
-                            overflow: 'scroll'
+                            overflow: 'scroll',
+                            msOverflowStyle: 'none',
+                            '&::-webkit-scrollbar': { display: 'none' }
                         }}
                     >
                         <Stack

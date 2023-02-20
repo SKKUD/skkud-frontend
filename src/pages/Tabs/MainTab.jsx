@@ -119,8 +119,14 @@ function MainTab() {
     };
 
     return (
-        <Box sx={{ width: '100%', paddingTop: '71px' }}>
+        <Box
+            sx={{
+                width: '100%',
+                paddingTop: '71px'
+            }}
+        >
             <Header position="static" />
+
             <Box
                 sx={{
                     display: 'flex',
@@ -152,7 +158,8 @@ function MainTab() {
                 index={value}
                 style={{
                     margin: '40px auto 0px',
-                    maxWidth: '390px'
+                    maxWidth: '390px',
+                    minHeight: `calc(100vh - 235px)`
                 }}
             >
                 <Routes>
@@ -177,6 +184,7 @@ function MainTab() {
                     <Route path="study/post" element={<PostStudy />} />
                 </Routes>
             </TabPanel>
+
             <Footer />
         </Box>
     );
