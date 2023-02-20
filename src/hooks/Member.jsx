@@ -6,7 +6,7 @@ export const useUserPostDetailApi = (index) => {
 
     useEffect(() => {
         const fetchEvents = async () => {
-            const res = await axios.get(`http://localhost:8000/posts/${index}`);
+            const res = await axios.get(`https://api.skku.dev/posts/${index}`);
             setProject(res.data.data);
         };
         fetchEvents();
@@ -18,7 +18,7 @@ export const useUserSkillsApi = (index) => {
     const [skills, setSkills] = useState([]);
     useEffect(() => {
         const fetchEvents = async () => {
-            const res = await axios.get(`http://localhost:8000/users/${index}`);
+            const res = await axios.get(`https://api.skku.dev/users/${index}`);
             setSkills(res.data.data.user.skills);
         };
         fetchEvents();

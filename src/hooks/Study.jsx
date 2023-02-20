@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 
-const BASE_URL = 'http://localhost:8000/';
+const BASE_URL = 'https://api.skku.dev/';
 
 export const useStudyGroupsApi = () => {
     const [studyGroups, setStudyGroups] = useState([]);

@@ -6,7 +6,7 @@ export const useApplicationFormApi = () => {
 
     useEffect(() => {
         const fetchEvents = async () => {
-            const res = await axios.get(`http://localhost:8000/applies/appliers`);
+            const res = await axios.get(`https://api.skku.dev/applies/appliers`);
             setform(res.data.data);
         };
         fetchEvents();
@@ -20,7 +20,7 @@ export const useAppliedUserApi = () => {
 
     useEffect(() => {
         const fetchEvents = async () => {
-            const res = await axios.get(`http://localhost:8000/applies/appliedUsers`);
+            const res = await axios.get(`https://api.skku.dev/applies/appliedUsers`);
             setUsers(res.data.data);
         };
         fetchEvents();
@@ -34,7 +34,7 @@ export const useAppliedUserDetailApi = ({ id }) => {
 
     useEffect(() => {
         const fetchEvents = async () => {
-            const res = await axios.get(`http://localhost:8000/applies/appliedUsers/:id`);
+            const res = await axios.get(`https://api.skku.dev/applies/appliedUsers/:id`);
             setUser(res.data.data);
         };
         fetchEvents();
@@ -45,14 +45,14 @@ export const useAppliedUserDetailApi = ({ id }) => {
 
 export const useAppliedUserEditApi = (id, body) => {
     axios
-        .patch(`http://localhost:8000/applies/appliedUsers/${id}`, body)
+        .patch(`https://api.skku.dev/applies/appliedUsers/${id}`, body)
         .then((data) => console.log(data))
         .catch((error) => console.log(error));
 };
 
 export const useAppliedUserDeleteApi = () => {
     axios
-        .delete(`http://localhost:8000/applies/appliedUsers`)
+        .delete(`https://api.skku.dev/applies/appliedUsers`)
         .then((data) => console.log(data))
         .catch((error) => console.log(error));
 };
@@ -65,7 +65,7 @@ export const useApplicationFormDetailApi = () => {
 
     useEffect(() => {
         const fetchEvents = async () => {
-            const res = await axios.get(`http://localhost:8000/applies/appliers`);
+            const res = await axios.get(`https://api.skku.dev/applies/appliers`);
             return res.data.data;
         };
         fetchEvents().then((data) => {

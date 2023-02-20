@@ -24,7 +24,7 @@ export default function DeleteBtn(_id) {
             component="label"
             onClick={() => {
                 const deleteEvents = async () => {
-                    await axios.delete(`http://localhost:8000/posts/${state}`);
+                    await axios.delete(`https://api.skku.dev/posts/${state}`);
                 };
                 deleteEvents();
                 navigateToProject();
