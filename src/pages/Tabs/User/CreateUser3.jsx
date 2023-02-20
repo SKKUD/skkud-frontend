@@ -76,7 +76,7 @@ export default function CreateUser3() {
                 <Typography
                     variant="h6"
                     textAlign={'center'}
-                    style={{ fontWeight: 700, fontSize: '1rem' }}
+                    style={{ fontWeight: 700, fontSize: '1rem', margin: '30px' }}
                 >
                     회원가입
                 </Typography>
@@ -92,7 +92,7 @@ export default function CreateUser3() {
                     onChange={(e) => setInsta(e.target.value)}
                 />
 
-                <Typography style={{ fontWeight: '700', fontSize: '0.75rem' }}>
+                <Typography style={{ fontWeight: '700', fontSize: '0.75rem', marginTop: '30px' }}>
                     2.본인을 소개할 수 있는 기타 링크를 첨부해주세요. <br /> (Figma, Github, GitLab,
                     Behance 등)
                 </Typography>
@@ -103,7 +103,7 @@ export default function CreateUser3() {
                     variant="standard"
                     onChange={(e) => setOtherLinks([e.target.value])}
                 />
-                <Typography style={{ fontWeight: '700', fontSize: '0.75rem' }}>
+                <Typography style={{ fontWeight: '700', fontSize: '0.75rem', marginTop: '30px' }}>
                     3. 20자 내로 본인을 소개해주세요. <br /> (예시:스꾸디 신입 김OO)
                 </Typography>
                 <TextField

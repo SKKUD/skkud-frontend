@@ -274,19 +274,20 @@ export default function ApplicationForm() {
                                             </MenuItem>
                                         </Select>
                                     </FormControl>
+                                    <Button
+                                        variant="contained"
+                                        onClick={HandleNext}
+                                        sx={{
+                                            margin: '100px 0px 59px',
+                                            padding: '12px 45%',
+                                            borderRadius: '99px',
+                                            fontWeight: 600,
+                                            maxWidth: '500px'
+                                        }}
+                                    >
+                                        다음
+                                    </Button>
                                 </div>
-                                <Button
-                                    variant="contained"
-                                    onClick={HandleNext}
-                                    sx={{
-                                        margin: '100px 0px 59px',
-                                        padding: '12px 45%',
-                                        borderRadius: '99px',
-                                        fontWeight: 600
-                                    }}
-                                >
-                                    다음
-                                </Button>
                             </>
                         ) : (
                             <div
@@ -340,7 +341,8 @@ export default function ApplicationForm() {
                                         margin: '40px 0px 59px',
                                         padding: '12px 40%',
                                         borderRadius: '99px',
-                                        fontWeight: 600
+                                        fontWeight: 600,
+                                        maxWidth: '500px'
                                     }}
                                 >
                                     지원 완료
@@ -392,7 +394,8 @@ export default function ApplicationForm() {
                                 fontWeight: 700,
                                 color: '#fff',
                                 border: '1px solid #727272',
-                                backgroundColor: '#2C2C2E'
+                                backgroundColor: '#2C2C2E',
+                                maxWidth: '500px'
                             }}
                         >
                             스꾸디 둘러보기

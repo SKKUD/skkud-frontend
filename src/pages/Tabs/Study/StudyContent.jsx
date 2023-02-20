@@ -71,9 +71,9 @@ export default function StudyContent() {
                     flexWrap: 'nowrap',
                     overflowX: 'scroll',
                     alignItems: 'center',
-
                     boxSizing: 'border-box',
-                    height: '180px'
+                    height: '180px',
+                    '&::-webkit-scrollbar': { display: 'none' }
                 }}
             >
                 {imgFiles.map((url) => {

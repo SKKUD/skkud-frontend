@@ -100,7 +100,8 @@ export default function ProjectDetail() {
                         overflow: 'scroll',
                         display: 'flex',
                         mb: '10px',
-                        pb: '5px'
+                        pb: '5px',
+                        '&::-webkit-scrollbar': { display: 'none' }
                     }}
                 >
                     {user.map((member) => {
@@ -127,7 +128,11 @@ export default function ProjectDetail() {
                                     <img
                                         src={img}
                                         alt={name}
-                                        style={{ width: '132px', height: '132px' }}
+                                        style={{
+                                            width: '132px',
+                                            height: '132px',
+                                            objectFit: 'cover'
+                                        }}
                                     />
                                 </div>
                                 <div
