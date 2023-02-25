@@ -15,9 +15,13 @@ export default function TabStudy() {
     const [cookies] = useCookies(['id']);
     const [studyGroups] = useStudyGroupsApi();
     const [studies, filterStudies, study] = useStudiesApi();
-    const [selectedGroup, setGroup] = useState('636dece13ee7782e84583cee');
+    const [selectedGroup, setGroup] = useState('');
+
     useEffect(() => {
         studies && filterStudies(selectedGroup);
+        if (studyGroups.length > 0) {
+            setGroup(studyGroups[0]._id);
+        }
     }, [studies]);
 
     return (
