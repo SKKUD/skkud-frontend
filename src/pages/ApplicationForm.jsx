@@ -15,6 +15,8 @@ import Footer from '../components/common/Footer';
 import Alert from '@mui/material/Alert';
 import Snackbar from '@mui/material/Snackbar';
 
+const BASE_URI = 'http://localhost:8000';
+
 export default function ApplicationForm() {
     const form = useApplicationFormDetailApi();
 
@@ -69,7 +71,7 @@ export default function ApplicationForm() {
                 documentAnswers
             };
             await axios
-                .post('https://api.skku.dev/applies/appliedUsers', application)
+                .post(BASE_URI + '/applies/appliedUsers', application)
                 .then(() => {
                     setSubmit('submit');
                 })

@@ -1,20 +1,25 @@
 import React from 'react';
 import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
+import styled from '@emotion/styled';
 
-export default function PostBtn(props) {
-    const { content } = props;
+const PostBtnWrap = styled(Box)`
+    width: 100%;
+    display: flex;
+    flex-direction: row-reverse;
+`;
 
+const Btn = styled(Button)`
+    margin-bottom: 15px;
+    text-transform: none;
+`;
+
+export default function PostBtn({ content }) {
     return (
-        <Box sx={{ width: '100%', display: 'flex', flexDirection: 'row-reverse' }}>
-            <Button
-                color="primary"
-                variant="contained"
-                size="small"
-                sx={{ mb: 1.5, textTransform: 'none' }}
-            >
+        <PostBtnWrap>
+            <Btn color="primary" variant="contained" size="small">
                 {content}
-            </Button>
-        </Box>
+            </Btn>
+        </PostBtnWrap>
     );
 }

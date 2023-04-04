@@ -4,6 +4,8 @@ import axios from 'axios';
 import MemberCard from './MemberCard';
 import { TrackContext } from '../../../context/TrackContext';
 
+const BASE_URI = 'http://localhost:8000';
+
 export default function MemberList() {
     const [users, setUsers] = useState([]);
     const [design, setDesign] = useState([]);
@@ -14,7 +16,7 @@ export default function MemberList() {
 
     useEffect(() => {
         const fetchEvents = async () => {
-            const res = await axios.get('https://api.skku.dev/users');
+            const res = await axios.get(BASE_URI + '/users');
             setUsers(res.data.data.users);
         };
         fetchEvents();

@@ -17,6 +17,8 @@ import ListItemText from '@mui/material/ListItemText';
 import Checkbox from '@mui/material/Checkbox';
 import { useProjectPostDetailApi } from '../../../hooks/Project';
 
+const BASE_URI = 'http://localhost:8000';
+
 export default function EditProject() {
     const navigate = useNavigate();
     const navigateToProject = () => {
@@ -44,7 +46,7 @@ export default function EditProject() {
     };
     useEffect(() => {
         const fetchEvents = async () => {
-            const res = await axios.get('https://api.skku.dev/users');
+            const res = await axios.get(BASE_URI + '/users');
             getUsers(res.data.data.users);
         };
         fetchEvents();
@@ -101,7 +103,7 @@ export default function EditProject() {
             // );
 
             await axios
-                .patch(`https://api.skku.dev/posts/contributor/${index}`, {
+                .patch(BASE_URI + `/posts/contributor/${index}`, {
                     contributors: checked
                 })
                 .then((response) => {
@@ -112,7 +114,7 @@ export default function EditProject() {
                 });
 
             await axios
-                .post(`https://api.skku.dev/posts/revise/${index}`, formData)
+                .post(BASE_URI + `/posts/revise/${index}`, formData)
                 .then((response) => {
                     console.log(response.status);
                 })

@@ -4,6 +4,8 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import IconButton from '@mui/material/IconButton';
 import DeleteIcon from '@mui/icons-material/Delete';
 
+const BASE_URI = 'http://localhost:8000';
+
 export default function DeleteBtn(_id) {
     const { state } = _id;
     const location = useLocation();
@@ -24,7 +26,7 @@ export default function DeleteBtn(_id) {
             component="label"
             onClick={() => {
                 const deleteEvents = async () => {
-                    await axios.delete(`https://api.skku.dev/posts/${state}`);
+                    await axios.delete(BASE_URI + `/posts/${state}`);
                 };
                 deleteEvents();
                 navigateToProject();

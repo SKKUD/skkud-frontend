@@ -47,21 +47,23 @@ const Title = styled.div`
 //     text-align: center;
 // `;
 
+const Logo = styled.img`
+    margin-left: auto;
+    display: block;
+    margin-right: 11px;
+    margin-bottom: 35px;
+    width: 213px;
+`;
+
+const StyledCards = styled.img`
+    width: 100%;
+`;
+
 export default function History() {
     return (
         <div>
             <Title>History of</Title>
-            <img
-                src={SKKUD}
-                alt="SKKUD"
-                style={{
-                    marginLeft: 'auto',
-                    display: 'block',
-                    marginRight: '11px',
-                    marginBottom: '35px',
-                    width: '213px'
-                }}
-            />
+            <Logo src={SKKUD} alt="SKKUD" />
 
             <div>
                 {/* <Grid container spacing={1}>
@@ -102,7 +104,7 @@ export default function History() {
                         </Card1>
                     </Grid>
                 </Grid> */}
-                <img src={CardImg} alt="cards" style={{ width: '100%' }} />
+                <StyledCards src={CardImg} alt="cards" />
             </div>
         </div>
     );

@@ -1,12 +1,14 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 
+const BASE_URI = 'http://localhost:8000';
+
 export const useUserPostDetailApi = (index) => {
     const [project, setProject] = useState([]);
 
     useEffect(() => {
         const fetchEvents = async () => {
-            const res = await axios.get(`https://api.skku.dev/posts/${index}`);
+            const res = await axios.get(BASE_URI + `/posts/${index}`);
             setProject(res.data.data);
         };
         fetchEvents();
@@ -18,7 +20,7 @@ export const useUserSkillsApi = (index) => {
     const [skills, setSkills] = useState([]);
     useEffect(() => {
         const fetchEvents = async () => {
-            const res = await axios.get(`https://api.skku.dev/users/${index}`);
+            const res = await axios.get(BASE_URI + `/users/${index}`);
             setSkills(res.data.data.user.skills);
         };
         fetchEvents();

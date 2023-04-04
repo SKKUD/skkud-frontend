@@ -7,6 +7,8 @@ import { useState } from 'react';
 import { useCookies } from 'react-cookie';
 import { useNavigate } from 'react-router-dom';
 
+const BASE_URI = 'http://localhost:8000';
+
 export default function MemberDeleteBtn(_id) {
     const navigate = useNavigate();
     const navigateToMainTab = () => {
@@ -17,7 +19,7 @@ export default function MemberDeleteBtn(_id) {
     const logoutBtn = async () => {
         removeCookie('id');
         await axios
-            .post('https://api.skku.dev/auth/logout')
+            .post(BASE_URI + '/auth/logout')
             .then((userData) => console.log(userData))
             .catch((error) => console.log(error));
 

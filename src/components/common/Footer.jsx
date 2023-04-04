@@ -11,6 +11,24 @@ const Typography = styled.div`
     font-weight: 700;
     line-height: 12px;
     align-items: center;
+    > p {
+        margin-top: 6px;
+    }
+`;
+
+const FooterWrap = styled.div`
+    width: 100%;
+    background-color: #1b1b1b;
+    display: flex;
+    justify-content: center;
+`;
+
+const FooterContainer = styled.div`
+    width: 390px;
+    height: 125px;
+    padding-top: 16px;
+    padding-left: 25px;
+    padding-right: 23px;
 `;
 
 const TopDiv = styled.div`
@@ -26,45 +44,37 @@ const BottomDiv = styled.div`
     flex-direction: column;
 `;
 
+const Logo = styled.img`
+    width: 100px;
+    filter: opacity(0.5) drop-shadow(0 0 0 #000000);
+`;
+
+const IconWrap = styled.div`
+    height: 18px;
+    & img:first-child {
+        margin-right: 16px;
+    }
+`;
+
 export default function Footer() {
     return (
-        <div
-            style={{
-                width: '100%',
-                backgroundColor: '#1b1b1b',
-                display: 'flex',
-                justifyContent: 'center'
-            }}
-        >
-            <Box
-                sx={{
-                    width: '390px',
-                    height: '125px',
-                    paddingTop: '16px',
-                    paddingLeft: '25px',
-                    paddingRight: '23px'
-                }}
-            >
+        <FooterWrap>
+            <FooterContainer>
                 <TopDiv>
-                    <img
-                        src={SKKUDLOGO}
-                        alt="SKKUD"
-                        style={{
-                            width: '100px',
-                            filter: 'opacity(0.5) drop-shadow(0 0 0 #000000)'
-                        }}
-                    />
-                    <div style={{ height: '18px' }}>
-                        <img src={insta} style={{ marginRight: '16px' }} alt="instagram" />
+                    <Logo src={SKKUDLOGO} alt="SKKUD" />
+                    <IconWrap>
+                        <img src={insta} alt="instagram" />
                         <img src={sender} alt="send" />
-                    </div>
+                    </IconWrap>
                 </TopDiv>
                 <BottomDiv>
                     <Typography>Sungkyunkwan University</Typography>
                     <Typography>Designer & Developer Group</Typography>
-                    <Typography style={{ marginTop: '6px' }}>Team Leader 강동헌</Typography>
+                    <Typography>
+                        <p>Team Leader 강동헌</p>
+                    </Typography>
                 </BottomDiv>
-            </Box>
-        </div>
+            </FooterContainer>
+        </FooterWrap>
     );
 }

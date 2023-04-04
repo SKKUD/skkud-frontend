@@ -16,6 +16,8 @@ import Checkbox from '@mui/material/Checkbox';
 import Alert from '@mui/material/Alert';
 import Snackbar from '@mui/material/Snackbar';
 
+const BASE_URI = 'http://localhost:8000';
+
 export default function PostProject() {
     const navigate = useNavigate();
     const navigateToProject = () => {
@@ -40,7 +42,7 @@ export default function PostProject() {
     };
     useEffect(() => {
         const fetchEvents = async () => {
-            const res = await axios.get('https://api.skku.dev/users');
+            const res = await axios.get(BASE_URI + '/users');
             getUsers(res.data.data.users);
         };
         fetchEvents();
@@ -84,7 +86,7 @@ export default function PostProject() {
             images.map((image) => formData.append('images', image));
 
             await axios
-                .post('https://api.skku.dev/posts', formData)
+                .post(BASE_URI + '/posts', formData)
                 .then((response) => {
                     console.log(response.status);
                 })
