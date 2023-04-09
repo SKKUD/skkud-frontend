@@ -1,19 +1,12 @@
-import * as React from 'react';
+import React, { useState } from 'react';
 import SKKUD from '../../../assets/SKKUD_green.jpeg';
 import ToggleButton from '@mui/material/ToggleButton';
 import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
-import backimg from '../../../assets/backimg1.png';
-import frontimg from '../../../assets/frontimg1.png';
-import designimg from '../../../assets/designimg1.png';
 import styled from '@emotion/styled';
+import backimg from '../../../assets/back_default.png';
+import frontimg from '../../../assets/front_default.png';
+import designimg from '../../../assets/design_default.png';
 
-const Detail = styled.div`
-    font-size: 0.75rem;
-    font-weight: 500;
-    padding: 0 30px 30px;
-    text-align: center;
-    white-space: pre-wrap;
-`;
 const Title = styled.div`
     font-size: 2.5rem;
     font-weight: 700;
@@ -22,6 +15,50 @@ const Title = styled.div`
     margin-left: 11px;
     margin-bottom: 7px;
 `;
+
+const SKKUDimg = styled.img`
+    margin-left: auto;
+    display: block;
+    margin-right: 11px;
+    margin-bottom: 35px;
+    width: 213px;
+`;
+
+const ToggleCardWrap = styled.div`
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+`;
+
+const StyledToggleButtonGroup = styled(ToggleButtonGroup)`
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+`;
+
+const StyledToggleButton = styled(ToggleButton)({
+    border: 'none',
+    borderRadius: '33px',
+    padding: '3px 6%',
+    margin: '0 auto',
+    overflow: 'hidden',
+    textTransform: 'none',
+    span: {
+        borderRadius: '33px',
+        border: '1px solid #00FFA8'
+    },
+    '&.Mui-selected, &.Mui-selected:hover, &.MuiToggleButtonGroup-grouped:not(:last-of-type)': {
+        borderRadius: '33px'
+    },
+    p: {
+        fontSize: '0.7rem',
+        margin: '0px',
+        fontWeight: '600'
+    }
+});
 
 const PositionImageBlock = styled.div`
     display: flex;
@@ -32,126 +69,75 @@ const PositionImageBlock = styled.div`
     box-shadow: 0px 8px 24px rgba(0, 0, 0, 0.15);
     border-radius: 25px;
     width: 312px;
-    height: 285px;
     margin-top: 20px;
     padding: 10px;
 `;
 
+const StyledImg = styled.img``;
+
+const Detail = styled.div`
+    font-size: 0.75rem;
+    font-weight: 500;
+    padding: 0 0px 15px;
+    text-align: center;
+    white-space: pre-wrap;
+`;
+
 export default function Position() {
-    const [alignment, setAlignment] = React.useState('front');
-    const designDetail = '서비스 UX/UI 기획,\n서비스 본질에 필요한 디자인 업무를 담당합니다.';
-    const frontDetail = '데이터의 입출력을 통한 기능 구현,\n사용자 인터페이스 작업을 담당합니다.';
-    const backDetail = '전반적인 로직 구성,\n데이터베이스와 API 서버 개발을 담당합니다.';
-    const [detail, setDetail] = React.useState(frontDetail);
-    const [image, setImage] = React.useState(frontimg);
-    const handleChange = (event, newAlignment) => {
+    const TrackDetail = {
+        front: '데이터의 입출력을 통한 기능 구현,\n사용자 인터페이스 작업을 담당합니다.',
+        back: '전반적인 로직 구성,\n데이터베이스와 API 서버 개발을 담당합니다.',
+        design: '서비스 UX/UI 기획,\n서비스 본질에 필요한 디자인 업무를 담당합니다.'
+    };
+    const [alignment, setAlignment] = useState('front');
+    const [detail, setDetail] = useState(TrackDetail.front);
+    const [image, setImage] = useState(frontimg);
+    const handleChange = (e, newAlignment) => {
         setAlignment(newAlignment);
     };
-    const changeDetailFront = () => {
-        setDetail(frontDetail);
-        setImage(frontimg);
+
+    const changeTrack = (value) => {
+        if (value === 'back') {
+            setDetail(TrackDetail.back);
+            setImage(backimg);
+        } else if (value === 'design') {
+            setDetail(TrackDetail.design);
+            setImage(designimg);
+        } else if (value === 'front') {
+            setDetail(TrackDetail.front);
+            setImage(frontimg);
+        }
     };
-    const changeDetailBack = () => {
-        setDetail(backDetail);
-        setImage(backimg);
-    };
-    const changeDetailDesign = () => {
-        setDetail(designDetail);
-        setImage(designimg);
-    };
+
     return (
         <div>
             <Title>Position of</Title>
-            <img
-                src={SKKUD}
-                alt="SKKUD"
-                style={{
-                    marginLeft: 'auto',
-                    display: 'block',
-                    marginRight: '11px',
-                    marginBottom: '35px',
-                    width: '213px'
-                }}
-            />
-            <div
-                style={{
-                    display: 'flex',
-                    flexDirection: 'column',
-                    justifyContent: 'center',
-                    alignItems: 'center'
-                }}
-            >
-                <ToggleButtonGroup
+            <SKKUDimg src={SKKUD} alt="SKKUD" />
+            <ToggleCardWrap>
+                <StyledToggleButtonGroup
                     color="primary"
                     value={alignment}
                     exclusive
                     onChange={handleChange}
                     aria-label="Platform"
-                    style={{
-                        display: 'flex',
-                        flexDirection: 'row',
-                        justifyContent: 'center',
-                        alignItems: 'center'
-                    }}
                 >
-                    <ToggleButton
-                        value="front"
-                        onClick={changeDetailFront}
-                        style={{
-                            borderRadius: '33px',
-                            border: '1px solid #00FFA8',
-                            padding: '4px 18px',
-                            width: '87px',
-                            height: '22px',
-                            marginRight: '5px'
-                        }}
-                    >
-                        <p style={{ fontSize: '0.7rem' }}>frontend</p>
-                    </ToggleButton>
-                    <ToggleButton
-                        value="back"
-                        onClick={changeDetailBack}
-                        style={{
-                            borderRadius: '33px',
-                            border: '1px solid #00FFA8',
-                            padding: '4px 18px',
-                            width: '85px',
-                            height: '22px',
-                            marginRight: '5px'
-                        }}
-                    >
-                        <p style={{ fontSize: '0.7rem' }}>backend</p>
-                    </ToggleButton>
-                    <ToggleButton
-                        value="design"
-                        onClick={changeDetailDesign}
-                        style={{
-                            borderRadius: '33px',
-                            border: '1px solid #00FFA8',
-                            padding: '4px 18px',
-                            width: '122px',
-                            height: '22px',
-                            marginRight: '5px'
-                        }}
-                    >
-                        <p style={{ fontSize: '0.6rem' }}>ui/ux designer</p>
-                    </ToggleButton>
-                </ToggleButtonGroup>
+                    <StyledToggleButton value="front" onClick={() => changeTrack('front')}>
+                        <p>Frontend</p>
+                    </StyledToggleButton>
+                    <StyledToggleButton value="back" onClick={() => changeTrack('back')}>
+                        <p>Backend</p>
+                    </StyledToggleButton>
+                    <StyledToggleButton value="design" onClick={() => changeTrack('design')}>
+                        <p>UI/UX Designer</p>
+                    </StyledToggleButton>
+                </StyledToggleButtonGroup>
 
                 <PositionImageBlock>
-                    <img
-                        src={image}
-                        alt="emoji"
-                        style={{
-                            width: '200px',
-                            height: '200px',
-                            marginTop: '5px',
-                            padding: '20px'
-                        }}
-                    />
+                    <StyledImg src={image} alt="emoji" />
+
                     <Detail>{detail}</Detail>
                 </PositionImageBlock>
-            </div>
+            </ToggleCardWrap>
         </div>
     );
 }

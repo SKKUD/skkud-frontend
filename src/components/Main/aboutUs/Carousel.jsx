@@ -9,9 +9,12 @@ export default function Carousel(props) {
 
     const settings = {
         slidesToShow: 2.7,
-        slidesToScroll: 2,
+        slidesToScroll: 1,
         speed: 500,
-        autoplaySpeed: 2000
+        autoplay: true,
+        autoplaySpeed: 2000,
+        arrows: false,
+        swipeToSlide: true
     };
 
     const ImgWrap = styled.div`
@@ -20,8 +23,8 @@ export default function Carousel(props) {
 
     const SliderImg = styled.img`
         border-radius: 15px;
-        width: 125px;
-        height: 125px;
+        width: 120px;
+        height: 120px;
         background-color: rgba(255, 255, 255, 0.2);
         margin: 5px;
         object-fit: cover;

@@ -31,7 +31,7 @@ const SidebarWrapper = styled(Box)`
     padding-right: 12px;
     margin-top: 10px;
 
-    & SidebarItem:first-child {
+    & SidebarItem:first-of-type {
         padding-right: 0px;
     }
 `;

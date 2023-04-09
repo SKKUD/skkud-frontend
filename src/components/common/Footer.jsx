@@ -51,7 +51,7 @@ const Logo = styled.img`
 
 const IconWrap = styled.div`
     height: 18px;
-    & img:first-child {
+    & img:first-of-type {
         margin-right: 16px;
     }
 `;
