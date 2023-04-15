@@ -38,6 +38,7 @@ const TopDiv = styled.div`
     align-items: center;
     justify-content: space-between;
 `;
+
 const BottomDiv = styled.div`
     margin-top: 27.5px;
     display: flex;

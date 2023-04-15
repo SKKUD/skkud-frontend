@@ -22,7 +22,7 @@ export const useAppliedUserApi = () => {
 
     useEffect(() => {
         const fetchEvents = async () => {
-            const res = await axios.get(BASE_URI + `applies/appliedUsers`);
+            const res = await axios.get(BASE_URI + `/applies/appliedUsers`);
             setUsers(res.data.data);
         };
         fetchEvents();

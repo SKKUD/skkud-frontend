@@ -131,6 +131,7 @@ export default function ApplicationForm() {
                                     style={{
                                         width: '100%',
                                         maxWidth: '500px',
+                                        minHeight: `calc(100vh - 200px)`,
                                         display: 'flex',
                                         flexDirection: 'column',
                                         alignItems: 'center'

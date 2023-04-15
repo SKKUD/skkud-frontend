@@ -131,7 +131,8 @@ function Appliers() {
                 index={value}
                 style={{
                     margin: '40px auto 0px',
-                    maxWidth: '390px'
+                    maxWidth: '390px',
+                    minHeight: `calc(100vh - 235px)`
                 }}
             >
                 <Routes>

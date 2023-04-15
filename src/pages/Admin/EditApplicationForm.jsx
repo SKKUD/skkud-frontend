@@ -71,8 +71,15 @@ export default function EditApplicationForm() {
                   })
                 : ''}
 
-            <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-                <Button type="button" onClick={() => updateApplier()}>
+            <div
+                style={{
+                    display: 'flex',
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                    marginTop: '15px'
+                }}
+            >
+                <Button type="button" variant="contained" onClick={() => updateApplier()}>
                     Submit
                 </Button>
             </div>

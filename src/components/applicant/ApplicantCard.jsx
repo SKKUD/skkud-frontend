@@ -1,13 +1,50 @@
-import * as React from 'react';
-import { useState } from 'react';
+import React, { useState } from 'react';
 import ApplicantCardDetail from './ApplicantCardDetail';
-import PropTypes from 'prop-types';
 import Card from '@mui/material/Card';
-import CardMedia from '@mui/material/CardMedia';
-import Typography from '@mui/material/Typography';
 import ButtonBase from '@mui/material/ButtonBase';
-import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
+import styled from '@emotion/styled';
+
+const StyledButtonBase = styled(ButtonBase)`
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 10px;
+`;
+
+const StyledCard = styled(Card)`
+    width: 100%;
+    margintop: 13;
+    border-radius: 15px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+`;
+
+const ApplicantInfoCard = styled(Box)`
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    line-height: 1;
+`;
+
+const Name = styled.div`
+    font-size: 1.2rem;
+    font-weight: 600;
+`;
+const PersonalInfo = styled(Box)`
+    display: flex;
+    flex-direction: row;
+`;
+
+const ApplicationInfo = styled(Box)`
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    margin-top: 15px;
+    height: 80px;
+    justify-content: space-around;
+`;
 
 export default function ApplicantCard({
     documentAnswers,
@@ -25,51 +62,22 @@ export default function ApplicantCard({
 
     return (
         <>
-            <ButtonBase
-                sx={{ width: '100%', display: 'flex', flexDirection: 'column' }}
-                onClick={() => setIsVisible(!isVisible)}
-            >
-                <Card
-                    key={_id}
-                    sx={{ width: '100%' }}
-                    style={{
-                        marginTop: 13,
-                        borderRadius: '15px',
-                        padding: '20px',
-                        display: 'flex',
-                        flexDirection: 'column'
-                    }}
-                >
-                    <Box
-                        sx={{
-                            display: 'flex',
-                            alignItems: 'center',
-                            justifyContent: 'space-between',
-                            lineHeight: '1'
-                        }}
-                    >
-                        <div style={{ fontSize: '1.2rem', fontWeight: '600' }}>{name}</div>
-                        <Box sx={{ display: 'flex', flexDirection: 'row' }}>
+            <StyledButtonBase onClick={() => setIsVisible(!isVisible)}>
+                <StyledCard key={_id}>
+                    <ApplicantInfoCard>
+                        <Name>{name}</Name>
+                        <PersonalInfo>
                             <div style={{ marginRight: '10px' }}>{major}</div>
                             <div>{studentId}</div>
-                        </Box>
-                    </Box>
-                    <Box
-                        sx={{
-                            display: 'flex',
-                            flexDirection: 'column',
-                            alignItems: 'start',
-                            marginTop: '15px',
-                            height: '80px',
-                            justifyContent: 'space-around'
-                        }}
-                    >
+                        </PersonalInfo>
+                    </ApplicantInfoCard>
+                    <ApplicationInfo>
                         <div>지원 트랙 : {track}</div>
                         <div>이메일 : {email}</div>
                         <div>전화번호 : {phoneNumber}</div>
-                    </Box>
-                </Card>
-            </ButtonBase>
+                    </ApplicationInfo>
+                </StyledCard>
+            </StyledButtonBase>
             {isVisible ? (
                 <ApplicantCardDetail
                     id={_id}

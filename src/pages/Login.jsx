@@ -94,10 +94,11 @@ export default function Login() {
                     <Box
                         sx={{
                             display: 'flex',
+                            minHeight: `calc(100vh - 205px)`,
                             flexDirection: 'column',
                             alignItems: 'center',
                             marginTop: '80px',
-                            marginBottom: '50px',
+
                             '& > :not(style)': { m: 1 }
                         }}
                     >
