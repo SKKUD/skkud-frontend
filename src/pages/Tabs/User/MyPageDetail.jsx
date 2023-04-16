@@ -1,7 +1,6 @@
 import * as React from 'react';
 import { useState, useCallback, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-
 import { useCookies } from 'react-cookie';
 import axios from 'axios';
 import Box from '@mui/material/Box';
@@ -10,6 +9,8 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Alert from '@mui/material/Alert';
 import Snackbar from '@mui/material/Snackbar';
+
+const BASE_URI = 'http://localhost:8000';
 
 export default function MyPageDetail() {
     const [cookies, , removeCookie] = useCookies(['id']);
@@ -22,7 +23,7 @@ export default function MyPageDetail() {
     };
     useEffect(() => {
         const fetchEvents = async () => {
-            const res = await axios.get(`https://api.skku.dev/users/${id}`);
+            const res = await axios.get(`${BASE_URI}/users/${id}`);
 
             setUser(res.data.data.user);
         };
@@ -33,7 +34,7 @@ export default function MyPageDetail() {
         removeCookie('id');
 
         await axios
-            .post('https://api.skku.dev/auth/logout')
+            .post('${BASE_URI}/auth/logout')
             .then((userData) => console.log(userData))
             .catch((error) => console.log(error));
 
@@ -69,7 +70,7 @@ export default function MyPageDetail() {
     const submit = useCallback(async () => {
         if (checker === true) {
             await axios
-                .patch(`https://api.skku.dev/users/${id}`, {
+                .patch(`${BASE_URI}/users/${id}`, {
                     userID: newID,
                     passwd: newpw
                 })

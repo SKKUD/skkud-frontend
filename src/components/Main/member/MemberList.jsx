@@ -1,26 +1,17 @@
 import * as React from 'react';
 import { useState, useEffect, useContext } from 'react';
-import axios from 'axios';
 import MemberCard from './MemberCard';
 import { TrackContext } from '../../../context/TrackContext';
-
-const BASE_URI = 'http://localhost:8000';
+import { useUsersApi } from '../../../hooks/Member';
 
 export default function MemberList() {
-    const [users, setUsers] = useState([]);
+    const [users] = useUsersApi();
     const [design, setDesign] = useState([]);
     const [frontend, setFrontend] = useState([]);
     const [backend, setBackend] = useState([]);
     const { trackTab } = useContext(TrackContext);
     const [data, setData] = useState([]);
 
-    useEffect(() => {
-        const fetchEvents = async () => {
-            const res = await axios.get(BASE_URI + '/users');
-            setUsers(res.data.data.users);
-        };
-        fetchEvents();
-    }, []);
     useEffect(() => {
         let frontArr = [];
         let backArr = [];

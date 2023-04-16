@@ -15,6 +15,8 @@ import { ButtonBase } from '@mui/material';
 import Alert from '@mui/material/Alert';
 import Snackbar from '@mui/material/Snackbar';
 
+const BASE_URI = 'http://localhost:8000';
+
 export default function MyPage() {
     const [alert, setAlert] = useState(false);
     const [emailAlert, setEmailAlert] = useState(false);
@@ -23,7 +25,7 @@ export default function MyPage() {
     const [user, setUser] = useState([]);
     useEffect(() => {
         const fetchEvents = async () => {
-            const res = await axios.get(`https://api.skku.dev/users/${id}`);
+            const res = await axios.get(`${BASE_URI}/users/${id}`);
 
             setUser(res.data.data.user);
             setPreviewImg(res.data.data.user.image);
@@ -96,7 +98,7 @@ export default function MyPage() {
             setEmailAlert(true);
         } else {
             await axios
-                .patch(`https://api.skku.dev/users/${id}`, {
+                .patch(`${BASE_URI}/users/${id}`, {
                     username: newname,
                     email: newemail,
                     major: newmajor,

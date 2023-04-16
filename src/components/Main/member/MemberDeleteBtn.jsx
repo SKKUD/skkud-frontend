@@ -1,4 +1,5 @@
 import * as React from 'react';
+import styled from '@emotion/styled';
 import axios from 'axios';
 import Button from '@mui/material/Button';
 import Alert from '@mui/material/Alert';
@@ -8,6 +9,18 @@ import { useCookies } from 'react-cookie';
 import { useNavigate } from 'react-router-dom';
 
 const BASE_URI = 'http://localhost:8000';
+
+const StyledButton = styled(Button)`
+    border-radius: 17px;
+    border: 1px solid red;
+    color: red;
+    width: 200px;
+    height: 21px;
+    font-size: 11px;
+    padding: 4px 14px;
+    gap: 10px;
+    margin-top: 30px;
+`;
 
 export default function MemberDeleteBtn(_id) {
     const navigate = useNavigate();
@@ -32,7 +45,7 @@ export default function MemberDeleteBtn(_id) {
             // alert('계정이 삭제되었습니다.');
             setAlert(true);
             await axios
-                .delete(`https://api.skku.dev/users/${id}`)
+                .delete(`${BASE_URI}/users/${id}`)
                 .then((response) => console.log('delete', response));
             logoutBtn();
             // window.location.reload();
@@ -44,30 +57,15 @@ export default function MemberDeleteBtn(_id) {
 
     return (
         <>
-            <Button
-                variant="contained"
-                color="background"
-                onClick={deleteEvent}
-                style={{
-                    borderRadius: 17,
-                    border: '1px solid red',
-                    color: 'red',
-                    width: '200px',
-                    height: '21px',
-                    fontSize: '11px',
-                    padding: '4px 14px',
-                    gap: '10px',
-                    marginTop: '30px'
-                }}
-            >
+            <StyledButton variant="contained" color="background" onClick={deleteEvent}>
                 계정 삭제
-            </Button>
-            <Snackbar open={alert} autoHideDuration={1000}>
+            </StyledButton>
+            <Snackbar open={alert} autoHideDuration={1500} onClose={() => setError(false)}>
                 <Alert severity="error" sx={{ width: '100%' }}>
                     계정이 삭제되었습니다.
                 </Alert>
             </Snackbar>
-            <Snackbar open={error} autoHideDuration={1000}>
+            <Snackbar open={error} autoHideDuration={1500} onClose={() => setError(false)}>
                 <Alert severity="warning" sx={{ width: '100%' }}>
                     계정 삭제를 취소합니다.
                 </Alert>

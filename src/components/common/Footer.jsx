@@ -1,5 +1,4 @@
 import * as React from 'react';
-import Box from '@mui/material/Box';
 import SKKUDLOGO from '../../assets/SKKUD_LOGO.png';
 import styled from '@emotion/styled';
 import insta from '../../assets/insta.png';

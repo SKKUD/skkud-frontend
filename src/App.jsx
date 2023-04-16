@@ -68,6 +68,16 @@ export const darkTheme = createTheme({
                     background: '#222222'
                 }
             }
+        },
+        MuiToggleButtonGroup: {
+            styleOverrides: {
+                grouped: {
+                    '&:not(:first-of-type)': {
+                        marginLeft: 0,
+                        borderLeft: 'none'
+                    }
+                }
+            }
         }
     }
 });

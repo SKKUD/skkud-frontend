@@ -27,3 +27,17 @@ export const useUserSkillsApi = (index) => {
     }, []);
     return [skills];
 };
+
+export const useUsersApi = () => {
+    const [users, setUsers] = useState([]);
+
+    useEffect(() => {
+        const fetchEvents = async () => {
+            const res = await axios.get(BASE_URI + '/users');
+            setUsers(res.data.data.users);
+        };
+        fetchEvents();
+    }, []);
+
+    return [users];
+};

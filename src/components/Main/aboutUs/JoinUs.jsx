@@ -2,7 +2,6 @@ import * as React from 'react';
 import { useNavigate } from 'react-router-dom';
 import Button from '@mui/material/Button';
 import styled from '@emotion/styled';
-import Typography from '@mui/material/Typography';
 
 const JoinUsWrap = styled.div`
     display: flex;
