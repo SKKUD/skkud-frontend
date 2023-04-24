@@ -1,14 +1,12 @@
 import * as React from 'react';
 import styled from '@emotion/styled';
-import axios from 'axios';
 import Button from '@mui/material/Button';
 import Alert from '@mui/material/Alert';
 import Snackbar from '@mui/material/Snackbar';
 import { useState } from 'react';
 import { useCookies } from 'react-cookie';
 import { useNavigate } from 'react-router-dom';
-
-const BASE_URI = 'http://localhost:8000';
+import { useMemberDeleteApi } from '../../../hooks/Member';
 
 const StyledButton = styled(Button)`
     border-radius: 17px;
@@ -29,28 +27,21 @@ export default function MemberDeleteBtn(_id) {
     };
     const [alert, setAlert] = useState(false);
     const [error, setError] = useState(false);
+    const [logout, deleteUser] = useMemberDeleteApi();
+
     const logoutBtn = async () => {
         removeCookie('id');
-        await axios
-            .post(BASE_URI + '/auth/logout')
-            .then((userData) => console.log(userData))
-            .catch((error) => console.log(error));
-
+        logout();
         navigateToMainTab();
     };
     const [cookies, , removeCookie] = useCookies([]);
     const id = cookies.id;
     const deleteEvent = async () => {
         if (window.confirm('계정을 삭제합니다')) {
-            // alert('계정이 삭제되었습니다.');
             setAlert(true);
-            await axios
-                .delete(`${BASE_URI}/users/${id}`)
-                .then((response) => console.log('delete', response));
+            deleteUser(id);
             logoutBtn();
-            // window.location.reload();
         } else {
-            // alert('취소합니다.');
             setError(true);
         }
     };

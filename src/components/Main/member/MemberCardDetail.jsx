@@ -9,6 +9,7 @@ import { useUserSkillsApi } from '../../../hooks/Member';
 
 const StyledCard = styled(Card)`
     width: 342.5px;
+    margin: 0 auto;
     margin-top: -25px;
     border-radius: 20px;
     padding-top: 40px;

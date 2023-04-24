@@ -16,6 +16,19 @@ export const useUserPostDetailApi = (index) => {
     return [project];
 };
 
+export const useUserApi = (id) => {
+    const [user, setUser] = useState([]);
+    useEffect(() => {
+        const fetchEvents = async () => {
+            const res = await axios.get(`${BASE_URI}/users/${id}`);
+
+            setUser(res.data.data.user);
+        };
+        fetchEvents();
+    }, []);
+    return [user, setUser];
+};
+
 export const useUserSkillsApi = (index) => {
     const [skills, setSkills] = useState([]);
     useEffect(() => {
@@ -40,4 +53,66 @@ export const useUsersApi = () => {
     }, []);
 
     return [users];
+};
+
+export const useMemberDeleteApi = () => {
+    const logout = () => {
+        axios
+            .post(BASE_URI + '/auth/logout')
+            .then((userData) => console.log(userData))
+            .catch((error) => console.log(error));
+    };
+
+    const deleteUser = (id) => {
+        axios.delete(`${BASE_URI}/users/${id}`).then((response) => console.log('delete', response));
+    };
+
+    return [logout, deleteUser];
+};
+
+export const useMemberCreateApi = () => {
+    const postMemberdata = (formData) => {
+        axios
+            .post(`${BASE_URI}/users`, formData)
+            .then((response) => console.log(response))
+            .catch((error) => console.log(error));
+    };
+
+    return [postMemberdata];
+};
+
+export const useEditMemberApi = () => {
+    const editUserINfo = (
+        id,
+        newname,
+        newemail,
+        newbio,
+        newinsta,
+        newlinks,
+        newmajor,
+        newskill,
+        PreviewImg
+    ) => {
+        axios
+            .patch(`${BASE_URI}/users/${id}`, {
+                username: newname,
+                email: newemail,
+                major: newmajor,
+                otherLinks: newlinks,
+                insta: newinsta,
+                bio: newbio,
+                skills: newskill,
+                image: PreviewImg
+            })
+            .catch((error) => console.log(error));
+    };
+    const editUserIdPw = (id, newID, newpw) => {
+        axios
+            .patch(`${BASE_URI}/users/${id}`, {
+                userID: newID,
+                passwd: newpw
+            })
+            .then((res) => console.log(res));
+    };
+    return [editUserINfo, editUserIdPw];
 };

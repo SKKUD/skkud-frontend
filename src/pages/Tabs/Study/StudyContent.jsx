@@ -73,7 +73,7 @@ export default function StudyContent() {
                     alignItems: 'center',
                     boxSizing: 'border-box',
                     height: '180px',
-                    '&::-webkit-scrollbar': { display: 'none' }
+                    ':WebkitScrollbar': { display: 'none' }
                 }}
             >
                 {imgFiles.map((url) => {

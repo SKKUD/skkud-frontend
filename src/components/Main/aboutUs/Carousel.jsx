@@ -23,8 +23,8 @@ export default function Carousel(props) {
 
     const SliderImg = styled.img`
         border-radius: 15px;
-        width: 120px;
-        height: 120px;
+        width: 125px;
+        height: 125px;
         background-color: rgba(255, 255, 255, 0.2);
         margin: 5px;
         object-fit: cover;

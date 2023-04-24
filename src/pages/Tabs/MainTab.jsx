@@ -12,18 +12,12 @@ import TabMember from './User/TabMember';
 import PostProject from './Project/PostProject';
 import ProjectDetail from './Project/ProjectDetail';
 import EditProject from './Project/EditProject';
-import CreateUser from './User/CreateUser';
-import CreateUser2 from './User/CreateUser2';
-import CreateUser3 from './User/CreateUser3';
-import FrontendTab from './User/FrontendTab';
-import BackendTab from './User/BackendTab';
 import TabStudy from './Study/TabStudy';
 import StudyContent from './Study/StudyContent';
 import EditStudy from './Study/EditStudy';
 import PostStudy from './Study/PostStudy';
 import Header from '../../components/common/Header';
 import Footer from '../../components/common/Footer';
-import FinishCreateUser from './User/FinishCreateUser';
 import MyPageDetail from './User/MyPageDetail';
 import MyPage from './User/MyPage';
 
@@ -158,7 +152,7 @@ function MainTab() {
                 index={value}
                 style={{
                     margin: '40px auto 0px',
-                    maxWidth: '390px',
+                    maxWidth: '480px',
                     minHeight: `calc(100vh - 235px)`
                 }}
             >
@@ -168,15 +162,8 @@ function MainTab() {
                     <Route path="postproject" element={<PostProject />} />
                     <Route path="editproject/:index" element={<EditProject />} />
                     <Route path="projectdetail/:index" element={<ProjectDetail />} />
-                    <Route path="member" element={<FrontendTab />} />
-                    <Route path="member/design" element={<TabMember />} />
-                    {/* <Route path="frontend" element={<FrontendTab />} /> */}
-                    <Route path="member/backend" element={<BackendTab />} />
-                    <Route path="member/createuser" element={<CreateUser />} />
-                    <Route path="member/createuser2" element={<CreateUser2 />} />
-                    <Route path="member/createuser3" element={<CreateUser3 />} />
+                    <Route path="member" element={<TabMember />} />
                     <Route path="member/mypage" element={<MyPage />} />
-                    <Route path="member/usercreated" element={<FinishCreateUser />} />
                     <Route path="member/mypagedetail" element={<MyPageDetail />} />
                     <Route path="study" element={<TabStudy />} />
                     <Route path="study/:index" element={<StudyContent />} />

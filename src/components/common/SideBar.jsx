@@ -2,14 +2,9 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { useCookies } from 'react-cookie';
 import PropTypes from 'prop-types';
-import styled from '@emotion/styled';
-import List from '@mui/material/List';
-import IconButton from '@mui/material/IconButton';
-import Drawer from '@mui/material/Drawer';
-import ListItem from '@mui/material/ListItem';
-import ListItemButton from '@mui/material/ListItemButton';
+import { Box, Drawer, IconButton, List, ListItem, ListItemButton } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
-import Box from '@mui/material/Box';
+import styled from '@emotion/styled';
 
 const DrawerHeader = styled('div')(({ theme }) => ({
     display: 'flex',
@@ -21,6 +16,40 @@ const DrawerHeader = styled('div')(({ theme }) => ({
     marginTop: '18px',
     paddingRight: '18px'
 }));
+
+function SidebarItem({ path, name, color }) {
+    const StyledListItem = styled(ListItem)`
+        margin-bottom: 10px;
+    `;
+
+    const StyledLink = styled(Link)`
+        width: 100%;
+        color: ${(props) => props.linkcolor};
+        text-decoration: none;
+    `;
+
+    const StyledItemButton = styled(ListItemButton)`
+        justify-content: end;
+        > div {
+            font-weight: 600;
+            font-size: 0.93rem;
+        }
+    `;
+
+    return (
+        <StyledListItem disablePadding>
+            <StyledLink linkcolor={color} to={path}>
+                <StyledItemButton>
+                    <div>{name}</div>
+                </StyledItemButton>
+            </StyledLink>
+        </StyledListItem>
+    );
+}
+
+SidebarItem.propTypes = {
+    path: PropTypes.string.isRequired
+};
 
 const SidebarWrapper = styled(Box)`
     width: 169px;
@@ -68,7 +97,12 @@ export default function SideBar() {
             >
                 <MenuIcon sx={{ fontSize: 35 }} />
             </IconButton>
-            <Drawer open={open} onClose={toggleDrawer(false)} anchor="right">
+            <Drawer
+                open={open}
+                onClose={toggleDrawer(false)}
+                anchor="right"
+                disableScrollLock={true}
+            >
                 <DrawerHeader>
                     <IconButton onClick={toggleDrawer(false)}>
                         <MenuIcon sx={{ fontSize: 35 }} />
@@ -113,37 +147,3 @@ export default function SideBar() {
         </>
     );
 }
-
-function SidebarItem({ path, name, color }) {
-    const StyledListItem = styled(ListItem)`
-        margin-bottom: 10px;
-    `;
-
-    const StyledLink = styled(Link)`
-        width: 100%;
-        color: ${(props) => props.linkColor};
-        text-decoration: none;
-    `;
-
-    const StyledItemButton = styled(ListItemButton)`
-        justify-content: end;
-        > div {
-            font-weight: 600;
-            font-size: 0.93rem;
-        }
-    `;
-
-    return (
-        <StyledListItem disablePadding>
-            <StyledLink linkColor={color} to={path}>
-                <StyledItemButton>
-                    <div>{name}</div>
-                </StyledItemButton>
-            </StyledLink>
-        </StyledListItem>
-    );
-}
-
-SidebarItem.propTypes = {
-    path: PropTypes.string.isRequired
-};

@@ -40,13 +40,13 @@ const MemberCardEngName = styled(Typography)`
     font-weight: 300;
 `;
 
-const MemberCardCaption = styled(Typography)`
+const MemberCardCaption = styled.div`
     text-align: left;
     margin-left: 20px;
     margin-top: 12px;
 `;
 
-const MemberCardBio = styled(Typography)`
+const MemberCardBio = styled.div`
     margin-bottom: 8px;
     font-size: 0.9rem;
 `;
@@ -60,7 +60,7 @@ const MemberCardBox = styled(Box)`
     text-align: left;
 `;
 
-const MemberCardCaptionBold = styled(Typography)`
+const MemberCardCaptionBold = styled.div`
     font-weight: bold;
 `;
 

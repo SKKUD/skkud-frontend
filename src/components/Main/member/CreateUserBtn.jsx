@@ -34,7 +34,7 @@ const StyledButton = styled(Button)`
 export default function CreateUserBtn() {
     const navigate = useNavigate();
     const navigateToCreateUser = () => {
-        navigate('/maintab/member/createuser');
+        navigate('/signup');
     };
     return (
         <ButtonWrap>

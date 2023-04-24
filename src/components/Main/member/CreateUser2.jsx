@@ -1,33 +1,32 @@
 import * as React from 'react';
-import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { useLocation } from 'react-router-dom';
-import Box from '@mui/material/Box';
-import TextField from '@mui/material/TextField';
-import Button from '@mui/material/Button';
-import FormControl from '@mui/material/FormControl';
-import FormLabel from '@mui/material/FormLabel';
-import IconButton from '@mui/material/IconButton';
+import { useState, useContext } from 'react';
+import {
+    Box,
+    TextField,
+    Button,
+    FormControl,
+    FormLabel,
+    IconButton,
+    InputLabel,
+    MenuItem,
+    Select,
+    Typography,
+    Alert,
+    Snackbar
+} from '@mui/material';
 import PhotoCamera from '@mui/icons-material/PhotoCamera';
-import InputLabel from '@mui/material/InputLabel';
-import MenuItem from '@mui/material/MenuItem';
-import Select from '@mui/material/Select';
-import Typography from '@mui/material/Typography';
-import Alert from '@mui/material/Alert';
-import Snackbar from '@mui/material/Snackbar';
+import { PageContext } from '../../../pages/SignUp';
 
 export default function CreateUser2() {
+    const { page, changePage } = useContext(PageContext);
+
     const [alert, setAlert] = useState(false);
     const [name, setName] = useState('');
     const [engName, setEngName] = useState('');
     const [track, setTrack] = useState('');
     const [image, setImage] = useState('');
     const [major, setMajor] = useState('');
-    const location = useLocation();
-    const ID = location.state.id;
-    const pw = location.state.pw;
-    const email = location.state.email;
-    const navigate = useNavigate();
+
     const handleClose = (event, reason) => {
         setAlert(false);
     };
@@ -35,11 +34,10 @@ export default function CreateUser2() {
         if (name === '' || engName === '' || track === '' || image === '' || major === '') {
             setAlert(true);
         } else {
-            navigate('/maintab/member/createuser3', {
+            changePage({
+                p: 3,
                 state: {
-                    id: ID,
-                    pw: pw,
-                    email: email,
+                    ...page.state,
                     name: name,
                     engName: engName,
                     track: track,
@@ -167,7 +165,7 @@ export default function CreateUser2() {
                     style={{
                         display: 'flex',
                         borderRadius: '99px',
-                        width: '312px',
+                        width: '30ch',
                         height: '44px',
                         marginTop: '94px'
                     }}

@@ -1,6 +1,5 @@
 import * as React from 'react';
-import { useContext, useState, useEffect } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { useContext, useState } from 'react';
 import { styled } from '@mui/material/styles';
 import ToggleButton from '@mui/material/ToggleButton';
 import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
@@ -20,6 +19,7 @@ const StyledToggleButton = styled(ToggleButton)({
     fontSize: '0.75rem',
     fontWeight: 600,
     textTransform: 'none',
+    border: 'none',
     span: {
         borderRadius: '33px',
         border: '1px solid #00FFA8'
@@ -37,17 +37,10 @@ const StyledToggleButton = styled(ToggleButton)({
 export default function MemberNav() {
     const { trackTab, setTrackTab } = useContext(TrackContext);
     const [, setAlignment] = useState('frontend');
-    const location = useLocation();
 
     const handleChange = (event, newAlignment) => {
         setAlignment(newAlignment);
     };
-
-    useEffect(() => {
-        if (location.pathname === '/maintab/member') {
-            setTrackTab('frontend');
-        }
-    }, [location]);
 
     return (
         <StyledToggleButtonGroup
@@ -59,8 +52,6 @@ export default function MemberNav() {
         >
             <StyledToggleButton
                 value="frontend"
-                component={Link}
-                to="/maintab/member"
                 onClick={() => {
                     setTrackTab('frontend');
                 }}
@@ -69,8 +60,6 @@ export default function MemberNav() {
             </StyledToggleButton>
             <StyledToggleButton
                 value="backend"
-                component={Link}
-                to="/maintab/member/backend"
                 onClick={() => {
                     setTrackTab('backend');
                 }}
@@ -79,8 +68,6 @@ export default function MemberNav() {
             </StyledToggleButton>
             <StyledToggleButton
                 value="design"
-                component={Link}
-                to="/maintab/member/design"
                 onClick={() => {
                     setTrackTab('design');
                 }}
