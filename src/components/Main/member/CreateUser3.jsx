@@ -3,6 +3,42 @@ import { useState, useCallback, useContext } from 'react';
 import { Box, TextField, Typography, Button, Alert, Snackbar } from '@mui/material';
 import { PageContext } from '../../../pages/SignUp';
 import { useMemberCreateApi } from '../../../hooks/Member';
+import styled from '@emotion/styled';
+
+const StyledContainer = styled.div`
+    display: flex;
+    justify-content: center;
+`;
+
+const StyledForm = styled(Box)`
+    & > :not(style) {
+        width: 300px;
+    }
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+`;
+
+const StyledTitle = styled(Typography)`
+    font-weight: 700;
+    font-size: 1rem;
+    margin: 30px;
+`;
+
+const StyledSubtitle = styled(Typography)`
+    font-weight: 700;
+    font-size: 0.75rem;
+    margin-top: 30px;
+`;
+
+const StyledButton = styled(Button)`
+    display: flex;
+    border-radius: 99px;
+    width: 30ch;
+    height: 44px;
+    margin-top: 58px;
+`;
 
 export default function CreateUser3() {
     const { page, changePage } = useContext(PageContext);
@@ -44,33 +80,16 @@ export default function CreateUser3() {
     }, [insta, bio, otherLinks]);
 
     return (
-        <div style={{ display: 'flex', justifyContent: 'center' }}>
-            <Box
-                component="form"
-                sx={{
-                    '& > :not(style)': { m: 1, width: '300px' }
-                }}
-                noValidate
-                autoComplete="off"
-                style={{
-                    display: 'flex',
-                    flexDirection: 'column',
-                    justifyContent: 'center',
-                    alignItems: 'center'
-                }}
-            >
-                <Typography
-                    variant="h6"
-                    textAlign={'center'}
-                    style={{ fontWeight: 700, fontSize: '1rem', margin: '30px' }}
-                >
+        <StyledContainer>
+            <StyledForm component="form" noValidate autoComplete="off">
+                <StyledTitle variant="h6" textAlign={'center'}>
                     회원가입
-                </Typography>
+                </StyledTitle>
 
-                <Typography style={{ fontWeight: '700', fontSize: '0.75rem' }}>
+                <StyledSubtitle>
                     1. 본인을 소개할 수 있는 sns 링크를 첨부해주세요. <br /> (인스타그램, 페이스북
                     등)
-                </Typography>
+                </StyledSubtitle>
                 <TextField
                     id="insta"
                     label="인스타"
@@ -78,10 +97,10 @@ export default function CreateUser3() {
                     onChange={(e) => setInsta(e.target.value)}
                 />
 
-                <Typography style={{ fontWeight: '700', fontSize: '0.75rem', marginTop: '30px' }}>
+                <StyledSubtitle>
                     2.본인을 소개할 수 있는 기타 링크를 첨부해주세요. <br /> (Figma, Github, GitLab,
                     Behance 등)
-                </Typography>
+                </StyledSubtitle>
 
                 <TextField
                     id="link1"
@@ -89,9 +108,9 @@ export default function CreateUser3() {
                     variant="standard"
                     onChange={(e) => setOtherLinks([e.target.value])}
                 />
-                <Typography style={{ fontWeight: '700', fontSize: '0.75rem', marginTop: '30px' }}>
+                <StyledSubtitle>
                     3. 20자 내로 본인을 소개해주세요. <br /> (예시:스꾸디 신입 김OO)
-                </Typography>
+                </StyledSubtitle>
                 <TextField
                     id="bio"
                     label="한줄 소개"
@@ -99,25 +118,15 @@ export default function CreateUser3() {
                     onChange={(e) => setBio(e.target.value)}
                 />
 
-                <Button
-                    variant="contained"
-                    onClick={submit}
-                    style={{
-                        display: 'flex',
-                        borderRadius: '99px',
-                        width: '30ch',
-                        height: '44px',
-                        marginTop: '58px'
-                    }}
-                >
+                <StyledButton variant="contained" onClick={submit}>
                     가입 완료
-                </Button>
-            </Box>
+                </StyledButton>
+            </StyledForm>
             <Snackbar open={alert} autoHideDuration={700} onClose={handleClose}>
                 <Alert severity="error" sx={{ width: '100%' }}>
                     입력을 완료하세요.
                 </Alert>
             </Snackbar>
-        </div>
+        </StyledContainer>
     );
 }

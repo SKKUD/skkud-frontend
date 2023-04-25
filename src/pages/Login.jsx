@@ -1,17 +1,12 @@
 import * as React from 'react';
-import Footer from '../components/common/Footer';
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
-import Box from '@mui/material/Box';
-import TextField from '@mui/material/TextField';
-import Button from '@mui/material/Button';
-import Typography from '@mui/material/Typography';
 import { useCookies } from 'react-cookie';
+import Footer from '../components/common/Footer';
 import Header from '../components/common/Header';
 import CreateUserBtn from '../components/Main/member/CreateUserBtn';
-import Alert from '@mui/material/Alert';
-import Snackbar from '@mui/material/Snackbar';
+import axios from 'axios';
+import { TextField, Button, Typography, Alert, Snackbar } from '@mui/material';
 import styled from '@emotion/styled';
 
 const Container = styled.div`
@@ -92,9 +87,7 @@ export default function Login() {
         const token = cookies.id;
         try {
             const res = await axios.post(BASE_URI + '/auth/verify');
-            if (res.data.data.userID !== token) {
-                logoutBtn();
-            }
+            if (res.data.data.userID !== token) logoutBtn();
         } catch (error) {
             console.log('auth check error');
             removeCookie('id');

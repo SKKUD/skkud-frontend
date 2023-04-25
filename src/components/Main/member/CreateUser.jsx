@@ -1,6 +1,5 @@
 import * as React from 'react';
 import { useState, useContext } from 'react';
-import { useNavigate } from 'react-router-dom';
 import { Typography, Box, TextField, Button, Alert, Snackbar } from '@mui/material';
 import { PageContext } from '../../../pages/SignUp';
 import styled from '@emotion/styled';
@@ -41,7 +40,6 @@ export default function CreateUser() {
     const [pw, setPw] = useState('');
     const [repw, setrePw] = useState('');
     const validEmail = '^[a-zA-Z0-9+-_.]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$';
-    const navigate = useNavigate();
     const handleClose = (event, reason) => {
         setAlert(false);
         setEmailAlert(false);

@@ -1,7 +1,6 @@
 import * as React from 'react';
 import { useState, useContext } from 'react';
 import {
-    Box,
     TextField,
     Button,
     FormControl,
@@ -16,10 +15,57 @@ import {
 } from '@mui/material';
 import PhotoCamera from '@mui/icons-material/PhotoCamera';
 import { PageContext } from '../../../pages/SignUp';
+import styled from '@emotion/styled';
+
+const StyledForm = styled.form`
+    & > :not(style) {
+        width: 30ch;
+    }
+    & > h6 {
+        margin-bottom: 40px;
+        fontweight: 700;
+    }
+    & > div {
+        margin-bottom: 1.3rem;
+    }
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding-top: 40px;
+`;
+
+const StyledMenuItem = styled(MenuItem)`
+    && {
+        margin: 5px 17px 0px;
+        padding-left: 0px;
+        border-bottom: 0.5px solid #757575;
+        line-height: 20px;
+        &:last-of-type {
+            border-bottom: none;
+        }
+        & > div {
+            font-weight: 500;
+        }
+    }
+`;
+
+const StyledBox = styled.div`
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+`;
+
+const StyledButton = styled(Button)`
+    display: flex;
+    border-radius: 99px;
+    width: 30ch;
+    height: 44px;
+    margin-top: 60px;
+`;
 
 export default function CreateUser2() {
     const { page, changePage } = useContext(PageContext);
-
     const [alert, setAlert] = useState(false);
     const [name, setName] = useState('');
     const [engName, setEngName] = useState('');
@@ -55,21 +101,7 @@ export default function CreateUser2() {
 
     return (
         <>
-            <Box
-                component="form"
-                sx={{
-                    '& > :not(style)': { m: 1, width: '30ch' }
-                }}
-                noValidate
-                autoComplete="off"
-                style={{
-                    display: 'flex',
-                    flexDirection: 'column',
-                    justifyContent: 'center',
-                    alignItems: 'center',
-                    paddingTop: '40px'
-                }}
-            >
+            <StyledForm component="form" noValidate autoComplete="off">
                 <Typography
                     variant="h6"
                     textAlign={'center'}
@@ -104,46 +136,19 @@ export default function CreateUser2() {
                         }}
                         label="track"
                     >
-                        <MenuItem
-                            value={'frontend'}
-                            sx={{
-                                margin: '5px 17px 0px',
-                                borderBottom: '0.5px solid #757575',
-                                pl: '0px'
-                            }}
-                        >
-                            <div style={{ fontWeight: 500 }}>Frontend</div>
-                        </MenuItem>{' '}
-                        <MenuItem
-                            value={'backend'}
-                            sx={{
-                                lineHeight: '20px',
-                                margin: '5px 17px 0px',
-                                borderBottom: '0.5px solid #757575',
-                                pl: '0px'
-                            }}
-                        >
-                            <div style={{ fontWeight: 500 }}>Backend</div>
-                        </MenuItem>
-                        <MenuItem
-                            value={'design'}
-                            sx={{
-                                margin: '5px 17px 0px',
-                                pl: '0px'
-                            }}
-                        >
-                            <div style={{ fontWeight: 500 }}>Design</div>
-                        </MenuItem>
+                        <StyledMenuItem value="frontend">
+                            <div>Frontend</div>
+                        </StyledMenuItem>
+                        <StyledMenuItem value="backend">
+                            <div>Backend</div>
+                        </StyledMenuItem>
+                        <StyledMenuItem value="design">
+                            <div>Design</div>
+                        </StyledMenuItem>
                     </Select>
                 </FormControl>
 
-                <Box
-                    sx={{
-                        display: 'flex',
-                        alignItems: 'center',
-                        justifyContent: 'space-between'
-                    }}
-                >
+                <StyledBox>
                     {' '}
                     <FormLabel id="demo-row-radio-buttons-group-label">Image</FormLabel>
                     {image ? <p>등록완료</p> : <p></p>}
@@ -157,22 +162,12 @@ export default function CreateUser2() {
                         />
                         <PhotoCamera />
                     </IconButton>
-                </Box>
+                </StyledBox>
 
-                <Button
-                    variant="contained"
-                    onClick={nextBtn}
-                    style={{
-                        display: 'flex',
-                        borderRadius: '99px',
-                        width: '30ch',
-                        height: '44px',
-                        marginTop: '94px'
-                    }}
-                >
+                <StyledButton variant="contained" onClick={nextBtn}>
                     다음
-                </Button>
-            </Box>
+                </StyledButton>
+            </StyledForm>
             <Snackbar open={alert} autoHideDuration={700} onClose={handleClose}>
                 <Alert severity="error" sx={{ width: '100%' }}>
                     입력을 완료하세요.

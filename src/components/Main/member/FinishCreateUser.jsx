@@ -14,6 +14,10 @@ const CongratsContainer = styled.div`
     padding-top: 5vh;
 `;
 
+const Title = styled(Typography)`
+    margin-bottom: 20px;
+`;
+
 const CongratsImg = styled.img`
     width: 250px;
     height: 250px;
@@ -40,9 +44,9 @@ export default function FinishCreateUser() {
 
     return (
         <CongratsContainer>
-            <Typography variant="h7" fontWeight="bold">
+            <Title variant="h7" fontWeight="bold">
                 가입을 축하합니다!
-            </Typography>
+            </Title>
 
             <CongratsImg alt={name} src={Img} />
 

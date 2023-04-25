@@ -9,7 +9,7 @@ import styled from '@emotion/styled';
 import Footer from '../components/common/Footer';
 
 const SignupContainer = styled.div`
-    min-height: calc(100vh - 71px);
+    min-height: calc(100vh - 155px);
     padding-top: 70px;
     margin-bottom: 30px;
 `;
