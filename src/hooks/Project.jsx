@@ -4,7 +4,7 @@ import axios from 'axios';
 
 const BASE_URI = 'http://localhost:8000';
 
-export const useProjectPostApi = () => {
+export const useProjectGetApi = () => {
     const [post, setPost] = useState({});
 
     // :id 파라미터
@@ -19,6 +19,57 @@ export const useProjectPostApi = () => {
     }, []);
 
     return [post];
+};
+
+export const useProjectPostApi = () => {
+    const postProjectPost = (formData) =>
+        axios
+            .post(BASE_URI + '/posts', formData)
+            .then((response) => {
+                console.log(response.status);
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+    return [postProjectPost];
+};
+
+export const useProjectDeleteApi = () => {
+    const deleteProjectPost = (id) => {
+        axios
+            .delete(`${BASE_URI}/posts/${id}`)
+            .then((data) => console.log(data))
+            .catch((error) => console.log(error));
+    };
+
+    return [deleteProjectPost];
+};
+
+export const useProjectEditApi = () => {
+    const editProjectContributor = (id, checked) => {
+        axios
+            .patch(BASE_URI + `/posts/contributor/${id}`, {
+                contributors: checked
+            })
+            .then((response) => {
+                console.log(response.status);
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+    };
+
+    const editProjectPost = (id, formData) => {
+        axios
+            .post(BASE_URI + `/posts/revise/${id}`, formData)
+            .then((response) => {
+                console.log(response.status);
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+    };
+    return [editProjectContributor, editProjectPost];
 };
 
 export const useProjectListApi = () => {

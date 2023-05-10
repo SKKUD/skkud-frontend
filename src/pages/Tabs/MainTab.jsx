@@ -159,9 +159,9 @@ function MainTab() {
                 <Routes>
                     <Route path="" element={<TabAboutUs />} />
                     <Route path="project" element={<ProjectList />} />
-                    <Route path="postproject" element={<PostProject />} />
-                    <Route path="editproject/:index" element={<EditProject />} />
-                    <Route path="projectdetail/:index" element={<ProjectDetail />} />
+                    <Route path="project/post" element={<PostProject />} />
+                    <Route path="project/:index" element={<ProjectDetail />} />
+                    <Route path="project/edit/:index" element={<EditProject />} />
                     <Route path="member" element={<TabMember />} />
                     <Route path="member/mypage" element={<MyPage />} />
                     <Route path="member/mypagedetail" element={<MyPageDetail />} />

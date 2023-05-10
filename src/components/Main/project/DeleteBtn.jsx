@@ -1,12 +1,11 @@
 import React from 'react';
-import axios from 'axios';
 import { useNavigate, useLocation } from 'react-router-dom';
 import IconButton from '@mui/material/IconButton';
 import DeleteIcon from '@mui/icons-material/Delete';
-
-const BASE_URI = 'http://localhost:8000';
+import { useProjectDeleteApi } from '../../../hooks/Project';
 
 export default function DeleteBtn(_id) {
+    const [deleteProjectPost] = useProjectDeleteApi();
     const { state } = _id;
     const location = useLocation();
     const navigate = useNavigate();
@@ -25,10 +24,7 @@ export default function DeleteBtn(_id) {
             aria-label="delete post"
             component="label"
             onClick={() => {
-                const deleteEvents = async () => {
-                    await axios.delete(BASE_URI + `/posts/${state}`);
-                };
-                deleteEvents();
+                deleteProjectPost(state);
                 navigateToProject();
             }}
         >

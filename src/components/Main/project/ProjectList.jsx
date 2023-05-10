@@ -3,6 +3,18 @@ import { Link } from 'react-router-dom';
 import { useProjectListApi } from '../../../hooks/Project';
 import Card from '@mui/material/Card';
 import ProjectCard from './ProjectCard';
+import styled from '@emotion/styled';
+
+const StyledLink = styled(Link)`
+    text-decoration: none;
+    display: contents;
+    width: 100%;
+`;
+
+const StyledCard = styled(Card)`
+    border-radius: 25px;
+    margin-bottom: 10px;
+`;
 
 export default function ProjectList() {
     const [postList] = useProjectListApi();
@@ -42,20 +54,15 @@ export default function ProjectList() {
         .reverse()
         .map((project) => {
             return (
-                <Card sx={{ borderRadius: '25px', mb: 2 }} key={project.index}>
-                    <Link
-                        to={`/maintab/projectdetail/${project._id}`}
-                        style={{
-                            textDecoration: 'none',
-                            display: 'contents',
-                            width: '100%'
-                        }}
+                <StyledCard key={project.index}>
+                    <StyledLink
+                        to={`/maintab/project/${project._id}`}
                         key={project.index}
                         state={{ project }}
                     >
                         <ProjectCard project={project} />
-                    </Link>
-                </Card>
+                    </StyledLink>
+                </StyledCard>
             );
         });
 }

@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { useCookies } from 'react-cookie';
 import { Link } from 'react-router-dom';
-import PostBtn from '../../../components/common/PostBtn';
+import PostBtn from '../../../components/Main/project/PostBtn';
 import ProjectList from '../../../components/Main/project/ProjectList';
 
 export default function TabProject() {
@@ -10,7 +10,7 @@ export default function TabProject() {
     return (
         <>
             {cookies.id ? (
-                <Link to="/maintab/postproject" style={{ textDecoration: 'inherit' }}>
+                <Link to="/maintab/project/post" style={{ textDecoration: 'inherit' }}>
                     <PostBtn content="Add New Post" />
                 </Link>
             ) : (
