@@ -25,7 +25,7 @@ export default function EditStudy() {
     const loc = useLocation();
     const state = loc.state;
 
-    const [studies, filterStudies, study, createStudy, updateStudy, deleteStudy] = useStudiesApi(); // eslint-disable-line no-unused-vars
+    const [, , , , updateStudy] = useStudiesApi();
 
     const postId = state._id;
     const navigate = useNavigate();

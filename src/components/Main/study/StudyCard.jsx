@@ -7,12 +7,6 @@ import CardMedia from '@mui/material/CardMedia';
 import Chip from '@mui/material/Chip';
 import Stack from '@mui/material/Stack';
 
-function getDayOfWeek(date) {
-    const week = ['일', '월', '화', '수', '목', '금', '토'];
-    const dayOfWeek = week[new Date(date).getDay()];
-
-    return dayOfWeek;
-}
 export default function StudyCard(props) {
     const { attendance, content, studyTimeStart, title, images } = props.props;
 
@@ -26,6 +20,7 @@ export default function StudyCard(props) {
         margin-top: 10px;
         border-radius: 15px;
     `;
+
     const StyledChip = styled((props) => <Chip {...props} />)(() => ({
         border: '1.5px solid #444',
         height: '18px',
@@ -39,101 +34,76 @@ export default function StudyCard(props) {
         }
     }));
 
+    const Title = styled.div({
+        fontSize: '0.89rem',
+        fontWeight: 600,
+        lineHeight: '0.9rem',
+        overflow: 'hidden',
+        textOverflow: 'ellipsis',
+        whiteSpace: 'nowrap'
+    });
+
+    const Divider = styled.div({
+        width: '1px',
+        height: '12px',
+        backgroundColor: 'rgba(255, 255, 255, 0.8)'
+    });
+
+    const Date = styled.div({
+        fontSize: '0.75rem',
+        lineHeight: '0.9rem',
+        color: 'rgba(255, 255, 255, 0.5)'
+    });
+
+    const StyledImage = styled(CardMedia)({
+        borderRadius: '5px',
+        width: '107px',
+        height: '107px',
+        margin: '10px'
+    });
+
+    const Content = styled.div({
+        fontSize: '0.625rem',
+        lineHeight: '1rem',
+        height: '80px',
+        margin: '10px 0px',
+        overflow: 'hidden',
+        textOverflow: 'ellipsis'
+    });
+
+    const Attendance = styled.div({
+        width: '100%',
+        height: '24px',
+        overflow: 'scroll',
+        msOverflowStyle: 'none',
+        '&::-webkit-scrollbar': { display: 'none' }
+    });
+
     return (
         <StyledStudyCard>
             <Grid container spacing={1}>
                 <Grid item xs={7}>
-                    <div
-                        style={{
-                            fontSize: '0.89rem',
-                            fontWeight: 600,
-                            lineHeight: '0.9rem',
-                            overflow: 'hidden',
-                            textOverflow: 'ellipsis',
-                            whiteSpace: 'nowrap'
-                        }}
-                    >
-                        {title}
-                    </div>
+                    <Title>{title}</Title>
                 </Grid>
                 <Grid item xs={1} sx={{ display: 'flex', justifyContent: 'flex-end' }}>
-                    <div
-                        style={{
-                            width: '1px',
-                            height: '12px',
-                            backgroundColor: 'rgba(255, 255, 255, 0.8)'
-                        }}
-                    />
+                    <Divider />
                 </Grid>
                 <Grid item xs={4}>
-                    <div
-                        style={{
-                            color: 'rgba(255, 255, 255, 0.5)',
-                            fontSize: '0.75rem',
-                            lineHeight: '0.9rem'
-                        }}
-                    >
-                        {date + '(' + day + ')'}
-                    </div>
+                    <Date>
+                        {date} ({day})
+                    </Date>
                 </Grid>
                 <Grid item xs={6}>
                     {images.length !== 0 ? (
-                        <CardMedia
-                            component="img"
-                            image={images[0]}
-                            alt={title}
-                            style={{
-                                borderRadius: '5px',
-                                width: '107px',
-                                height: '107px',
-                                margin: '10px'
-                            }}
-                        />
+                        <StyledImage component="img" image={images[0]} alt={title} />
                     ) : (
-                        <CardMedia
-                            component="img"
-                            image={IntroDesign}
-                            alt={title}
-                            style={{
-                                borderRadius: '5px',
-                                width: '107px',
-                                height: '107px',
-                                margin: '10px'
-                            }}
-                        />
+                        <StyledImage component="img" image={IntroDesign} alt={title} />
                     )}
                 </Grid>
                 <Grid item xs={6}>
-                    <div
-                        style={{
-                            fontSize: '0.625rem',
-                            lineHeight: '1rem',
-                            height: '80px',
-                            margin: '10px 0px',
-                            overflow: 'hidden',
-                            textOverflow: 'ellipsis'
-                        }}
-                    >
-                        {content}
-                    </div>
-                    <div
-                        style={{
-                            width: '100%',
-                            height: '24px',
-
-                            overflow: 'scroll',
-                            msOverflowStyle: 'none',
-                            '&::-webkit-scrollbar': { display: 'none' }
-                        }}
-                    >
-                        <Stack
-                            direction="row"
-                            spacing={0.5}
-                            sx={{
-                                justifyContent: 'left',
-                                flexWrap: 'wrap'
-                            }}
-                        >
+                    <Content>{content}</Content>
+                    <Attendance>
+                        <Stack direction="row" spacing={0.5} justifyContent="left" flexWrap="wrap">
                             {attendance &&
                                 attendance.map((mem) => (
                                     <StyledChip
@@ -144,9 +114,16 @@ export default function StudyCard(props) {
                                     />
                                 ))}
                         </Stack>
-                    </div>
+                    </Attendance>
                 </Grid>
             </Grid>
         </StyledStudyCard>
     );
+}
+
+function getDayOfWeek(date) {
+    const week = ['일', '월', '화', '수', '목', '금', '토'];
+    const dayOfWeek = week[new Date(date).getDay()];
+
+    return dayOfWeek;
 }

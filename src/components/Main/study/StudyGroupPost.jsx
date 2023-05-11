@@ -3,6 +3,27 @@ import { useState } from 'react';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import { useStudyGroupsApi } from '../../../hooks/Study';
+import styled from '@emotion/styled';
+
+const StyledForm = styled('form')({
+    width: '90%',
+    margin: '0 auto'
+});
+
+const Title = styled('div')({
+    color: 'rgba(255, 255, 255, 0.5)',
+    fontWeight: 500,
+    fontSize: '0.9rem',
+    margin: '10px'
+});
+
+const BtnWrap = styled('div')({
+    display: 'flex',
+    justifyContent: 'center',
+    marginTop: '15px'
+});
+
+const StyledBtn = styled(Button)({ textTransform: 'none' });
 
 export default function StudyGroupPost() {
     const [, , createStudyGroup, ,] = useStudyGroupsApi();
@@ -20,23 +41,8 @@ export default function StudyGroupPost() {
     };
 
     return (
-        <form
-            encType="multipart/form-data"
-            style={{
-                width: '90%',
-                margin: '0 auto'
-            }}
-        >
-            <div
-                style={{
-                    color: 'rgba(255, 255, 255, 0.5)',
-                    fontWeight: 500,
-                    fontSize: '0.9rem',
-                    margin: '10px'
-                }}
-            >
-                새로운 스터디 그룹 생성
-            </div>
+        <StyledForm encType="multipart/form-data">
+            <Title>새로운 스터디 그룹 생성</Title>
             <TextField
                 fullWidth
                 label="groupName"
@@ -63,17 +69,11 @@ export default function StudyGroupPost() {
                     setMembers(tagsArray);
                 }}
             />
-            <div style={{ display: 'flex', justifyContent: 'center' }}>
-                <Button
-                    color="primary"
-                    variant="contained"
-                    size="small"
-                    sx={{ mt: 1.5, textTransform: 'none' }}
-                    onClick={handleSubmit}
-                >
+            <BtnWrap>
+                <StyledBtn color="primary" variant="contained" size="small" onClick={handleSubmit}>
                     Create
-                </Button>
-            </div>
-        </form>
+                </StyledBtn>
+            </BtnWrap>
+        </StyledForm>
     );
 }
