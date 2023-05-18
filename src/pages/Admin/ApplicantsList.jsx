@@ -1,6 +1,6 @@
 import React from 'react';
 import { useAppliedUserApi, useAppliedUserDeleteApi } from '../../hooks/Application';
-import { Typography, Button, Box } from '@mui/material';
+import { Button, Box } from '@mui/material';
 import ApplicantCard from '../../components/applicant/ApplicantCard';
 import styled from '@emotion/styled';
 
