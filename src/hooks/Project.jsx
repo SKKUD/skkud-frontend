@@ -99,7 +99,6 @@ export const useProjectPostDetailApi = () => {
             setChecked(data.users);
         });
     }, []);
-    const prevChecked = [...checked];
 
     return [
         [title, setTitle],
@@ -108,7 +107,7 @@ export const useProjectPostDetailApi = () => {
         [period, setPeriod],
         [link, setLink],
         [images, setImages],
-        [checked, setChecked],
+        [checked, setChecked]
     ];
 };
 

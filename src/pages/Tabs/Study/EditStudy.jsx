@@ -1,7 +1,8 @@
 import React from 'react';
 import { useState } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
-import { useStudiesApi } from '../../../hooks/Study';
+import { useNavigate } from 'react-router-dom';
+import { useParams } from 'react-router';
+import { useStudiesApi, useStudyDetailApi } from '../../../hooks/Study';
 import dayjs from 'dayjs';
 import { Box, Card, Button, Alert, Snackbar } from '@mui/material';
 import AttendantInput from '../../../components/Main/study/AttendantInput';
@@ -31,12 +32,12 @@ const StyledButton = styled(Button)`
 `;
 
 export default function EditStudy() {
-    const loc = useLocation();
-    const state = loc.state;
-
     const [, , , , updateStudy] = useStudiesApi();
 
-    const postId = state._id;
+    // :id 파라미터
+    const { index } = useParams();
+    const StudyDetail = useStudyDetailApi();
+
     const navigate = useNavigate();
     const navigateToStudy = () => {
         navigate('/maintab/study');
@@ -46,19 +47,21 @@ export default function EditStudy() {
     const [alertContent, setAlertContent] = useState(false);
     const [alertTaskContent, setAlertTaskContent] = useState(false);
     const [alertTaskName, setAlertTaskName] = useState(false);
-    const [title, setTitle] = useState(state.title);
-    const [content, setContent] = useState(state.content);
-    const [location, setLocation] = useState(state.location);
-    const [attendance, setAtd] = useState(state.attendance);
+
+    const [title, setTitle] = useState('');
+    const [content, setContent] = useState('');
+    const [location, setLocation] = useState('');
+    const [attendance, setAtd] = useState([]);
+    const [taskContents, setTaskContents] = useState([]);
+    const [taskNames, setTaskNames] = useState([]);
+    const [images, setImages] = useState([]); // eslint-disable-line no-unused-vars
+    const [studyTimeStart, setStart] = useState(dayjs());
+    const [studyTimeEnd, setEnd] = useState(dayjs());
     const [taskContent, setTaskContent] = useState('');
-    const [taskContents, setTaskContents] = useState(state.taskContents);
     const [taskName, setTaskName] = useState('');
-    const [taskNames, setTaskNames] = useState(state.taskNames);
-    const [images, setImages] = useState(state.images); // eslint-disable-line no-unused-vars
     const [newimages, setnewImages] = useState([]);
     const [PreviewImg, setPreviewImg] = useState([]);
-    const [studyTimeStart, setStart] = useState(dayjs(state.studyTimeStart));
-    const [studyTimeEnd, setEnd] = useState(dayjs(state.studyTimeEnd));
+
     let initialTask = [];
     for (let i = 0; i < taskContents.length; i++) {
         initialTask.push({ task: taskContents[i], name: taskNames[i] });
@@ -133,7 +136,7 @@ export default function EditStudy() {
                 newimages.map((image) => formData.append('images', image));
             }
 
-            updateStudy(formData, postId);
+            updateStudy(formData, index);
             navigateToStudy();
         }
     };

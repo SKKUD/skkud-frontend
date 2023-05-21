@@ -4,8 +4,7 @@ import IconButton from '@mui/material/IconButton';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { useStudiesApi } from '../../../hooks/Study';
 
-export default function StudyDeleteBtn(_id) {
-    const { state } = _id;
+export default function StudyDeleteBtn({ id }) {
     const [, , , , , deleteStudy] = useStudiesApi();
     const navigate = useNavigate();
     const navigateToStudy = () => {
@@ -19,7 +18,7 @@ export default function StudyDeleteBtn(_id) {
             aria-label="delete post"
             component="label"
             onClick={() => {
-                deleteStudy(state);
+                deleteStudy(id);
                 navigateToStudy();
             }}
         >
