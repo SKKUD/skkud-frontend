@@ -24,13 +24,14 @@ const ButtonWrap = styled(Box)`
 `;
 
 export default function EditProject() {
-    const [editProjectContributor, editProjectPost] = useProjectEditApi();
+    const [editProjectPost] = useProjectEditApi();
     const navigate = useNavigate();
     const navigateToProject = () => {
         navigate('/maintab/project');
     };
 
     const PostDetail = useProjectPostDetailApi();
+
     const [alertTitle, setAlertTitle] = useState(false);
     const [alertContent, setAlertContent] = useState(false);
     const [alertPeriod, setAlertPeriod] = useState(false);
@@ -41,9 +42,12 @@ export default function EditProject() {
     const [link, setLink] = PostDetail[4];
     const [images] = PostDetail[5];
     const [checked, setChecked] = PostDetail[6];
+    const [addContributors, setAddContributors] = useState([]);
+    const [deleteContributors, setDeleteContributors] = useState([]);
     const [newImages, setNewImages] = useState([]);
     const [PreviewImg, setPreviewImg] = useState([]);
     const [users] = useUsersApi();
+
     const handleClose = () => {
         setAlertContent(false);
         setAlertTitle(false);
@@ -90,11 +94,10 @@ export default function EditProject() {
             formData.append('period', period);
             formData.append('link', link);
             newImages.map((image) => formData.append('images', image));
+            formData.append('addContributors', addContributors);
+            formData.append('deleteContributors', deleteContributors);
 
-            editProjectContributor(index, checked);
-            editProjectPost(index, formData).then(() => {
-                navigateToProject();
-            });
+            editProjectPost(index, formData);
         }
     };
 
@@ -102,13 +105,28 @@ export default function EditProject() {
         const handleToggle = (id) => () => {
             const currentIndex = checked.indexOf(id);
             const newChecked = [...checked];
+            const newAddContributors = [...addContributors];
+            const newDeleteContributors = [...deleteContributors];
 
             if (currentIndex === -1) {
                 newChecked.push(id);
+                newAddContributors.push(id);
+                const deleteIndex = newDeleteContributors.indexOf(id);
+                if (deleteIndex !== -1) {
+                    newDeleteContributors.splice(deleteIndex, 1);
+                }
             } else {
                 newChecked.splice(currentIndex, 1);
+                newDeleteContributors.push(id);
+                const addIndex = newAddContributors.indexOf(id);
+                if (addIndex !== -1) {
+                    newAddContributors.splice(addIndex, 1);
+                }
             }
+
             setChecked(newChecked);
+            setAddContributors(newAddContributors);
+            setDeleteContributors(newDeleteContributors);
         };
         return <ContributorList users={users} handleToggle={handleToggle} checked={checked} />;
     }

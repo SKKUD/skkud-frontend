@@ -67,9 +67,10 @@ export default function PostProject() {
 
             formData.append('developPeriod', period);
             formData.append('link', link);
+            formData.append('initializeContributors', checked);
             images.map((image) => formData.append('images', image));
 
-            postProjectPost.then(() => {
+            postProjectPost(formData).then(() => {
                 navigateToProject();
             });
         }

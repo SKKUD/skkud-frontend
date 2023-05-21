@@ -46,22 +46,9 @@ export const useProjectDeleteApi = () => {
 };
 
 export const useProjectEditApi = () => {
-    const editProjectContributor = (id, checked) => {
-        axios
-            .patch(BASE_URI + `/posts/contributor/${id}`, {
-                contributors: checked
-            })
-            .then((response) => {
-                console.log(response.status);
-            })
-            .catch((error) => {
-                console.log(error);
-            });
-    };
-
     const editProjectPost = (id, formData) => {
         axios
-            .post(BASE_URI + `/posts/revise/${id}`, formData)
+            .patch(BASE_URI + `/posts/${id}`, formData)
             .then((response) => {
                 console.log(response.status);
             })
@@ -69,7 +56,7 @@ export const useProjectEditApi = () => {
                 console.log(error);
             });
     };
-    return [editProjectContributor, editProjectPost];
+    return [editProjectPost];
 };
 
 export const useProjectListApi = () => {
@@ -112,6 +99,7 @@ export const useProjectPostDetailApi = () => {
             setChecked(data.users);
         });
     }, []);
+    const prevChecked = [...checked];
 
     return [
         [title, setTitle],
@@ -120,7 +108,7 @@ export const useProjectPostDetailApi = () => {
         [period, setPeriod],
         [link, setLink],
         [images, setImages],
-        [checked, setChecked]
+        [checked, setChecked],
     ];
 };
 
