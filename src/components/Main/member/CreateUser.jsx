@@ -1,14 +1,37 @@
 import * as React from 'react';
-import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import Typography from '@mui/material/Typography';
-import Box from '@mui/material/Box';
-import TextField from '@mui/material/TextField';
-import Button from '@mui/material/Button';
-import Alert from '@mui/material/Alert';
-import Snackbar from '@mui/material/Snackbar';
+import { useState, useContext } from 'react';
+import { Typography, Box, TextField, Button, Alert, Snackbar } from '@mui/material';
+import { PageContext } from '../../../pages/SignUp';
+import styled from '@emotion/styled';
+
+const FormContainer = styled(Box)`
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding-top: 40px;
+
+    & > div {
+        margin: 1rem;
+        width: 30ch;
+    }
+`;
+
+const Title = styled(Typography)`
+    font-weight: 700;
+`;
+
+const StyledButton = styled(Button)`
+    display: flex;
+    border-radius: 99px;
+    width: 30ch;
+    height: 44px;
+    margin-top: 100px;
+`;
 
 export default function CreateUser() {
+    const { changePage } = useContext(PageContext);
+
     const [alert, setAlert] = useState(false);
     const [emailAlert, setEmailAlert] = useState(false);
     const [pwAlert, setPwAlert] = useState(false);
@@ -17,7 +40,6 @@ export default function CreateUser() {
     const [pw, setPw] = useState('');
     const [repw, setrePw] = useState('');
     const validEmail = '^[a-zA-Z0-9+-_.]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$';
-    const navigate = useNavigate();
     const handleClose = (event, reason) => {
         setAlert(false);
         setEmailAlert(false);
@@ -34,36 +56,18 @@ export default function CreateUser() {
             // alert('동일한 비밀번호가 아닙니다');
             setPwAlert(true);
         } else {
-            navigate('/maintab/member/createuser2', { state: { id: ID, pw: pw, email: email } });
+            changePage({ p: 2, state: { id: ID, pw: pw, email: email } });
         }
     };
 
     return (
         <>
-            <userForm>
-                <Box
-                    component="form"
-                    sx={{
-                        '& > :not(style)': { m: 1, width: '30ch' }
-                    }}
-                    noValidate
-                    autoComplete="off"
-                    style={{
-                        display: 'flex',
-                        flexDirection: 'column',
-                        justifyContent: 'center',
-                        alignItems: 'center',
-                        paddingTop: '40px'
-                    }}
-                >
+            <form>
+                <FormContainer component="form" noValidate autoComplete="off">
                     {' '}
-                    <Typography
-                        variant="h6"
-                        textAlign={'center'}
-                        style={{ fontWeight: 700, fontSize: '1rem' }}
-                    >
+                    <Title variant="h6" textAlign={'center'}>
                         회원가입
-                    </Typography>
+                    </Title>
                     <TextField
                         id="ID"
                         label="아이디 입력"
@@ -90,24 +94,11 @@ export default function CreateUser() {
                         variant="standard"
                         onChange={(e) => setrePw(e.target.value)}
                     />
-                    <Button
-                        variant="contained"
-                        onClick={nextBtn}
-                        style={{
-                            display: 'flex',
-                            borderRadius: '99px',
-                            width: '312px',
-                            height: '44px',
-                            marginTop: '150px'
-
-                            // left: '24px',
-                            // top: '635px'
-                        }}
-                    >
+                    <StyledButton variant="contained" onClick={nextBtn}>
                         다음
-                    </Button>
-                </Box>
-            </userForm>
+                    </StyledButton>
+                </FormContainer>
+            </form>
             <Snackbar open={alert} autoHideDuration={700} onClose={handleClose}>
                 <Alert severity="error" sx={{ width: '100%' }}>
                     입력을 완료하세요.

@@ -1,47 +1,149 @@
 import React from 'react';
-import { styled } from '@mui/material/styles';
+import styled from '@emotion/styled';
 import { Link } from 'react-router-dom';
 import { useCookies } from 'react-cookie';
 import Box from '@mui/material/Box';
 import Chip from '@mui/material/Chip';
 import Stack from '@mui/material/Stack';
 import Card from '@mui/material/Card';
-import { useProjectPostApi, useProjectUserApi } from '../../../hooks/Project';
+import { useProjectGetApi, useProjectUserApi } from '../../../hooks/Project';
 import ProjectCard from '../../../components/Main/project/ProjectCard';
 import DeleteBtn from '../../../components/Main/project/DeleteBtn';
 import EditBtn from '../../../components/common/EditBtn';
 
+const CardWrap = styled(Card)`
+    border-radius: 24px;
+    padding-bottom: 40px;
+`;
+
+const StyledEditButton = styled(Link)`
+    text-decoration: none;
+    display: contents;
+    width: 100%;
+`;
+
+const DetailBox = styled(Box)`
+    display: flex;
+    flex-direction: column;
+    padding-left: 21px;
+    margin-top: 20px;
+`;
+
+const LinkLabel = styled(Box)`
+    line-height: 14.32px;
+    font-weight: 600;
+    font-size: 0.75rem;
+`;
+
+const LinkWrap = styled(Box)`
+    line-height: 14.32px;
+    margin-top: 9px;
+    margin-bottom: 27px;
+    font-size: 0.75rem;
+`;
+
+const MemberListWrapper = styled.div`
+    display: flex;
+    line-height: 14.32px;
+    flex-direction: column;
+`;
+
+const MemberListLabel = styled.div`
+    display: flex;
+`;
+
+const MemberListTitle = styled.div`
+    font-weight: 600;
+    font-size: 0.75rem;
+`;
+
+const MemberListCount = styled.div`
+    margin-left: 12px;
+    font-size: 0.563rem;
+`;
+
+const MemberListItem = styled.div`
+    text-align: center;
+    margin: 15px 10px 0px 0px;
+`;
+
+const MemberImageWrapper = styled.div`
+    width: 125px;
+    height: 125px;
+    border-radius: 100%;
+    background-color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+`;
+
+const MemberImage = styled.img`
+    width: 132px;
+    height: 132px;
+    object-fit: cover;
+`;
+
+const MemberName = styled.div`
+    font-size: 0.6rem;
+    font-weight: 500;
+    margin-top: 8px;
+`;
+
+const MemberTrack = styled.div`
+    font-size: 0.563rem;
+`;
+
+const MemberListContainer = styled.div`
+    overflow: scroll;
+    display: flex;
+    margin-bottom: 10px;
+    padding-bottom: 5px;
+
+    &::-webkit-scrollbar {
+        display: none;
+    }
+`;
+
+const SkillChipLabel = styled(Box)`
+    padding: 0;
+    font-weight: 600;
+    font-size: 0.75rem;
+    margin-bottom: 5px;
+`;
+
+const ChipStack = styled(Stack)`
+    justify-content: left;
+    flex-wrap: wrap;
+    width: 270px;
+    margin-top: 12px;
+`;
+
+const StyledChip = styled((props) => <Chip {...props} />)(() => ({
+    border: '1.5px solid #00FFB0',
+    height: '22px',
+    fontSize: '0.75rem',
+    boxSizing: 'border-box',
+    padding: '5px',
+
+    '& span': {
+        fontWeight: 600,
+        color: '#FFF'
+    }
+}));
+
 export default function ProjectDetail() {
     const [cookies] = useCookies(['id']);
-    const [post] = useProjectPostApi();
+    const [post] = useProjectGetApi();
     const [user] = useProjectUserApi();
     const { _id, title, body, images, mainimage, tags, developPeriod, link } = post;
 
-    // chip
-
-    const StyledChip = styled((props) => <Chip {...props} />)(() => ({
-        border: '1.5px solid #00FFB0',
-        height: '22px',
-        fontSize: '0.75rem',
-        boxSizing: 'border-box',
-        padding: '5px',
-        '& span': {
-            fontWeight: 600,
-            color: '#FFF'
-        }
-    }));
-
     return (
-        <Card sx={{ borderRadius: '24px', pb: '40px' }}>
+        <CardWrap>
             {cookies.id ? (
                 <Box sx={{ display: 'flex', justifyContent: 'end' }}>
-                    <Link
-                        to={`/maintab/editproject/${_id}`}
-                        style={{
-                            textDecoration: 'none',
-                            display: 'contents',
-                            width: '100%'
-                        }}
+                    <StyledEditButton
+                        to={`/maintab/project/edit/${_id}`}
                         state={{
                             _id,
                             body,
@@ -54,112 +156,45 @@ export default function ProjectDetail() {
                         }}
                     >
                         <EditBtn />
-                    </Link>
+                    </StyledEditButton>
                     <DeleteBtn state={_id} />
                 </Box>
             ) : (
                 ''
             )}
             <ProjectCard project={post} />
-            <Box
-                sx={{
-                    display: 'flex',
-                    flexDirection: 'column',
-                    pl: '21px',
-                    mt: '20px'
-                }}
-            >
-                <Box sx={{ lineHeight: '14.32px', fontWeight: 600, fontSize: '0.75rem' }}>
-                    연결 링크
-                </Box>
-                <Box
-                    sx={{
-                        lineHeight: '14.32pxpx',
-                        mt: '9px',
-                        mb: '27px',
-                        fontSize: '0.75rem'
-                    }}
-                >
+            <DetailBox>
+                <LinkLabel>연결 링크</LinkLabel>
+                <LinkWrap>
                     <a href={link} style={{ color: '#fff' }}>
                         {link}
                     </a>
-                </Box>
-                <Box sx={{ display: 'flex', lineHeight: '14.32px' }}>
-                    <Box
-                        sx={{
-                            fontWeight: 600,
-                            fontSize: '0.75rem'
-                        }}
-                    >
-                        참여한 사람들
-                    </Box>
-                    <Box sx={{ ml: '12px', fontSize: '0.563rem' }}>총 {user.length}명</Box>
-                </Box>
-                <Box
-                    sx={{
-                        overflow: 'scroll',
-                        display: 'flex',
-                        mb: '10px',
-                        pb: '5px',
-                        '&::-webkit-scrollbar': { display: 'none' }
-                    }}
-                >
-                    {user.map((member) => {
-                        const name = member.username;
-                        const img = member.image;
-                        const track = member.track;
-                        return (
-                            <div
-                                style={{ textAlign: 'center', margin: '12px 10px 0px 0px' }}
-                                key={name}
-                            >
-                                <div
-                                    style={{
-                                        width: '125px',
-                                        height: '125px',
-                                        borderRadius: '100%',
-                                        backgroundColor: '#fff',
-                                        display: 'flex',
-                                        justifyContent: 'center',
-                                        alignItems: 'center',
-                                        overflow: 'hidden'
-                                    }}
-                                >
-                                    <img
-                                        src={img}
-                                        alt={name}
-                                        style={{
-                                            width: '132px',
-                                            height: '132px',
-                                            objectFit: 'cover'
-                                        }}
-                                    />
-                                </div>
-                                <div
-                                    style={{
-                                        fontSize: '0.6rem',
-                                        fontWeight: 500,
-                                        marginTop: '8px'
-                                    }}
-                                >
-                                    {name}
-                                </div>
-                                <div style={{ fontSize: '0.563rem' }}>{track}</div>
-                            </div>
-                        );
-                    })}
-                </Box>
+                </LinkWrap>
+                <MemberListWrapper>
+                    <MemberListLabel>
+                        <MemberListTitle>참여한 사람들</MemberListTitle>
+                        <MemberListCount>총 {user.length}명</MemberListCount>
+                    </MemberListLabel>
+                    <MemberListContainer>
+                        {user.map((member) => {
+                            const name = member.username;
+                            const img = member.image;
+                            const track = member.track;
+                            return (
+                                <MemberListItem key={name}>
+                                    <MemberImageWrapper>
+                                        <MemberImage src={img} alt={name} />
+                                    </MemberImageWrapper>
+                                    <MemberName>{name}</MemberName>
+                                    <MemberTrack>{track}</MemberTrack>
+                                </MemberListItem>
+                            );
+                        })}
+                    </MemberListContainer>
+                </MemberListWrapper>
                 <Box>
-                    <Box sx={{ padding: '0', fontWeight: 600, fontSize: '0.75rem', mb: '5px' }}>
-                        {' '}
-                        Skill Set
-                    </Box>
-
-                    <Stack
-                        direction="row"
-                        spacing={1.2}
-                        sx={{ justifyContent: 'left', flexWrap: 'wrap', width: '270px' }}
-                    >
+                    <SkillChipLabel> Skill Set</SkillChipLabel>
+                    <ChipStack direction="row" spacing={1.2}>
                         {tags &&
                             tags.map((tag) => (
                                 <StyledChip
@@ -167,12 +202,11 @@ export default function ProjectDetail() {
                                     label={tag}
                                     variant="outlined"
                                     color="primary"
-                                    style={{ margin: '7px 8px 0px 0px' }}
                                 />
                             ))}
-                    </Stack>
+                    </ChipStack>
                 </Box>
-            </Box>
-        </Card>
+            </DetailBox>
+        </CardWrap>
     );
 }

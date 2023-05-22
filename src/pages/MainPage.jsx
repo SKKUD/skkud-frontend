@@ -5,6 +5,7 @@ import Login from './Login';
 import MainTab from './Tabs/MainTab';
 import ApplicationForm from './ApplicationForm';
 import Appliers from './Admin/Appliers';
+import SignUp from './SignUp';
 
 export default function MainPage() {
     return (
@@ -15,6 +16,7 @@ export default function MainPage() {
                 <Route path="/maintab/*" element={<MainTab />} />
                 <Route path="/application" element={<ApplicationForm />} />
                 <Route path="/applier/*" element={<Appliers />} />
+                <Route path="/signup" element={<SignUp />} />
             </Routes>
         </>
     );

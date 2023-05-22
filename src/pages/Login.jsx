@@ -1,17 +1,49 @@
 import * as React from 'react';
-import Footer from '../components/common/Footer';
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
-import Box from '@mui/material/Box';
-import TextField from '@mui/material/TextField';
-import Button from '@mui/material/Button';
-import Typography from '@mui/material/Typography';
 import { useCookies } from 'react-cookie';
+import Footer from '../components/common/Footer';
 import Header from '../components/common/Header';
 import CreateUserBtn from '../components/Main/member/CreateUserBtn';
-import Alert from '@mui/material/Alert';
-import Snackbar from '@mui/material/Snackbar';
+import axios from 'axios';
+import { TextField, Button, Typography, Alert, Snackbar } from '@mui/material';
+import styled from '@emotion/styled';
+
+const Container = styled.div`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: calc(100vh - 175px);
+    margin-top: 80px;
+`;
+
+const LoginTitle = styled(Typography)`
+    font-weight: bold;
+    margin-top: 50px;
+    margin-bottom: 55px;
+`;
+
+const TextFieldStyled = styled(TextField)`
+    width: 312px;
+    height: 40px;
+    margin-bottom: ${({ hasBottomMargin }) => (hasBottomMargin ? '70px' : '10px')};
+`;
+
+const LoginButton = styled(Button)`
+    border-radius: 99px;
+    width: 312px;
+    height: 48px;
+    font-weight: 700;
+    font-size: 0.875rem;
+    margin-bottom: 10px;
+`;
+
+const LaterLogin = styled.div`
+    color: #fff;
+    border-bottom: 0.5px solid #c2c2c2;
+    font-size: 0.875rem;
+`;
+const BASE_URI = 'http://localhost:8000';
 
 export default function Login() {
     const [errorMsg, setErrorMsg] = useState('');
@@ -23,12 +55,11 @@ export default function Login() {
     const navigateToMainTab = () => {
         navigate('/maintab');
     };
-    const [, setPreviewImg] = useState('');
     const loginBtn = async (e) => {
         e.preventDefault();
 
         await axios
-            .post('https://api.skku.dev/auth/login', { userID: ID, passwd: PW })
+            .post(BASE_URI + '/auth/login', { userID: ID, passwd: PW })
             .then((userData) => {
                 if (userData.data.loginSuccess === true) {
                     setCookie('id', ID);
@@ -42,42 +73,27 @@ export default function Login() {
             });
     };
 
-    if (cookies.id) {
-        useEffect(() => {
-            const fetchEvents = async () => {
-                const res = await axios.get(`https://api.skku.dev/users/${cookies.id}`);
-                setPreviewImg(res.data.data.user.image);
-            };
-            fetchEvents();
-        }, []);
-    }
-
     const logoutBtn = async () => {
         removeCookie('id');
         authCheck();
         await axios
-            .post('https://api.skku.dev/auth/logout')
+            .post(BASE_URI + '/auth/logout')
             .then((userData) => console.log(userData))
             .catch((error) => console.log(error));
         navigateToMainTab();
-        window.location.reload();
     };
 
-    const authCheck = () => {
+    const authCheck = async () => {
         const token = cookies.id;
-        axios
-            .post('https://api.skku.dev/auth/verify')
-            .then((res) => {
-                console.log('authcheck', res);
-                if (res.data.data.userID !== token) {
-                    logoutBtn();
-                }
-            })
-            .catch((error) => {
-                console.log('auth check error');
-                removeCookie('id');
-            });
+        try {
+            const res = await axios.post(BASE_URI + '/auth/verify');
+            if (res.data.data.userID !== token) logoutBtn();
+        } catch (error) {
+            console.log('auth check error');
+            removeCookie('id');
+        }
     };
+
     useEffect(() => {
         authCheck();
     }, []);
@@ -89,61 +105,29 @@ export default function Login() {
                 logoutBtn()
             ) : (
                 <>
-                    <Box
-                        sx={{
-                            display: 'flex',
-                            flexDirection: 'column',
-                            alignItems: 'center',
-                            marginTop: '80px',
-                            marginBottom: '50px',
-                            '& > :not(style)': { m: 1 }
-                        }}
-                    >
-                        <Typography variant="h7" fontWeight="bold" style={{ marginTop: '50px' }}>
+                    <Container>
+                        <LoginTitle variant="h6" fontWeight="bold">
                             로그인
-                        </Typography>
-                        <TextField
+                        </LoginTitle>
+                        <TextFieldStyled
                             id="demo-helper-text-aligned"
                             label="ID"
                             size="small"
                             onChange={(e) => setID(e.target.value)}
-                            style={{ width: '312px', height: '40px', paddingBottom: '20px' }}
                         />
-
-                        <TextField
+                        <TextFieldStyled
                             id="demo-helper-text-aligned"
                             label="PW"
                             onChange={(e) => setPW(e.target.value)}
                             size="small"
-                            style={{ width: '312px', height: '40px', paddingBottom: '100px' }}
+                            hasBottomMargin
                         />
-                        <Button
-                            variant="contained"
-                            onClick={loginBtn}
-                            color="mint"
-                            sx={{
-                                borderRadius: '99px',
-                                width: '312px',
-                                height: '48px',
-                                fontWeight: 700,
-                                fontSize: '0.875rem'
-                            }}
-                        >
+                        <LoginButton variant="contained" onClick={loginBtn} color="mint">
                             로그인하기
-                        </Button>
-                        <div
-                            style={{
-                                color: '#fff',
-                                borderBottom: '0.5px solid #c2c2c2',
-                                fontSize: '0.875rem'
-                            }}
-                            onClick={navigateToMainTab}
-                        >
-                            나중에 로그인하기
-                        </div>
-
+                        </LoginButton>
+                        <LaterLogin onClick={navigateToMainTab}>나중에 로그인하기</LaterLogin>
                         <CreateUserBtn />
-                    </Box>
+                    </Container>
                 </>
             )}
             <Footer />

@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { styled } from '@mui/material/styles';
 import Tabs from '@mui/material/Tabs';
@@ -12,18 +12,12 @@ import TabMember from './User/TabMember';
 import PostProject from './Project/PostProject';
 import ProjectDetail from './Project/ProjectDetail';
 import EditProject from './Project/EditProject';
-import CreateUser from './User/CreateUser';
-import CreateUser2 from './User/CreateUser2';
-import CreateUser3 from './User/CreateUser3';
-import FrontendTab from './User/FrontendTab';
-import BackendTab from './User/BackendTab';
 import TabStudy from './Study/TabStudy';
 import StudyContent from './Study/StudyContent';
 import EditStudy from './Study/EditStudy';
 import PostStudy from './Study/PostStudy';
 import Header from '../../components/common/Header';
 import Footer from '../../components/common/Footer';
-import FinishCreateUser from './User/FinishCreateUser';
 import MyPageDetail from './User/MyPageDetail';
 import MyPage from './User/MyPage';
 
@@ -43,6 +37,15 @@ function TabPanel(props) {
     );
 }
 
+TabPanel.propTypes = {
+    children: PropTypes.node,
+    index: PropTypes.number.isRequired,
+    value: PropTypes.number.isRequired
+};
+TabPanel.defaultProps = {
+    children: ''
+};
+
 const StyledTabs = styled((props) => (
     <Tabs
         variant="scrollable"
@@ -50,7 +53,7 @@ const StyledTabs = styled((props) => (
         {...props}
         TabIndicatorProps={{ children: <span className="MuiTabs-indicatorSpan" /> }}
     />
-))({
+))(({ theme }) => ({
     '& .MuiTabs-indicator': {
         display: 'flex',
         justifyContent: 'center',
@@ -60,8 +63,13 @@ const StyledTabs = styled((props) => (
         maxWidth: 68,
         width: '100%',
         backgroundColor: '#00FFB0'
-    }
-});
+    },
+    width: '100%',
+    padding: '0 8px',
+    position: 'fixed',
+    backgroundColor: theme.palette.background.paper,
+    zIndex: 1150
+}));
 
 const StyledTab = styled((props) => <Tab disableRipple {...props} />)(({ theme }) => ({
     textTransform: 'none',
@@ -77,14 +85,16 @@ const StyledTab = styled((props) => <Tab disableRipple {...props} />)(({ theme }
     }
 }));
 
-TabPanel.propTypes = {
-    children: PropTypes.node,
-    index: PropTypes.number.isRequired,
-    value: PropTypes.number.isRequired
-};
-TabPanel.defaultProps = {
-    children: ''
-};
+const Container = styled(Box)`
+    width: 100%;
+    padding-top: 71px;
+`;
+
+const TabPanelContainer = styled(Box)`
+    margin: 65px auto 0;
+    max-width: 480px;
+    min-height: calc(100vh - 235px);
+`;
 
 function a11yProps(index) {
     return {
@@ -95,7 +105,7 @@ function a11yProps(index) {
 
 function MainTab() {
     let TabIndex = 0;
-    const [value, setValue] = React.useState(TabIndex);
+    const [value, setValue] = useState(TabIndex);
     const location = useLocation();
 
     useEffect(() => {
@@ -119,12 +129,7 @@ function MainTab() {
     };
 
     return (
-        <Box
-            sx={{
-                width: '100%',
-                paddingTop: '71px'
-            }}
-        >
+        <Container>
             <Header position="static" />
 
             <Box
@@ -138,13 +143,6 @@ function MainTab() {
                     onChange={handleChange}
                     aria-label="mainTabs"
                     variant="fullWidth"
-                    sx={{
-                        width: '100%',
-                        padding: '0 8px',
-                        position: 'fixed',
-                        bgcolor: 'background.paper',
-                        zIndex: 1150
-                    }}
                 >
                     <StyledTab label="About us" {...a11yProps(0)} component={Link} to="" />
                     <StyledTab label="Project" {...a11yProps(1)} component={Link} to="project" />
@@ -153,40 +151,25 @@ function MainTab() {
                 </StyledTabs>
             </Box>
 
-            <TabPanel
-                value={value}
-                index={value}
-                style={{
-                    margin: '40px auto 0px',
-                    maxWidth: '390px',
-                    minHeight: `calc(100vh - 235px)`
-                }}
-            >
+            <TabPanelContainer>
                 <Routes>
                     <Route path="" element={<TabAboutUs />} />
                     <Route path="project" element={<ProjectList />} />
-                    <Route path="postproject" element={<PostProject />} />
-                    <Route path="editproject/:index" element={<EditProject />} />
-                    <Route path="projectdetail/:index" element={<ProjectDetail />} />
-                    <Route path="member" element={<FrontendTab />} />
-                    <Route path="member/design" element={<TabMember />} />
-                    {/* <Route path="frontend" element={<FrontendTab />} /> */}
-                    <Route path="member/backend" element={<BackendTab />} />
-                    <Route path="member/createuser" element={<CreateUser />} />
-                    <Route path="member/createuser2" element={<CreateUser2 />} />
-                    <Route path="member/createuser3" element={<CreateUser3 />} />
+                    <Route path="project/post" element={<PostProject />} />
+                    <Route path="project/:index" element={<ProjectDetail />} />
+                    <Route path="project/edit/:index" element={<EditProject />} />
+                    <Route path="member" element={<TabMember />} />
                     <Route path="member/mypage" element={<MyPage />} />
-                    <Route path="member/usercreated" element={<FinishCreateUser />} />
                     <Route path="member/mypagedetail" element={<MyPageDetail />} />
                     <Route path="study" element={<TabStudy />} />
                     <Route path="study/:index" element={<StudyContent />} />
                     <Route path="study/edit/:index" element={<EditStudy />} />
                     <Route path="study/post" element={<PostStudy />} />
                 </Routes>
-            </TabPanel>
+            </TabPanelContainer>
 
             <Footer />
-        </Box>
+        </Container>
     );
 }
 

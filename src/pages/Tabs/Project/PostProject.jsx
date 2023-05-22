@@ -1,22 +1,15 @@
 import * as React from 'react';
-import { useState, useEffect } from 'react';
-import axios from 'axios';
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import TextField from '@mui/material/TextField';
-import Button from '@mui/material/Button';
-import IconButton from '@mui/material/IconButton';
-import PhotoCamera from '@mui/icons-material/PhotoCamera';
-import Box from '@mui/material/Box';
+import { Box, Button, IconButton, Snackbar, TextField, Alert } from '@mui/material';
+import { PhotoCamera } from '@mui/icons-material';
 import PreImages from '../../../components/Main/project/PreImages';
-import List from '@mui/material/List';
-import ListItem from '@mui/material/ListItem';
-import ListItemButton from '@mui/material/ListItemButton';
-import ListItemText from '@mui/material/ListItemText';
-import Checkbox from '@mui/material/Checkbox';
-import Alert from '@mui/material/Alert';
-import Snackbar from '@mui/material/Snackbar';
+import ContributorList from '../../../components/Main/project/ContributorList';
+import { useProjectPostApi } from '../../../hooks/Project';
+import { useUsersApi } from '../../../hooks/Member';
 
 export default function PostProject() {
+    const [postProjectPost] = useProjectPostApi();
     const navigate = useNavigate();
     const navigateToProject = () => {
         navigate('/maintab/project');
@@ -31,20 +24,13 @@ export default function PostProject() {
     const [link, setLink] = useState('');
     const [images, setImages] = useState([]);
     const [PreviewImg, setPreviewImg] = useState([]);
-    const [users, getUsers] = useState([]);
+    const [users] = useUsersApi();
     const [checked, setChecked] = React.useState([]);
     const handleClose = (event, reason) => {
         setAlertContent(false);
         setAlertTitle(false);
         setAlertPeriod(false);
     };
-    useEffect(() => {
-        const fetchEvents = async () => {
-            const res = await axios.get('https://api.skku.dev/users');
-            getUsers(res.data.data.users);
-        };
-        fetchEvents();
-    }, []);
 
     const uploadImgFile = (event) => {
         const fileArr = event.target.files;
@@ -81,19 +67,12 @@ export default function PostProject() {
 
             formData.append('developPeriod', period);
             formData.append('link', link);
+            formData.append('initializeContributors', checked);
             images.map((image) => formData.append('images', image));
 
-            await axios
-                .post('https://api.skku.dev/posts', formData)
-                .then((response) => {
-                    console.log(response.status);
-                })
-                .then(() => {
-                    navigateToProject();
-                })
-                .catch((error) => {
-                    console.log(error);
-                });
+            postProjectPost(formData).then(() => {
+                navigateToProject();
+            });
         }
     };
 
@@ -111,33 +90,7 @@ export default function PostProject() {
             setChecked(newChecked);
         };
 
-        return (
-            <List dense sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>
-                {users.map((member) => {
-                    const id = member._id;
-                    const name = member.username;
-                    const labelId = `checkbox-list-secondary-label-${id}`;
-                    return (
-                        <ListItem
-                            key={id}
-                            secondaryAction={
-                                <Checkbox
-                                    edge="end"
-                                    onChange={handleToggle(id)}
-                                    checked={checked.indexOf(id) !== -1}
-                                    inputProps={{ 'aria-labelledby': labelId }}
-                                />
-                            }
-                            disablePadding
-                        >
-                            <ListItemButton>
-                                <ListItemText id={labelId} primary={`${name}`} />
-                            </ListItemButton>
-                        </ListItem>
-                    );
-                })}
-            </List>
-        );
+        return <ContributorList users={users} handleToggle={handleToggle} checked={checked} />;
     }
     return (
         <>

@@ -5,7 +5,6 @@ import MemberList from '../../../components/Main/member/MemberList';
 function TabMember() {
     return (
         <>
-            {' '}
             <MemberNav />
             <MemberList />
         </>

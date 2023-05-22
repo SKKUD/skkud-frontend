@@ -1,7 +1,15 @@
 import React from 'react';
 import { useAppliedUserApi, useAppliedUserDeleteApi } from '../../hooks/Application';
-import { TextField, Typography, Button, Box } from '@mui/material';
+import { Button, Box } from '@mui/material';
 import ApplicantCard from '../../components/applicant/ApplicantCard';
+import styled from '@emotion/styled';
+
+const Track = styled.div`
+    margin-bottom: 15px;
+    font-weight: 700;
+    font-size: 1.3rem;
+    color: #00ffb0;
+`;
 
 function confirmModal() {
     if (window.confirm('정말 삭제하시겠습니까?')) {
@@ -30,7 +38,7 @@ export default function ApplicantsList() {
 
     return (
         <Box>
-            <div style={{ fontWeight: '700', fontSize: '1.3rem', color: '#00FFB0' }}>Frontend</div>
+            <Track>Frontend</Track>
             {frontend.length > 0 &&
                 frontend.map((user) => (
                     <ApplicantCard
@@ -47,7 +55,7 @@ export default function ApplicantsList() {
                         major={user.major}
                     />
                 ))}
-            <div style={{ fontWeight: '700', fontSize: '1.3rem', color: '#00FFB0' }}>Backend</div>
+            <Track>Backend</Track>
             {backend.length > 0 &&
                 backend.map((user) => (
                     <ApplicantCard
@@ -64,7 +72,7 @@ export default function ApplicantsList() {
                         major={user.major}
                     />
                 ))}
-            <div style={{ fontWeight: '700', fontSize: '1.3rem', color: '#00FFB0' }}>Design</div>
+            <Track>Design</Track>
             {design.length > 0 &&
                 design.map((user) => (
                     <ApplicantCard

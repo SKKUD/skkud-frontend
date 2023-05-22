@@ -1,15 +1,10 @@
-import * as React from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import { useCookies } from 'react-cookie';
 import PropTypes from 'prop-types';
-import { styled } from '@mui/material/styles';
-import List from '@mui/material/List';
-import IconButton from '@mui/material/IconButton';
-import Drawer from '@mui/material/Drawer';
-import ListItem from '@mui/material/ListItem';
-import ListItemButton from '@mui/material/ListItemButton';
+import { Box, Drawer, IconButton, List, ListItem, ListItemButton } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
-import Box from '@mui/material/Box';
+import styled from '@emotion/styled';
 
 const DrawerHeader = styled('div')(({ theme }) => ({
     display: 'flex',
@@ -17,18 +12,38 @@ const DrawerHeader = styled('div')(({ theme }) => ({
     padding: theme.spacing(0, 1),
     // necessary for content to be below app bar
     ...theme.mixins.toolbar,
-    justifyContent: 'flex-end'
+    justifyContent: 'flex-end',
+    marginTop: '18px',
+    paddingRight: '18px'
 }));
 
 function SidebarItem({ path, name, color }) {
+    const StyledListItem = styled(ListItem)`
+        margin-bottom: 10px;
+    `;
+
+    const StyledLink = styled(Link)`
+        width: 100%;
+        color: ${(props) => props.linkcolor};
+        text-decoration: none;
+    `;
+
+    const StyledItemButton = styled(ListItemButton)`
+        justify-content: end;
+        > div {
+            font-weight: 600;
+            font-size: 0.93rem;
+        }
+    `;
+
     return (
-        <ListItem disablePadding sx={{ marginBottom: '10px' }}>
-            <Link style={{ color: `${color}`, textDecoration: 'none', width: '100%' }} to={path}>
-                <ListItemButton sx={{ justifyContent: 'end' }}>
-                    <div style={{ fontWeight: 600, fontSize: '0.93rem' }}>{name}</div>
-                </ListItemButton>
-            </Link>
-        </ListItem>
+        <StyledListItem disablePadding>
+            <StyledLink linkcolor={color} to={path}>
+                <StyledItemButton>
+                    <div>{name}</div>
+                </StyledItemButton>
+            </StyledLink>
+        </StyledListItem>
     );
 }
 
@@ -36,9 +51,32 @@ SidebarItem.propTypes = {
     path: PropTypes.string.isRequired
 };
 
+const SidebarWrapper = styled(Box)`
+    width: 169px;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    align-items: flex-end;
+    padding-right: 12px;
+    margin-top: 10px;
+
+    & SidebarItem:first-of-type {
+        padding-right: 0px;
+    }
+`;
+
+const Divider = styled.div`
+    width: 99px;
+    border: none;
+    height: 1px;
+    background-color: #929292;
+    margin-right: 12px;
+    margin-top: 20px;
+    margin-bottom: 22px;
+`;
+
 export default function SideBar() {
     const [cookies] = useCookies(['id']);
-
     const [open, setOpen] = React.useState(false);
 
     const toggleDrawer = (val) => (event) => {
@@ -59,48 +97,29 @@ export default function SideBar() {
             >
                 <MenuIcon sx={{ fontSize: 35 }} />
             </IconButton>
-            <Drawer open={open} onClose={toggleDrawer(false)} anchor="right">
-                <DrawerHeader sx={{ marginTop: '18px', pr: '18px' }}>
+            <Drawer
+                open={open}
+                onClose={toggleDrawer(false)}
+                anchor="right"
+                disableScrollLock={true}
+            >
+                <DrawerHeader>
                     <IconButton onClick={toggleDrawer(false)}>
                         <MenuIcon sx={{ fontSize: 35 }} />
                     </IconButton>
                 </DrawerHeader>
 
-                <Box
-                    sx={{
-                        width: '169px',
-                        display: 'flex',
-                        flexDirection: 'column',
-                        flex: 1,
-                        alignItems: 'flex-end',
-                        pr: '12px',
-                        mt: '10px'
-                    }}
+                <SidebarWrapper
                     role="presentation"
                     onClick={toggleDrawer(false)}
                     onKeyDown={toggleDrawer(false)}
                 >
                     <List>
-                        <SidebarItem
-                            path="/maintab"
-                            name="About us"
-                            sx={{ pr: '0px' }}
-                            color="#fff"
-                        />
+                        <SidebarItem path="/maintab" name="About us" color="#fff" />
                         <SidebarItem path="/maintab/project" name="Project" color="#fff" />
                         <SidebarItem path="/maintab/member" name="Member" color="#fff" />
                         <SidebarItem path="/maintab/study" name="Study" color="#fff" />
-                        <div
-                            style={{
-                                width: '99px',
-                                border: 'none',
-                                height: '1px',
-                                backgroundColor: '#929292',
-                                marginRight: '12px',
-                                marginTop: '20px',
-                                marginBottom: '22px'
-                            }}
-                        />
+                        <Divider />
 
                         {cookies.id ? (
                             <>
@@ -123,7 +142,7 @@ export default function SideBar() {
                             </>
                         )}
                     </List>
-                </Box>
+                </SidebarWrapper>
             </Drawer>
         </>
     );

@@ -4,10 +4,22 @@ import IconButton from '@mui/material/IconButton';
 import DeleteIcon from '@mui/icons-material/Delete';
 import GroupAddIcon from '@mui/icons-material/GroupAdd';
 import EditIcon from '@mui/icons-material/Edit';
-import Card from '@mui/material/Card';
 import StudyGroupEdit from './StudyGroupEdit';
 import StudyGroupDelete from './StudyGroupDelete';
 import StudyGroupPost from './StudyGroupPost';
+import styled from '@emotion/styled';
+
+const FormCard = styled('div')({
+    width: '100%',
+    marginBottom: '20px',
+    paddingBottom: '15px'
+});
+
+const BtnWrap = styled('div')({
+    display: 'flex',
+    justifyContent: 'end',
+    margin: '10px'
+});
 
 export default function StudyGroupForm(id) {
     const [task, setTask] = useState('');
@@ -64,7 +76,7 @@ export default function StudyGroupForm(id) {
 
     function SGFormCard(id) {
         return (
-            <Card sx={{ width: '100%', mb: '20px', pb: '15px' }}>
+            <FormCard>
                 {task === 'edit' ? (
                     <StudyGroupEdit id={id.id} />
                 ) : task === 'delete' ? (
@@ -72,22 +84,17 @@ export default function StudyGroupForm(id) {
                 ) : (
                     <StudyGroupPost />
                 )}
-            </Card>
+            </FormCard>
         );
     }
+
     return (
         <div>
-            <div
-                style={{
-                    display: 'flex',
-                    justifyContent: 'end',
-                    margin: '10px'
-                }}
-            >
+            <BtnWrap>
                 <SGEditBtn />
                 <SGDeleteBtn />
                 <SGPostBtn />
-            </div>
+            </BtnWrap>
             {open === true ? <SGFormCard id={GroupId} /> : null}
         </div>
     );

@@ -1,13 +1,62 @@
-import * as React from 'react';
+import React from 'react';
 import styled from '@emotion/styled';
 import { NavLink } from 'react-router-dom';
 import Card from '@mui/material/Card';
-import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import ImageList from '@mui/material/ImageList';
-
 import { useUserPostDetailApi } from '../../../hooks/Member';
 import { useUserSkillsApi } from '../../../hooks/Member';
+
+const StyledCard = styled(Card)`
+    width: 342.5px;
+    margin: 0 auto;
+    margin-top: -25px;
+    border-radius: 20px;
+    padding-top: 40px;
+    padding-bottom: 20px;
+    padding-left: 12px;
+    padding-right: 12px;
+    background-color: #303030;
+    z-index: -1;
+`;
+
+const ProjectList = styled.div`
+    width: 100%;
+    margin-top: 10px;
+    text-align: left;
+`;
+
+const ProjectTitle = styled(Typography)`
+    font-weight: 700;
+    font-size: 0.75rem;
+`;
+
+const ProjectCount = styled.span`
+    font-size: 0.563rem;
+`;
+
+const StyledImageList = styled(ImageList)`
+    display: grid;
+    grid-auto-flow: column;
+    grid-template-columns: repeat(auto-fill);
+    justify-content: start;
+    ::-webkit-scrollbar {
+        display: none;
+    }
+`;
+
+const StyledImg = styled.img`
+    width: 125px;
+    height: 125px;
+    border-radius: 15px;
+    margin: 3px;
+    object-fit: cover;
+`;
+
+const SkillSet = styled.div`
+    display: flex;
+    flex-wrap: wrap;
+`;
 
 const SkillBtn = styled.button`
     height: 22px;
@@ -23,6 +72,7 @@ const SkillBtn = styled.button`
     gap: 10px;
     margin: 3px;
 `;
+
 export default function MemberCardDetail(props) {
     const proj = props.projects;
     let projectList = [];
@@ -32,7 +82,6 @@ export default function MemberCardDetail(props) {
             const [detail] = useUserPostDetailApi(proj[i]);
             if (detail !== null) {
                 projectList.push([detail.mainimage, detail._id, detail.tags, detail.title]);
-                // projectCount += 1;
             }
             projectList = [...new Set(projectList.map(JSON.stringify))].map(JSON.parse);
         }
@@ -41,66 +90,26 @@ export default function MemberCardDetail(props) {
     const [userDetail] = useUserSkillsApi(props.id);
 
     return (
-        <Card
-            style={{
-                width: '342.5px',
-                marginTop: -25,
-                borderRadius: 20,
-                paddingTop: '40px',
-                paddingBottom: '20px',
-                paddingLeft: '8px',
-                paddingRight: '8px',
-                backgroundColor: '#303030',
-                zIndex: '-1'
-            }}
-        >
-            <Box
-                sx={{
-                    width: '100%',
-                    marginTop: '10px',
-                    textAlign: 'left'
-                }}
-            >
-                <Typography sx={{ fontWeight: '700', fontSize: '0.75rem' }} variant="caption">
-                    {' '}
-                    진행한 프로젝트{' '}
-                </Typography>
-                <span style={{ fontSize: '0.563rem' }}> &nbsp; 총 {projectList.length}개</span>
-                <ImageList
-                    style={{
-                        display: 'grid',
-                        gridAutoFlow: 'column',
-                        gridTemplateColumns: 'repeat(auto-fill)',
-                        justifyContent: 'start'
-                    }}
-                >
+        <StyledCard>
+            <ProjectList>
+                <ProjectTitle variant="caption">진행한 프로젝트</ProjectTitle>
+                <ProjectCount>&nbsp; 총 {projectList.length}개</ProjectCount>
+                <StyledImageList>
                     {projectList.map((item) => (
-                        <NavLink key={item[1]} to={'/maintab/projectdetail/' + item[1]}>
-                            <img
-                                key={item[1]}
-                                src={item[0]}
-                                alt={item[1]}
-                                style={{
-                                    width: '125px',
-                                    height: '125px',
-                                    borderRadius: '15px',
-                                    margin: '3px',
-                                    objectFit: 'cover'
-                                }}
-                            />
+                        <NavLink key={item[1]} to={`/maintab/projectdetail/${item[1]}`}>
+                            <StyledImg key={item[1]} src={item[0]} alt={item[1]} />
                         </NavLink>
                     ))}
-                </ImageList>
-                <Typography sx={{ fontWeight: '700', fontSize: '0.75rem' }} variant="caption">
-                    {' '}
-                    Skill Set
-                </Typography>
-                <div style={{ display: 'flex', flexWrap: 'wrap' }}>
+                </StyledImageList>
+            </ProjectList>
+            <ProjectList>
+                <ProjectTitle variant="caption">Skill Set</ProjectTitle>
+                <SkillSet>
                     {userDetail.map((item) => (
                         <SkillBtn key={item}>{item}</SkillBtn>
                     ))}
-                </div>
-            </Box>
-        </Card>
+                </SkillSet>
+            </ProjectList>
+        </StyledCard>
     );
 }

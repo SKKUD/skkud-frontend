@@ -8,6 +8,61 @@ import Typography from '@mui/material/Typography';
 import ButtonBase from '@mui/material/ButtonBase';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
+import styled from '@emotion/styled';
+
+const MemberCardWrapper = styled(ButtonBase)`
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+`;
+
+const MemberCardContainer = styled(Card)`
+    max-width: 350px;
+    margin-top: 13px;
+    border-radius: 15px;
+    padding: 20px 12px;
+`;
+
+const MemberCardMedia = styled(CardMedia)`
+    border-radius: 150px;
+    width: 120px;
+    height: 120px;
+    margin-right: 10px;
+    background-color: white;
+    object-fit: cover;
+`;
+
+const MemberCardName = styled(Typography)`
+    font-weight: bold;
+`;
+const MemberCardEngName = styled(Typography)`
+    font-weight: 300;
+`;
+
+const MemberCardCaption = styled.div`
+    text-align: left;
+    margin-left: 20px;
+    margin-top: 12px;
+`;
+
+const MemberCardBio = styled.div`
+    margin-bottom: 8px;
+    font-size: 0.9rem;
+`;
+
+const MemberCardGrid = styled(Grid)`
+    flex-wrap: nowrap;
+`;
+
+const MemberCardBox = styled(Box)`
+    flex-grow: 1;
+    text-align: left;
+`;
+
+const MemberCardCaptionBold = styled.div`
+    font-weight: bold;
+`;
 
 export default function MemberCard({
     id,
@@ -25,89 +80,53 @@ export default function MemberCard({
 
     return (
         <>
-            <ButtonBase
-                sx={{ width: '100%', display: 'flex', flexDirection: 'column' }}
-                onClick={() => setIsVisible(!isVisible)}
-            >
-                <Card
-                    key={id}
-                    sx={{ maxWidth: 350 }}
-                    style={{
-                        marginTop: 13,
-                        borderRadius: '15px',
-                        paddingTop: '20px',
-                        paddingBottom: '20px',
-                        paddingLeft: '8px',
-                        paddingRight: '8px'
-                    }}
-                >
-                    <Grid container spacing={1} style={{ flexWrap: 'nowrap' }}>
+            <MemberCardWrapper onClick={() => setIsVisible(!isVisible)}>
+                <MemberCardContainer key={id}>
+                    <MemberCardGrid container spacing={1}>
                         <Grid item style={{ display: 'flex', alignItems: 'center' }}>
-                            <CardMedia
-                                sx={{ flexDirection: 'row' }}
-                                component="img"
-                                image={img}
-                                alt={name}
-                                style={{
-                                    borderRadius: '150px',
-                                    width: '120px',
-                                    height: '120px',
-                                    marginRight: '10px',
-                                    backgroundColor: 'white',
-                                    objectFit: 'cover'
-                                }}
-                            />
+                            <MemberCardMedia component="img" image={img} alt={name} />
                         </Grid>
                         <Grid item xs={1} sm container>
                             <Grid item xs container direction="column" spacing={2}>
-                                <Grid item xs sx={{ textAlign: 'left' }}>
+                                <MemberCardCaption item xs>
                                     <Grid container spacing={1} columns={1} width={200}>
                                         <Grid item xs={12}>
-                                            <Typography
+                                            <MemberCardName
                                                 gutterBottom
                                                 variant="button"
                                                 align="center"
-                                                sx={{ fontWeight: 'bold' }}
                                             >
-                                                {name}&nbsp;&nbsp;| &nbsp;
-                                            </Typography>
-                                            <Typography
+                                                {name}&nbsp;&nbsp;
+                                            </MemberCardName>
+                                            <MemberCardEngName
                                                 gutterBottom
                                                 variant="caption"
                                                 align="left"
                                                 // flex-wrap
                                             >
-                                                {engname}
-                                            </Typography>
+                                                | &nbsp;{engname}
+                                            </MemberCardEngName>
                                         </Grid>
 
                                         <Grid item xs={12}>
-                                            <Typography gutterBottom variant="body2">
-                                                "{bio}"
-                                            </Typography>
+                                            <MemberCardBio>"{bio}"</MemberCardBio>
                                         </Grid>
                                     </Grid>
 
-                                    <Box sx={{ flexGrow: 1, textAlign: 'left' }}>
+                                    <MemberCardBox>
                                         <Grid container>
                                             <Grid item xs={4}>
-                                                <Typography
-                                                    sx={{ fontWeight: 'bold' }}
-                                                    variant="caption"
-                                                >
+                                                <MemberCardCaptionBold variant="caption">
                                                     MAIL
-                                                </Typography>
+                                                </MemberCardCaptionBold>
                                             </Grid>
                                             <Grid item xs={8}>
                                                 <Typography variant="caption">{email}</Typography>
                                             </Grid>
                                             <Grid item xs={4}>
-                                                <Typography
-                                                    sx={{ fontWeight: 'bold' }}
-                                                    variant="caption"
-                                                >
+                                                <MemberCardCaptionBold variant="caption">
                                                     WEB
-                                                </Typography>
+                                                </MemberCardCaptionBold>
                                             </Grid>
                                             <Grid item xs={8}>
                                                 <Typography variant="caption">
@@ -115,35 +134,29 @@ export default function MemberCard({
                                                 </Typography>
                                             </Grid>
                                             <Grid item xs={4}>
-                                                <Typography
-                                                    sx={{ fontWeight: 'bold' }}
-                                                    variant="caption"
-                                                >
+                                                <MemberCardCaptionBold variant="caption">
                                                     MAJOR
-                                                </Typography>
+                                                </MemberCardCaptionBold>
                                             </Grid>
                                             <Grid item xs={8}>
                                                 <Typography variant="caption">{major}</Typography>
                                             </Grid>
                                             <Grid item xs={4}>
-                                                <Typography
-                                                    sx={{ fontWeight: 'bold' }}
-                                                    variant="caption"
-                                                >
+                                                <MemberCardCaptionBold variant="caption">
                                                     INSTA
-                                                </Typography>
+                                                </MemberCardCaptionBold>
                                             </Grid>
                                             <Grid item xs={8}>
                                                 <Typography variant="caption"> {insta}</Typography>
                                             </Grid>
                                         </Grid>
-                                    </Box>
-                                </Grid>
+                                    </MemberCardBox>
+                                </MemberCardCaption>
                             </Grid>
                         </Grid>
-                    </Grid>
-                </Card>
-            </ButtonBase>
+                    </MemberCardGrid>
+                </MemberCardContainer>
+            </MemberCardWrapper>
             {isVisible ? <MemberCardDetail projects={projects} id={id} /> : null}
         </>
     );

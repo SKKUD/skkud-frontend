@@ -1,11 +1,10 @@
-import * as React from 'react';
+import React from 'react';
 import SKKUD from '../../../assets/SKKUD_green.jpeg';
-// import projectImg from '../../../assets/project-img1.png';
 import { useNavigate } from 'react-router-dom';
-import Button from '@mui/material/Button';
-import styled from '@emotion/styled';
 import { useProjectListApi } from '../../../hooks/Project';
 import Carousel from './Carousel';
+import Button from '@mui/material/Button';
+import styled from '@emotion/styled';
 
 const Title = styled.div`
     font-size: 2.5rem;
@@ -16,34 +15,32 @@ const Title = styled.div`
     margin-bottom: 7px;
 `;
 
-// const Imgbox = styled.div`
-//     border: 1px solid transparent;
-//     background-image: url(${projectImg});
-//     background-size: 125px 125px;
-//     box-shadow: 0px 8px 24px rgba(0, 0, 0, 0.15);
-//     border-radius: 15px;
-//     width: 125px;
-//     height: 125px;
-//     margin-right: 10px;
-//     margin-left: 10px;
-//     margin-top: 20px;
-// `;
-
-// const ImgboxBlock = styled.div`
-//     display: flex;
-//     flex-direction: row;
-//     width: 350px;
-//     align-items: center;
-//     justify-content: center;
-// `;
+const SKKUDimg = styled.img`
+    margin-left: auto;
+    display: block;
+    margin-right: 11px;
+    margin-bottom: 35px;
+    width: 213px;
+`;
 
 const ButtonBlock = styled.div`
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 30px;
+    margin-bottom: 65px;
+
     .projectBtn {
         background-color: rgba(255, 255, 255, 0.2);
-        color: white;
+        color: #fff;
         width: 255px;
         height: 38px;
         border-radius: 25px;
+    }
+    .projectBtn:hover {
+        background-color: rgba(156, 156, 156, 0.2);
+        color: rgba(255, 255, 255, 0.72);
     }
 `;
 
@@ -55,38 +52,17 @@ export default function Project() {
     const imgList = [];
     const [projectList] = useProjectListApi();
     for (let i = 0; i < projectList.length; i++) {
-        // if (projectList[i].mainimage === undefined)
-
         imgList.push(projectList[i].mainimage);
     }
 
     return (
         <div>
             <Title>Project of</Title>
-            <img
-                src={SKKUD}
-                alt="SKKUD"
-                style={{
-                    marginLeft: 'auto',
-                    display: 'block',
-                    marginRight: '11px',
-                    marginBottom: '35px',
-                    width: '213px'
-                }}
-            />
+            <SKKUDimg src={SKKUD} alt="SKKUD" />
 
             <Carousel images={imgList} />
 
-            <ButtonBlock
-                style={{
-                    display: 'flex',
-                    flexDirection: 'column',
-                    justifyContent: 'center',
-                    alignItems: 'center',
-                    marginTop: '30px',
-                    marginBottom: '65px'
-                }}
-            >
+            <ButtonBlock style={{}}>
                 <Button className="projectBtn" onClick={navigateToProject}>
                     프로젝트 더 보기
                 </Button>

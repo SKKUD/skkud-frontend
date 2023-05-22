@@ -1,42 +1,59 @@
 import * as React from 'react';
 import { useState, useCallback, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-
 import { useCookies } from 'react-cookie';
-import axios from 'axios';
-import Box from '@mui/material/Box';
-import TextField from '@mui/material/TextField';
-import Button from '@mui/material/Button';
-import Typography from '@mui/material/Typography';
-import Alert from '@mui/material/Alert';
-import Snackbar from '@mui/material/Snackbar';
+import { useUserApi, useMemberDeleteApi, useEditMemberApi } from '../../../hooks/Member';
+import { Box, TextField, Button, Typography, Alert, Snackbar } from '@mui/material';
+import styled from '@emotion/styled';
+
+const StyledBox = styled(Box)`
+    & > :not(style) {
+        margin: 1rem;
+    }
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+`;
+
+const StyledTypography = styled(Typography)`
+    text-align: center;
+`;
+
+const StyledButton = styled(Button)`
+    border-radius: 17px;
+    border: 1px solid #00ffa8;
+    color: #00ffa8;
+    width: 110px;
+    height: 21px;
+    font-size: 11px;
+    padding: 4px 14px;
+    gap: 10px;
+`;
+
+const StyledBigButton = styled(Button)`
+    border-radius: 99px;
+    width: 80%;
+    height: 44px;
+`;
 
 export default function MyPageDetail() {
+    const [logout] = useMemberDeleteApi();
+    const [, editUserIdPw] = useEditMemberApi();
     const [cookies, , removeCookie] = useCookies(['id']);
     const id = cookies.id;
     const [editAlert, setEditAlert] = useState(false);
-    const [user, setUser] = useState([]);
+    const [user, setUser] = useUserApi(id);
     const navigate = useNavigate();
+
     const navigateToMainTab = () => {
         navigate('/maintab');
     };
-    useEffect(() => {
-        const fetchEvents = async () => {
-            const res = await axios.get(`https://api.skku.dev/users/${id}`);
 
-            setUser(res.data.data.user);
-        };
-        fetchEvents();
-    }, []);
-    const logoutBtn = async () => {
+    const logoutBtn = () => {
         setUser('');
         removeCookie('id');
-
-        await axios
-            .post('https://api.skku.dev/auth/logout')
-            .then((userData) => console.log(userData))
-            .catch((error) => console.log(error));
-
+        logout();
         navigateToMainTab();
     };
 
@@ -44,7 +61,6 @@ export default function MyPageDetail() {
     const pw = user.passwd;
 
     const [newID, setID] = useState(ID);
-
     const [newpw, setPw] = useState('');
     const [newrepw, setrePw] = useState('');
 
@@ -53,12 +69,6 @@ export default function MyPageDetail() {
         setPw(pw);
     }, [ID, pw]);
 
-    const navigateToMember = () => {
-        navigate('/maintab/member');
-    };
-    // const navigateToIDpw = () => {
-    //     navigate('/maintab/edituserdetail');
-    // };
     const [checker, setChecker] = useState(true);
     const checkPw = () => {
         if (newpw !== newrepw) {
@@ -66,71 +76,36 @@ export default function MyPageDetail() {
         }
     };
 
-    const submit = useCallback(async () => {
+    const submit = useCallback(() => {
         if (checker === true) {
-            await axios
-                .patch(`https://api.skku.dev/users/${id}`, {
-                    userID: newID,
-                    passwd: newpw
-                })
-                .then((res) => console.log(res));
-
+            editUserIdPw(id, newID, newpw);
             setEditAlert(true);
-            navigateToMember();
-            logoutBtn();
+            setTimeout(() => {
+                logoutBtn();
+            }, 3000);
         }
-    }, [newID]);
+    }, [checker, id, newID, newpw, logoutBtn]);
 
     return (
         <>
-            <Box
-                component="form"
-                sx={{
-                    '& > :not(style)': { m: 1, width: '100%' },
-                    overflow: 'hidden'
-                }}
-                noValidate
-                autoComplete="off"
-            >
-                <Typography variant="h6" textAlign={'center'}>
-                    ID/비밀번호 수정
-                </Typography>
+            <StyledBox component="form" noValidate autoComplete="off">
+                <StyledTypography variant="h6">ID/비밀번호 수정</StyledTypography>
                 <TextField
+                    fullWidth
                     id="id"
                     label="ID"
                     variant="standard"
                     value={newID || ''}
                     onChange={(e) => setID(e.target.value)}
                 />
-                <Button
-                    variant="contained"
-                    onClick={submit}
-                    color="background"
-                    style={{
-                        borderRadius: 17,
-                        border: '1px solid #00ffa8',
-                        color: '#00ffa8',
-                        width: '110px',
-                        height: '21px',
-                        fontSize: '11px',
-                        padding: '4px 14px',
-                        gap: '10px'
-                    }}
-                >
+                <StyledButton variant="contained" onClick={submit} color="background">
                     ID 수정
-                </Button>
-                {/* <TextField
-                id="originalPW"
-                label="현재 비밀번호 입력"
-                variant="standard"
-                // value={|| ''}
-                onChange={(e) => setPw(e.target.value)}
-            /> */}
+                </StyledButton>
                 <TextField
+                    fullWidth
                     id="newPW"
                     label="새 비밀번호 입력"
                     variant="standard"
-                    // value={newpw || ''}
                     onChange={(e) => setPw(e.target.value)}
                 />
                 <TextField
@@ -138,24 +113,16 @@ export default function MyPageDetail() {
                     id="newPW2"
                     label="새 비밀번호 확인"
                     variant="standard"
-                    // value={newpw || ''}
                     onChange={(e) => {
                         setrePw(e.target.value);
                         checkPw();
                     }}
                 />
-                <Button
-                    variant="contained"
-                    onClick={submit}
-                    style={{
-                        borderRadius: '99px',
-                        width: '312px',
-                        height: '44px'
-                    }}
-                >
+                <StyledBigButton variant="contained" onClick={submit}>
                     비밀번호 바꾸기
-                </Button>
-            </Box>
+                </StyledBigButton>
+            </StyledBox>
+
             <Snackbar open={editAlert} autoHideDuration={1000}>
                 <Alert severity="success" sx={{ width: '100%' }}>
                     멤버 아이디가 수정되었습니다.

@@ -1,4 +1,5 @@
 import React from 'react';
+import styled from '@emotion/styled';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import Slider from 'react-slick';
@@ -8,27 +9,33 @@ export default function Carousel(props) {
 
     const settings = {
         slidesToShow: 2.7,
-        slidesToScroll: 2,
+        slidesToScroll: 1,
         speed: 500,
-        autoplaySpeed: 2000
+        autoplay: true,
+        autoplaySpeed: 2000,
+        arrows: false,
+        swipeToSlide: true
     };
+
+    const ImgWrap = styled.div`
+        margin-right: 40px;
+    `;
+
+    const SliderImg = styled.img`
+        border-radius: 15px;
+        width: 125px;
+        height: 125px;
+        background-color: rgba(255, 255, 255, 0.2);
+        margin: 5px;
+        object-fit: cover;
+    `;
+
     return (
         <Slider {...settings}>
             {imgList.map((item) => (
-                <div key={item} style={{ marginRight: '40px' }}>
-                    <img
-                        src={item}
-                        alt="projects"
-                        style={{
-                            borderRadius: '15px',
-                            width: '125px',
-                            height: '125px',
-                            backgroundColor: 'rgba(255,255,255,0.2)',
-                            margin: '5px',
-                            objectFit: 'cover'
-                        }}
-                    />
-                </div>
+                <ImgWrap key={item}>
+                    <SliderImg src={item} alt="projects" />
+                </ImgWrap>
             ))}
         </Slider>
     );

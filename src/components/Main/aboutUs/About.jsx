@@ -38,20 +38,19 @@ const Detail2 = styled.div`
     margin-left: 24px;
     margin-bottom: 30px;
 `;
+
+const SKKUDimg = styled.img`
+    display: block;
+    margin-right: 21px;
+    margin-left: auto;
+    width: 213px;
+`;
+
 export default function About() {
     return (
         <StyledCard>
             <TitleAbout>About</TitleAbout>
-            <img
-                src={SKKUD}
-                alt="SKKUD"
-                style={{
-                    marginLeft: 'auto',
-                    display: 'block',
-                    marginRight: '21px',
-                    width: '213px'
-                }}
-            />
+            <SKKUDimg src={SKKUD} alt="SKKUD" />
             <Detail1>
                 우리는 웹 개발자가 되고 싶은 학생들을 위해
                 <br /> 실전 같은 경험을 제공합니다.

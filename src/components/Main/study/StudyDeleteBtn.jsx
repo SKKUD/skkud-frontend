@@ -1,12 +1,11 @@
 import React from 'react';
-import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import IconButton from '@mui/material/IconButton';
 import DeleteIcon from '@mui/icons-material/Delete';
+import { useStudiesApi } from '../../../hooks/Study';
 
-export default function StudyDeleteBtn(_id) {
-    const { state } = _id;
-
+export default function StudyDeleteBtn({ id }) {
+    const [, , , , , deleteStudy] = useStudiesApi();
     const navigate = useNavigate();
     const navigateToStudy = () => {
         navigate('/maintab/study');
@@ -19,10 +18,7 @@ export default function StudyDeleteBtn(_id) {
             aria-label="delete post"
             component="label"
             onClick={() => {
-                const deleteEvents = async () => {
-                    await axios.delete(`https://api.skku.dev/study/studies/${state}`);
-                };
-                deleteEvents();
+                deleteStudy(id);
                 navigateToStudy();
             }}
         >

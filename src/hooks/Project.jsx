@@ -2,7 +2,9 @@ import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
 
-export const useProjectPostApi = () => {
+const BASE_URI = 'http://localhost:8000';
+
+export const useProjectGetApi = () => {
     const [post, setPost] = useState({});
 
     // :id 파라미터
@@ -10,7 +12,7 @@ export const useProjectPostApi = () => {
 
     useEffect(() => {
         const fetchEvents = async () => {
-            const res = await axios.get(`https://api.skku.dev/posts/${index}`);
+            const res = await axios.get(BASE_URI + `/posts/${index}`);
             setPost(res.data.data);
         };
         fetchEvents();
@@ -19,12 +21,50 @@ export const useProjectPostApi = () => {
     return [post];
 };
 
+export const useProjectPostApi = () => {
+    const postProjectPost = (formData) =>
+        axios
+            .post(BASE_URI + '/posts', formData)
+            .then((response) => {
+                console.log(response.status);
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+    return [postProjectPost];
+};
+
+export const useProjectDeleteApi = () => {
+    const deleteProjectPost = (id) => {
+        axios
+            .delete(`${BASE_URI}/posts/${id}`)
+            .then((data) => console.log(data))
+            .catch((error) => console.log(error));
+    };
+
+    return [deleteProjectPost];
+};
+
+export const useProjectEditApi = () => {
+    const editProjectPost = (id, formData) => {
+        axios
+            .patch(BASE_URI + `/posts/${id}`, formData)
+            .then((response) => {
+                console.log(response.status);
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+    };
+    return [editProjectPost];
+};
+
 export const useProjectListApi = () => {
     const [postList, setPostList] = useState([]);
 
     useEffect(() => {
         const fetchEvents = async () => {
-            const res = await axios.get('https://api.skku.dev/posts');
+            const res = await axios.get(BASE_URI + '/posts');
             setPostList(res.data.data);
         };
         fetchEvents();
@@ -46,7 +86,7 @@ export const useProjectPostDetailApi = () => {
 
     useEffect(() => {
         const fetchEvents = async () => {
-            const res = await axios.get(`https://api.skku.dev/posts/${index}`);
+            const res = await axios.get(BASE_URI + `/posts/${index}`);
             return res.data.data;
         };
         fetchEvents().then((data) => {
@@ -79,7 +119,7 @@ export const useProjectUserApi = () => {
 
     useEffect(() => {
         const fetchEvents = async () => {
-            const res = await axios.get(`https://api.skku.dev/users/byProject/${index}`);
+            const res = await axios.get(BASE_URI + `/users/byProject/${index}`);
             setUser(res.data.data);
         };
         fetchEvents();

@@ -3,10 +3,31 @@ import { useState, useEffect } from 'react';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import { useStudyGroupsApi } from '../../../hooks/Study';
+import styled from '@emotion/styled';
+
+const StyledForm = styled('form')({
+    width: '90%',
+    margin: '0 auto'
+});
+
+const StyledTitle = styled('div')({
+    color: 'rgba(255, 255, 255, 0.5)',
+    fontWeight: 500,
+    fontSize: '0.9rem',
+    margin: '10px'
+});
+
+const StyledTextField = styled(TextField)({
+    marginTop: '10px'
+});
+
+const StyledButton = styled(Button)({
+    marginTop: '15px',
+    textTransform: 'none'
+});
 
 export default function StudyGroupEdit(id) {
-    const [studyGroups, setStudyGroups, createStudyGroup, updateStudyGroup, deleteStudyGroup] = // eslint-disable-line no-unused-vars
-        useStudyGroupsApi();
+    const [studyGroups, , , updateStudyGroup] = useStudyGroupsApi();
     const [groupName, setName] = useState('');
     const [studyDay, setDay] = useState('');
     const [members, setMembers] = useState([]);
@@ -36,24 +57,9 @@ export default function StudyGroupEdit(id) {
     };
 
     return (
-        <form
-            encType="multipart/form-data"
-            style={{
-                width: '90%',
-                margin: '0 auto'
-            }}
-        >
-            <div
-                style={{
-                    color: 'rgba(255, 255, 255, 0.5)',
-                    fontWeight: 500,
-                    fontSize: '0.9rem',
-                    margin: '10px'
-                }}
-            >
-                선택한 스터디 그룹 수정
-            </div>
-            <TextField
+        <StyledForm encType="multipart/form-data">
+            <StyledTitle>선택한 스터디 그룹 수정</StyledTitle>
+            <StyledTextField
                 fullWidth
                 label="groupName"
                 id="groupName"
@@ -61,21 +67,19 @@ export default function StudyGroupEdit(id) {
                 onChange={(e) => setName(e.target.value)}
                 value={groupName || ''}
             />
-            <TextField
+            <StyledTextField
                 fullWidth
                 label="studyDay"
                 id="studyDay"
                 size="small"
-                sx={{ marginTop: '10px' }}
                 onChange={(e) => setDay(e.target.value)}
                 value={studyDay || ''}
             />
-            <TextField
+            <StyledTextField
                 fullWidth
                 label="members"
                 id="members"
                 size="small"
-                sx={{ marginTop: '10px' }}
                 onChange={(e) => {
                     const tagsArray = e.target.value.split(',');
                     setMembers(tagsArray);
@@ -83,16 +87,15 @@ export default function StudyGroupEdit(id) {
                 value={members || ''}
             />
             <div style={{ display: 'flex', justifyContent: 'center' }}>
-                <Button
+                <StyledButton
                     color="primary"
                     variant="contained"
                     size="small"
-                    sx={{ mt: 1.5, textTransform: 'none' }}
                     onClick={handleSubmit}
                 >
                     Edit
-                </Button>
+                </StyledButton>
             </div>
-        </form>
+        </StyledForm>
     );
 }

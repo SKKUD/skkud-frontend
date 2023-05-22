@@ -1,29 +1,37 @@
 import * as React from 'react';
-import { useState, useEffect } from 'react';
-import axios from 'axios';
+import { useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import TextField from '@mui/material/TextField';
-import Button from '@mui/material/Button';
-import IconButton from '@mui/material/IconButton';
-import PhotoCamera from '@mui/icons-material/PhotoCamera';
-import Alert from '@mui/material/Alert';
-import Snackbar from '@mui/material/Snackbar';
-import Box from '@mui/material/Box';
+import { Box, Button, IconButton, Snackbar, TextField, Alert } from '@mui/material';
+import { PhotoCamera } from '@mui/icons-material';
 import PreImages from '../../../components/Main/project/PreImages';
-import List from '@mui/material/List';
-import ListItem from '@mui/material/ListItem';
-import ListItemButton from '@mui/material/ListItemButton';
-import ListItemText from '@mui/material/ListItemText';
-import Checkbox from '@mui/material/Checkbox';
-import { useProjectPostDetailApi } from '../../../hooks/Project';
+import ContributorList from '../../../components/Main/project/ContributorList';
+import { useProjectPostDetailApi, useProjectEditApi } from '../../../hooks/Project';
+import { useUsersApi } from '../../../hooks/Member';
+import styled from '@emotion/styled';
+
+const ImgWrap = styled(Box)`
+    margin-bottom: 12px;
+    border: 1px solid #00ffa8;
+    box-sizing: border-box;
+    height: 205px;
+    overflow: hidden;
+`;
+const ButtonWrap = styled(Box)`
+    display: flex;
+    margin-top: 12px;
+    align-content: center;
+    justify-content: space-between;
+`;
 
 export default function EditProject() {
+    const [editProjectPost] = useProjectEditApi();
     const navigate = useNavigate();
     const navigateToProject = () => {
         navigate('/maintab/project');
     };
 
     const PostDetail = useProjectPostDetailApi();
+
     const [alertTitle, setAlertTitle] = useState(false);
     const [alertContent, setAlertContent] = useState(false);
     const [alertPeriod, setAlertPeriod] = useState(false);
@@ -34,21 +42,17 @@ export default function EditProject() {
     const [link, setLink] = PostDetail[4];
     const [images] = PostDetail[5];
     const [checked, setChecked] = PostDetail[6];
+    const [addContributors, setAddContributors] = useState([]);
+    const [deleteContributors, setDeleteContributors] = useState([]);
     const [newImages, setNewImages] = useState([]);
     const [PreviewImg, setPreviewImg] = useState([]);
-    const [users, getUsers] = useState([]);
-    const handleClose = (event, reason) => {
+    const [users] = useUsersApi();
+
+    const handleClose = () => {
         setAlertContent(false);
         setAlertTitle(false);
         setAlertPeriod(false);
     };
-    useEffect(() => {
-        const fetchEvents = async () => {
-            const res = await axios.get('https://api.skku.dev/users');
-            getUsers(res.data.data.users);
-        };
-        fetchEvents();
-    }, []);
 
     // :id 파라미터
     const { index } = useParams();
@@ -90,111 +94,51 @@ export default function EditProject() {
             formData.append('period', period);
             formData.append('link', link);
             newImages.map((image) => formData.append('images', image));
-            // formData.append('addCotributors', checked);
-            // console.log(checked);
-            // console.log(PreviousChecked);
-            // console.log(checked.filter((x) => !PreviousChecked.includes(x)));
-            // console.log(PreviousChecked.filter((x) => !checked.includes(x)));
-            // formData.append(
-            //     'deleteContributors',
-            //     PreviousChecked.filter((x) => !checked.includes(x))
-            // );
+            formData.append('addContributors', addContributors);
+            formData.append('deleteContributors', deleteContributors);
 
-            await axios
-                .patch(`https://api.skku.dev/posts/contributor/${index}`, {
-                    contributors: checked
-                })
-                .then((response) => {
-                    console.log(response.status);
-                })
-                .catch((error) => {
-                    console.log(error);
-                });
-
-            await axios
-                .post(`https://api.skku.dev/posts/revise/${index}`, formData)
-                .then((response) => {
-                    console.log(response.status);
-                })
-                .then(() => {
-                    navigateToProject();
-                })
-                .catch((error) => {
-                    console.log(error);
-                });
+            editProjectPost(index, formData);
         }
     };
 
     function CheckboxMemberList() {
         const handleToggle = (id) => () => {
             const currentIndex = checked.indexOf(id);
-
             const newChecked = [...checked];
+            const newAddContributors = [...addContributors];
+            const newDeleteContributors = [...deleteContributors];
 
             if (currentIndex === -1) {
                 newChecked.push(id);
+                newAddContributors.push(id);
+                const deleteIndex = newDeleteContributors.indexOf(id);
+                if (deleteIndex !== -1) {
+                    newDeleteContributors.splice(deleteIndex, 1);
+                }
             } else {
                 newChecked.splice(currentIndex, 1);
+                newDeleteContributors.push(id);
+                const addIndex = newAddContributors.indexOf(id);
+                if (addIndex !== -1) {
+                    newAddContributors.splice(addIndex, 1);
+                }
             }
 
             setChecked(newChecked);
+            setAddContributors(newAddContributors);
+            setDeleteContributors(newDeleteContributors);
         };
-
-        return (
-            <div style={{ backgroundColor: '#333', borderBottom: '1px solid #ffffff99' }}>
-                <div
-                    style={{
-                        fontSize: '0.75rem',
-                        color: '#ffffff99',
-                        padding: '12px 0px 0px 12px'
-                    }}
-                >
-                    참여 멤버
-                </div>
-                <List dense sx={{ width: '100%', maxWidth: 360, bgcolor: '#333' }}>
-                    {users.map((member) => {
-                        const id = member._id;
-                        const name = member.username;
-                        const labelId = `checkbox-list-secondary-label-${id}`;
-                        return (
-                            <ListItem
-                                key={id}
-                                secondaryAction={
-                                    <Checkbox
-                                        edge="end"
-                                        onChange={handleToggle(id)}
-                                        checked={checked.indexOf(id) !== -1}
-                                        inputProps={{ 'aria-labelledby': labelId }}
-                                    />
-                                }
-                                disablePadding
-                            >
-                                <ListItemButton>
-                                    <ListItemText id={labelId} primary={`${name}`} />
-                                </ListItemButton>
-                            </ListItem>
-                        );
-                    })}
-                </List>
-            </div>
-        );
+        return <ContributorList users={users} handleToggle={handleToggle} checked={checked} />;
     }
+
     return (
         <>
             <form>
-                <Box
-                    mb="12px"
-                    sx={{
-                        border: '1px solid #00FFA8',
-                        boxSizing: 'border-box',
-                        height: '205px',
-                        overflow: 'hidden'
-                    }}
-                >
+                <ImgWrap>
                     {PreviewImg.length === 0
                         ? images && <img src={images} alt="project" key={images} width="100%" />
                         : PreviewImg && <PreImages imgFiles={PreviewImg} />}
-                </Box>
+                </ImgWrap>
                 <TextField
                     fullWidth
                     label="Project Title"
@@ -240,14 +184,7 @@ export default function EditProject() {
                     onChange={(e) => setLink(e.target.value)}
                 />
                 <CheckboxMemberList members={users} />
-                <Box
-                    sx={{
-                        display: 'flex',
-                        mt: '5px',
-                        alignContent: 'center',
-                        justifyContent: 'space-between'
-                    }}
-                >
+                <ButtonWrap>
                     <IconButton color="primary" aria-label="upload picture" component="label">
                         <input
                             hidden
@@ -269,7 +206,7 @@ export default function EditProject() {
                     >
                         submit
                     </Button>
-                </Box>
+                </ButtonWrap>
             </form>
             <Snackbar open={alertTitle} autoHideDuration={700} onClose={handleClose}>
                 <Alert severity="error" sx={{ width: '100%' }}>

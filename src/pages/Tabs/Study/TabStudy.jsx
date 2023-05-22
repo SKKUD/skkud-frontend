@@ -6,7 +6,7 @@ import ToggleButton from '@mui/material/ToggleButton';
 import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
 import { useStudiesApi, useStudyGroupsApi } from '../../../hooks/Study.jsx';
 import StudyCard from '../../../components/Main/study/StudyCard.jsx';
-import PostBtn from '../../../components/common/PostBtn';
+import PostBtn from '../../../components/Main/project/PostBtn';
 import StudyGroupForm from '../../../components/Main/study/StudyGroupForm.jsx';
 import Box from '@mui/system/Box';
 import Card from '@mui/material/Card';
@@ -22,7 +22,7 @@ export default function TabStudy() {
         if (studyGroups.length > 0) {
             setGroup(studyGroups[0]._id);
         }
-    }, [studies]);
+    }, [studyGroups]);
 
     return (
         <>
