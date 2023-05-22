@@ -10,6 +10,53 @@ import PostBtn from '../../../components/Main/project/PostBtn';
 import StudyGroupForm from '../../../components/Main/study/StudyGroupForm.jsx';
 import Box from '@mui/system/Box';
 import Card from '@mui/material/Card';
+import styled from '@emotion/styled';
+
+const StyledCard = styled(Card)`
+    margin-bottom: 10px;
+    border-radius: 15px;
+`;
+const StyledToggleButtonGroup = styled(ToggleButtonGroup)({
+    display: 'flex',
+    width: '100%',
+    flexDirection: 'row',
+    justifyContent: 'space-evenly',
+    alignItems: 'center',
+    marginBottom: '21px',
+    marginTop: '21px'
+});
+
+const StyledToggleButton = styled(ToggleButton)({
+    padding: '4px 18px',
+    height: '22px',
+    fontSize: '0.75rem',
+    fontWeight: 600,
+    textTransform: 'none',
+    border: 'none',
+    span: {
+        borderRadius: '33px',
+        border: '1px solid #00FFA8'
+    },
+    '&.Mui-selected, &.Mui-selected:hover, &.MuiToggleButtonGroup-grouped:not(:last-of-type)': {
+        borderRadius: '33px'
+    },
+    p: {
+        fontSize: '0.7rem',
+        margin: '0px',
+        fontWeight: '600'
+    }
+});
+
+const StyledBox = styled(Box)`
+    display: flex;
+    justify-content: end;
+`;
+
+const StyledLink = styled(Link)({
+    textDecoration: 'none',
+    display: 'contents',
+    width: '100%'
+});
 
 export default function TabStudy() {
     const [cookies] = useCookies(['id']);
@@ -27,23 +74,11 @@ export default function TabStudy() {
     return (
         <>
             {cookies.id ? (
-                <Card sx={{ mb: '10px', borderRadius: '15px' }}>
+                <StyledCard>
                     <StudyGroupForm id={selectedGroup} />
-                    <ToggleButtonGroup
-                        color="mint"
-                        value={selectedGroup}
-                        exclusive
-                        style={{
-                            width: '100%',
-                            display: 'flex',
-                            flexDirection: 'row',
-                            justifyContent: 'space-evenly',
-                            marginBottom: '21px',
-                            marginTop: '21px'
-                        }}
-                    >
+                    <StyledToggleButtonGroup color="mint" value={selectedGroup} exclusive>
                         {studyGroups.map((group) => (
-                            <ToggleButton
+                            <StyledToggleButton
                                 variant="outlined"
                                 key={group._id}
                                 value={group._id}
@@ -51,33 +86,16 @@ export default function TabStudy() {
                                     filterStudies(group._id);
                                     setGroup(group._id);
                                 }}
-                                style={{
-                                    borderRadius: '33px',
-                                    border: '1px solid #00FFA8',
-                                    padding: '4px 18px',
-                                    height: '22px'
-                                }}
                             >
                                 {group.groupName}
-                            </ToggleButton>
+                            </StyledToggleButton>
                         ))}
-                    </ToggleButtonGroup>
-                </Card>
+                    </StyledToggleButtonGroup>
+                </StyledCard>
             ) : (
-                <ToggleButtonGroup
-                    color="mint"
-                    value={selectedGroup}
-                    exclusive
-                    style={{
-                        width: '100%',
-                        display: 'flex',
-                        flexDirection: 'row',
-                        justifyContent: 'space-evenly',
-                        marginBottom: '21px'
-                    }}
-                >
+                <StyledToggleButtonGroup color="mint" value={selectedGroup} exclusive>
                     {studyGroups.map((group) => (
-                        <ToggleButton
+                        <StyledToggleButton
                             variant="outlined"
                             key={group._id}
                             value={group._id}
@@ -85,53 +103,34 @@ export default function TabStudy() {
                                 filterStudies(group._id);
                                 setGroup(group._id);
                             }}
-                            style={{
-                                borderRadius: '33px',
-                                border: '1px solid #00FFA8',
-                                padding: '4px 18px',
-                                height: '22px'
-                            }}
                         >
                             {group.groupName}
-                        </ToggleButton>
+                        </StyledToggleButton>
                     ))}
-                </ToggleButtonGroup>
+                </StyledToggleButtonGroup>
             )}
 
             {cookies.id ? (
-                <Box sx={{ display: 'flex', justifyContent: 'end' }}>
-                    <Link
-                        to={`/maintab/study/post`}
-                        style={{
-                            textDecoration: 'none',
-                            display: 'contents',
-                            width: '100%'
-                        }}
-                        state={{ id: `${selectedGroup}` }}
-                    >
+                <StyledBox>
+                    <StyledLink to={`/maintab/study/post`} state={{ id: `${selectedGroup}` }}>
                         <PostBtn content="+ Post" />
-                    </Link>
-                </Box>
+                    </StyledLink>
+                </StyledBox>
             ) : null}
+
             <div>
                 {study &&
                     study
                         .slice(0)
                         .reverse()
                         .map((item) => (
-                            // eslint-disable-next-line no-underscore-dangle
-                            <Link
+                            <StyledLink
                                 to={`/maintab/study/${item._id}`}
-                                style={{
-                                    textDecoration: 'none',
-                                    display: 'contents',
-                                    width: '100%'
-                                }}
                                 state={item}
                                 key={item._id}
                             >
                                 <StudyCard props={item} />
-                            </Link>
+                            </StyledLink>
                         ))}
             </div>
         </>

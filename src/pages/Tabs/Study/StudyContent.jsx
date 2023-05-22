@@ -70,6 +70,12 @@ const AttendanceCount = styled(Box)`
     font-size: 0.75rem;
 `;
 
+const StyledLocationIcon = styled(FmdGoodOutlinedIcon)({
+    width: '14px',
+    height: '16px',
+    margin: '0px 8px 3px 0px'
+});
+
 const AttendanceCountNumber = styled(Box)`
     margin-left: 12px;
     font-size: 0.563rem;
@@ -148,9 +154,7 @@ export default function StudyContent() {
                         {date} ({day}) {startTime} - {endTime}
                     </DateText>
                     <LocationText>
-                        <FmdGoodOutlinedIcon
-                            sx={{ width: '14px', height: '16px', margin: '0px 8px 3px 0px' }}
-                        />
+                        <StyledLocationIcon />
                         {location}
                     </LocationText>
                     <Box mb={'21px'}>
