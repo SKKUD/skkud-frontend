@@ -1,9 +1,8 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useParams } from 'react-router';
 import { useStudiesApi, useStudyDetailApi } from '../../../hooks/Study';
-import dayjs from 'dayjs';
 import { Box, Card, Button, Alert, Snackbar } from '@mui/material';
 import AttendantInput from '../../../components/Main/study/AttendantInput';
 import StudyDateNLocInput from '../../../components/Main/study/StudyDateNLocInput';
@@ -37,7 +36,6 @@ export default function EditStudy() {
     // :id 파라미터
     const { index } = useParams();
     const StudyDetail = useStudyDetailApi();
-
     const navigate = useNavigate();
     const navigateToStudy = () => {
         navigate('/maintab/study');
@@ -48,25 +46,28 @@ export default function EditStudy() {
     const [alertTaskContent, setAlertTaskContent] = useState(false);
     const [alertTaskName, setAlertTaskName] = useState(false);
 
-    const [title, setTitle] = useState('');
-    const [content, setContent] = useState('');
-    const [location, setLocation] = useState('');
-    const [attendance, setAtd] = useState([]);
-    const [taskContents, setTaskContents] = useState([]);
-    const [taskNames, setTaskNames] = useState([]);
-    const [images, setImages] = useState([]); // eslint-disable-line no-unused-vars
-    const [studyTimeStart, setStart] = useState(dayjs());
-    const [studyTimeEnd, setEnd] = useState(dayjs());
+    const [title, setTitle] = StudyDetail[0];
+    const [content, setContent] = StudyDetail[1];
+    const [location, setLocation] = StudyDetail[2];
+    const [attendance, setAtd] = StudyDetail[3];
+    const [taskContents, setTaskContents] = StudyDetail[4];
+    const [taskNames, setTaskNames] = StudyDetail[5];
+    const [images, setImages] = StudyDetail[6]; // eslint-disable-line no-unused-vars
+    const [studyTimeStart, setStart] = StudyDetail[7];
+    const [studyTimeEnd, setEnd] = StudyDetail[8];
     const [taskContent, setTaskContent] = useState('');
     const [taskName, setTaskName] = useState('');
     const [newimages, setnewImages] = useState([]);
     const [PreviewImg, setPreviewImg] = useState([]);
-
     let initialTask = [];
-    for (let i = 0; i < taskContents.length; i++) {
-        initialTask.push({ task: taskContents[i], name: taskNames[i] });
-    }
-    const [Task, setTask] = useState(initialTask);
+    const [Task, setTask] = useState([]);
+    useEffect(() => {
+        for (let i = 0; i < taskContents.length; i++) {
+            initialTask.push({ task: taskContents[i], name: taskNames[i] });
+        }
+        setTask(initialTask);
+        console.log(taskContents);
+    }, [taskContents]);
 
     const handleChangeStart = (newValue) => {
         setStart(newValue);

@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router';
 import axios from 'axios';
+import dayjs from 'dayjs';
 
 const BASE_URI = 'http://localhost:8000';
 
@@ -59,7 +60,7 @@ export const useStudiesApi = () => {
 
     const updateStudy = (body, id) => {
         axios
-            .post(`${BASE_URI}/study/studies/revise/${id}`, body)
+            .patch(`${BASE_URI}/study/studies/${id}`, body)
             .then((data) => console.log(data))
             .catch((error) => console.log(error));
     };
@@ -80,7 +81,6 @@ export const useStudiesApi = () => {
 
 export const useStudyDetailApi = () => {
     const { index } = useParams();
-    console.log(index);
     const [title, setTitle] = useState('');
     const [content, setContent] = useState('');
     const [location, setLocation] = useState('');
@@ -94,11 +94,9 @@ export const useStudyDetailApi = () => {
     useEffect(() => {
         const fetchEvents = async () => {
             const res = await axios.get(BASE_URI + `/study/studies/${index}`);
-            console.log(res);
             return res.data.data;
         };
         fetchEvents().then((data) => {
-            console.log(data);
             setTitle(data.title);
             setContent(data.content);
             setLocation(data.location);
@@ -119,7 +117,7 @@ export const useStudyDetailApi = () => {
         [taskContents, setTaskContents],
         [taskNames, setTaskNames],
         [images, setImages],
-        [studyTimeEnd, setEnd],
-        [studyTimeStart, setStart]
+        [dayjs(studyTimeEnd), setEnd],
+        [dayjs(studyTimeStart), setStart]
     ];
 };

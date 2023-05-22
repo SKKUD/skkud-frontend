@@ -1,18 +1,22 @@
 import React from 'react';
-import { styled } from '@mui/material/styles';
-import { Link, useLocation } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import { useCookies } from 'react-cookie';
 import Box from '@mui/material/Box';
 import Chip from '@mui/material/Chip';
 import Stack from '@mui/material/Stack';
 import Card from '@mui/material/Card';
 import ImagesView from '../../../components/Main/study/ImagesView';
-import StudyDeleteBtn from '../../../components/Main/study/StudyDeleteBtn';
-import EditBtn from '../../../components/common/EditBtn';
 import img from '../../../assets/IntroDesign.png';
 import FmdGoodOutlinedIcon from '@mui/icons-material/FmdGoodOutlined';
 import getDayOfWeek from '../../../utils/getDayOfWeek';
 import EditNDeleteBtn from '../../../components/Main/study/EditNDeleteBtn';
+import styled from '@emotion/styled';
+
+const StyledCard = styled(Card)`
+    border-radius: 24px;
+    background-color: #0c0c0c;
+    margin: 0 15px 20px;
+`;
 
 const StyledChip = styled((props) => <Chip {...props} />)(() => ({
     border: '1.5px solid #444',
@@ -26,6 +30,70 @@ const StyledChip = styled((props) => <Chip {...props} />)(() => ({
         padding: '5px'
     }
 }));
+
+const StudyContentCard = styled(Card)`
+    border-radius: 24px;
+    background-color: #1c1c1c;
+    padding-bottom: 40px;
+    padding-top: 8px;
+`;
+
+const StyledBox = styled(Box)`
+    display: flex;
+    flex-direction: column;
+    padding-left: 21px;
+    margin-top: 20px;
+`;
+
+const Title = styled(Box)`
+    font-size: 1.125rem;
+    font-weight: 600;
+    line-height: 21.48px;
+    margin-bottom: 8px;
+`;
+
+const DateText = styled.div`
+    color: rgba(255, 255, 255, 0.5);
+    font-size: 0.75rem;
+    line-height: 0.9rem;
+    margin-bottom: 2px;
+`;
+
+const LocationText = styled.div`
+    color: rgba(255, 255, 255, 0.5);
+    font-size: 0.75rem;
+    line-height: 0.9rem;
+    display: flex;
+    align-items: center;
+    margin-bottom: 21px;
+`;
+
+const AttendanceCount = styled(Box)`
+    color: rgba(255, 255, 255, 0.5);
+    font-weight: 600;
+    font-size: 0.75rem;
+`;
+
+const AttendanceCountNumber = styled(Box)`
+    margin-left: 12px;
+    font-size: 0.563rem;
+    color: rgba(255, 255, 255, 0.5);
+`;
+
+const AttendanceWrapper = styled(Box)`
+    display: flex;
+    line-height: 14.32px;
+    margin-bottom: 10px;
+`;
+
+const TaskTitle = styled(Box)`
+    font-weight: 700;
+    font-size: 0.875rem;
+`;
+
+const TaskName = styled(Box)`
+    font-size: 0.75rem;
+`;
 
 export default function StudyContent() {
     const [cookies] = useCookies(['id']);
@@ -55,84 +123,26 @@ export default function StudyContent() {
     const endTime = studyTimeEnd.substring(11, 16);
 
     return (
-        <Card sx={{ borderRadius: '24px', backgroundColor: '#1c1c1c' }}>
-            {cookies.id ? (
-                <EditNDeleteBtn id={_id} />
-            ) : (
-                ''
-            )}
+        <StyledCard>
+            {cookies.id ? <EditNDeleteBtn id={_id} /> : ''}
 
-            <Card sx={{ borderRadius: '24px', pb: '40px', pt: '8px' }}>
-                <Box
-                    sx={{
-                        display: 'flex',
-                        flexDirection: 'column',
-                        pl: '21px',
-                        mt: '20px'
-                    }}
-                >
-                    <Box
-                        style={{
-                            fontSize: '1.125rem',
-                            fontWeight: 600,
-                            lineHeight: '21.48px',
-                            marginBottom: '8px'
-                        }}
-                    >
-                        {title}
-                    </Box>
-                    <div
-                        style={{
-                            color: 'rgba(255, 255, 255, 0.5)',
-                            fontSize: '0.75rem',
-                            lineHeight: '0.9rem',
-                            marginBottom: '2px'
-                        }}
-                    >
-                        {date + '(' + day + ') ' + startTime + ' - ' + endTime}
-                    </div>
-                    <div
-                        style={{
-                            color: 'rgba(255, 255, 255, 0.5)',
-                            fontSize: '0.75rem',
-                            lineHeight: '0.9rem',
-                            display: 'flex',
-                            alignItems: 'center',
-                            marginBottom: '21px'
-                        }}
-                    >
+            <StudyContentCard>
+                <StyledBox>
+                    <Title>{title}</Title>
+                    <DateText>
+                        {date} ({day}) {startTime} - {endTime}
+                    </DateText>
+                    <LocationText>
                         <FmdGoodOutlinedIcon
                             sx={{ width: '14px', height: '16px', margin: '0px 8px 3px 0px' }}
                         />
                         {location}
-                    </div>
+                    </LocationText>
                     <Box mb={'21px'}>
-                        <Box
-                            sx={{
-                                display: 'flex',
-                                lineHeight: '14.32px',
-                                marginBottom: '10px'
-                            }}
-                        >
-                            <Box
-                                sx={{
-                                    color: 'rgba(255, 255, 255, 0.5)',
-                                    fontWeight: 600,
-                                    fontSize: '0.75rem'
-                                }}
-                            >
-                                참여자
-                            </Box>
-                            <Box
-                                sx={{
-                                    ml: '12px',
-                                    fontSize: '0.563rem',
-                                    color: 'rgba(255, 255, 255, 0.5)'
-                                }}
-                            >
-                                총 {attendance.length}명
-                            </Box>
-                        </Box>
+                        <AttendanceWrapper>
+                            <AttendanceCount>참여자</AttendanceCount>
+                            <AttendanceCountNumber>총 {attendance.length}명</AttendanceCountNumber>
+                        </AttendanceWrapper>
                         <Stack
                             direction="row"
                             spacing={0.5}
@@ -209,27 +219,14 @@ export default function StudyContent() {
                             {Task &&
                                 Task.map((item) => (
                                     <div style={{ marginBottom: '10px' }} key={item.task}>
-                                        <Box
-                                            sx={{
-                                                fontWeight: 700,
-                                                fontSize: '0.875rem'
-                                            }}
-                                        >
-                                            {item.task}
-                                        </Box>
-                                        <Box
-                                            sx={{
-                                                fontSize: '0.75rem'
-                                            }}
-                                        >
-                                            {item.name}
-                                        </Box>
+                                        <TaskTitle>{item.task}</TaskTitle>
+                                        <TaskName>{item.name}</TaskName>
                                     </div>
                                 ))}
                         </Stack>
                     </Box>
-                </Box>
-            </Card>
-        </Card>
+                </StyledBox>
+            </StudyContentCard>
+        </StyledCard>
     );
 }

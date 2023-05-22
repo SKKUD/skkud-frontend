@@ -22,7 +22,7 @@ export default function TabStudy() {
         if (studyGroups.length > 0) {
             setGroup(studyGroups[0]._id);
         }
-    }, [studies]);
+    }, [studyGroups]);
 
     return (
         <>
