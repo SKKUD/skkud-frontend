@@ -123,7 +123,6 @@ export default function StudyContent() {
     const {
         attendance,
         content,
-        groupId,
         location,
         studyTimeEnd,
         studyTimeStart,

@@ -20,7 +20,7 @@ import styled from '@emotion/styled';
 
 const FormWrapper = styled(Box)`
     & > :not(style) {
-        m: 1;
+        margin: 1;
         width: 25ch;
     }
     display: flex;

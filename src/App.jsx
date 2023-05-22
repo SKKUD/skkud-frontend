@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from 'react';
+import React from 'react';
 import axios from 'axios';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -82,10 +82,6 @@ export const darkTheme = createTheme({
 });
 
 function App() {
-    const [trackTab, setTrackTab] = useState();
-
-    const trackValue = useMemo(() => ({ trackTab, setTrackTab }), [trackTab, setTrackTab]);
-
     return (
         <ThemeProvider theme={darkTheme}>
             <CssBaseline />
