@@ -3,34 +3,37 @@ import { useParams } from 'react-router';
 import axios from 'axios';
 import dayjs from 'dayjs';
 
-const BASE_URI = 'http://localhost:8000';
+const BASE_URI = () => {
+    if (process.env.REACT_APP_ENV === 'production') return process.env.REACT_APP_DEV_URI;
+    else return process.env.REACT_APP_PROD_URI;
+}
 
 export const useStudyGroupsApi = () => {
     const [studyGroups, setStudyGroups] = useState([]);
 
     useEffect(() => {
-        axios.get(`${BASE_URI}/study/studyGroups`).then(({ data: { data } }) => {
+        axios.get(`${BASE_URI()}/study/studyGroups`).then(({ data: { data } }) => {
             setStudyGroups(data);
         });
     }, []);
 
     const createStudyGroup = (body) => {
         axios
-            .post(`${BASE_URI}/study/studyGroups`, body)
+            .post(`${BASE_URI()}/study/studyGroups`, body)
             .then((data) => console.log(data))
             .catch((error) => console.log(error));
     };
 
     const updateStudyGroup = (body, id) => {
         axios
-            .patch(`${BASE_URI}/study/studyGroups/${id}`, body)
+            .patch(`${BASE_URI()}/study/studyGroups/${id}`, body)
             .then((data) => console.log(data))
             .catch((error) => console.log(error));
     };
 
     const deleteStudyGroup = (id) => {
         axios
-            .delete(`${BASE_URI}/study/studyGroups/${id}`)
+            .delete(`${BASE_URI()}/study/studyGroups/${id}`)
             .then((data) => console.log(data))
             .catch((error) => console.log(error));
     };
@@ -43,7 +46,7 @@ export const useStudiesApi = () => {
     const [study, setStudy] = useState();
 
     const getData = () => {
-        axios.get(`${BASE_URI}/study/studies`).then(({ data: { data } }) => setStudies(data));
+        axios.get(`${BASE_URI()}/study/studies`).then(({ data: { data } }) => setStudies(data));
     };
 
     const filterStudies = (key) => {
@@ -53,21 +56,21 @@ export const useStudiesApi = () => {
 
     const createStudy = (body, studyGroupId) => {
         axios
-            .post(`${BASE_URI}/study/studies/${studyGroupId}`, body)
+            .post(`${BASE_URI()}/study/studies/${studyGroupId}`, body)
             .then((data) => console.log(data))
             .catch((error) => console.log(error));
     };
 
     const updateStudy = (body, id) => {
         axios
-            .patch(`${BASE_URI}/study/studies/${id}`, body)
+            .patch(`${BASE_URI()}/study/studies/${id}`, body)
             .then((data) => console.log(data))
             .catch((error) => console.log(error));
     };
 
     const deleteStudy = (id) => {
         axios
-            .delete(`${BASE_URI}/study/studies/${id}`)
+            .delete(`${BASE_URI()}/study/studies/${id}`)
             .then((data) => console.log(data))
             .catch((error) => console.log(error));
     };
@@ -93,7 +96,7 @@ export const useStudyDetailApi = () => {
 
     useEffect(() => {
         const fetchEvents = async () => {
-            const res = await axios.get(BASE_URI + `/study/studies/${index}`);
+            const res = await axios.get(BASE_URI() + `/study/studies/${index}`);
             return res.data.data;
         };
         fetchEvents().then((data) => {

@@ -1,6 +1,10 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
-const BASE_URI = 'http://localhost:8000';
+
+const BASE_URI = () => {
+    if (process.env.REACT_APP_ENV === 'production') return process.env.REACT_APP_DEV_URI;
+    else return process.env.REACT_APP_PROD_URI;
+}
 
 export const useApplierApi = () => {
     const [appliers, setAppliers] = useState({ title: '', introduction: '', questions: [] });
@@ -12,7 +16,7 @@ export const useApplierApi = () => {
 
     const updateApplier = () => {
         axios
-            .patch(BASE_URI + '/applies/appliers/', appliers)
+            .patch(BASE_URI() + '/applies/appliers/', appliers)
             .then(() => {
                 fetchApplier();
                 window.location.reload();

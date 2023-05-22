@@ -1,14 +1,17 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 
-const BASE_URI = 'http://localhost:8000';
+const BASE_URI = () => {
+    if (process.env.REACT_APP_ENV === 'production') return process.env.REACT_APP_DEV_URI;
+    else return process.env.REACT_APP_PROD_URI;
+}
 
 export const useApplicationFormApi = () => {
     const [form, setform] = useState({});
 
     useEffect(() => {
         const fetchEvents = async () => {
-            const res = await axios.get(BASE_URI + `/applies/appliers`);
+            const res = await axios.get(BASE_URI() + `/applies/appliers`);
             setform(res.data.data);
         };
         fetchEvents();
@@ -22,7 +25,7 @@ export const useAppliedUserApi = () => {
 
     useEffect(() => {
         const fetchEvents = async () => {
-            const res = await axios.get(BASE_URI + `/applies/appliedUsers`);
+            const res = await axios.get(BASE_URI() + `/applies/appliedUsers`);
             setUsers(res.data.data);
         };
         fetchEvents();
@@ -36,7 +39,7 @@ export const useAppliedUserDetailApi = ({ id }) => {
 
     useEffect(() => {
         const fetchEvents = async () => {
-            const res = await axios.get(BASE_URI + `/applies/appliedUsers/:id`);
+            const res = await axios.get(BASE_URI() + `/applies/appliedUsers/:id`);
             setUser(res.data.data);
         };
         fetchEvents();
@@ -47,14 +50,14 @@ export const useAppliedUserDetailApi = ({ id }) => {
 
 export const useAppliedUserEditApi = (id, body) => {
     axios
-        .patch(BASE_URI + `/applies/appliedUsers/${id}`, body)
+        .patch(BASE_URI() + `/applies/appliedUsers/${id}`, body)
         .then((data) => console.log(data))
         .catch((error) => console.log(error));
 };
 
 export const useAppliedUserDeleteApi = () => {
     axios
-        .delete(BASE_URI + `/applies/appliedUsers`)
+        .delete(BASE_URI() + `/applies/appliedUsers`)
         .then((data) => console.log(data))
         .catch((error) => console.log(error));
 };
@@ -67,7 +70,7 @@ export const useApplicationFormDetailApi = () => {
 
     useEffect(() => {
         const fetchEvents = async () => {
-            const res = await axios.get(BASE_URI + `/applies/appliers`);
+            const res = await axios.get(BASE_URI() + `/applies/appliers`);
             return res.data.data;
         };
         fetchEvents().then((data) => {

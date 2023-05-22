@@ -1,14 +1,17 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 
-const BASE_URI = 'http://localhost:8000';
+const BASE_URI = () => {
+    if (process.env.REACT_APP_ENV === 'production') return process.env.REACT_APP_DEV_URI;
+    else return process.env.REACT_APP_PROD_URI;
+}
 
 export const useUserPostDetailApi = (index) => {
     const [project, setProject] = useState([]);
 
     useEffect(() => {
         const fetchEvents = async () => {
-            const res = await axios.get(BASE_URI + `/posts/${index}`);
+            const res = await axios.get(BASE_URI() + `/posts/${index}`);
             setProject(res.data.data);
         };
         fetchEvents();
@@ -20,7 +23,7 @@ export const useUserApi = (id) => {
     const [user, setUser] = useState([]);
     useEffect(() => {
         const fetchEvents = async () => {
-            const res = await axios.get(`${BASE_URI}/users/${id}`);
+            const res = await axios.get(`${BASE_URI()}/users/${id}`);
 
             setUser(res.data.data.user);
         };
@@ -33,7 +36,7 @@ export const useUserSkillsApi = (index) => {
     const [skills, setSkills] = useState([]);
     useEffect(() => {
         const fetchEvents = async () => {
-            const res = await axios.get(BASE_URI + `/users/${index}`);
+            const res = await axios.get(BASE_URI() + `/users/${index}`);
             setSkills(res.data.data.user.skills);
         };
         fetchEvents();
@@ -46,7 +49,7 @@ export const useUsersApi = () => {
 
     useEffect(() => {
         const fetchEvents = async () => {
-            const res = await axios.get(BASE_URI + '/users');
+            const res = await axios.get(BASE_URI() + '/users');
             setUsers(res.data.data.users);
         };
         fetchEvents();
@@ -58,13 +61,13 @@ export const useUsersApi = () => {
 export const useMemberDeleteApi = () => {
     const logout = () => {
         axios
-            .post(BASE_URI + '/auth/logout')
+            .post(BASE_URI() + '/auth/logout')
             .then((userData) => console.log(userData))
             .catch((error) => console.log(error));
     };
 
     const deleteUser = (id) => {
-        axios.delete(`${BASE_URI}/users/${id}`).then((response) => console.log('delete', response));
+        axios.delete(`${BASE_URI()}/users/${id}`).then((response) => console.log('delete', response));
     };
 
     return [logout, deleteUser];
@@ -73,7 +76,7 @@ export const useMemberDeleteApi = () => {
 export const useMemberCreateApi = () => {
     const postMemberdata = (formData) => {
         axios
-            .post(`${BASE_URI}/users`, formData)
+            .post(`${BASE_URI()}/users`, formData)
             .then((response) => console.log(response))
             .catch((error) => console.log(error));
     };
@@ -94,7 +97,7 @@ export const useEditMemberApi = () => {
         PreviewImg
     ) => {
         axios
-            .patch(`${BASE_URI}/users/${id}`, {
+            .patch(`${BASE_URI()}/users/${id}`, {
                 username: newname,
                 email: newemail,
                 major: newmajor,
@@ -108,7 +111,7 @@ export const useEditMemberApi = () => {
     };
     const editUserIdPw = (id, newID, newpw) => {
         axios
-            .patch(`${BASE_URI}/users/${id}`, {
+            .patch(`${BASE_URI()}/users/${id}`, {
                 userID: newID,
                 passwd: newpw
             })

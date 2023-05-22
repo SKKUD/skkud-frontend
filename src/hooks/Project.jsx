@@ -2,7 +2,10 @@ import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
 
-const BASE_URI = 'http://localhost:8000';
+const BASE_URI = () => {
+    if (process.env.REACT_APP_ENV === 'production') return process.env.REACT_APP_DEV_URI;
+    else return process.env.REACT_APP_PROD_URI;
+}
 
 export const useProjectGetApi = () => {
     const [post, setPost] = useState({});
@@ -12,7 +15,7 @@ export const useProjectGetApi = () => {
 
     useEffect(() => {
         const fetchEvents = async () => {
-            const res = await axios.get(BASE_URI + `/posts/${index}`);
+            const res = await axios.get(BASE_URI() + `/posts/${index}`);
             setPost(res.data.data);
         };
         fetchEvents();
@@ -24,7 +27,7 @@ export const useProjectGetApi = () => {
 export const useProjectPostApi = () => {
     const postProjectPost = (formData) =>
         axios
-            .post(BASE_URI + '/posts', formData)
+            .post(BASE_URI() + '/posts', formData)
             .then((response) => {
                 console.log(response.status);
             })
@@ -37,7 +40,7 @@ export const useProjectPostApi = () => {
 export const useProjectDeleteApi = () => {
     const deleteProjectPost = (id) => {
         axios
-            .delete(`${BASE_URI}/posts/${id}`)
+            .delete(`${BASE_URI()}/posts/${id}`)
             .then((data) => console.log(data))
             .catch((error) => console.log(error));
     };
@@ -48,7 +51,7 @@ export const useProjectDeleteApi = () => {
 export const useProjectEditApi = () => {
     const editProjectPost = (id, formData) => {
         axios
-            .patch(BASE_URI + `/posts/${id}`, formData)
+            .patch(BASE_URI() + `/posts/${id}`, formData)
             .then((response) => {
                 console.log(response.status);
             })
@@ -64,7 +67,7 @@ export const useProjectListApi = () => {
 
     useEffect(() => {
         const fetchEvents = async () => {
-            const res = await axios.get(BASE_URI + '/posts');
+            const res = await axios.get(BASE_URI() + '/posts');
             setPostList(res.data.data);
         };
         fetchEvents();
@@ -86,7 +89,7 @@ export const useProjectPostDetailApi = () => {
 
     useEffect(() => {
         const fetchEvents = async () => {
-            const res = await axios.get(BASE_URI + `/posts/${index}`);
+            const res = await axios.get(BASE_URI() + `/posts/${index}`);
             return res.data.data;
         };
         fetchEvents().then((data) => {
@@ -119,7 +122,7 @@ export const useProjectUserApi = () => {
 
     useEffect(() => {
         const fetchEvents = async () => {
-            const res = await axios.get(BASE_URI + `/users/byProject/${index}`);
+            const res = await axios.get(BASE_URI() + `/users/byProject/${index}`);
             setUser(res.data.data);
         };
         fetchEvents();
