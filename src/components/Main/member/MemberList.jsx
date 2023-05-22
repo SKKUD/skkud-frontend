@@ -1,12 +1,13 @@
 import * as React from 'react';
-import { useState, useEffect, useContext } from 'react';
+import { useState, useEffect } from 'react';
 import MemberCard from './MemberCard';
-import { TrackContext } from '../../../context/TrackContext';
 import { useUsersApi } from '../../../hooks/Member';
+import MemberNav from './MemberNav';
 
 export default function MemberList() {
     const [users] = useUsersApi();
-    const { trackTab } = useContext(TrackContext);
+
+    const [trackTab, setTrackTab] = useState('backend');
     const [data, setData] = useState([]);
 
     useEffect(() => {
@@ -15,6 +16,7 @@ export default function MemberList() {
 
     return (
         <>
+            <MemberNav trackTab={trackTab} setTrackTab={setTrackTab} />
             {data.map((member) => (
                 <MemberCard
                     key={member.userID}
