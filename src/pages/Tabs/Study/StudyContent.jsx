@@ -1,10 +1,7 @@
 import React from 'react';
 import { useLocation } from 'react-router-dom';
 import { useCookies } from 'react-cookie';
-import Box from '@mui/material/Box';
-import Chip from '@mui/material/Chip';
-import Stack from '@mui/material/Stack';
-import Card from '@mui/material/Card';
+import { Box, Chip, Stack, Card } from '@mui/material';
 import ImagesView from '../../../components/Main/study/ImagesView';
 import img from '../../../assets/IntroDesign.png';
 import FmdGoodOutlinedIcon from '@mui/icons-material/FmdGoodOutlined';
@@ -15,7 +12,6 @@ import styled from '@emotion/styled';
 const StyledCard = styled(Card)`
     border-radius: 24px;
     background-color: #0c0c0c;
-    margin: 0 15px 20px;
 `;
 
 const StyledChip = styled((props) => <Chip {...props} />)(() => ({
@@ -74,6 +70,12 @@ const AttendanceCount = styled(Box)`
     font-size: 0.75rem;
 `;
 
+const StyledLocationIcon = styled(FmdGoodOutlinedIcon)({
+    width: '14px',
+    height: '16px',
+    margin: '0px 8px 3px 0px'
+});
+
 const AttendanceCountNumber = styled(Box)`
     margin-left: 12px;
     font-size: 0.563rem;
@@ -95,6 +97,25 @@ const TaskName = styled(Box)`
     font-size: 0.75rem;
 `;
 
+const StyledContentContainer = styled(Box)`
+    margin-bottom: 18px;
+`;
+
+const StyledContentBox = styled(Box)`
+    color: rgba(255, 255, 255, 0.5);
+    font-weight: 600;
+    font-size: 0.75rem;
+    margin-bottom: 11px;
+`;
+
+const StyledImg = styled.img`
+    width: 160px;
+    height: 160px;
+    border-radius: 5px;
+`;
+
+const StyledStack = styled(Stack)({ justifyContent: 'left', flexWrap: 'wrap', width: '250px' });
+
 export default function StudyContent() {
     const [cookies] = useCookies(['id']);
     const Task = [];
@@ -102,7 +123,6 @@ export default function StudyContent() {
     const {
         attendance,
         content,
-        groupId,
         location,
         studyTimeEnd,
         studyTimeStart,
@@ -133,9 +153,7 @@ export default function StudyContent() {
                         {date} ({day}) {startTime} - {endTime}
                     </DateText>
                     <LocationText>
-                        <FmdGoodOutlinedIcon
-                            sx={{ width: '14px', height: '16px', margin: '0px 8px 3px 0px' }}
-                        />
+                        <StyledLocationIcon />
                         {location}
                     </LocationText>
                     <Box mb={'21px'}>
@@ -159,72 +177,30 @@ export default function StudyContent() {
                                 ))}
                         </Stack>
                     </Box>
-                    <Box mb={'18px'}>
-                        <Box
-                            sx={{
-                                color: 'rgba(255, 255, 255, 0.5)',
-                                fontWeight: 600,
-                                fontSize: '0.75rem',
-                                mb: '11px'
-                            }}
-                        >
-                            스터디 내용
-                        </Box>
-                        <Box
-                            sx={{
-                                fontSize: '0.75rem',
-                                mb: '11px'
-                            }}
-                        >
-                            {content}
-                        </Box>
-                    </Box>
-                    <Box mb={'18px'}>
-                        <Box
-                            sx={{
-                                color: 'rgba(255, 255, 255, 0.5)',
-                                fontWeight: 600,
-                                fontSize: '0.75rem',
-                                mb: '11px'
-                            }}
-                        >
-                            스터디 자료
-                        </Box>
+                    <StyledContentContainer>
+                        <StyledContentBox>스터디 내용</StyledContentBox>
+                        <Box sx={{ fontSize: '0.75rem', mb: '11px' }}>{content}</Box>
+                    </StyledContentContainer>
+                    <StyledContentContainer>
+                        <StyledContentBox>스터디 자료</StyledContentBox>
                         {images.length > 0 ? (
                             <ImagesView imgFiles={images} />
                         ) : (
-                            <img
-                                src={img}
-                                alt="스터디자료"
-                                style={{ width: '160px', height: '160px', borderRadius: '5px' }}
-                            />
+                            <StyledImg src={img} alt="스터디자료" />
                         )}
-                    </Box>
-                    <Box mb={'50px'}>
-                        <Box
-                            sx={{
-                                color: 'rgba(255, 255, 255, 0.5)',
-                                fontWeight: 600,
-                                fontSize: '0.75rem',
-                                mb: '11px'
-                            }}
-                        >
-                            과제
-                        </Box>
-                        <Stack
-                            direction="column"
-                            spacing={0.5}
-                            sx={{ justifyContent: 'left', flexWrap: 'wrap', width: '250px' }}
-                        >
+                    </StyledContentContainer>
+                    <StyledContentContainer mb={'50px'}>
+                        <StyledContentBox>과제</StyledContentBox>
+                        <StyledStack direction="column" spacing={0.5}>
                             {Task &&
                                 Task.map((item) => (
-                                    <div style={{ marginBottom: '10px' }} key={item.task}>
+                                    <Box sx={{ mb: '10px' }} key={item.task}>
                                         <TaskTitle>{item.task}</TaskTitle>
                                         <TaskName>{item.name}</TaskName>
-                                    </div>
+                                    </Box>
                                 ))}
-                        </Stack>
-                    </Box>
+                        </StyledStack>
+                    </StyledContentContainer>
                 </StyledBox>
             </StudyContentCard>
         </StyledCard>

@@ -9,6 +9,11 @@ import axios from 'axios';
 import { TextField, Button, Typography, Alert, Snackbar } from '@mui/material';
 import styled from '@emotion/styled';
 
+const BASE_URI = () => {
+    if (process.env.REACT_APP_ENV === 'production') return process.env.REACT_APP_DEV_URI;
+    else return process.env.REACT_APP_PROD_URI;
+};
+
 const Container = styled.div`
     display: flex;
     flex-direction: column;
@@ -43,7 +48,6 @@ const LaterLogin = styled.div`
     border-bottom: 0.5px solid #c2c2c2;
     font-size: 0.875rem;
 `;
-const BASE_URI = 'http://localhost:8000';
 
 export default function Login() {
     const [errorMsg, setErrorMsg] = useState('');

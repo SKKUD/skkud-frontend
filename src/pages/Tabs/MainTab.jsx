@@ -91,7 +91,7 @@ const Container = styled(Box)`
 `;
 
 const TabPanelContainer = styled(Box)`
-    margin: 65px auto 0;
+    margin: 65px 15px 15px;
     max-width: 480px;
     min-height: calc(100vh - 235px);
 `;

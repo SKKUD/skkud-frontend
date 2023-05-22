@@ -1,8 +1,7 @@
-import React, { useState, useMemo } from 'react';
+import React from 'react';
 import axios from 'axios';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
-import { TrackContext } from './context/TrackContext';
 import MainPage from './pages/MainPage';
 import './utils/font.css';
 
@@ -83,19 +82,13 @@ export const darkTheme = createTheme({
 });
 
 function App() {
-    const [trackTab, setTrackTab] = useState();
-
-    const trackValue = useMemo(() => ({ trackTab, setTrackTab }), [trackTab, setTrackTab]);
-
     return (
         <ThemeProvider theme={darkTheme}>
             <CssBaseline />
 
-            <TrackContext.Provider value={trackValue}>
-                <div className="App" color="primary" style={{ overflow: 'hidden' }}>
-                    <MainPage />
-                </div>
-            </TrackContext.Provider>
+            <div className="App" color="primary" style={{ overflow: 'hidden' }}>
+                <MainPage />
+            </div>
         </ThemeProvider>
     );
 }

@@ -1,9 +1,8 @@
 import * as React from 'react';
-import { useContext, useState } from 'react';
+import { useState } from 'react';
 import { styled } from '@mui/material/styles';
 import ToggleButton from '@mui/material/ToggleButton';
 import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
-import { TrackContext } from '../../../context/TrackContext';
 
 const StyledToggleButtonGroup = styled(ToggleButtonGroup)({
     display: 'flex',
@@ -34,9 +33,8 @@ const StyledToggleButton = styled(ToggleButton)({
     }
 });
 
-export default function MemberNav() {
-    const { trackTab, setTrackTab } = useContext(TrackContext);
-    const [, setAlignment] = useState('frontend');
+export default function MemberNav({ trackTab, setTrackTab }) {
+    const [, setAlignment] = useState('');
 
     const handleChange = (event, newAlignment) => {
         setAlignment(newAlignment);
