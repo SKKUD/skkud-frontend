@@ -14,7 +14,6 @@ import img from '../assets/login_default.png';
 import Footer from '../components/common/Footer';
 import Alert from '@mui/material/Alert';
 import Snackbar from '@mui/material/Snackbar';
-
 const BASE_URI = () => {
     if (process.env.REACT_APP_ENV === 'production') return process.env.REACT_APP_DEV_URI;
     else return process.env.REACT_APP_PROD_URI;
@@ -74,7 +73,7 @@ export default function ApplicationForm() {
                 documentAnswers
             };
             await axios
-                .post(BASE_URI + '/applies/appliedUsers', application)
+                .post(BASE_URI() + '/applies/appliedUsers', application)
                 .then(() => {
                     setSubmit('submit');
                 })

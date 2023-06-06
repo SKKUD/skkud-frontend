@@ -8,7 +8,6 @@ import CreateUserBtn from '../components/Main/member/CreateUserBtn';
 import axios from 'axios';
 import { TextField, Button, Typography, Alert, Snackbar } from '@mui/material';
 import styled from '@emotion/styled';
-
 const BASE_URI = () => {
     if (process.env.REACT_APP_ENV === 'production') return process.env.REACT_APP_DEV_URI;
     else return process.env.REACT_APP_PROD_URI;
@@ -55,6 +54,7 @@ export default function Login() {
     const [PW, setPW] = useState('');
     const [cookies, setCookie, removeCookie] = useCookies([]);
     const navigate = useNavigate();
+    console.log(process.env.REACT_APP_ENV);
 
     const navigateToMainTab = () => {
         navigate('/maintab');
@@ -63,7 +63,7 @@ export default function Login() {
         e.preventDefault();
 
         await axios
-            .post(BASE_URI + '/auth/login', { userID: ID, passwd: PW })
+            .post(BASE_URI() + '/auth/login', { userID: ID, passwd: PW })
             .then((userData) => {
                 if (userData.data.loginSuccess === true) {
                     setCookie('id', ID);
@@ -73,7 +73,7 @@ export default function Login() {
             .catch((error) => {
                 console.log('error', error);
                 // alert(error.response.data.message);
-                setErrorMsg(error.response.data.message);
+                setErrorMsg(error.code.message);
             });
     };
 
@@ -81,7 +81,7 @@ export default function Login() {
         removeCookie('id');
         authCheck();
         await axios
-            .post(BASE_URI + '/auth/logout')
+            .post(BASE_URI() + '/auth/logout')
             .then((userData) => console.log(userData))
             .catch((error) => console.log(error));
         navigateToMainTab();
@@ -90,7 +90,7 @@ export default function Login() {
     const authCheck = async () => {
         const token = cookies.id;
         try {
-            const res = await axios.post(BASE_URI + '/auth/verify');
+            const res = await axios.post(BASE_URI() + '/auth/verify');
             if (res.data.data.userID !== token) logoutBtn();
         } catch (error) {
             console.log('auth check error');
