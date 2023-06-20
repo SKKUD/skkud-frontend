@@ -2,8 +2,8 @@ import { useEffect, useState } from 'react';
 import axios from 'axios';
 
 const BASE_URI = () => {
-    if (process.env.REACT_APP_ENV === 'production') return process.env.REACT_APP_DEV_URI;
-    else return process.env.REACT_APP_PROD_URI;
+    if (process.env.REACT_APP_ENV === 'production') return process.env.REACT_APP_PROD_URI;
+    else return process.env.REACT_APP_DEV_URI;
 }
 
 export const useApplicationFormApi = () => {

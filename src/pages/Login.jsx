@@ -10,8 +10,8 @@ import { TextField, Button, Typography, Alert, Snackbar } from '@mui/material';
 import styled from '@emotion/styled';
 
 const BASE_URI = () => {
-    if (process.env.REACT_APP_ENV === 'production') return process.env.REACT_APP_DEV_URI;
-    else return process.env.REACT_APP_PROD_URI;
+    if (process.env.REACT_APP_ENV === 'production') return process.env.REACT_APP_PROD_URI;
+    else return process.env.REACT_APP_DEV_URI;
 };
 
 const Container = styled.div`
