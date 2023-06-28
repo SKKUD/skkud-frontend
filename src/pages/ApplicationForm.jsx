@@ -15,8 +15,8 @@ import Footer from '../components/common/Footer';
 import Alert from '@mui/material/Alert';
 import Snackbar from '@mui/material/Snackbar';
 const BASE_URI = () => {
-    if (process.env.REACT_APP_ENV === 'production') return process.env.REACT_APP_DEV_URI;
-    else return process.env.REACT_APP_PROD_URI;
+    if (process.env.REACT_APP_ENV === 'production') return process.env.REACT_APP_PROD_URI;
+    else return process.env.REACT_APP_DEV_URI;
 };
 
 export default function ApplicationForm() {
