@@ -13,6 +13,12 @@ const Typography = styled.div`
     > p {
         margin-top: 6px;
     }
+
+    @media (min-width: 1024px) {
+        font-size: 16px;
+        line-height: 25px;
+        font-weight: 400;
+    }
 `;
 
 const FooterWrap = styled.div`
@@ -28,6 +34,12 @@ const FooterContainer = styled.div`
     padding-top: 16px;
     padding-left: 25px;
     padding-right: 23px;
+    @media (min-width: 1024px) {
+        min-width: 1000px;
+        width: 80%;
+        height: 200px;
+        padding-top: 40px;
+    }
 `;
 
 const TopDiv = styled.div`
@@ -47,12 +59,22 @@ const BottomDiv = styled.div`
 const Logo = styled.img`
     width: 100px;
     filter: opacity(0.5) drop-shadow(0 0 0 #000000);
+    @media (min-width: 1024px) {
+        width: 200px;
+    }
 `;
 
 const IconWrap = styled.div`
     height: 18px;
     & img:first-of-type {
         margin-right: 16px;
+    }
+
+    @media (min-width: 1024px) {
+        height: 25px;
+        img {
+            width: 25px;
+        }
     }
 `;
 
