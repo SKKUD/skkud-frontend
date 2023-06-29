@@ -8,7 +8,7 @@ import ProjectCard from './ProjectCard';
 import styled from '@emotion/styled';
 
 const StyledTitle = styled.div`
-    margin: 80px 0 30px;
+    margin: 60px 0 30px;
     color: #00ffa8;
     font-size: 60px;
     font-weight: 900;

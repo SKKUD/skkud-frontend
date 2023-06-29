@@ -11,7 +11,7 @@ const PostBtnWrap = styled(Box)`
         width: 300px;
         display: block;
         position: relative;
-        top: 150px;
+        top: 130px;
         left: 400px;
     }
 `;
