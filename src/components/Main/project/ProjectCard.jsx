@@ -50,6 +50,42 @@ const InnerCard = styled(Card)`
         background-color: #fff;
         margin: 0 12px;
     }
+
+    @media (min-width: 1024px) {
+        height: 25vw;
+        min-height: 420px;
+        border-radius: 15px;
+
+        & > div {
+            height: 165px;
+            padding-top: 35px;
+            padding-left: 45px;
+        }
+
+        .title-wrap {
+            margin-bottom: 20px;
+        }
+
+        .project-title {
+            font-size: 30px;
+            font-weight: 600;
+        }
+
+        .project-description {
+            font-size: 16px;
+            line-height: 24px;
+            font-weight: 400;
+            margin-right: 12px;
+            letter-spacing: 1.5px;
+        }
+
+        .project-separator {
+            height: 20px;
+            width: 1px;
+            background-color: #909090;
+            margin: 0 12px;
+        }
+    }
 `;
 
 export default function ProjectCard(project) {

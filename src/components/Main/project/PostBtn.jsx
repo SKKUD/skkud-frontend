@@ -7,6 +7,13 @@ const PostBtnWrap = styled(Box)`
     width: 100%;
     display: flex;
     flex-direction: row-reverse;
+    @media (min-width: 1024px) {
+        width: 300px;
+        display: block;
+        position: relative;
+        top: 150px;
+        left: 400px;
+    }
 `;
 
 const Btn = styled(Button)`
