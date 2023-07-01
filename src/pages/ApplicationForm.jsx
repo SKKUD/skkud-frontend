@@ -409,37 +409,93 @@ export default function ApplicationForm() {
                 )}
                 <Footer />
             </Box>
-            <Snackbar open={answerAlert} autoHideDuration={700} onClose={handleClose}>
+            <Snackbar
+                anchorOrigin={{
+                    vertical: 'bottom',
+                    horizontal: 'center'
+                }}
+                open={answerAlert}
+                autoHideDuration={700}
+                onClose={handleClose}
+            >
                 <Alert severity="error" sx={{ width: '100%' }}>
                     답변을 입력하세요.
                 </Alert>
             </Snackbar>
-            <Snackbar open={nameAlert} autoHideDuration={700} onClose={handleClose}>
+            <Snackbar
+                anchorOrigin={{
+                    vertical: 'bottom',
+                    horizontal: 'center'
+                }}
+                open={nameAlert}
+                autoHideDuration={700}
+                onClose={handleClose}
+            >
                 <Alert severity="error" sx={{ width: '100%' }}>
                     이름을 입력하세요.
                 </Alert>
             </Snackbar>
-            <Snackbar open={majorAlert} autoHideDuration={700} onClose={handleClose}>
+            <Snackbar
+                anchorOrigin={{
+                    vertical: 'bottom',
+                    horizontal: 'center'
+                }}
+                open={majorAlert}
+                autoHideDuration={700}
+                onClose={handleClose}
+            >
                 <Alert severity="error" sx={{ width: '100%' }}>
                     학과를 입력하세요.
                 </Alert>
             </Snackbar>
-            <Snackbar open={numAlert} autoHideDuration={700} onClose={handleClose}>
+            <Snackbar
+                anchorOrigin={{
+                    vertical: 'bottom',
+                    horizontal: 'center'
+                }}
+                open={numAlert}
+                autoHideDuration={700}
+                onClose={handleClose}
+            >
                 <Alert severity="error" sx={{ width: '100%' }}>
                     연락처를 입력하세요.
                 </Alert>
             </Snackbar>
-            <Snackbar open={studentIdAlert} autoHideDuration={700} onClose={handleClose}>
+            <Snackbar
+                anchorOrigin={{
+                    vertical: 'bottom',
+                    horizontal: 'center'
+                }}
+                open={studentIdAlert}
+                autoHideDuration={700}
+                onClose={handleClose}
+            >
                 <Alert severity="error" sx={{ width: '100%' }}>
                     학번을 입력하세요.
                 </Alert>
             </Snackbar>
-            <Snackbar open={trackAlert} autoHideDuration={700} onClose={handleClose}>
+            <Snackbar
+                anchorOrigin={{
+                    vertical: 'bottom',
+                    horizontal: 'center'
+                }}
+                open={trackAlert}
+                autoHideDuration={700}
+                onClose={handleClose}
+            >
                 <Alert severity="error" sx={{ width: '100%' }}>
                     지원트랙을 입력하세요.
                 </Alert>
             </Snackbar>
-            <Snackbar open={emailAlert} autoHideDuration={700} onClose={handleClose}>
+            <Snackbar
+                anchorOrigin={{
+                    vertical: 'bottom',
+                    horizontal: 'center'
+                }}
+                open={emailAlert}
+                autoHideDuration={700}
+                onClose={handleClose}
+            >
                 <Alert severity="error" sx={{ width: '100%' }}>
                     이메일을 입력하세요.
                 </Alert>

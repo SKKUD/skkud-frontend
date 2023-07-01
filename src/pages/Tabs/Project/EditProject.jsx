@@ -246,17 +246,41 @@ export default function EditProject() {
                     </Button>
                 </ButtonWrap>
             </form>
-            <Snackbar open={alertTitle} autoHideDuration={700} onClose={handleClose}>
+            <Snackbar
+                anchorOrigin={{
+                    vertical: 'bottom',
+                    horizontal: 'center'
+                }}
+                open={alertTitle}
+                autoHideDuration={700}
+                onClose={handleClose}
+            >
                 <Alert severity="error" sx={{ width: '100%' }}>
                     제목을 입력하세요.
                 </Alert>
             </Snackbar>
-            <Snackbar open={alertContent} autoHideDuration={700} onClose={handleClose}>
+            <Snackbar
+                anchorOrigin={{
+                    vertical: 'bottom',
+                    horizontal: 'center'
+                }}
+                open={alertContent}
+                autoHideDuration={700}
+                onClose={handleClose}
+            >
                 <Alert severity="error" sx={{ width: '100%' }}>
                     내용을 입력하세요.
                 </Alert>
             </Snackbar>
-            <Snackbar open={alertPeriod} autoHideDuration={700} onClose={handleClose}>
+            <Snackbar
+                anchorOrigin={{
+                    vertical: 'bottom',
+                    horizontal: 'center'
+                }}
+                open={alertPeriod}
+                autoHideDuration={700}
+                onClose={handleClose}
+            >
                 <Alert severity="error" sx={{ width: '100%' }}>
                     개발 기간을 입력하세요.
                 </Alert>

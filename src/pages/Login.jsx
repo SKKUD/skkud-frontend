@@ -8,6 +8,7 @@ import CreateUserBtn from '../components/Main/member/CreateUserBtn';
 import axios from 'axios';
 import { TextField, Button, Typography, Alert, Snackbar } from '@mui/material';
 import styled from '@emotion/styled';
+
 const BASE_URI = () => {
     if (process.env.REACT_APP_ENV === 'production') return process.env.REACT_APP_PROD_URI;
     else return process.env.REACT_APP_DEV_URI;
@@ -19,6 +20,14 @@ const Container = styled.div`
     align-items: center;
     min-height: calc(100vh - 175px);
     margin-top: 80px;
+
+    @media (min-width: 1024px) {
+        width: 500px;
+        margin: 100px auto 50px;
+        border-radius: 25px;
+        background-color: #292929;
+        box-shadow: 0px 5px 5px 0px rgba(0, 0, 0, 0.15);
+    }
 `;
 
 const LoginTitle = styled(Typography)`
@@ -49,12 +58,11 @@ const LaterLogin = styled.div`
 `;
 
 export default function Login() {
-    const [errorMsg, setErrorMsg] = useState('');
+    const [isSnackbarOpen, setIsSnackbarOpen] = useState(false);
     const [ID, setID] = useState('');
     const [PW, setPW] = useState('');
     const [cookies, setCookie, removeCookie] = useCookies([]);
     const navigate = useNavigate();
-    console.log(process.env.REACT_APP_ENV);
 
     const navigateToMainTab = () => {
         navigate('/maintab');
@@ -72,8 +80,7 @@ export default function Login() {
             })
             .catch((error) => {
                 console.log('error', error);
-                // alert(error.response.data.message);
-                setErrorMsg(error.code.message);
+                setIsSnackbarOpen(true);
             });
     };
 
@@ -85,6 +92,7 @@ export default function Login() {
             .then((userData) => console.log(userData))
             .catch((error) => console.log(error));
         navigateToMainTab();
+        setIsSnackbarOpen(false);
     };
 
     const authCheck = async () => {
@@ -135,9 +143,16 @@ export default function Login() {
                 </>
             )}
             <Footer />
-            <Snackbar open={errorMsg} autoHideDuration={1000}>
+            <Snackbar
+                open={isSnackbarOpen}
+                anchorOrigin={{
+                    vertical: 'top',
+                    horizontal: 'center'
+                }}
+                autoHideDuration={1000}
+            >
                 <Alert severity="error" sx={{ width: '100%' }}>
-                    {errorMsg}
+                    로그인에 실패하였습니다. 다시 시도해주세요.
                 </Alert>
             </Snackbar>
         </div>

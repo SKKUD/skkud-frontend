@@ -123,7 +123,14 @@ export default function MyPageDetail() {
                 </StyledBigButton>
             </StyledBox>
 
-            <Snackbar open={editAlert} autoHideDuration={1000}>
+            <Snackbar
+                anchorOrigin={{
+                    vertical: 'bottom',
+                    horizontal: 'center'
+                }}
+                open={editAlert}
+                autoHideDuration={1000}
+            >
                 <Alert severity="success" sx={{ width: '100%' }}>
                     멤버 아이디가 수정되었습니다.
                 </Alert>

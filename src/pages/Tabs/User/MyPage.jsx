@@ -250,12 +250,26 @@ export default function MyPage() {
                 </Button>
                 <MemberDeleteBtn />
             </FormWrapper>
-            <Snackbar open={alert} autoHideDuration={1000}>
+            <Snackbar
+                anchorOrigin={{
+                    vertical: 'bottom',
+                    horizontal: 'center'
+                }}
+                open={alert}
+                autoHideDuration={1000}
+            >
                 <Alert severity="error" sx={{ width: '100%' }}>
                     입력을 완료하세요.
                 </Alert>
             </Snackbar>
-            <Snackbar open={emailAlert} autoHideDuration={1000}>
+            <Snackbar
+                anchorOrigin={{
+                    vertical: 'bottom',
+                    horizontal: 'center'
+                }}
+                open={emailAlert}
+                autoHideDuration={1000}
+            >
                 <Alert severity="error" sx={{ width: '100%' }}>
                     이메일 형식에 맞춰 입력하세요.
                 </Alert>

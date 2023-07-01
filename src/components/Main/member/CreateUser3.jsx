@@ -122,7 +122,15 @@ export default function CreateUser3() {
                     가입 완료
                 </StyledButton>
             </StyledForm>
-            <Snackbar open={alert} autoHideDuration={700} onClose={handleClose}>
+            <Snackbar
+                anchorOrigin={{
+                    vertical: 'top',
+                    horizontal: 'center'
+                }}
+                open={alert}
+                autoHideDuration={700}
+                onClose={handleClose}
+            >
                 <Alert severity="error" sx={{ width: '100%' }}>
                     입력을 완료하세요.
                 </Alert>

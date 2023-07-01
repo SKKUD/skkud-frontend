@@ -187,22 +187,50 @@ export default function EditStudy() {
                     </Container>
                 </StyledCard>
             </form>
-            <Snackbar open={alertTaskName} autoHideDuration={1000}>
+            <Snackbar
+                anchorOrigin={{
+                    vertical: 'bottom',
+                    horizontal: 'center'
+                }}
+                open={alertTaskName}
+                autoHideDuration={1000}
+            >
                 <Alert severity="error" sx={{ width: '100%' }}>
                     이름을 입력하세요.
                 </Alert>
             </Snackbar>
-            <Snackbar open={alertTaskContent} autoHideDuration={1000}>
+            <Snackbar
+                anchorOrigin={{
+                    vertical: 'bottom',
+                    horizontal: 'center'
+                }}
+                open={alertTaskContent}
+                autoHideDuration={1000}
+            >
                 <Alert severity="error" sx={{ width: '100%' }}>
                     과제 내용을 입력하세요.
                 </Alert>
             </Snackbar>
-            <Snackbar open={alertTitle} autoHideDuration={1000}>
+            <Snackbar
+                anchorOrigin={{
+                    vertical: 'bottom',
+                    horizontal: 'center'
+                }}
+                open={alertTitle}
+                autoHideDuration={1000}
+            >
                 <Alert severity="error" sx={{ width: '100%' }}>
                     제목을 입력하세요.
                 </Alert>
             </Snackbar>
-            <Snackbar open={alertContent} autoHideDuration={1000}>
+            <Snackbar
+                anchorOrigin={{
+                    vertical: 'bottom',
+                    horizontal: 'center'
+                }}
+                open={alertContent}
+                autoHideDuration={1000}
+            >
                 <Alert severity="error" sx={{ width: '100%' }}>
                     내용을 입력하세요.
                 </Alert>
