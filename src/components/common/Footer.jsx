@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { Link } from 'react-router-dom';
 import SKKUDLOGO from '../../assets/SKKUD_LOGO.png';
 import styled from '@emotion/styled';
 import insta from '../../assets/insta.png';
@@ -60,7 +61,7 @@ const Logo = styled.img`
     width: 100px;
     filter: opacity(0.5) drop-shadow(0 0 0 #000000);
     @media (min-width: 1024px) {
-        width: 200px;
+        width: 150px;
     }
 `;
 
@@ -85,7 +86,13 @@ export default function Footer() {
                 <TopDiv>
                     <Logo src={SKKUDLOGO} alt="SKKUD" />
                     <IconWrap>
-                        <img src={insta} alt="instagram" />
+                        <a
+                            href="https://instagram.com/skku.devs"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                        >
+                            <img src={insta} alt="instagram" />
+                        </a>
                         <img src={sender} alt="send" />
                     </IconWrap>
                 </TopDiv>

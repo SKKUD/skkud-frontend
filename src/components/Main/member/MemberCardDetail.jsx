@@ -84,7 +84,7 @@ const SkillBtn = styled.div`
     padding: 1px 16px;
 
     @media (min-width: 1024px) {
-        padding: 3px 18px;
+        padding: 1.5px 18px;
         font-weight: 600;
     }
 `;
