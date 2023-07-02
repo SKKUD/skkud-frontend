@@ -38,7 +38,7 @@ export default function MemberList() {
     const match1024 = useMediaQuery('(min-width:1024px)');
     const [users] = useUsersApi();
 
-    const [trackTab, setTrackTab] = useState('backend');
+    const [trackTab, setTrackTab] = useState('frontend');
     const [data, setData] = useState([]);
 
     useEffect(() => {
