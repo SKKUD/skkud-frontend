@@ -117,7 +117,7 @@ export default function PostProject() {
 
             formData.append('developPeriod', period);
             formData.append('link', link);
-            formData.append('initializeContributors', checked);
+            checked.map((user) => formData.append('initializeContributors', user));
             images.map((image) => formData.append('images', image));
 
             postProjectPost(formData).then(() => {

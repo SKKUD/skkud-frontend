@@ -130,8 +130,8 @@ export default function EditProject() {
             formData.append('period', period);
             formData.append('link', link);
             newImages.map((image) => formData.append('images', image));
-            formData.append('addContributors', addContributors);
-            formData.append('deleteContributors', deleteContributors);
+            addContributors.map((user) => formData.append('addContributors', user));
+            deleteContributors.map((user) => formData.append('deleteContributors', user));
 
             editProjectPost(index, formData);
         }
