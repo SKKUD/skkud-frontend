@@ -12,6 +12,14 @@ import StudyImageInput from '../../../components/Main/study/StudyImageInput';
 import StudyTaskInput from '../../../components/Main/study/StudyTaskInput';
 import styled from '@emotion/styled';
 
+const Wrapper = styled.div`
+    @media (min-width: 1024px) {
+        width: 55%;
+        min-width: 1000px;
+        margin: 60px auto 150px;
+    }
+`;
+
 const StyledCard = styled(Card)`
     border-radius: 24px;
     padding-bottom: 40px;
@@ -133,7 +141,7 @@ export default function PostStudy() {
     };
 
     return (
-        <>
+        <Wrapper>
             <form encType="multipart/form-data">
                 <StyledCard>
                     <Container>
@@ -229,6 +237,6 @@ export default function PostStudy() {
                     내용을 입력하세요.
                 </Alert>
             </Snackbar>
-        </>
+        </Wrapper>
     );
 }

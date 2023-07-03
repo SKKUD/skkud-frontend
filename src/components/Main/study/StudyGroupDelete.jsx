@@ -7,7 +7,8 @@ import StudyGroupCheckList from './StudyGroupCheckList';
 
 const StyledWrapper = styled(Box)({
     width: '90%',
-    margin: '0 auto'
+    margin: '0 auto',
+    maxWidth: '600px'
 });
 
 const StyledText = styled(Box)({

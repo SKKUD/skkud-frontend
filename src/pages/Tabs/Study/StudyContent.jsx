@@ -9,9 +9,21 @@ import getDayOfWeek from '../../../utils/getDayOfWeek';
 import EditNDeleteBtn from '../../../components/Main/study/EditNDeleteBtn';
 import styled from '@emotion/styled';
 
+const Header = styled.div`
+    color: #00ffa8;
+    font-size: 60px;
+    font-weight: 900;
+    line-height: 104.836%;
+`;
+
 const StyledCard = styled(Card)`
     border-radius: 24px;
-    background-color: #0c0c0c;
+    background-color: #191919;
+    @media (min-width: 1024px) {
+        width: 65%;
+        min-width: 1000px;
+        margin: 60px auto 150px;
+    }
 `;
 
 const StyledChip = styled((props) => <Chip {...props} />)(() => ({
@@ -29,7 +41,6 @@ const StyledChip = styled((props) => <Chip {...props} />)(() => ({
 
 const StudyContentCard = styled(Card)`
     border-radius: 24px;
-    background-color: #1c1c1c;
     padding-bottom: 40px;
     padding-top: 8px;
 `;

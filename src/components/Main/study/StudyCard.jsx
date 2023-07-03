@@ -19,6 +19,9 @@ export default function StudyCard(props) {
         padding: 18px;
         margin-top: 10px;
         border-radius: 15px;
+        @media (min-width: 1024px) {
+            padding: 40px;
+        }
     `;
 
     const StyledChip = styled((props) => <Chip {...props} />)(() => ({
@@ -31,6 +34,15 @@ export default function StudyCard(props) {
             fontWeight: 600,
             color: '#ffffff8b',
             padding: '5px'
+        },
+        '@media (min-width: 1024px)': {
+            height: '28px',
+            fontSize: '14px',
+            marginRight: '7px',
+            '& span': {
+                fontWeight: 400,
+                padding: '6px'
+            }
         }
     }));
 
@@ -40,26 +52,34 @@ export default function StudyCard(props) {
         lineHeight: '0.9rem',
         overflow: 'hidden',
         textOverflow: 'ellipsis',
-        whiteSpace: 'nowrap'
+        whiteSpace: 'nowrap',
+        '@media (min-width: 1024px)': {
+            fontSize: '18px',
+            lineHeight: '18px',
+            fontWeight: 500
+        }
     });
 
     const Divider = styled.div({
         width: '1px',
         height: '12px',
-        backgroundColor: 'rgba(255, 255, 255, 0.8)'
+        backgroundColor: 'rgba(255, 255, 255, 0.8)',
+        '@media (min-width: 1024px)': { height: '18px' }
     });
 
     const Date = styled.div({
         fontSize: '0.75rem',
         lineHeight: '0.9rem',
-        color: 'rgba(255, 255, 255, 0.5)'
+        color: 'rgba(255, 255, 255, 0.5)',
+        '@media (min-width: 1024px)': { lineHeight: '18px', fontSize: '14px' }
     });
 
     const StyledImage = styled(CardMedia)({
         borderRadius: '5px',
         width: '107px',
         height: '107px',
-        margin: '10px'
+        margin: '10px',
+        '@media (min-width: 1024px)': { width: '157px', height: '157px' }
     });
 
     const Content = styled.div({
@@ -68,7 +88,9 @@ export default function StudyCard(props) {
         height: '80px',
         margin: '10px 0px',
         overflow: 'hidden',
-        textOverflow: 'ellipsis'
+        textOverflow: 'ellipsis',
+        wordBreak: 'keep-all',
+        '@media (min-width: 1024px)': { fontSize: '16px', lineHeight: '20px', height: '120px' }
     });
 
     const Attendance = styled.div({
@@ -76,7 +98,10 @@ export default function StudyCard(props) {
         height: '24px',
         overflow: 'scroll',
         msOverflowStyle: 'none',
-        '&::-webkit-scrollbar': { display: 'none' }
+        '&::-webkit-scrollbar': { display: 'none' },
+        '@media (min-width: 1024px)': {
+            height: '28px'
+        }
     });
 
     return (
