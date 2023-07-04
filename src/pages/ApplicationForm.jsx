@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import styled from '@emotion/styled';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
@@ -14,6 +15,26 @@ import img from '../assets/login_default.png';
 import Footer from '../components/common/Footer';
 import Alert from '@mui/material/Alert';
 import Snackbar from '@mui/material/Snackbar';
+
+const FormWrap = styled.div`
+    width: 100%;
+    margin-top: 60px;
+    padding: 40px 20px 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    @media (min-width: 1024px) {
+        width: 60%;
+        min-width: 900px;
+        margin: 120px auto 100px;
+        padding-top: 60px;
+        background-color: #292929;
+        border-radius: 25px;
+        box-shadow: 0px 5px 5px 0px rgba(0, 0, 0, 0.15);
+    }
+`;
+
 const BASE_URI = () => {
     if (process.env.REACT_APP_ENV === 'production') return process.env.REACT_APP_PROD_URI;
     else return process.env.REACT_APP_DEV_URI;
@@ -112,17 +133,7 @@ export default function ApplicationForm() {
             <Box>
                 <Header />
                 {submit === '' ? (
-                    <form
-                        style={{
-                            width: '100%',
-                            marginTop: '60px',
-                            padding: '40px 20px 0',
-                            display: 'flex',
-                            flexDirection: 'column',
-                            alignItems: 'center',
-                            justifyContent: 'center'
-                        }}
-                    >
+                    <FormWrap>
                         <div style={{ textAlign: 'center', marginBottom: '30px' }}>
                             <div style={{ fontSize: '1.35rem', fontWeight: 700 }}>{title}</div>
                         </div>
@@ -283,8 +294,9 @@ export default function ApplicationForm() {
                                         variant="contained"
                                         onClick={HandleNext}
                                         sx={{
-                                            margin: '100px 0px 59px',
-                                            padding: '12px 45%',
+                                            margin: '100px auto 59px',
+                                            width: '350px',
+                                            height: '60px',
                                             borderRadius: '99px',
                                             fontWeight: 600,
                                             maxWidth: '500px'
@@ -343,8 +355,9 @@ export default function ApplicationForm() {
                                     variant="contained"
                                     onClick={HandlPostSubmit}
                                     sx={{
-                                        margin: '40px 0px 59px',
-                                        padding: '12px 40%',
+                                        margin: '40px auto 59px',
+                                        width: '350px',
+                                        height: '60px',
                                         borderRadius: '99px',
                                         fontWeight: 600,
                                         maxWidth: '500px'
@@ -354,16 +367,16 @@ export default function ApplicationForm() {
                                 </Button>
                             </div>
                         )}
-                    </form>
+                    </FormWrap>
                 ) : (
-                    <div
-                        style={{
-                            display: 'flex',
-                            flexDirection: 'column',
-                            alignItems: 'center',
-                            textAlign: 'center',
-                            marginTop: '120px'
-                        }}
+                    <FormWrap
+                    // style={{
+                    //     display: 'flex',
+                    //     flexDirection: 'column',
+                    //     alignItems: 'center',
+                    //     textAlign: 'center',
+                    //     marginTop: '120px'
+                    // }}
                     >
                         <div style={{ fontSize: '1.8rem' }}>지원이 접수되었습니다!</div>
                         <div style={{ fontSize: '1.2rem', marginTop: '5px', color: '#00FFA8' }}>
@@ -385,16 +398,15 @@ export default function ApplicationForm() {
                             />
                         </div>
                         <div style={{ fontSize: '1.2rem', fontWeight: 700, marginTop: '31px' }}>
-                            확인 후 입력하신 이메일로
-                            <br />
-                            안내 드리겠습니다!
+                            확인 후 입력하신 이메일로 안내 드리겠습니다!
                         </div>
                         <Button
                             variant="contained"
                             onClick={navigateToMainTab}
                             sx={{
-                                margin: '170px 0px 59px',
-                                padding: '12px 30%',
+                                margin: '170px auto 59px',
+                                width: '350px',
+                                height: '60px',
                                 borderRadius: '99px',
                                 fontWeight: 700,
                                 color: '#fff',
@@ -405,7 +417,7 @@ export default function ApplicationForm() {
                         >
                             스꾸디 둘러보기
                         </Button>
-                    </div>
+                    </FormWrap>
                 )}
                 <Footer />
             </Box>
