@@ -11,10 +11,10 @@ export default function DeleteBtn(_id) {
     const navigate = useNavigate();
     const navigateToProject = () => {
         if (location.pathname === '/maintab/project') {
-            window.location.reload();
+            window.location.reload(true);
         } else {
             navigate('/maintab/project');
-            window.location.reload();
+            window.location.reload(true);
         }
     };
 

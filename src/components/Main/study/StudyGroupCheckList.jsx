@@ -4,7 +4,7 @@ import styled from '@emotion/styled';
 
 const StyledList = styled(List)({
     width: '100%',
-    maxWidth: 360,
+    maxWidth: '600px',
     bgcolor: '#333'
 });
 
@@ -15,7 +15,7 @@ export default function StudyGroupCheckList({ studyGroups, handleToggle, checked
                 const { _id: id, groupName: name } = group;
                 const labelId = `checkbox-list-secondary-label-${id}`;
                 return (
-                    <ListItem key={id} disablePadding>
+                    <ListItem key={id}>
                         <ListItemButton onClick={handleToggle(id)} aria-labelledby={labelId}>
                             <ListItemText primary={`${name}`} />
                             <Checkbox

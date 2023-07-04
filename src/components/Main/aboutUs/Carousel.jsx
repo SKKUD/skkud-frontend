@@ -1,14 +1,17 @@
 import React from 'react';
+import { useMediaQuery } from '@mui/material';
 import styled from '@emotion/styled';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import Slider from 'react-slick';
 
 export default function Carousel(props) {
+    const match1024 = useMediaQuery('(min-width:1024px)');
     const imgList = props.images;
+    const slidesToShowN = match1024 ? 4 : 2.7;
 
     const settings = {
-        slidesToShow: 2.7,
+        slidesToShow: slidesToShowN,
         slidesToScroll: 1,
         speed: 500,
         autoplay: true,
@@ -19,6 +22,10 @@ export default function Carousel(props) {
 
     const ImgWrap = styled.div`
         margin-right: 40px;
+        @media (min-width: 1024px) {
+            margin-right: 20px;
+            margin-left: 20px;
+        }
     `;
 
     const SliderImg = styled.img`
@@ -28,6 +35,12 @@ export default function Carousel(props) {
         background-color: rgba(255, 255, 255, 0.2);
         margin: 5px;
         object-fit: cover;
+        @media (min-width: 1024px) {
+            min-width: 250px;
+            min-height: 250px;
+            width: 18vw;
+            height: 18vw;
+        }
     `;
 
     return (

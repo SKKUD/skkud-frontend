@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { Link } from 'react-router-dom';
 import SKKUDLOGO from '../../assets/SKKUD_LOGO.png';
 import styled from '@emotion/styled';
 import insta from '../../assets/insta.png';
@@ -12,6 +13,12 @@ const Typography = styled.div`
     align-items: center;
     > p {
         margin-top: 6px;
+    }
+
+    @media (min-width: 1024px) {
+        font-size: 16px;
+        line-height: 25px;
+        font-weight: 400;
     }
 `;
 
@@ -28,6 +35,12 @@ const FooterContainer = styled.div`
     padding-top: 16px;
     padding-left: 25px;
     padding-right: 23px;
+    @media (min-width: 1024px) {
+        min-width: 1000px;
+        width: 80%;
+        height: 200px;
+        padding-top: 40px;
+    }
 `;
 
 const TopDiv = styled.div`
@@ -47,12 +60,22 @@ const BottomDiv = styled.div`
 const Logo = styled.img`
     width: 100px;
     filter: opacity(0.5) drop-shadow(0 0 0 #000000);
+    @media (min-width: 1024px) {
+        width: 150px;
+    }
 `;
 
 const IconWrap = styled.div`
     height: 18px;
     & img:first-of-type {
         margin-right: 16px;
+    }
+
+    @media (min-width: 1024px) {
+        height: 25px;
+        img {
+            width: 25px;
+        }
     }
 `;
 
@@ -63,7 +86,13 @@ export default function Footer() {
                 <TopDiv>
                     <Logo src={SKKUDLOGO} alt="SKKUD" />
                     <IconWrap>
-                        <img src={insta} alt="instagram" />
+                        <a
+                            href="https://instagram.com/skku.devs"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                        >
+                            <img src={insta} alt="instagram" />
+                        </a>
                         <img src={sender} alt="send" />
                     </IconWrap>
                 </TopDiv>

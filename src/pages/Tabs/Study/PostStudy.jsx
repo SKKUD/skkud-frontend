@@ -12,6 +12,14 @@ import StudyImageInput from '../../../components/Main/study/StudyImageInput';
 import StudyTaskInput from '../../../components/Main/study/StudyTaskInput';
 import styled from '@emotion/styled';
 
+const Wrapper = styled.div`
+    @media (min-width: 1024px) {
+        width: 55%;
+        min-width: 1000px;
+        margin: 60px auto 150px;
+    }
+`;
+
 const StyledCard = styled(Card)`
     border-radius: 24px;
     padding-bottom: 40px;
@@ -39,7 +47,7 @@ export default function PostStudy() {
     const navigate = useNavigate();
     const navigateToStudy = () => {
         navigate('/maintab/study');
-        window.location.reload();
+        window.location.reload(true);
     };
     const [alertTitle, setAlertTitle] = useState(false);
     const [alertContent, setAlertContent] = useState(false);
@@ -111,6 +119,7 @@ export default function PostStudy() {
             setAlertContent(true);
         } else {
             const formData = new FormData();
+            formData.append('groupId', GroupId);
             formData.append('title', title);
             formData.append('content', content);
             formData.append('location', location);
@@ -125,7 +134,9 @@ export default function PostStudy() {
             }
             formData.append('studyTimeStart', studyTimeStart);
             formData.append('studyTimeEnd', studyTimeEnd);
-            images.map((image) => formData.append('images', image));
+            if (images.length > 0) {
+                images.map((image) => formData.append('images', image));
+            }
 
             createStudy(formData, GroupId);
             navigateToStudy();
@@ -133,7 +144,7 @@ export default function PostStudy() {
     };
 
     return (
-        <>
+        <Wrapper>
             <form encType="multipart/form-data">
                 <StyledCard>
                     <Container>
@@ -177,26 +188,58 @@ export default function PostStudy() {
                     </Container>
                 </StyledCard>
             </form>
-            <Snackbar open={alertTaskName} autoHideDuration={700} onClose={handleClose}>
+            <Snackbar
+                anchorOrigin={{
+                    vertical: 'bottom',
+                    horizontal: 'center'
+                }}
+                open={alertTaskName}
+                autoHideDuration={700}
+                onClose={handleClose}
+            >
                 <Alert severity="error" sx={{ width: '100%' }}>
                     이름을 입력하세요.
                 </Alert>
             </Snackbar>
-            <Snackbar open={alertTaskContent} autoHideDuration={700} onClose={handleClose}>
+            <Snackbar
+                anchorOrigin={{
+                    vertical: 'bottom',
+                    horizontal: 'center'
+                }}
+                open={alertTaskContent}
+                autoHideDuration={700}
+                onClose={handleClose}
+            >
                 <Alert severity="error" sx={{ width: '100%' }}>
                     과제 내용을 입력하세요.
                 </Alert>
             </Snackbar>
-            <Snackbar open={alertTitle} autoHideDuration={700} onClose={handleClose}>
+            <Snackbar
+                anchorOrigin={{
+                    vertical: 'bottom',
+                    horizontal: 'center'
+                }}
+                open={alertTitle}
+                autoHideDuration={700}
+                onClose={handleClose}
+            >
                 <Alert severity="error" sx={{ width: '100%' }}>
                     제목을 입력하세요.
                 </Alert>
             </Snackbar>
-            <Snackbar open={alertContent} autoHideDuration={700} onClose={handleClose}>
+            <Snackbar
+                anchorOrigin={{
+                    vertical: 'bottom',
+                    horizontal: 'center'
+                }}
+                open={alertContent}
+                autoHideDuration={700}
+                onClose={handleClose}
+            >
                 <Alert severity="error" sx={{ width: '100%' }}>
                     내용을 입력하세요.
                 </Alert>
             </Snackbar>
-        </>
+        </Wrapper>
     );
 }

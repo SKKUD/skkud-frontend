@@ -13,6 +13,10 @@ const ImageContainer = styled(Box)`
     &::-webkit-scrollbar {
         display: none;
     }
+
+    @media (min-width: 1024px) {
+        height: 340px;
+    }
 `;
 
 const ImageBox = styled(Box)`
@@ -22,6 +26,10 @@ const ImageBox = styled(Box)`
     border-radius: 5px;
     overflow: hidden;
     margin-right: 10px;
+    @media (min-width: 1024px) {
+        width: 320px;
+        height: 320px;
+    }
 `;
 
 const StyledImg = styled.img`

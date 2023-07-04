@@ -1,14 +1,64 @@
 import * as React from 'react';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Box, Button, IconButton, Snackbar, TextField, Alert } from '@mui/material';
+import styled from '@emotion/styled';
+import { useMediaQuery, Box, Button, IconButton, Snackbar, TextField, Alert } from '@mui/material';
 import { PhotoCamera } from '@mui/icons-material';
 import PreImages from '../../../components/Main/project/PreImages';
 import ContributorList from '../../../components/Main/project/ContributorList';
 import { useProjectPostApi } from '../../../hooks/Project';
 import { useUsersApi } from '../../../hooks/Member';
 
+const FormWrap = styled.div`
+    @media (min-width: 1024px) {
+        width: 60%;
+        min-width: 900px;
+        margin: 50px auto 100px;
+    }
+`;
+
+const StyledTitle = styled.div`
+    margin: 80px 0 30px;
+    color: #00ffa8;
+    font-size: 40px;
+    font-weight: 600;
+    line-height: 104.836%;
+`;
+
+const ImgWrap = styled(Box)`
+    margin-bottom: 12px;
+    border: 1px solid #00ffa8;
+    box-sizing: border-box;
+    height: 205px;
+    overflow: hidden;
+    position: relative;
+    @media (min-width: 1024px) {
+        height: 400px;
+    }
+`;
+
+const PreviewLabel = styled.div`
+    width: 150px;
+    height: 30px;
+    line-height: 30px;
+    text-align: center;
+    background-color: #000;
+    color: #fff;
+    margin: 5px;
+    position: absolute;
+    top: 0;
+    right: 0;
+`;
+
+const StyledSnackbar = styled(Snackbar)`
+    @media (min-width: 1024px) {
+        width: 60%;
+    }
+`;
+
 export default function PostProject() {
+    const match1024 = useMediaQuery('(min-width:1024px)');
+
     const [postProjectPost] = useProjectPostApi();
     const navigate = useNavigate();
     const navigateToProject = () => {
@@ -67,7 +117,7 @@ export default function PostProject() {
 
             formData.append('developPeriod', period);
             formData.append('link', link);
-            formData.append('initializeContributors', checked);
+            checked.map((user) => formData.append('initializeContributors', user));
             images.map((image) => formData.append('images', image));
 
             postProjectPost(formData).then(() => {
@@ -93,20 +143,14 @@ export default function PostProject() {
         return <ContributorList users={users} handleToggle={handleToggle} checked={checked} />;
     }
     return (
-        <>
+        <FormWrap>
+            {match1024 && <StyledTitle>Post Project</StyledTitle>}
             <form encType="multipart/form-data">
                 {PreviewImg.length !== 0 ? (
-                    <Box
-                        mb="12px"
-                        sx={{
-                            border: '1px solid #00FFA8',
-                            boxSizing: 'border-box',
-                            height: '205px',
-                            overflow: 'hidden'
-                        }}
-                    >
+                    <ImgWrap>
+                        <PreviewLabel>preview image</PreviewLabel>
                         <PreImages imgFiles={PreviewImg} />
-                    </Box>
+                    </ImgWrap>
                 ) : null}
                 <TextField
                     fullWidth
@@ -172,21 +216,45 @@ export default function PostProject() {
                     </Button>
                 </Box>
             </form>
-            <Snackbar open={alertTitle} autoHideDuration={700} onClose={handleClose}>
+            <StyledSnackbar
+                anchorOrigin={{
+                    vertical: 'bottom',
+                    horizontal: 'center'
+                }}
+                open={alertTitle}
+                autoHideDuration={700}
+                onClose={handleClose}
+            >
                 <Alert severity="error" sx={{ width: '100%' }}>
                     제목을 입력하세요.
                 </Alert>
-            </Snackbar>
-            <Snackbar open={alertContent} autoHideDuration={700} onClose={handleClose}>
+            </StyledSnackbar>
+            <StyledSnackbar
+                anchorOrigin={{
+                    vertical: 'bottom',
+                    horizontal: 'center'
+                }}
+                open={alertContent}
+                autoHideDuration={700}
+                onClose={handleClose}
+            >
                 <Alert severity="error" sx={{ width: '100%' }}>
                     내용을 입력하세요.
                 </Alert>
-            </Snackbar>
-            <Snackbar open={alertPeriod} autoHideDuration={700} onClose={handleClose}>
+            </StyledSnackbar>
+            <StyledSnackbar
+                anchorOrigin={{
+                    vertical: 'bottom',
+                    horizontal: 'center'
+                }}
+                open={alertPeriod}
+                autoHideDuration={700}
+                onClose={handleClose}
+            >
                 <Alert severity="error" sx={{ width: '100%' }}>
                     개발 기간을 입력하세요.
                 </Alert>
-            </Snackbar>
-        </>
+            </StyledSnackbar>
+        </FormWrap>
     );
 }

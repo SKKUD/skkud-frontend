@@ -20,6 +20,14 @@ const Container = styled.div`
     align-items: center;
     min-height: calc(100vh - 175px);
     margin-top: 80px;
+
+    @media (min-width: 1024px) {
+        width: 500px;
+        margin: 100px auto 50px;
+        border-radius: 25px;
+        background-color: #292929;
+        box-shadow: 0px 5px 5px 0px rgba(0, 0, 0, 0.15);
+    }
 `;
 
 const LoginTitle = styled(Typography)`
@@ -50,7 +58,7 @@ const LaterLogin = styled.div`
 `;
 
 export default function Login() {
-    const [errorMsg, setErrorMsg] = useState('');
+    const [isSnackbarOpen, setIsSnackbarOpen] = useState(false);
     const [ID, setID] = useState('');
     const [PW, setPW] = useState('');
     const [cookies, setCookie, removeCookie] = useCookies([]);
@@ -63,7 +71,7 @@ export default function Login() {
         e.preventDefault();
 
         await axios
-            .post(BASE_URI + '/auth/login', { userID: ID, passwd: PW })
+            .post(BASE_URI() + '/auth/login', { userID: ID, passwd: PW })
             .then((userData) => {
                 if (userData.data.loginSuccess === true) {
                     setCookie('id', ID);
@@ -72,8 +80,7 @@ export default function Login() {
             })
             .catch((error) => {
                 console.log('error', error);
-                // alert(error.response.data.message);
-                setErrorMsg(error.response.data.message);
+                setIsSnackbarOpen(true);
             });
     };
 
@@ -81,16 +88,17 @@ export default function Login() {
         removeCookie('id');
         authCheck();
         await axios
-            .post(BASE_URI + '/auth/logout')
+            .post(BASE_URI() + '/auth/logout')
             .then((userData) => console.log(userData))
             .catch((error) => console.log(error));
         navigateToMainTab();
+        setIsSnackbarOpen(false);
     };
 
     const authCheck = async () => {
         const token = cookies.id;
         try {
-            const res = await axios.post(BASE_URI + '/auth/verify');
+            const res = await axios.post(BASE_URI() + '/auth/verify');
             if (res.data.data.userID !== token) logoutBtn();
         } catch (error) {
             console.log('auth check error');
@@ -135,9 +143,16 @@ export default function Login() {
                 </>
             )}
             <Footer />
-            <Snackbar open={errorMsg} autoHideDuration={1000}>
+            <Snackbar
+                open={isSnackbarOpen}
+                anchorOrigin={{
+                    vertical: 'top',
+                    horizontal: 'center'
+                }}
+                autoHideDuration={1000}
+            >
                 <Alert severity="error" sx={{ width: '100%' }}>
-                    {errorMsg}
+                    로그인에 실패하였습니다. 다시 시도해주세요.
                 </Alert>
             </Snackbar>
         </div>

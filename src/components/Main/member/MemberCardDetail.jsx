@@ -12,12 +12,17 @@ const StyledCard = styled(Card)`
     margin: 0 auto;
     margin-top: -25px;
     border-radius: 20px;
-    padding-top: 40px;
+    padding-top: 30px;
     padding-bottom: 20px;
     padding-left: 12px;
     padding-right: 12px;
     background-color: #303030;
     z-index: -1;
+    @media (min-width: 1024px) {
+        margin-left: 0;
+        width: 97%;
+        padding: 30px;
+    }
 `;
 
 const ProjectList = styled.div`
@@ -29,10 +34,18 @@ const ProjectList = styled.div`
 const ProjectTitle = styled(Typography)`
     font-weight: 700;
     font-size: 0.75rem;
+    @media (min-width: 1024px) {
+        font-size: 16px;
+        font-weight: 600;
+    }
 `;
 
 const ProjectCount = styled.span`
     font-size: 0.563rem;
+    @media (min-width: 1024px) {
+        font-size: 12px;
+        opacity: 0.8;
+    }
 `;
 
 const StyledImageList = styled(ImageList)`
@@ -54,23 +67,26 @@ const StyledImg = styled.img`
 `;
 
 const SkillSet = styled.div`
+    width: 100%;
     display: flex;
     flex-wrap: wrap;
+    margin-top: 5px;
 `;
 
-const SkillBtn = styled.button`
-    height: 22px;
+const SkillBtn = styled.div`
+    width: auto;
     border: 1px solid #00ffa8;
     border-radius: 33px;
     background-color: transparent;
     color: white;
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    padding: 4px 18px;
     gap: 10px;
     margin: 3px;
+    padding: 1px 16px;
+
+    @media (min-width: 1024px) {
+        padding: 1.5px 18px;
+        font-weight: 600;
+    }
 `;
 
 export default function MemberCardDetail(props) {

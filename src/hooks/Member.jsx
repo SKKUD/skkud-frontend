@@ -4,7 +4,7 @@ import axios from 'axios';
 const BASE_URI = () => {
     if (process.env.REACT_APP_ENV === 'production') return process.env.REACT_APP_PROD_URI;
     else return process.env.REACT_APP_DEV_URI;
-}
+};
 
 export const useUserPostDetailApi = (index) => {
     const [project, setProject] = useState([]);
@@ -59,15 +59,18 @@ export const useUsersApi = () => {
 };
 
 export const useMemberDeleteApi = () => {
-    const logout = () => {
-        axios
-            .post(BASE_URI() + '/auth/logout')
-            .then((userData) => console.log(userData))
-            .catch((error) => console.log(error));
+    const logout = async () => {
+        try {
+            await axios.post(BASE_URI() + '/auth/logout');
+        } catch (error) {
+            console.log('Logout error:', error);
+        }
     };
 
     const deleteUser = (id) => {
-        axios.delete(`${BASE_URI()}/users/${id}`).then((response) => console.log('delete', response));
+        axios
+            .delete(`${BASE_URI()}/users/${id}`)
+            .then((response) => console.log('delete', response));
     };
 
     return [logout, deleteUser];

@@ -14,7 +14,7 @@ const Track = styled.div`
 function confirmModal() {
     if (window.confirm('정말 삭제하시겠습니까?')) {
         useAppliedUserDeleteApi();
-        window.location.reload();
+        window.location.reload(true);
     } else {
         console.log('취소. 변화 없음');
     }

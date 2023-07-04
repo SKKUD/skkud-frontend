@@ -9,7 +9,7 @@ export default function StudyDeleteBtn({ id }) {
     const navigate = useNavigate();
     const navigateToStudy = () => {
         navigate('/maintab/study');
-        window.location.reload();
+        window.location.reload(true);
     };
 
     return (

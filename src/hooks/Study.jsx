@@ -6,7 +6,7 @@ import dayjs from 'dayjs';
 const BASE_URI = () => {
     if (process.env.REACT_APP_ENV === 'production') return process.env.REACT_APP_PROD_URI;
     else return process.env.REACT_APP_DEV_URI;
-}
+};
 
 export const useStudyGroupsApi = () => {
     const [studyGroups, setStudyGroups] = useState([]);
@@ -54,25 +54,31 @@ export const useStudiesApi = () => {
         setStudy(data);
     };
 
-    const createStudy = (body, studyGroupId) => {
-        axios
-            .post(`${BASE_URI()}/study/studies/${studyGroupId}`, body)
-            .then((data) => console.log(data))
-            .catch((error) => console.log(error));
+    const createStudy = async (body) => {
+        try {
+            const response = await axios.post(`${BASE_URI()}/study/studies`, body);
+            console.log(response.data);
+        } catch (error) {
+            console.log(error);
+        }
     };
 
-    const updateStudy = (body, id) => {
-        axios
-            .patch(`${BASE_URI()}/study/studies/${id}`, body)
-            .then((data) => console.log(data))
-            .catch((error) => console.log(error));
+    const updateStudy = async (body, id) => {
+        try {
+            const response = await axios.patch(`${BASE_URI()}/study/studies/${id}`, body);
+            console.log(response.data);
+        } catch (error) {
+            console.log(error);
+        }
     };
 
-    const deleteStudy = (id) => {
-        axios
-            .delete(`${BASE_URI()}/study/studies/${id}`)
-            .then((data) => console.log(data))
-            .catch((error) => console.log(error));
+    const deleteStudy = async (id) => {
+        try {
+            const response = await axios.delete(`${BASE_URI()}/study/studies/${id}`);
+            console.log(response.data);
+        } catch (error) {
+            console.log(error);
+        }
     };
 
     useEffect(() => {

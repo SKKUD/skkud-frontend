@@ -1,5 +1,4 @@
-import React from 'react';
-import { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import IconButton from '@mui/material/IconButton';
 import DeleteIcon from '@mui/icons-material/Delete';
 import GroupAddIcon from '@mui/icons-material/GroupAdd';
@@ -25,6 +24,7 @@ export default function StudyGroupForm(id) {
     const [task, setTask] = useState('');
     const [open, setOpen] = useState(false);
     const GroupId = id.id;
+    const formCardRef = useRef(null);
 
     function SGEditBtn() {
         return (
@@ -88,8 +88,21 @@ export default function StudyGroupForm(id) {
         );
     }
 
+    useEffect(() => {
+        function handleClickOutside(event) {
+            if (formCardRef.current && !formCardRef.current.contains(event.target)) {
+                setOpen(false);
+            }
+        }
+
+        document.addEventListener('mousedown', handleClickOutside);
+        return () => {
+            document.removeEventListener('mousedown', handleClickOutside);
+        };
+    }, []);
+
     return (
-        <div>
+        <div ref={formCardRef}>
             <BtnWrap>
                 <SGEditBtn />
                 <SGDeleteBtn />

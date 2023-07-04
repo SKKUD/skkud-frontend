@@ -51,12 +51,28 @@ export default function MemberDeleteBtn(_id) {
             <StyledButton variant="contained" color="background" onClick={deleteEvent}>
                 계정 삭제
             </StyledButton>
-            <Snackbar open={alert} autoHideDuration={1500} onClose={() => setError(false)}>
+            <Snackbar
+                anchorOrigin={{
+                    vertical: 'bottom',
+                    horizontal: 'center'
+                }}
+                open={alert}
+                autoHideDuration={1500}
+                onClose={() => setError(false)}
+            >
                 <Alert severity="error" sx={{ width: '100%' }}>
                     계정이 삭제되었습니다.
                 </Alert>
             </Snackbar>
-            <Snackbar open={error} autoHideDuration={1500} onClose={() => setError(false)}>
+            <Snackbar
+                anchorOrigin={{
+                    vertical: 'bottom',
+                    horizontal: 'center'
+                }}
+                open={error}
+                autoHideDuration={1500}
+                onClose={() => setError(false)}
+            >
                 <Alert severity="warning" sx={{ width: '100%' }}>
                     계정 삭제를 취소합니다.
                 </Alert>

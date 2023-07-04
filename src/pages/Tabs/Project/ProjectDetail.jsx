@@ -14,6 +14,12 @@ import EditBtn from '../../../components/common/EditBtn';
 const CardWrap = styled(Card)`
     border-radius: 24px;
     padding-bottom: 40px;
+
+    @media (min-width: 1024px) {
+        width: 60%;
+        min-width: 900px;
+        margin: 50px auto 100px;
+    }
 `;
 
 const StyledEditButton = styled(Link)`
@@ -27,12 +33,21 @@ const DetailBox = styled(Box)`
     flex-direction: column;
     padding-left: 21px;
     margin-top: 20px;
+    @media (min-width: 1024px) {
+        padding-left: 45px;
+        margin-top: 40px;
+    }
 `;
 
 const LinkLabel = styled(Box)`
     line-height: 14.32px;
     font-weight: 600;
     font-size: 0.75rem;
+
+    @media (min-width: 1024px) {
+        font-size: 20px;
+        line-height: 24px;
+    }
 `;
 
 const LinkWrap = styled(Box)`
@@ -40,12 +55,19 @@ const LinkWrap = styled(Box)`
     margin-top: 9px;
     margin-bottom: 27px;
     font-size: 0.75rem;
+    @media (min-width: 1024px) {
+        font-size: 18px;
+        line-height: 20px;
+    }
 `;
 
 const MemberListWrapper = styled.div`
     display: flex;
     line-height: 14.32px;
     flex-direction: column;
+    @media (min-width: 1024px) {
+        margin: 20px 0px;
+    }
 `;
 
 const MemberListLabel = styled.div`
@@ -55,11 +77,19 @@ const MemberListLabel = styled.div`
 const MemberListTitle = styled.div`
     font-weight: 600;
     font-size: 0.75rem;
+    @media (min-width: 1024px) {
+        font-size: 20px;
+        line-height: 24px;
+    }
 `;
 
 const MemberListCount = styled.div`
     margin-left: 12px;
     font-size: 0.563rem;
+    @media (min-width: 1024px) {
+        font-size: 14px;
+        line-height: 24px;
+    }
 `;
 
 const MemberListItem = styled.div`
@@ -88,10 +118,19 @@ const MemberName = styled.div`
     font-size: 0.6rem;
     font-weight: 500;
     margin-top: 8px;
+    @media (min-width: 1024px) {
+        font-size: 16px;
+        line-height: 20px;
+    }
 `;
 
 const MemberTrack = styled.div`
     font-size: 0.563rem;
+    @media (min-width: 1024px) {
+        font-size: 12px;
+        line-height: 20px;
+        font-weight: 600;
+    }
 `;
 
 const MemberListContainer = styled.div`
@@ -110,6 +149,11 @@ const SkillChipLabel = styled(Box)`
     font-weight: 600;
     font-size: 0.75rem;
     margin-bottom: 5px;
+    @media (min-width: 1024px) {
+        font-size: 20px;
+        line-height: 24px;
+        margin-bottom: 15px;
+    }
 `;
 
 const ChipStack = styled(Stack)`
@@ -117,6 +161,10 @@ const ChipStack = styled(Stack)`
     flex-wrap: wrap;
     width: 270px;
     margin-top: 12px;
+    @media (min-width: 1024px) {
+        width: 100%;
+        margin-bottom: 30px;
+    }
 `;
 
 const StyledChip = styled((props) => <Chip {...props} />)(() => ({
@@ -129,6 +177,11 @@ const StyledChip = styled((props) => <Chip {...props} />)(() => ({
     '& span': {
         fontWeight: 600,
         color: '#FFF'
+    },
+
+    '@media (min-width: 1024px)': {
+        height: '26px',
+        fontSize: '14px'
     }
 }));
 

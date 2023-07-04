@@ -7,7 +7,8 @@ import styled from '@emotion/styled';
 
 const StyledForm = styled('form')({
     width: '90%',
-    margin: '0 auto'
+    margin: '0 auto',
+    maxWidth: '600px'
 });
 
 const StyledTitle = styled('div')({
@@ -53,7 +54,7 @@ export default function StudyGroupEdit(id) {
             },
             GroupId
         );
-        window.location.reload();
+        window.location.reload(true);
     };
 
     return (

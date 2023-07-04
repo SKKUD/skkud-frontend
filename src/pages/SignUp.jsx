@@ -12,6 +12,17 @@ const SignupContainer = styled.div`
     min-height: calc(100vh - 155px);
     padding-top: 70px;
     margin-bottom: 30px;
+
+    @media (min-width: 1024px) {
+        width: 500px;
+        min-height: 600px;
+        padding: 30px;
+        padding-bottom: 60px;
+        margin: 100px auto 50px;
+        border-radius: 25px;
+        background-color: #292929;
+        box-shadow: 0px 5px 5px 0px rgba(0, 0, 0, 0.15);
+    }
 `;
 
 export const PageContext = createContext(null);

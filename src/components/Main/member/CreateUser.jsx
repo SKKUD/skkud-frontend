@@ -99,17 +99,41 @@ export default function CreateUser() {
                     </StyledButton>
                 </FormContainer>
             </form>
-            <Snackbar open={alert} autoHideDuration={700} onClose={handleClose}>
+            <Snackbar
+                anchorOrigin={{
+                    vertical: 'top',
+                    horizontal: 'center'
+                }}
+                open={alert}
+                autoHideDuration={700}
+                onClose={handleClose}
+            >
                 <Alert severity="error" sx={{ width: '100%' }}>
                     입력을 완료하세요.
                 </Alert>
             </Snackbar>
-            <Snackbar open={emailAlert} autoHideDuration={700} onClose={handleClose}>
+            <Snackbar
+                anchorOrigin={{
+                    vertical: 'top',
+                    horizontal: 'center'
+                }}
+                open={emailAlert}
+                autoHideDuration={700}
+                onClose={handleClose}
+            >
                 <Alert severity="error" sx={{ width: '100%' }}>
                     이메일 형식에 맞춰 입력하세요.
                 </Alert>
             </Snackbar>
-            <Snackbar open={pwAlert} autoHideDuration={700} onClose={handleClose}>
+            <Snackbar
+                anchorOrigin={{
+                    vertical: 'top',
+                    horizontal: 'center'
+                }}
+                open={pwAlert}
+                autoHideDuration={700}
+                onClose={handleClose}
+            >
                 <Alert severity="error" sx={{ width: '100%' }}>
                     동일한 비밀번호가 아닙니다.
                 </Alert>

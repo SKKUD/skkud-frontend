@@ -4,13 +4,19 @@ import { styled } from '@mui/material/styles';
 import ToggleButton from '@mui/material/ToggleButton';
 import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
 
-const StyledToggleButtonGroup = styled(ToggleButtonGroup)({
-    display: 'flex',
-    width: '100%',
-    flexDirection: 'row',
-    justifyContent: 'space-evenly',
-    alignItems: 'center'
-});
+const StyledToggleButtonGroup = styled(ToggleButtonGroup)`
+    display: flex;
+    width: 100%;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+
+    @media (min-width: 1024px) {
+        width: 440px;
+        justify-content: space-between;
+        margin: 15px 0px;
+    }
+`;
 
 const StyledToggleButton = styled(ToggleButton)({
     padding: '4px 18px',
@@ -30,6 +36,11 @@ const StyledToggleButton = styled(ToggleButton)({
         fontSize: '0.7rem',
         margin: '0px',
         fontWeight: '600'
+    },
+    '@media (min-width: 1024px)': {
+        padding: '6px 30px',
+        height: '28px',
+        fontSize: '14px'
     }
 });
 
