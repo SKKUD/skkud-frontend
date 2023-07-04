@@ -10,9 +10,9 @@ const PostBtnWrap = styled(Box)`
     @media (min-width: 1024px) {
         width: 300px;
         display: block;
-        position: relative;
-        top: 130px;
-        left: 400px;
+        position: absolute;
+        top: 155px;
+        left: 680px;
     }
 `;
 
