@@ -44,7 +44,7 @@ export default function StudyGroupDelete() {
 
     const handleSubmit = () => {
         deleteStudyGroup(checked[0]);
-        window.location.reload();
+        window.location.reload(true);
     };
     return (
         <StyledWrapper>

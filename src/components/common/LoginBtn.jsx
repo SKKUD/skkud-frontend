@@ -38,7 +38,7 @@ export default function LoginBtn() {
 
     const navigateToMainTab = () => {
         navigate('/maintab');
-        window.location.reload();
+        window.location.reload(true);
     };
 
     const authCheck = async () => {

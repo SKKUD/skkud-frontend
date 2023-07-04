@@ -4,7 +4,7 @@ import axios from 'axios';
 const BASE_URI = () => {
     if (process.env.REACT_APP_ENV === 'production') return process.env.REACT_APP_PROD_URI;
     else return process.env.REACT_APP_DEV_URI;
-}
+};
 
 export const useApplierApi = () => {
     const [appliers, setAppliers] = useState({ title: '', introduction: '', questions: [] });
@@ -19,7 +19,7 @@ export const useApplierApi = () => {
             .patch(BASE_URI() + '/applies/appliers/', appliers)
             .then(() => {
                 fetchApplier();
-                window.location.reload();
+                window.location.reload(true);
             })
             .catch((error) => {
                 alert('응애');

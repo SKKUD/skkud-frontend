@@ -47,7 +47,7 @@ export default function EditStudy() {
     const navigate = useNavigate();
     const navigateToStudy = () => {
         navigate('/maintab/study');
-        window.location.reload();
+        window.location.reload(true);
     };
     const [alertTitle, setAlertTitle] = useState(false);
     const [alertContent, setAlertContent] = useState(false);

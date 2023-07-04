@@ -86,7 +86,7 @@ export default function EditApplicantScore({ documentScores, interviewScores, id
             documentScores: Dscore,
             interviewScores: Iscore
         });
-        window.location.reload();
+        window.location.reload(true);
     };
 
     return (

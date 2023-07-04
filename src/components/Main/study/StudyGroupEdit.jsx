@@ -54,7 +54,7 @@ export default function StudyGroupEdit(id) {
             },
             GroupId
         );
-        window.location.reload();
+        window.location.reload(true);
     };
 
     return (
