@@ -65,6 +65,9 @@ const MemberListWrapper = styled.div`
     display: flex;
     line-height: 14.32px;
     flex-direction: column;
+    @media (min-width: 1024px) {
+        margin: 20px 0px;
+    }
 `;
 
 const MemberListLabel = styled.div`
@@ -126,6 +129,7 @@ const MemberTrack = styled.div`
     @media (min-width: 1024px) {
         font-size: 12px;
         line-height: 20px;
+        font-weight: 600;
     }
 `;
 
@@ -157,6 +161,10 @@ const ChipStack = styled(Stack)`
     flex-wrap: wrap;
     width: 270px;
     margin-top: 12px;
+    @media (min-width: 1024px) {
+        width: 100%;
+        margin-bottom: 30px;
+    }
 `;
 
 const StyledChip = styled((props) => <Chip {...props} />)(() => ({
@@ -169,6 +177,11 @@ const StyledChip = styled((props) => <Chip {...props} />)(() => ({
     '& span': {
         fontWeight: 600,
         color: '#FFF'
+    },
+
+    '@media (min-width: 1024px)': {
+        height: '26px',
+        fontSize: '14px'
     }
 }));
 
