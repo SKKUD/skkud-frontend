@@ -119,6 +119,7 @@ export default function PostStudy() {
             setAlertContent(true);
         } else {
             const formData = new FormData();
+            formData.append('groupId', GroupId);
             formData.append('title', title);
             formData.append('content', content);
             formData.append('location', location);
@@ -133,7 +134,9 @@ export default function PostStudy() {
             }
             formData.append('studyTimeStart', studyTimeStart);
             formData.append('studyTimeEnd', studyTimeEnd);
-            images.map((image) => formData.append('images', image));
+            if (images.length > 0) {
+                images.map((image) => formData.append('images', image));
+            }
 
             createStudy(formData, GroupId);
             navigateToStudy();

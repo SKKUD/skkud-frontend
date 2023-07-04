@@ -74,7 +74,6 @@ export default function EditStudy() {
             initialTask.push({ task: taskContents[i], name: taskNames[i] });
         }
         setTask(initialTask);
-        console.log(taskContents);
     }, [taskContents]);
 
     const handleChangeStart = (newValue) => {
