@@ -18,6 +18,7 @@ import Snackbar from '@mui/material/Snackbar';
 
 const FormWrap = styled.div`
     width: 100%;
+    min-height: calc(100vh - 200px);
     margin-top: 60px;
     padding: 40px 20px 0;
     display: flex;
@@ -28,7 +29,7 @@ const FormWrap = styled.div`
         width: 60%;
         min-width: 900px;
         margin: 120px auto 100px;
-        padding-top: 60px;
+        padding-top: 80px;
         background-color: #292929;
         border-radius: 25px;
         box-shadow: 0px 5px 5px 0px rgba(0, 0, 0, 0.15);
@@ -130,7 +131,7 @@ export default function ApplicationForm() {
 
     return (
         <>
-            <Box>
+            <Box sx={{ padding: '30px 0px 0px' }}>
                 <Header />
                 {submit === '' ? (
                     <FormWrap>
@@ -144,7 +145,6 @@ export default function ApplicationForm() {
                                     style={{
                                         width: '100%',
                                         maxWidth: '500px',
-                                        minHeight: `calc(100vh - 200px)`,
                                         display: 'flex',
                                         flexDirection: 'column',
                                         alignItems: 'center'
@@ -369,15 +369,7 @@ export default function ApplicationForm() {
                         )}
                     </FormWrap>
                 ) : (
-                    <FormWrap
-                    // style={{
-                    //     display: 'flex',
-                    //     flexDirection: 'column',
-                    //     alignItems: 'center',
-                    //     textAlign: 'center',
-                    //     marginTop: '120px'
-                    // }}
-                    >
+                    <FormWrap>
                         <div style={{ fontSize: '1.8rem' }}>지원이 접수되었습니다!</div>
                         <div style={{ fontSize: '1.2rem', marginTop: '5px', color: '#00FFA8' }}>
                             지원 완료!

@@ -5,6 +5,7 @@ import styled from '@emotion/styled';
 import MemberCard from './MemberCard';
 import { useUsersApi } from '../../../hooks/Member';
 import MemberNav from './MemberNav';
+import Loading from '../../common/Loading';
 
 const Container = styled.div`
     @media (min-width: 1024px) {
@@ -36,7 +37,7 @@ const CardWrap = styled.div`
 
 export default function MemberList() {
     const match1024 = useMediaQuery('(min-width:1024px)');
-    const [users] = useUsersApi();
+    const [users, loading] = useUsersApi();
 
     const [trackTab, setTrackTab] = useState('frontend');
     const [data, setData] = useState([]);
@@ -50,16 +51,22 @@ export default function MemberList() {
             {match1024 ? <WeAreSKKUD>We Are SKKU.D</WeAreSKKUD> : null}
             <MemberNav trackTab={trackTab} setTrackTab={setTrackTab} />
             <CardWrap>
-                {data.map((member) => (
-                    <MemberCard
-                        key={member.userID}
-                        id={member.userID}
-                        name={member.username}
-                        engname={member.usernameEng}
-                        img={member.image}
-                        {...member}
-                    />
-                ))}
+                {loading ? (
+                    <Loading />
+                ) : data.length > 0 ? (
+                    data.map((member) => (
+                        <MemberCard
+                            key={member.userID}
+                            id={member.userID}
+                            name={member.username}
+                            engname={member.usernameEng}
+                            img={member.image}
+                            {...member}
+                        />
+                    ))
+                ) : (
+                    <p style={{ fontWeight: '600' }}>No members found.</p>
+                )}
             </CardWrap>
         </Container>
     );

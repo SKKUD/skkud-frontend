@@ -10,10 +10,21 @@ const StyledBox = styled(Box)`
     & > :not(style) {
         margin: 1rem;
     }
+    padding: 20px 30px;
     overflow: hidden;
     display: flex;
     flex-direction: column;
     align-items: center;
+
+    @media (min-width: 1024px) {
+        width: 500px;
+        height: 600px;
+        margin: 100px auto 100px;
+        padding: 60px;
+        border-radius: 25px;
+        background-color: #292929;
+        box-shadow: 0px 5px 5px 0px rgba(0, 0, 0, 0.15);
+    }
 `;
 
 const StyledTypography = styled(Typography)`

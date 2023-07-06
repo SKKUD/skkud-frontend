@@ -22,7 +22,6 @@ export const useApplierApi = () => {
                 window.location.reload(true);
             })
             .catch((error) => {
-                alert('응애');
                 alert(error.response.data.error);
             });
     };

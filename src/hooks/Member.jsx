@@ -46,16 +46,23 @@ export const useUserSkillsApi = (index) => {
 
 export const useUsersApi = () => {
     const [users, setUsers] = useState([]);
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        const fetchEvents = async () => {
-            const res = await axios.get(BASE_URI() + '/users');
-            setUsers(res.data.data.users);
+        const fetchUsers = async () => {
+            try {
+                const res = await axios.get(BASE_URI() + '/users');
+                setUsers(res.data.data.users);
+            } catch (error) {
+                console.error(error);
+            } finally {
+                setLoading(false);
+            }
         };
-        fetchEvents();
+        fetchUsers();
     }, []);
 
-    return [users];
+    return [users, loading]; // users와 loading 상태를 함께 반환
 };
 
 export const useMemberDeleteApi = () => {
