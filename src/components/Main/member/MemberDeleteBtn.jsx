@@ -17,7 +17,7 @@ const StyledButton = styled(Button)`
     font-size: 11px;
     padding: 4px 14px;
     gap: 10px;
-    margin-top: 30px;
+    margin: 30px 0px;
 `;
 
 export default function MemberDeleteBtn(_id) {

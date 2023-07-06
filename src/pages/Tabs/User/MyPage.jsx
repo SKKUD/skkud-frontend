@@ -28,6 +28,15 @@ const FormWrapper = styled(Box)`
     justify-content: center;
     align-items: center;
 
+    @media (min-width: 1024px) {
+        width: 500px;
+        margin: 60px auto 50px;
+        padding: 50px;
+        border-radius: 25px;
+        background-color: #292929;
+        box-shadow: 0px 5px 5px 0px rgba(0, 0, 0, 0.15);
+    }
+
     .title {
         text-align: center;
     }
