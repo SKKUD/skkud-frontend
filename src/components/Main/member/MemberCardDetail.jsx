@@ -49,10 +49,11 @@ const ProjectCount = styled.span`
 `;
 
 const StyledImageList = styled(ImageList)`
-    display: grid;
+    display: flex;
+    /*     
     grid-auto-flow: column;
     grid-template-columns: repeat(auto-fill);
-    justify-content: start;
+    justify-content: flex-start; */
     ::-webkit-scrollbar {
         display: none;
     }
