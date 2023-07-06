@@ -113,7 +113,7 @@ export default function MemberCardDetail(props) {
                 <ProjectCount>&nbsp; 총 {projectList.length}개</ProjectCount>
                 <StyledImageList>
                     {projectList.map((item) => (
-                        <NavLink key={item[1]} to={`/maintab/projectdetail/${item[1]}`}>
+                        <NavLink key={item[1]} to={`/maintab/project/${item[1]}`}>
                             <StyledImg key={item[1]} src={item[0]} alt={item[1]} />
                         </NavLink>
                     ))}
