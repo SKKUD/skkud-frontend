@@ -131,7 +131,7 @@ export default function ApplicationForm() {
 
     return (
         <>
-            <Box sx={{ padding: '30px 0px' }}>
+            <Box sx={{ padding: '30px 0px 0px' }}>
                 <Header />
                 {submit === '' ? (
                     <FormWrap>

@@ -14,7 +14,7 @@ const StyledButtonBase = styled(ButtonBase)`
 
 const StyledCard = styled(Card)`
     width: 100%;
-    margintop: 13;
+    margin-top: 13;
     border-radius: 15px;
     padding: 20px;
     display: flex;
