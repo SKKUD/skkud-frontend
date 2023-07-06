@@ -31,7 +31,6 @@ export default function EditApplicationForm() {
                 <Typography variant="h6">질문</Typography>
                 <Button
                     onClick={() => {
-                        console.log(appliers);
                         setAppliers({ ...appliers, questions: [...appliers.questions, ''] });
                     }}
                 >
