@@ -49,7 +49,6 @@ export default function NotFound() {
         navigate('/maintab');
     };
     const location = useLocation();
-    console.log(location.pathname.substring(1, 8));
     function IsMainTab() {
         if (location.pathname.substring(1, 8) === 'maintab') return false;
         else return true;
