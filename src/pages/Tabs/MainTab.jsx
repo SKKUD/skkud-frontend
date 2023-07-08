@@ -18,6 +18,7 @@ import Footer from '../../components/common/Footer';
 import MyPageDetail from './User/MyPageDetail';
 import MyPage from './User/MyPage';
 import MainTabs from '../../components/Main/MainTabs';
+import NotFound from '../NotFound';
 
 function TabPanel(props) {
     const { children, value, index, ...other } = props;
@@ -81,6 +82,7 @@ function MainTab() {
                     <Route path="study/:index" element={<StudyContent />} />
                     <Route path="study/edit/:index" element={<EditStudy />} />
                     <Route path="study/post" element={<PostStudy />} />
+                    <Route path="/*" element={<NotFound />} />
                 </Routes>
             </TabPanelContainer>
 

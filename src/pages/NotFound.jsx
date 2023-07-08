@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { useNavigate } from 'react-router';
+import { useLocation } from 'react-router-dom';
 import { Button } from '@mui/material';
 import ArrowRightAltIcon from '@mui/icons-material/ArrowRightAlt';
 import Footer from '../components/common/Footer';
@@ -47,9 +48,16 @@ export default function NotFound() {
     const navigateToMaintab = () => {
         navigate('/maintab');
     };
+    const location = useLocation();
+    console.log(location.pathname.substring(1, 8));
+    function IsMainTab() {
+        if (location.pathname.substring(1, 8) === 'maintab') return false;
+        else return true;
+    }
+
     return (
         <>
-            <Header />
+            {IsMainTab() && <Header />}
 
             <Container>
                 <Image404 src={Img404} alt="404 image" />
@@ -61,7 +69,7 @@ export default function NotFound() {
                 </Button>
             </Container>
 
-            <Footer />
+            {IsMainTab() && <Footer />}
         </>
     );
 }
