@@ -30,7 +30,7 @@ const StyledTabs = styled((props) => (
 
     '@media screen and (min-width: 1024px)': {
         top: '0px',
-        right: '300px',
+        right: '30%',
         width: '40%',
         height: '71px'
     }

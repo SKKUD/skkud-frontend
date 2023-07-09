@@ -24,7 +24,6 @@ export const useUserApi = (id) => {
     useEffect(() => {
         const fetchEvents = async () => {
             const res = await axios.get(`${BASE_URI()}/users/${id}`);
-
             setUser(res.data.data.user);
         };
         fetchEvents();

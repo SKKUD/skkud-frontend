@@ -108,7 +108,8 @@ const StyledLink = styled(Link)({
 
 const PostButton = styled(Button)`
     width: 90px;
-    height: 40px;
+    height: 35px;
+    margin-top: 10px;
     border-radius: 10px;
     @media (min-width: 1024px) {
         width: 100px;

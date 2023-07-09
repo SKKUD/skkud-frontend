@@ -15,7 +15,7 @@ const ImgBackground = styled.div`
     display: flex;
     flex-direction: column;
 
-    > img:first-child {
+    > img:first-of-type {
         width: 70%;
         margin: 40px auto;
     }

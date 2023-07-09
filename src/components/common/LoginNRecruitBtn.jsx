@@ -1,8 +1,9 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import Button from '@mui/material/Button';
 import { useCookies } from 'react-cookie';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import styled from '@emotion/styled';
+import UserToggle from './UserToggle';
 
 import axios from 'axios';
 
@@ -11,15 +12,36 @@ const BASE_URI = () => {
     else return process.env.REACT_APP_DEV_URI;
 };
 
-const Btn = styled(Button)`
-    width: 146px;
+const Wrap = styled.div`
+    width: 20%;
     height: 40px;
+    display: flex;
+    flex-direction: row;
+`;
+
+const LoginBtn = styled(Button)`
+    width: 86px;
+    height: 35px;
+    text-transform: none;
+    border-radius: 37px;
+    color: #fff;
+    background-color: #4d4d4d;
+    font-weight: 700;
+    margin-right: 10px;
+
+    :hover {
+        background-color: #888888;
+    }
+`;
+
+const RecruitBtn = styled(Button)`
+    width: 126px;
+    height: 35px;
     text-transform: none;
     border-radius: 37px;
     color: #fff;
     background-color: #05e49f;
     font-weight: 700;
-    margin-right: 100px;
 
     :hover {
         color: #888888;
@@ -30,8 +52,9 @@ const StyledLink = styled(Link)`
     color: inherit;
 `;
 
-export default function LoginBtn() {
+export default function LoginNRecruitBtn() {
     const [cookies, , removeCookie] = useCookies([]);
+    const [username, setName] = useState('');
     const navigate = useNavigate();
     const location = useLocation();
     const pathname = location.pathname;
@@ -46,6 +69,7 @@ export default function LoginBtn() {
         try {
             const res = await axios.post(BASE_URI() + '/auth/verify');
             if (res.data.data.userID !== token) logoutBtn();
+            setName(res.data.data.username);
         } catch (error) {
             console.log('auth check error');
             removeCookie('id');
@@ -67,12 +91,20 @@ export default function LoginBtn() {
     };
 
     return cookies.id ? (
-        <Btn variant="contained" onClick={logoutBtn}>
-            Logout
-        </Btn>
+        <Wrap>
+            <UserToggle username={username} logout={logoutBtn} />
+            <StyledLink to="/application">
+                <RecruitBtn variant="contained">recruiment</RecruitBtn>
+            </StyledLink>
+        </Wrap>
     ) : pathname === '/login' ? null : (
-        <StyledLink to="/login">
-            <Btn variant="contained">Login</Btn>
-        </StyledLink>
+        <Wrap>
+            <StyledLink to="/login">
+                <LoginBtn variant="contained">log in</LoginBtn>
+            </StyledLink>
+            <StyledLink to="/application">
+                <RecruitBtn variant="contained">recruiment</RecruitBtn>
+            </StyledLink>
+        </Wrap>
     );
 }

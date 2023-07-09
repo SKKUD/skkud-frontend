@@ -6,6 +6,7 @@ import MainTab from './Tabs/MainTab';
 import ApplicationForm from './ApplicationForm';
 import Appliers from './Admin/Appliers';
 import SignUp from './SignUp';
+import NotFound from './NotFound';
 
 export default function MainPage() {
     return (
@@ -17,6 +18,7 @@ export default function MainPage() {
                 <Route path="/application" element={<ApplicationForm />} />
                 <Route path="/applier/*" element={<Appliers />} />
                 <Route path="/signup" element={<SignUp />} />
+                <Route path="/*" element={<NotFound />} />
             </Routes>
         </>
     );
