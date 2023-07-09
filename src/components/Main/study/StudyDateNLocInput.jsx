@@ -13,7 +13,7 @@ const Container = styled(Box)`
     font-size: 0.75rem;
     line-height: 0.9rem;
     margin: 20px 0;
-    width: 70%;
+    width: 280px;
 `;
 
 const StyledTextField = styled(TextField)`
