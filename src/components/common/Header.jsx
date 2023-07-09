@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router';
 import { AppBar, Toolbar, useMediaQuery } from '@mui/material';
 import SideBar from './SideBar';
 import SKKUDLOGO from '../../assets/SKKUD_LOGO.png';
-import LoginBtn from './LoginBtn';
+import LoginNRecruitBtn from './LoginNRecruitBtn';
 
 const Logo = styled.img`
     width: 146px;
@@ -37,7 +37,7 @@ function Header() {
         <AppBar>
             <HeaderWrap>
                 <Logo src={SKKUDLOGO} alt="SKKUD" onClick={navigateToMaintab} />
-                {match1024 ? <LoginBtn /> : <SideBar />}
+                {match1024 ? <LoginNRecruitBtn /> : <SideBar />}
             </HeaderWrap>
         </AppBar>
     );
