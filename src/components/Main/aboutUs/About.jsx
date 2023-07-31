@@ -1,5 +1,7 @@
 import * as React from 'react';
 import styled from '@emotion/styled';
+import { Waypoint } from 'react-waypoint';
+import Typed from 'typed.js';
 import { useMediaQuery } from '@mui/material';
 import SKKUD from '../../../assets/SKKUD_green.jpeg';
 import WebAboutSKKUD from '../../../assets/web_about.png';
@@ -86,13 +88,40 @@ const WebSKKUDimg = styled.img`
 
 export default function About() {
     const match1024 = useMediaQuery('(min-width:1024px)');
+    const el = React.useRef(null);
+    let TypedInstance;
+
+    React.useEffect(() => {
+        if (match1024) {
+            TypedInstance = new Typed(el.current, {
+                strings: [
+                    '우리는 웹 개발자가 되고 싶은 학생들을 위해 실전 같은 경험을 제공합니다.'
+                ],
+                typeSpeed: 50
+            });
+
+            TypedInstance.stop();
+
+            return () => {
+                // Destroy Typed instance during cleanup to stop animation
+                TypedInstance.destroy();
+            };
+        }
+    }, [match1024]);
+
     return (
         <StyledCard>
             {match1024 ? (
                 <>
                     <WebSKKUDimg src={WebAboutSKKUD} alt="About SKKUD" />
                     <Detail1>
-                        우리는 웹 개발자가 되고 싶은 학생들을 위해 실전 같은 경험을 제공합니다.
+                        <Waypoint
+                            onEnter={() => {
+                                TypedInstance.start();
+                            }}
+                        >
+                            <span ref={el} />
+                        </Waypoint>
                     </Detail1>
                     <Detail2>
                         스꾸디는 성균관대학교 학생 개발자들이 모여 성균관대학교 학생들을 위한
