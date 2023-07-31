@@ -13,7 +13,7 @@ const BASE_URI = () => {
 };
 
 const Wrap = styled.div`
-    width: 20%;
+    width: 25%;
     height: 40px;
     display: flex;
     flex-direction: row;

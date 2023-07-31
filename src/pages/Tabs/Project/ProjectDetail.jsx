@@ -246,7 +246,7 @@ export default function ProjectDetail() {
                     </MemberListContainer>
                 </MemberListWrapper>
                 <Box>
-                    <SkillChipLabel> Skill Set</SkillChipLabel>
+                    <SkillChipLabel> 사용 기술</SkillChipLabel>
                     <ChipStack direction="row" spacing={1.2}>
                         {tags &&
                             tags.map((tag) => (
