@@ -1,6 +1,8 @@
 import * as React from 'react';
 import styled from '@emotion/styled';
 import { useMediaQuery } from '@mui/material';
+import Typed from 'typed.js';
+import { Waypoint } from 'react-waypoint';
 import SKKUD from '../../../assets/SKKUD_green.jpeg';
 import CardImg from '../../../assets/four_square.png';
 import WebHistorySkkud from '../../../assets/web_historySkkud.png';
@@ -72,12 +74,39 @@ const WebCardsContainer = styled.div`
 
 export default function History() {
     const match1024 = useMediaQuery('(min-width:1024px)');
+    const el = React.useRef(null);
+    let TypedInstance;
+
+    React.useEffect(() => {
+        if (match1024) {
+            TypedInstance = new Typed(el.current, {
+                strings: ['스꾸디의 프로젝트와 수상경력을 확인해보세요.'],
+                typeSpeed: 50
+            });
+
+            TypedInstance.stop();
+
+            return () => {
+                // Destroy Typed instance during cleanup to stop animation
+                TypedInstance.destroy();
+            };
+        }
+    }, [match1024]);
+
     return (
         <StyledContainer>
             {match1024 ? (
                 <>
                     <WebLogo src={WebHistorySkkud} alt="SKKUD" />
-                    <WebDetail>스꾸디의 프로젝트와 수상경력을 확인해보세요.</WebDetail>
+                    <Waypoint
+                        onEnter={() => {
+                            TypedInstance.start();
+                        }}
+                    >
+                        <WebDetail>
+                            <span ref={el} />
+                        </WebDetail>
+                    </Waypoint>
                     <WebCardsContainer>
                         <StyledCards src={WebCard1} />
                         <StyledCards src={WebCard2} />
